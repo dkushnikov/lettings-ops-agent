@@ -42,6 +42,19 @@ def test_answer_has_four_sections_and_no_secrets():
     assert "Approve £400 repair?" in text
 
 
+def test_execution_notes_surface_lost_and_reconciled_writes():
+    s = _state()
+    s.actions.append(ActionRecord(seq=3, tool="notify_tenant", tool_class=ToolClass.write, status=ActionStatus.unconfirmed, idempotency_key="k-9"))
+    s.actions.append(ActionRecord(seq=4, tool="create_work_order", tool_class=ToolClass.write, status=ActionStatus.completed, receipt='{"id": "WO-2"} (confirmed by read-back)'))
+    text = render_answer(_case(), s)
+    assert "Execution notes" in text
+    assert "outcome UNKNOWN" in text and "k-9" in text
+    assert "confirmed by reading it back" in text
+    assert "stopped by the policy gate (APR-SPEND-OVER-CAP)" in text
+    reasoning = render_reasoning(_case(), s, [])
+    assert "Execution: Action 3 notify_tenant" in reasoning
+
+
 def test_reasoning_has_timeline_from_events():
     events = [
         {"ts": "2026-10-09T12:00:00.000", "event": "model_turn", "step": 1, "stop_reason": "tool_use"},

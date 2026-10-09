@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from .sanitize import jsonable, redact_secrets, truncate
-from .schema import ActionRecord, ActionStatus, Case, DecisionState, Disposition, RunMeta
+from .schema import ActionRecord, ActionStatus, Case, DecisionState, Disposition, RunMeta, ToolClass
 
 
 class TraceWriter:
@@ -61,6 +61,25 @@ def _key_inputs(a: ActionRecord) -> str:
     return _md_escape(text)
 
 
+def execution_notes(state: DecisionState) -> list[str]:
+    """Lines a human must see about how actions actually went: lost responses,
+    read-back confirmations, retries, blocked or failed writes."""
+    notes: list[str] = []
+    for a in state.actions:
+        if a.status == ActionStatus.unconfirmed:
+            notes.append(f"Action {a.seq} {a.tool}: outcome UNKNOWN — the response was lost and the write was not resent (key {a.idempotency_key}); a human must verify before anyone retries.")
+        elif a.receipt and "read-back" in a.receipt:
+            notes.append(f"Action {a.seq} {a.tool}: the response was lost after sending; the effect was confirmed by reading it back ({_md_escape(truncate(a.receipt, 120))}). Not resent.")
+        elif a.status == ActionStatus.completed and a.attempts > 1:
+            notes.append(f"Action {a.seq} {a.tool}: succeeded on attempt {a.attempts} after a transient failure.")
+        elif a.status == ActionStatus.failed and a.tool_class == ToolClass.write:
+            notes.append(f"Action {a.seq} {a.tool}: FAILED ({_md_escape(truncate(a.error or '', 120))}); no effect recorded.")
+        elif a.status in (ActionStatus.blocked, ActionStatus.needs_approval):
+            rules = ", ".join(a.gate.rule_ids) if a.gate and a.gate.rule_ids else "policy gate"
+            notes.append(f"Action {a.seq} {a.tool}: stopped by the policy gate ({rules}); not executed.")
+    return notes
+
+
 def render_answer(case: Case, state: DecisionState) -> str:
     disp = state.disposition.value.upper() if state.disposition else "UNKNOWN"
     lines: list[str] = []
@@ -82,6 +101,11 @@ def render_answer(case: Case, state: DecisionState) -> str:
         lines.append("")
         lines.append("Actions deliberately withheld:")
         lines += [f"- {redact_secrets(s)}" for s in state.withheld_actions]
+    exec_notes = execution_notes(state)
+    if exec_notes:
+        lines.append("")
+        lines.append("Execution notes (what the runtime observed about the actions above):")
+        lines += [f"- {n}" for n in exec_notes]
     lines.append("")
     lines.append("## 2. Authority and evidence")
     lines.append("")
@@ -207,6 +231,8 @@ def render_reasoning(case: Case, state: DecisionState, events: list[dict[str, An
     lines.append(f"Disposition: **{state.disposition.value if state.disposition else 'unknown'}**. {redact_secrets(state.decision)}")
     if state.authority_citations:
         lines.append(f"Authority relied on: {', '.join(state.authority_citations)}.")
+    for n in execution_notes(state):
+        lines.append(f"Execution: {n}")
     if state.red_flags:
         lines.append("Red flags shaped the decision: " + "; ".join(f"{r.kind}: {redact_secrets(r.description)}" for r in state.red_flags))
     lines.append("")
