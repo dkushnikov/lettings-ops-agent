@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 import math
+import random
 import time
 import uuid
 from datetime import datetime
@@ -152,7 +153,8 @@ async def run_batch(
                     break
                 trace({"event": "case_error", "attempt": attempts, "reason": reason, "retryable": retryable})
                 if retryable and attempts <= settings.retry_budget:
-                    await asyncio.sleep(min(2.0 * attempts, 8.0))
+                    # Exponential backoff with jitter so concurrent cases do not retry in lockstep.
+                    await asyncio.sleep(min(2.0 * attempts, 8.0) + random.uniform(0.0, 1.5))
                     continue
                 meta.failures.append(f"{case.id}: {reason}")
                 state = fallback_state(case, reason, settings.model)

@@ -69,6 +69,11 @@ make run CASES=fixtures OUT=runs/dev   # process cases, write records
 make eval                       # score records against fixtures' expectations
 make demo                       # one fixture end to end, no environment needed
 make rehearse                   # fresh clone → setup → run → verify
+make mutate CASE=fixtures/F01-routine-tap   # adversarial variants along the Reality-Test axes
+make rules-extract DOCS=<dir>   # environment documents → candidate rules in agent/rulebook_staging.md
+make capacity N=20 C=4          # wall-time estimate for a batch
+make video-check                # demo video ≤ 60 s
+make secrets-scan               # gitleaks over the repository
 ```
 
 Configuration lives in `.env` (see `.env.example`): model, effort, concurrency, per-case timeout, step cap, retry budget, token budget per minute.
