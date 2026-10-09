@@ -112,6 +112,7 @@ class MockAdapter:
     def world_for(self, case: Case) -> World:
         if case.id not in self._worlds:
             self._worlds[case.id] = World(self._data)
+            self._worlds[case.id].clock = case.received_at
             self._fail_counters[case.id] = {}
         return self._worlds[case.id]
 

@@ -19,7 +19,10 @@ from harness.tools import ToolRejected
 DEFAULT_WORLD_PATH = Path(__file__).parent / "data" / "world.yaml"
 
 
-def _now_iso() -> str:
+def _now_iso(clock: str | None = None) -> str:
+    """World time: the case's own clock when set (so records date from the case), else now."""
+    if clock:
+        return clock
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
@@ -32,6 +35,7 @@ class World:
 
     def __init__(self, data: dict[str, Any]):
         self._base = copy.deepcopy(data)
+        self.clock: str | None = None
         self.state: dict[str, Any] = {}
         self.log: list[dict[str, Any]] = []
         self._idempotency: dict[str, str] = {}
@@ -75,7 +79,7 @@ class World:
         return f"{prefix}-{n}"
 
     def _record(self, op: str, inputs: dict[str, Any], result: Any) -> None:
-        self.log.append({"op": op, "input": inputs, "result": result, "at": _now_iso()})
+        self.log.append({"op": op, "input": inputs, "result": result, "at": _now_iso(self.clock)})
 
     def _property(self, property_id: str) -> dict[str, Any]:
         for p in self.state["properties"]:
@@ -183,7 +187,7 @@ class World:
             "estimated_cost_gbp": estimated_cost_gbp,
             "contractor_id": contractor_id,
             "status": "open",
-            "created_at": _now_iso(),
+            "created_at": _now_iso(self.clock),
         }
         self.state["work_orders"].append(wo)
         if idempotency_key:
@@ -210,7 +214,7 @@ class World:
             "amount_gbp": amount_gbp,
             "rationale": rationale,
             "status": "pending",
-            "requested_at": _now_iso(),
+            "requested_at": _now_iso(self.clock),
         }
         self.state["approvals"].append(apr)
         self._record("request_landlord_approval", apr, {"id": apr["id"]})
@@ -223,7 +227,7 @@ class World:
             "to": to_role,
             "property_id": property_id,
             "message": message,
-            "sent_at": _now_iso(),
+            "sent_at": _now_iso(self.clock),
         }
         self.state["messages"].append(msg)
         self._record(f"notify_{to_role}", {"property_id": property_id, "message": message}, {"id": msg["id"]})
@@ -246,7 +250,7 @@ class World:
             "property_id": property_id,
             "window": window,
             "tenant_consent": True,
-            "booked_at": _now_iso(),
+            "booked_at": _now_iso(self.clock),
         }
         self.state["access_bookings"].append(booking)
         self._record("schedule_access", booking, {"id": booking["id"]})
@@ -254,7 +258,7 @@ class World:
 
     def log_crm_note(self, property_id: str, note: str, **_: Any) -> dict[str, Any]:
         self._property(property_id)
-        entry = {"property_id": property_id, "date": _now_iso()[:10], "author": "agent", "note": note}
+        entry = {"property_id": property_id, "date": _now_iso(self.clock)[:10], "author": "agent", "note": note}
         self.state["crm_notes"].append(entry)
         self._record("log_crm_note", entry, {"ok": True})
         return {"ok": True, "note": copy.deepcopy(entry)}
@@ -266,7 +270,7 @@ class World:
             "title": title,
             "summary": summary,
             "status": "open",
-            "created_at": _now_iso(),
+            "created_at": _now_iso(self.clock),
         }
         self.state["human_tasks"].append(task)
         self._record("create_human_task", task, {"id": task["id"]})

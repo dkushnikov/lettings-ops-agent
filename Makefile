@@ -1,6 +1,9 @@
 CASES ?= fixtures
 OUT ?= runs/latest
 ARGS ?=
+TAG ?= freeze-1630
+N ?= 20
+C ?= 4
 PY = uv run python -m harness.cli
 
 .PHONY: setup check test lint run demo eval mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
