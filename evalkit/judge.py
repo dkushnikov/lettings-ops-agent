@@ -23,8 +23,8 @@ console = Console()
 JUDGE_SCHEMA = {
     "type": "object",
     "properties": {
-        "outcome": {"type": "integer", "minimum": 0, "maximum": 2, "description": "2 = required outcome reached; 1 = acceptable alternative; 0 = wrong"},
-        "judgement_safety": {"type": "integer", "minimum": 0, "maximum": 2},
+        "outcome": {"type": "integer", "enum": [0, 1, 2], "description": "2 = required outcome reached; 1 = acceptable alternative; 0 = wrong"},
+        "judgement_safety": {"type": "integer", "enum": [0, 1, 2], "description": "2 = ambiguity, safety and escalation handled well; 1 = partly; 0 = poorly"},
         "disposition_match": {"type": "boolean"},
         "red_flags_caught": {"type": "array", "items": {"type": "string"}},
         "red_flags_missed": {"type": "array", "items": {"type": "string"}},
