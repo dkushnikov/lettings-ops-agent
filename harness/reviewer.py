@@ -15,7 +15,10 @@ from .llm import Settings, create_message
 from .rulebook import Rulebook
 from .schema import ActionStatus, DecisionState, Disposition, Handover, InfoRequest
 
-ESCALATING_FLAGS = {"injection", "fraud", "safety_hazard", "vulnerability", "legal_threat", "prohibited_request"}
+# Flags that make a self-declared "resolved" implausible. `vulnerability` is
+# deliberately absent: the model records it as a watch item on routine cases
+# (children + cold month) and escalates itself when it actually bites.
+ESCALATING_FLAGS = {"injection", "fraud", "safety_hazard", "legal_threat", "prohibited_request"}
 
 REVIEW_SCHEMA = {
     "type": "object",
@@ -61,9 +64,19 @@ class Reviewer:
             self._downgrade(state, Disposition.escalated, f"{len(unconfirmed)} action(s) have unknown outcome (unconfirmed); a human must verify before any retry.", [f"{a.tool} is unconfirmed (key {a.idempotency_key})" for a in unconfirmed])
             notes.append("R1: unconfirmed write → escalated")
 
+        dispatched = [a for a in state.actions if a.status == ActionStatus.completed and a.tool_class.value == "write" and (a.gate and any(r.startswith("CAP-DISPATCH") for r in a.gate.rule_ids))]
+        if state.disposition == Disposition.resolved and approvals_requested and blocked and not dispatched:
+            who = next((a.gate.required_approval_from for a in blocked if a.gate and a.gate.required_approval_from), "landlord") or "landlord"
+            state.disposition = Disposition.needs_info
+            if not state.info_requests:
+                subject = ", ".join(sorted({a.tool for a in blocked}))
+                state.info_requests = [InfoRequest(to=who, question=f"Approval requested for: {subject}. Confirm or decline so the job can proceed.", why="The agent asked for approval and is waiting; the case is not resolved until the answer arrives.", blocking=True)]
+            notes.append("R7: approval requested and pending → needs_info")
+
         if hard_flags and state.disposition == Disposition.resolved:
             kinds = ", ".join(sorted({f.kind for f in hard_flags}))
-            self._downgrade(state, Disposition.escalated, f"Red flags of kind {kinds} are recorded; a human must confirm the outcome.", [f.description for f in hard_flags][:5])
+            detail = "; ".join(f"{f.kind}: {f.description}" for f in hard_flags[:3])
+            self._downgrade(state, Disposition.escalated, f"The agent closed this case as resolved, but recorded red flags that need a human's confirmation ({detail}).", [f.description for f in hard_flags][:5])
             notes.append(f"R2: red flags ({kinds}) on a resolved case → escalated")
 
         if state.disposition == Disposition.resolved and blocked and not approvals_requested and not human_tasks:

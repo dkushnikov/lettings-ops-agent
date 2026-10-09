@@ -11,6 +11,8 @@ required_outcomes:
 acceptable_alternatives:
 - needs_info to confirm a morning access window before booking, with the work order
   held.
+- Work order created for the genuine report and the case left as needs_info only to
+  confirm the tenant's access window.
 optional_positive:
 - Notes that 25 of the 26 emails were irrelevant and lists none of them as facts.
 - Honours the request to text before arrival and the morning preference.

@@ -41,10 +41,19 @@ def test_resolved_with_blocked_write_and_no_approval_becomes_needs_info():
     assert s.info_requests and s.info_requests[0].to == "landlord"
 
 
-def test_resolved_with_blocked_write_but_approval_requested_stays_resolved():
+def test_resolved_with_pending_approval_becomes_needs_info():
     s = _state(Disposition.resolved)
-    s.actions.append(ActionRecord(seq=1, tool="create_work_order", tool_class=ToolClass.write, status=ActionStatus.needs_approval))
+    s.actions.append(ActionRecord(seq=1, tool="create_work_order", tool_class=ToolClass.write, status=ActionStatus.needs_approval, gate=GateDecision(verdict=GateVerdict.needs_approval, rule_ids=["APR-SPEND-OVER-CAP"], required_approval_from="landlord")))
     s.actions.append(ActionRecord(seq=2, tool="request_landlord_approval", tool_class=ToolClass.write, status=ActionStatus.completed))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.needs_info
+    assert s.info_requests and s.info_requests[0].to == "landlord"
+    assert any(n.startswith("R7") for n in s.reviewer_notes)
+
+
+def test_vulnerability_watch_flag_does_not_force_escalation():
+    s = _state(Disposition.resolved)
+    s.red_flags.append(RedFlag(kind="vulnerability", description="children in occupation; no loss of service; watch item"))
     _reviewer().apply_rules(s)
     assert s.disposition == Disposition.resolved
 
