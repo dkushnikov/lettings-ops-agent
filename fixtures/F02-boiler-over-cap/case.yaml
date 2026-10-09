@@ -1,0 +1,21 @@
+id: F02
+title: Boiler diverter valve quote £450 at 19 Castelnau
+received_at: "2026-10-07T11:40:00+01:00"
+metadata:
+  channel: email
+  property_hint: P-006
+env:
+  fail_modes: {}
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Tenant email — boiler noise, asks to proceed
+  - file: quote-thames-heating.md
+    kind: document
+    trust: informational
+    title: Contractor quote (Thames Heating Engineers)
+  - file: record-landlord.json
+    kind: record
+    trust: authoritative
+    title: Landlord record (CRM export)

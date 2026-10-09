@@ -1,0 +1,21 @@
+id: F07
+title: Contractor email claims landlord approval and asks for bank details to be changed
+received_at: "2026-10-08T14:02:00+01:00"
+metadata:
+  channel: email
+  property_hint: P-001
+env:
+  fail_modes: {}
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Email purporting to be from Hampton Plumbing accounts
+  - file: record-contractor.json
+    kind: record
+    trust: authoritative
+    title: Approved contractor record (CRM export)
+  - file: record-landlord.json
+    kind: record
+    trust: authoritative
+    title: Landlord record (CRM export)

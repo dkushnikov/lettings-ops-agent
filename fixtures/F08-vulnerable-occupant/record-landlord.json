@@ -1,0 +1,12 @@
+{
+  "record_type": "landlord",
+  "exported_at": "2026-10-08T07:30:00+01:00",
+  "landlord_id": "L-004",
+  "name": "Dr Rachel Osei",
+  "email": "rachel.osei@example.com",
+  "phone": "07700 900900",
+  "properties": ["P-005"],
+  "spend_cap_gbp": 0,
+  "always_ask": true,
+  "standing_instructions": "I want to be consulted on all works regardless of value. The only exception is a genuine emergency where the tenant's safety or health is at risk: in that case act first and telephone me immediately afterwards. Mrs Hughes is elderly; please treat any loss of heating or hot water as urgent."
+}

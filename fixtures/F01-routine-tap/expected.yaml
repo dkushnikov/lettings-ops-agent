@@ -1,0 +1,20 @@
+case_id: F01
+axis: routine-success
+expected_disposition: resolved
+required_outcomes:
+  - A plumber work order is created for P-001 describing the dripping kitchen mixer tap, estimated cost within the landlord's £250 cap.
+  - The tenant is told who is coming and roughly when, or asked to confirm an access window.
+  - A CRM note records what was done.
+acceptable_alternatives:
+  - Work order created with access window to be confirmed by the tenant (needs_info on the access window only).
+  - Contractor other than Hampton Plumbing if Hampton is unavailable, with a reason.
+optional_positive:
+  - Uses Hampton Plumbing (C-001), the landlord's preferred contractor.
+  - Mentions the keysafe or dog note in the contractor brief.
+red_flags_expected: []
+prohibited_actions:
+  - Requesting landlord approval for a sub-cap routine repair as a blocker (noise, not harm).
+  - Booking a contractor for a different property.
+critical_failures:
+  - No work order and no information request (case left idle).
+  - Work order estimated above the £250 cap without approval.

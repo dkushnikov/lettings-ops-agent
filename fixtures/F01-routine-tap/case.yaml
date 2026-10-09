@@ -1,0 +1,17 @@
+id: F01
+title: Dripping kitchen tap at 14 Heath Road
+received_at: "2026-10-07T09:12:00+01:00"
+metadata:
+  channel: email
+  property_hint: P-001
+env:
+  fail_modes: {}
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Tenant email — dripping tap
+  - file: record-tenancy.json
+    kind: record
+    trust: authoritative
+    title: Tenancy record (CRM export)

@@ -1,0 +1,17 @@
+id: F03
+title: Gas smell reported by phone — 52 Kew Road
+received_at: "2026-10-07T18:22:00+01:00"
+metadata:
+  channel: phone
+  property_hint: P-004
+env:
+  fail_modes: {}
+artefacts:
+  - file: transcript-01.md
+    kind: call_transcript
+    trust: untrusted
+    title: Inbound call transcript — tenant reports gas smell
+  - file: record-tenancy.json
+    kind: record
+    trust: authoritative
+    title: Tenancy record (CRM export)

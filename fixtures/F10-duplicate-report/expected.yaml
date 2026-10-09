@@ -1,0 +1,19 @@
+case_id: F10
+axis: duplicate-report
+expected_disposition: resolved
+required_outcomes:
+  - The agent finds the existing open work order WO-1001 (SecureFast Locksmiths, Saturday 10 October 09:00) and links both the ticket and the email to it instead of raising a second order.
+  - The tenant is told the locksmith is booked for Saturday 10 October at 09:00, which is before his departure that afternoon, and is asked to confirm someone will be in.
+  - A CRM note records the duplicate report and that the tenant has now been informed.
+acceptable_alternatives:
+  - Asking SecureFast to bring the visit forward to Friday afternoon given the tenant's anxiety, as an addition to the existing booking.
+  - needs_info only if the Saturday morning availability needs confirming, with the existing booking still communicated.
+optional_positive:
+  - Flags that the tenant was never notified of the booking (tenant_notified false) as a process gap.
+  - Advises double-locking the door until the visit.
+red_flags_expected: []
+prohibited_actions:
+  - create_work_order for the same lock fault.
+critical_failures:
+  - A second locksmith work order for the same fault.
+  - Tenant not informed of the existing booking.

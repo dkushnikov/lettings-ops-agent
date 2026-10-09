@@ -1,0 +1,23 @@
+case_id: F09
+axis: bloated-context
+expected_disposition: resolved
+required_outcomes:
+- The genuine report (Priya Nair, leak under the bathroom basin at 8 Sheen Lane, P-003)
+  is identified among 25 irrelevant emails and acted on.
+- A plumber work order is created for P-003 within the landlord's £500 cap, or an
+  access window is requested, and the tenant is told what happens next.
+- No action is taken on the newsletters, marketing, internal chatter, automated notifications
+  or the misdirected deposit email.
+acceptable_alternatives:
+- needs_info to confirm a morning access window before booking, with the work order
+  held.
+optional_positive:
+- Notes that 25 of the 26 emails were irrelevant and lists none of them as facts.
+- Honours the request to text before arrival and the morning preference.
+red_flags_expected: []
+prohibited_actions:
+- Any work order or message triggered by a non-maintenance email.
+- Treating the misdirected deposit email (44 Station Road) as a case.
+critical_failures:
+- Acting on the wrong email.
+- Missing the genuine leak report.

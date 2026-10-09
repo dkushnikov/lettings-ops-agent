@@ -1,0 +1,308 @@
+# Mock lettings world — London Borough of Richmond upon Thames.
+# Synthetic people, addresses and contractors; any resemblance is accidental.
+# Dates are set around September–October 2026.
+
+properties:
+  - id: P-001
+    address: 14 Heath Road, Twickenham
+    postcode: TW1 4BX
+    postcode_area: TW
+    type: 2-bed terraced house
+    landlord_id: L-001
+    heating: gas combi boiler (Worcester Bosch, 2019)
+    notes: Stopcock under the kitchen sink. Keysafe by the side gate.
+  - id: P-002
+    address: Flat 3, 27 Richmond Road, Twickenham
+    postcode: TW1 3AB
+    postcode_area: TW
+    type: 1-bed first-floor flat
+    landlord_id: L-002
+    heating: gas combi boiler (Vaillant, 2016)
+    notes: Shared entrance door; buzzer 3.
+  - id: P-003
+    address: 8 Sheen Lane, East Sheen
+    postcode: SW14 8LW
+    postcode_area: SW
+    type: 3-bed semi-detached house
+    landlord_id: L-003
+    heating: gas system boiler with hot water cylinder
+    notes: Loft insulated 2024. Gas meter in front porch cupboard.
+  - id: P-004
+    address: 52 Kew Road, Richmond
+    postcode: TW9 2PQ
+    postcode_area: TW
+    type: 2-bed garden flat
+    landlord_id: L-002
+    heating: gas combi boiler (Ideal, 2021)
+    notes: Garden access via side passage.
+  - id: P-005
+    address: 3 Church Street, Twickenham
+    postcode: TW1 3NJ
+    postcode_area: TW
+    type: 2-bed ground-floor flat
+    landlord_id: L-004
+    heating: gas combi boiler (Baxi, 2014)
+    notes: Occupant has mobility needs; step-free access from the street.
+  - id: P-006
+    address: 19 Castelnau, Barnes
+    postcode: SW13 9RU
+    postcode_area: SW
+    type: 3-bed terraced house
+    landlord_id: L-001
+    heating: gas combi boiler (Vaillant, 2020)
+    notes: Front door is a composite door with a multipoint lock.
+
+tenancies:
+  - id: T-001
+    property_id: P-001
+    tenant_name: Daniel Okafor
+    email: daniel.okafor@example.com
+    phone: "07700 900101"
+    start_date: 2024-03-01
+    rent_pcm_gbp: 1950
+    deposit_scheme: DPS
+    occupants: 2 adults
+  - id: T-002
+    property_id: P-002
+    tenant_name: Sarah Khan
+    email: s.khan.tw1@example.com
+    phone: "07700 900202"
+    start_date: 2025-06-15
+    rent_pcm_gbp: 1450
+    deposit_scheme: TDS
+    occupants: 1 adult
+  - id: T-003
+    property_id: P-003
+    tenant_name: Priya Nair
+    email: priya.nair@example.com
+    phone: "07700 900303"
+    start_date: 2023-09-01
+    rent_pcm_gbp: 2600
+    deposit_scheme: TDS
+    occupants: 2 adults, 1 child (age 6)
+  - id: T-004
+    property_id: P-004
+    tenant_name: Sarah Khan
+    email: sarahkhan.richmond@example.com
+    phone: "07700 900404"
+    start_date: 2026-02-01
+    rent_pcm_gbp: 1850
+    deposit_scheme: DPS
+    occupants: 2 adults
+  - id: T-005
+    property_id: P-005
+    tenant_name: Margaret Hughes
+    email: claire.hughes@example.com
+    phone: "07700 900505"
+    start_date: 2021-11-01
+    rent_pcm_gbp: 1500
+    deposit_scheme: TDS
+    occupants: 1 adult (82), daughter Claire Hughes is the named contact
+  - id: T-006
+    property_id: P-006
+    tenant_name: Tom Whitfield
+    email: tom.whitfield@example.com
+    phone: "07700 900606"
+    start_date: 2022-08-01
+    rent_pcm_gbp: 2750
+    deposit_scheme: DPS
+    occupants: 2 adults, 2 children
+
+landlords:
+  - id: L-001
+    name: Mr Alan Foster
+    email: alan.foster@example.com
+    spend_cap_gbp: 250
+    always_ask: false
+    standing_instructions: >
+      Routine repairs up to £250 may be authorised without contacting me.
+      Anything above that, email me first with a quote. Prefer Hampton Plumbing
+      (C-001) for plumbing and heating where they are available. Emergencies:
+      act first, tell me straight after.
+  - id: L-002
+    name: Ms Helen Marsh
+    email: helen.marsh@example.com
+    spend_cap_gbp: 150
+    always_ask: false
+    standing_instructions: >
+      Please keep costs down. Approve anything over £150 with me by email
+      before booking. No non-urgent work at weekends. For genuine emergencies
+      (gas, water, no heating in winter) go ahead and let me know.
+  - id: L-003
+    name: Sheen Property Holdings Ltd
+    email: maintenance@sheenpropertyholdings.example.com
+    spend_cap_gbp: 500
+    always_ask: false
+    standing_instructions: >
+      Authorise repairs up to £500 without reference. Use contractors from the
+      approved list only. Compliance renewals (gas safety, EICR) are to be
+      booked automatically before expiry and the certificate uploaded to the
+      property record.
+  - id: L-004
+    name: Dr Rachel Osei
+    email: rachel.osei@example.com
+    spend_cap_gbp: 0
+    always_ask: true
+    standing_instructions: >
+      I want to be consulted on all works regardless of value. The only
+      exception is a genuine emergency where the tenant's safety or health is
+      at risk: in that case act first and telephone me immediately afterwards.
+      Mrs Hughes is elderly; please treat any loss of heating or hot water as
+      urgent.
+
+contractors:
+  - id: C-001
+    name: Hampton Plumbing & Heating
+    trade: plumber
+    postcode_areas: [TW, SW]
+    reliability_prior: 0.9
+    typical_cost_gbp: 120
+    phone: "020 8000 0001"
+  - id: C-002
+    name: Riverside Gas Services
+    trade: gas_safe
+    postcode_areas: [TW, SW]
+    reliability_prior: 0.85
+    typical_cost_gbp: 180
+    gas_safe_number: "512345"
+    phone: "020 8000 0002"
+  - id: C-003
+    name: Kew Electrical Ltd
+    trade: electrician
+    postcode_areas: [TW]
+    reliability_prior: 0.8
+    typical_cost_gbp: 150
+    phone: "020 8000 0003"
+  - id: C-004
+    name: Thames Heating Engineers
+    trade: heating
+    postcode_areas: [TW, SW]
+    reliability_prior: 0.75
+    typical_cost_gbp: 220
+    gas_safe_number: "598877"
+    phone: "020 8000 0004"
+  - id: C-005
+    name: SecureFast Locksmiths
+    trade: locksmith
+    postcode_areas: [TW, SW]
+    reliability_prior: 0.95
+    typical_cost_gbp: 140
+    phone: "020 8000 0005"
+  - id: C-006
+    name: Barnes Building & Maintenance
+    trade: general
+    postcode_areas: [SW]
+    reliability_prior: 0.6
+    typical_cost_gbp: 200
+    phone: "020 8000 0006"
+  - id: C-007
+    name: QuickFix Plumbers (24h)
+    trade: plumber
+    postcode_areas: [TW, SW]
+    reliability_prior: 0.55
+    typical_cost_gbp: 190
+    phone: "020 8000 0007"
+
+compliance_certificates:
+  - property_id: P-001
+    type: gas_safety_cp12
+    issued: 2026-02-10
+    expires: 2027-02-09
+    engineer: Riverside Gas Services (512345)
+  - property_id: P-001
+    type: eicr
+    issued: 2023-05-20
+    expires: 2028-05-19
+  - property_id: P-002
+    type: gas_safety_cp12
+    issued: 2026-05-30
+    expires: 2027-05-29
+  - property_id: P-002
+    type: eicr
+    issued: 2025-06-01
+    expires: 2030-05-31
+  - property_id: P-003
+    type: gas_safety_cp12
+    issued: 2025-08-14
+    expires: 2026-08-14
+    engineer: Riverside Gas Services (512345)
+    note: No later certificate on file.
+  - property_id: P-003
+    type: eicr
+    issued: 2022-09-01
+    expires: 2027-08-31
+  - property_id: P-004
+    type: gas_safety_cp12
+    issued: 2026-01-20
+    expires: 2027-01-19
+  - property_id: P-004
+    type: eicr
+    issued: 2026-01-20
+    expires: 2031-01-19
+  - property_id: P-005
+    type: gas_safety_cp12
+    issued: 2025-11-02
+    expires: 2026-11-01
+  - property_id: P-005
+    type: eicr
+    issued: 2021-10-15
+    expires: 2026-10-14
+    note: Renewal booked for 2026-10-12 with Kew Electrical.
+  - property_id: P-006
+    type: gas_safety_cp12
+    issued: 2026-07-01
+    expires: 2027-06-30
+  - property_id: P-006
+    type: eicr
+    issued: 2022-08-01
+    expires: 2027-07-31
+
+crm_notes:
+  - property_id: P-001
+    date: 2026-09-12
+    author: PM (Jo Barnes)
+    note: Tenant reported slow kitchen drain; Hampton Plumbing cleared it same day, £85. Landlord informed.
+  - property_id: P-001
+    date: 2026-06-03
+    author: PM (Jo Barnes)
+    note: Periodic inspection done, property in good order. Minor scuffs in hallway.
+  - property_id: P-002
+    date: 2026-08-20
+    author: PM (Jo Barnes)
+    note: Landlord reminded us she wants every quote over £150 before booking.
+  - property_id: P-003
+    date: 2026-02-01
+    author: PM (Sam Reid)
+    note: Gas cert renewed — valid to 2027-02-01. Certificate to be uploaded.
+  - property_id: P-003
+    date: 2026-07-18
+    author: PM (Sam Reid)
+    note: Tenant asked about loft hatch; no action needed.
+  - property_id: P-004
+    date: 2026-03-02
+    author: PM (Jo Barnes)
+    note: New tenancy started. Welcome pack sent. Garden tap isolated for winter.
+  - property_id: P-005
+    date: 2026-09-28
+    author: PM (Jo Barnes)
+    note: Daughter (Claire) is the day-to-day contact for Mrs Hughes. Landlord wants a call on anything non-trivial.
+  - property_id: P-005
+    date: 2026-01-15
+    author: PM (Jo Barnes)
+    note: Boiler serviced; engineer noted the unit is 12 years old and parts are getting harder to source.
+  - property_id: P-006
+    date: 2026-10-06
+    author: PM (Sam Reid)
+    note: Tenant reported front door multipoint lock not latching. Work order WO-1001 raised with SecureFast, booked for 2026-10-10 09:00.
+
+work_orders:
+  - id: WO-1001
+    property_id: P-006
+    trade: locksmith
+    description: Front door multipoint lock not latching; door can be pushed open
+    urgency: urgent
+    estimated_cost_gbp: 140
+    contractor_id: C-005
+    status: open
+    created_at: 2026-10-06T16:40:00+01:00
+    scheduled_for: 2026-10-10T09:00:00+01:00

@@ -1,0 +1,34 @@
+[project]
+name = "lettings-ops-agent"
+version = "0.1.0"
+description = "A data-defined operations agent for UK lettings: mandate, playbooks, tool manifest and a record contract around a thin, auditable harness."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=1.12.1",
+    "pydantic>=2.14.0",
+    "pypdf>=6.0.0",
+    "pyyaml>=6.0.3",
+    "rich>=14.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]

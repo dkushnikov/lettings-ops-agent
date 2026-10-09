@@ -1,0 +1,12 @@
+{
+  "record_type": "tenancy",
+  "exported_at": "2026-10-08T09:00:00+01:00",
+  "tenancy_id": "T-003",
+  "property_id": "P-003",
+  "address": "8 Sheen Lane, East Sheen, SW14 8LW",
+  "tenant": {"name": "Priya Nair", "email": "priya.nair@example.com", "phone": "07700 900303"},
+  "start_date": "2023-09-01",
+  "rent_pcm_gbp": 2600,
+  "landlord_id": "L-003",
+  "managed": true
+}

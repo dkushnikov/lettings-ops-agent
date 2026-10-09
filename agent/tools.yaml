@@ -1,0 +1,61 @@
+# Tool manifest overlay: what the policy gate needs to know about each tool
+# the environment supplies. Applied by the generic adapter on top of whatever
+# the environment declares (name, description, input schema).
+#
+# Fields: tool_class (read|write) · authority (capability name from
+# rulebook.yaml) · amount_field (input field carrying a GBP amount) ·
+# idempotent · reversible · side_effect (one line) · reconcile_with (a read
+# tool that can confirm the write happened).
+#
+# The entries below describe the mock world and double as the template for the
+# organisers' tools on the day: copy the real tool names in, fill the fields,
+# commit. A write tool missing from this file is routed to a human by the gate.
+
+tools:
+  get_property: {tool_class: read}
+  get_tenancy: {tool_class: read}
+  find_tenancies: {tool_class: read}
+  get_landlord_instructions: {tool_class: read}
+  get_compliance_certificates: {tool_class: read}
+  search_crm_notes: {tool_class: read}
+  list_contractors: {tool_class: read}
+  get_work_orders: {tool_class: read}
+
+  create_work_order:
+    tool_class: write
+    authority: dispatch_contractor
+    amount_field: estimated_cost_gbp
+    idempotent: true
+    reversible: true
+    side_effect: books a contractor and creates a work order
+    reconcile_with: get_work_orders
+  request_landlord_approval:
+    tool_class: write
+    authority: request_approval
+    amount_field: amount_gbp
+    side_effect: sends an approval request to the landlord
+  notify_tenant:
+    tool_class: write
+    authority: notify_party
+    side_effect: sends a message to the tenant
+  notify_landlord:
+    tool_class: write
+    authority: notify_party
+    side_effect: sends a message to the landlord
+  schedule_access:
+    tool_class: write
+    authority: schedule_access
+    side_effect: books an access window with the tenant
+  log_crm_note:
+    tool_class: write
+    authority: log_note
+    side_effect: appends a note to the property record
+  create_human_task:
+    tool_class: write
+    authority: create_human_task
+    side_effect: places a task in a human queue (delivers the handover)
+  update_payment_details:
+    tool_class: write
+    authority: change_payment_details
+    reversible: false
+    side_effect: changes where money is sent — prohibited for the agent

@@ -1,0 +1,18 @@
+id: F05
+title: Leak under the kitchen sink — Flat 3, 27 Richmond Road (booking system drops the response)
+received_at: "2026-10-08T10:30:00+01:00"
+metadata:
+  channel: email
+  property_hint: P-002
+env:
+  fail_modes:
+    create_work_order: lost_response
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Tenant email — leak under sink
+  - file: record-tenancy.json
+    kind: record
+    trust: authoritative
+    title: Tenancy record (CRM export)

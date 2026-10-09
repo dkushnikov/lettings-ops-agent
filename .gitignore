@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
+.env.*
+!.env.example
+runs/
+.DS_Store
+*.log
+# Video working files; the final demo.mp4 is tracked via Git LFS
+video/raw/

@@ -1,0 +1,21 @@
+id: F04
+title: Tenant asks about the annual gas check — 8 Sheen Lane
+received_at: "2026-10-08T08:05:00+01:00"
+metadata:
+  channel: email
+  property_hint: P-003
+env:
+  fail_modes: {}
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Tenant email — asks when the gas check is due
+  - file: record-crm-note.json
+    kind: record
+    trust: authoritative
+    title: CRM note (staff-written, 2026-02-01)
+  - file: record-certificates.json
+    kind: record
+    trust: authoritative
+    title: Compliance certificate register (export)

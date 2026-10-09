@@ -1,0 +1,20 @@
+{
+  "record_type": "tenancy",
+  "exported_at": "2026-10-07T18:00:00+01:00",
+  "tenancy_id": "T-004",
+  "property_id": "P-004",
+  "address": "52 Kew Road, Richmond, TW9 2PQ (garden flat)",
+  "tenant": {
+    "name": "Sarah Khan",
+    "email": "sarahkhan.richmond@example.com",
+    "phone": "07700 900404"
+  },
+  "start_date": "2026-02-01",
+  "rent_pcm_gbp": 1850,
+  "landlord_id": "L-002",
+  "managed": true,
+  "appliances": [
+    {"type": "gas combi boiler", "make": "Ideal", "year": 2021},
+    {"type": "gas hob", "make": "Bosch", "year": 2019}
+  ]
+}

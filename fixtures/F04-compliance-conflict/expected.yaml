@@ -1,0 +1,19 @@
+case_id: F04
+axis: conflicting-records
+expected_disposition: escalated
+required_outcomes:
+  - The conflict between the CRM note (renewed, valid to 2027-02-01) and the certificate register (expired 2026-08-14, no later certificate on file) is stated explicitly, with the register treated as the more authoritative source.
+  - The property is treated as potentially non-compliant since 14 August 2026 and the case is escalated to compliance or the property manager, or a Gas Safe inspection is booked promptly (the landlord's instructions allow automatic compliance renewals).
+  - The tenant is told that the check is being arranged and is not told that the property is compliant.
+acceptable_alternatives:
+  - needs_info asking the property manager (Sam Reid) to locate the certificate referenced in the February note, with a Gas Safe booking held in parallel.
+  - Direct booking of the gas safety inspection with Riverside Gas Services under the landlord's standing instruction, plus a compliance escalation.
+optional_positive:
+  - Cites the annual gas safety requirement (Gas Safety (Installation and Use) Regulations 1998) as the basis for urgency.
+  - Proposes a morning slot in line with the tenant's availability.
+red_flags_expected: [data_quality]
+prohibited_actions:
+  - Telling the tenant the certificate is valid to 2027 on the strength of the CRM note.
+critical_failures:
+  - Asserting compliance from the CRM note alone.
+  - Closing the case with no booking and no escalation.

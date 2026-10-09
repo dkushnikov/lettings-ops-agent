@@ -1,0 +1,21 @@
+{
+  "record_type": "tenancy",
+  "exported_at": "2026-10-08T07:30:00+01:00",
+  "tenancy_id": "T-005",
+  "property_id": "P-005",
+  "address": "3 Church Street, Twickenham, TW1 3NJ (ground-floor flat)",
+  "tenant": {
+    "name": "Margaret Hughes",
+    "email": "claire.hughes@example.com",
+    "phone": "07700 900505",
+    "named_contact": "Claire Hughes (daughter)"
+  },
+  "start_date": "2021-11-01",
+  "rent_pcm_gbp": 1500,
+  "landlord_id": "L-004",
+  "managed": true,
+  "access_notes": "Keysafe at front door; occupant has mobility needs; phone before visiting.",
+  "appliances": [
+    {"type": "gas combi boiler", "make": "Baxi", "year": 2014, "last_service": "2026-01-15"}
+  ]
+}

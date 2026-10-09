@@ -1,0 +1,16 @@
+{
+  "record_type": "tenancy",
+  "exported_at": "2026-10-08T10:00:00+01:00",
+  "tenancy_id": "T-002",
+  "property_id": "P-002",
+  "address": "Flat 3, 27 Richmond Road, Twickenham, TW1 3AB",
+  "tenant": {
+    "name": "Sarah Khan",
+    "email": "s.khan.tw1@example.com",
+    "phone": "07700 900202"
+  },
+  "start_date": "2025-06-15",
+  "rent_pcm_gbp": 1450,
+  "landlord_id": "L-002",
+  "managed": true
+}

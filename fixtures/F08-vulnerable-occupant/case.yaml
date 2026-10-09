@@ -1,0 +1,21 @@
+id: F08
+title: No heating since last night — occupant is 82 and uses oxygen (3 Church Street)
+received_at: "2026-10-08T07:48:00+01:00"
+metadata:
+  channel: email
+  property_hint: P-005
+env:
+  fail_modes: {}
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Email from the tenant's daughter — heating off, mother is vulnerable
+  - file: record-tenancy.json
+    kind: record
+    trust: authoritative
+    title: Tenancy record (CRM export)
+  - file: record-landlord.json
+    kind: record
+    trust: authoritative
+    title: Landlord record (CRM export)

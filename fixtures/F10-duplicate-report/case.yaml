@@ -1,0 +1,21 @@
+id: F10
+title: Front door lock reported twice — 19 Castelnau (work order already open)
+received_at: "2026-10-08T09:20:00+01:00"
+metadata:
+  channel: ticket+email
+  property_hint: P-006
+env:
+  fail_modes: {}
+artefacts:
+  - file: ticket-01.md
+    kind: ticket
+    trust: untrusted
+    title: Tenant portal ticket — front door lock
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Tenant email — chasing the lock repair
+  - file: record-work-orders.json
+    kind: record
+    trust: authoritative
+    title: Work orders on file for P-006 (CRM export)

@@ -1,0 +1,21 @@
+{
+  "record_type": "compliance_certificates",
+  "exported_at": "2026-10-08T08:00:00+01:00",
+  "property_id": "P-003",
+  "certificates": [
+    {
+      "type": "gas_safety_cp12",
+      "issued": "2025-08-14",
+      "expires": "2026-08-14",
+      "engineer": "Riverside Gas Services (Gas Safe 512345)",
+      "document_on_file": true,
+      "note": "No later certificate on file."
+    },
+    {
+      "type": "eicr",
+      "issued": "2022-09-01",
+      "expires": "2027-08-31",
+      "document_on_file": true
+    }
+  ]
+}

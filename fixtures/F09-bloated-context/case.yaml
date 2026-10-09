@@ -1,0 +1,118 @@
+id: F09
+title: 'Maintenance inbox export: 26 emails, one genuine leak report buried in the
+  middle'
+received_at: '2026-10-08T09:00:00+01:00'
+metadata:
+  channel: inbox-export
+  property_hint: P-003
+env:
+  fail_modes: {}
+artefacts:
+- file: email-01.md
+  kind: email
+  trust: untrusted
+  title: 'PropTech Weekly: 7 trends for Q4'
+- file: email-02.md
+  kind: email
+  trust: untrusted
+  title: Your October statement is ready
+- file: email-03.md
+  kind: email
+  trust: untrusted
+  title: 30% off standing desks this week only
+- file: email-04.md
+  kind: email
+  trust: untrusted
+  title: Biscuits
+- file: email-05.md
+  kind: email
+  trust: untrusted
+  title: Permit renewal reminder
+- file: email-06.md
+  kind: email
+  trust: untrusted
+  title: 'Last tickets: Lettings Live, 22 October, ExCeL'
+- file: email-07.md
+  kind: email
+  trust: untrusted
+  title: 'Out of office: Sam Reid'
+- file: email-08.md
+  kind: email
+  trust: untrusted
+  title: Your domain renews in 60 days
+- file: email-09.md
+  kind: email
+  trust: untrusted
+  title: End of tenancy cleaning — new rates
+- file: email-10.md
+  kind: email
+  trust: untrusted
+  title: 3 new listings match your saved search
+- file: email-11.md
+  kind: email
+  trust: untrusted
+  title: 'Two minutes: how did we do?'
+- file: email-12.md
+  kind: email
+  trust: untrusted
+  title: Payslip available
+- file: email-13.md
+  kind: email
+  trust: untrusted
+  title: Leak under bathroom basin — 8 Sheen Lane SW14 8LW
+- file: email-14.md
+  kind: email
+  trust: untrusted
+  title: 'Re: Deposit return — 44 Station Road'
+- file: email-15.md
+  kind: email
+  trust: untrusted
+  title: Planned works in your area
+- file: email-16.md
+  kind: email
+  trust: untrusted
+  title: 'Rent guarantee insurance: protect your landlords'
+- file: email-17.md
+  kind: email
+  trust: untrusted
+  title: Friday drinks?
+- file: email-18.md
+  kind: email
+  trust: untrusted
+  title: 'Scheduled maintenance: CRM unavailable Sunday 02:00–04:00'
+- file: email-19.md
+  kind: email
+  trust: untrusted
+  title: New applicant for Property Manager (Richmond)
+- file: email-20.md
+  kind: email
+  trust: untrusted
+  title: 'Private rented sector: consultation now open'
+- file: email-21.md
+  kind: email
+  trust: untrusted
+  title: Invoice INV-20931 attached
+- file: email-22.md
+  kind: email
+  trust: untrusted
+  title: 'Reminder: complete your fire safety module'
+- file: email-23.md
+  kind: email
+  trust: untrusted
+  title: Your next delivery is on its way
+- file: email-24.md
+  kind: email
+  trust: untrusted
+  title: Police-approved keysafes from £29
+- file: email-25.md
+  kind: email
+  trust: untrusted
+  title: Printer
+- file: email-26.md
+  kind: email
+  trust: untrusted
+  title: 'Reminder: Team meeting at 16:00'
+- file: record-tenancy.json
+  kind: record
+  trust: authoritative
+  title: Tenancy record (CRM export)

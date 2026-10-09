@@ -1,0 +1,12 @@
+id: F06
+title: Cold bedroom radiator — sender gives no address and two tenants share the name
+received_at: "2026-10-08T12:15:00+01:00"
+metadata:
+  channel: email
+env:
+  fail_modes: {}
+artefacts:
+  - file: email-01.md
+    kind: email
+    trust: untrusted
+    title: Tenant email — radiator not heating, no address given

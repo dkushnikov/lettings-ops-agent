@@ -1,0 +1,19 @@
+{
+  "record_type": "tenancy",
+  "exported_at": "2026-10-07T09:00:00+01:00",
+  "tenancy_id": "T-001",
+  "property_id": "P-001",
+  "address": "14 Heath Road, Twickenham, TW1 4BX",
+  "tenant": {
+    "name": "Daniel Okafor",
+    "email": "daniel.okafor@example.com",
+    "phone": "07700 900101"
+  },
+  "start_date": "2024-03-01",
+  "rent_pcm_gbp": 1950,
+  "landlord_id": "L-001",
+  "managed": true,
+  "repair_history": [
+    {"date": "2026-09-12", "summary": "Slow kitchen drain cleared by Hampton Plumbing, £85"}
+  ]
+}

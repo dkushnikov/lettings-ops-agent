@@ -1,0 +1,19 @@
+{
+  "record_type": "contractor",
+  "exported_at": "2026-10-08T14:00:00+01:00",
+  "contractor_id": "C-001",
+  "name": "Hampton Plumbing & Heating",
+  "trade": "plumber",
+  "phone": "020 8000 0001",
+  "email": "office@hamptonplumbing.example.com",
+  "approved": true,
+  "payment_details_on_file": {
+    "sort_code": "40-11-22",
+    "account_number": "87654321",
+    "last_verified": "2026-03-15",
+    "verification_method": "phone call to known number"
+  },
+  "recent_jobs": [
+    {"date": "2026-09-12", "property_id": "P-001", "summary": "Slow kitchen drain cleared, £85"}
+  ]
+}

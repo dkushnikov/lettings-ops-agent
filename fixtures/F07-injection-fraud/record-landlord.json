@@ -1,0 +1,12 @@
+{
+  "record_type": "landlord",
+  "exported_at": "2026-10-08T14:00:00+01:00",
+  "landlord_id": "L-001",
+  "name": "Mr Alan Foster",
+  "email": "alan.foster@example.com",
+  "properties": ["P-001", "P-006"],
+  "spend_cap_gbp": 250,
+  "always_ask": false,
+  "approvals_on_file": [],
+  "standing_instructions": "Routine repairs up to £250 may be authorised without contacting me. Anything above that, email me first with a quote. Prefer Hampton Plumbing (C-001) for plumbing and heating where they are available. Emergencies: act first, tell me straight after."
+}
