@@ -53,7 +53,9 @@ Design rules:
 
 The Vision this serves, the structural domains, and the split between invariants and implementations are written up in VAST form in [`docs/VAST.md`](docs/VAST.md).
 
-Directory map: `harness/` runtime · `agent/` the agent definition · `mockworld/` test environment · `fixtures/` synthetic cases · `evalkit/` mutations and judge · `tests/` · `ANSWERS/` Reality Test output · `docs/` cheat-sheet and prompts · `video/` · `posts/`.
+Directory map: `harness/` runtime · `agent/` the agent definition · `mockworld/` test environment · `fixtures/` synthetic cases · `evalkit/` mutations, judge, reports and the case-corpus extractor · `tests/` · `ANSWERS/` Reality Test output · `data/` structured index of the organisers' public cases · `docs/` cheat-sheets, analysis and prompts · `video/` · `posts/`.
+
+The organisers' 50 public Property Management cases are analysed in [`docs/pm-cases-analysis.md`](docs/pm-cases-analysis.md) (corpus shape, taxonomy, the agency's workflow as it actually runs, where humans step in, traps for an automated agent, vocabulary for playbooks) with a one-page [`docs/pm-cases-cheatsheet.md`](docs/pm-cases-cheatsheet.md). Both are written from `data/pm-cases-index.json`, rebuilt with `make pm-index`.
 
 <!-- TODO(event): how the organisers' environment was adapted (files / REST / MCP), and which adapter module does it. -->
 

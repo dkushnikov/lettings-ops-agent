@@ -7,7 +7,7 @@ N ?= 20
 C ?= 4
 PY = uv run python -m harness.cli
 
-.PHONY: setup check test lint run demo eval mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
+.PHONY: setup check test lint run demo eval cases-browser pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
 
 setup:
 	uv sync
@@ -36,6 +36,9 @@ cases-browser:
 
 report:
 	$(PY) report --run $(OUT) --cases $(CASES) --open
+
+pm-index:
+	uv run python -m evalkit.pm_cases_extract --cases "$(CASES_ROOT)" --out data/pm-cases-index.json
 
 mutate:
 	$(PY) mutate --case $(CASE) --out runs/mutations $(ARGS)
