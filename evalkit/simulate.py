@@ -91,7 +91,17 @@ def load_library(path: Path = SCENARIOS_PATH) -> Library:
         actor = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
         for b in actor.get("behaviours") or []:
             behaviours[str(b["id"])] = {**b, "actor": actor.get("actor", name)}
-    return Library(scenarios=list(data.get("scenarios") or []), behaviours=behaviours, simulator_rules=data.get("simulator_rules") or {})
+    scenarios = [_normalise_scenario(sc) for sc in (data.get("scenarios") or [])]
+    return Library(scenarios=scenarios, behaviours=behaviours, simulator_rules=data.get("simulator_rules") or {})
+
+
+def _normalise_scenario(sc: dict[str, Any]) -> dict[str, Any]:
+    """PyYAML (YAML 1.1) reads a bare `on:` key as the boolean True, so a turn's trigger silently vanished and the
+    episode stalled at that turn. Accept both spellings; `on` is what the scenario files mean."""
+    for turn in sc.get("script") or []:
+        if isinstance(turn, dict) and True in turn and "on" not in turn:
+            turn["on"] = turn.pop(True)
+    return sc
 
 
 def select(lib: Library, ids: list[str] | None) -> list[dict[str, Any]]:

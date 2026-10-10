@@ -154,3 +154,11 @@ def test_crashed_episode_is_an_error():
     ep = Episode(scenario=SCENARIO, end_reason="simulator error: AuthenticationError: 401")
     assert verdict(ep) == "ERROR"
     assert verdict(Episode(scenario=SCENARIO, end_reason="script complete")) == "UNGRADED"
+
+
+def test_script_triggers_survive_yaml_boolean_keys():
+    lib = load_library()
+    assert not [t for sc in lib.scenarios for t in sc.get("script", []) if True in t], "a bare `on:` key must be read as the trigger, not as True"
+    sc01 = next(sc for sc in lib.scenarios if sc["id"] == "SC-01")
+    landlord = next(t for t in sc01["script"] if t.get("actor") == "landlord")
+    assert landlord["on"] == "agent requests approval"
