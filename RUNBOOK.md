@@ -14,12 +14,12 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 - [ ] `PREBUILT.md` lists what changed since `pre-event`: `git diff --stat pre-event..HEAD`.
 - [ ] `SUBMISSION.md` fields filled except hashes and post URLs.
 - [ ] Repository switched to **public**: `gh repo edit --visibility public --accept-visibility-change-consequences`; open the URL in a private browser window to confirm.
-- [ ] Git LFS working: `git lfs ls-files` lists `video/demo.mp4`.
+- [ ] `video/demo.mp4` is a plain git blob (42 MB, under GitHub's limit); `git lfs ls-files` is empty and that is expected.
 
 ## 16:15 — video
 
 - [ ] `make video-check` reports duration ≤ 60 s.
-- [ ] `video/demo.mp4` committed and pushed; the file downloads from GitHub (not a pointer).
+- [ ] `video/demo.mp4` committed and pushed; the raw URL returns the binary (`curl -sL -o /dev/null -w '%{http_code} %{content_type}' https://raw.githubusercontent.com/dkushnikov/lettings-ops-agent/main/video/demo.mp4`).
 
 ## 16:30 — code freeze and Reality Test start
 
