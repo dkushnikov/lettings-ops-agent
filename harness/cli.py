@@ -25,11 +25,19 @@ from .tools import EnvironmentAdapter
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def build_adapter(name: str, tools_module: str | None) -> EnvironmentAdapter:
+def build_adapter(name: str, tools_module: str | None, args: argparse.Namespace | None = None) -> EnvironmentAdapter:
     if name == "mock":
         from mockworld.adapter import MockAdapter  # local package
 
         return MockAdapter()
+    if name == "dwelly":
+        from .adapters.dwelly import DwellyCasesAdapter
+
+        return DwellyCasesAdapter(
+            hide_outcome=not bool(getattr(args, "show_outcome", False)),
+            cutoff=getattr(args, "cutoff", None),
+            with_attachments=not bool(getattr(args, "no_attachments", False)),
+        )
     return GenericAdapter(tools_module)
 
 
@@ -60,11 +68,16 @@ def _parse_deadline(text: str | None) -> datetime | None:
 
 def cmd_run(args: argparse.Namespace) -> int:
     settings = Settings.from_env(model=args.model, effort=args.effort, concurrency=args.concurrency, case_timeout_s=args.timeout, max_steps=args.max_steps, reviewer=args.reviewer)
-    adapter = build_adapter(args.adapter, args.tools_module)
+    adapter = build_adapter(args.adapter, args.tools_module, args)
     cases = _select(adapter.load_cases(Path(args.cases)), args.case, args.limit)
     if not cases:
         print("No cases found.", file=sys.stderr)
         return 2
+    if args.adapter == "dwelly" and getattr(args, "emit_expected", False):
+        from .adapters.dwelly import write_expected
+
+        n_exp = write_expected(Path(args.cases), Path(args.out) / "_expected", cutoff=args.cutoff)
+        print(f"wrote {n_exp} hidden-outcome expectation file(s) to {Path(args.out) / '_expected'} (judge only)")
     agent = build_agent(settings)
     meta = asyncio.run(run_batch(cases, adapter, agent, settings, Path(args.out), force=args.force, deadline=_parse_deadline(args.deadline), progress=not args.no_progress))
     return 0 if meta.completed == meta.cases_total else 1
@@ -115,6 +128,12 @@ def cmd_rules_extract(args: argparse.Namespace) -> int:
         print("evalkit.rules_extract not available yet.", file=sys.stderr)
         return 2
     return rx_main(docs=Path(args.docs), out=Path(args.out), model=args.model)
+
+
+def cmd_report(args: argparse.Namespace) -> int:
+    from evalkit.report import main as report_main
+
+    return report_main(run=Path(args.run), cases=Path(args.cases) if args.cases else None, open_browser=args.open)
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
@@ -176,8 +195,12 @@ def build_parser() -> argparse.ArgumentParser:
     def add_run_args(sp: argparse.ArgumentParser, demo: bool = False) -> None:
         sp.add_argument("--cases", default="fixtures")
         sp.add_argument("--out", default=None if demo else "runs/latest")
-        sp.add_argument("--adapter", choices=["mock", "generic"], default="mock")
+        sp.add_argument("--adapter", choices=["mock", "generic", "dwelly"], default="mock")
         sp.add_argument("--tools-module", default=None, help="pkg.module:build_registry for the generic adapter")
+        sp.add_argument("--cutoff", type=int, default=None, help="dwelly: show only history events up to this number (decision point)")
+        sp.add_argument("--show-outcome", action="store_true", help="dwelly: keep overview/outcome visible (never for evaluation)")
+        sp.add_argument("--no-attachments", action="store_true", help="dwelly: skip attachment text")
+        sp.add_argument("--emit-expected", action="store_true", help="dwelly: write hidden outcome + later events to <out>/_expected for the judge")
         sp.add_argument("--concurrency", type=int, default=None)
         sp.add_argument("--model", default=None)
         sp.add_argument("--effort", default=None)
@@ -222,6 +245,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--out", default="agent/rulebook_staging.md")
     sp.add_argument("--model", default=None)
     sp.set_defaults(fn=cmd_rules_extract)
+
+    sp = sub.add_parser("report", help="self-contained HTML report for a run directory")
+    sp.add_argument("--run", default="runs/latest")
+    sp.add_argument("--cases", default="fixtures")
+    sp.add_argument("--open", action="store_true")
+    sp.set_defaults(fn=cmd_report)
 
     sp = sub.add_parser("rehearse", help="fresh clone → sync → run → verify")
     sp.add_argument("--cases", default="fixtures")

@@ -74,8 +74,18 @@ async def judge_case(client: Any, settings: Settings, case_id: str, expected: di
     return json.loads(text)
 
 
+def _expected_from_run(answers: Path) -> dict[str, dict[str, Any]]:
+    """Hidden-outcome expectations written by the dwelly adapter (`<out>/_expected/<id>.yaml`)."""
+    out: dict[str, dict[str, Any]] = {}
+    d = answers / "_expected"
+    if d.exists():
+        for p in sorted(d.glob("*.yaml")):
+            out[p.stem] = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    return out
+
+
 async def _run(answers: Path, cases: Path, settings: Settings) -> list[dict[str, Any]]:
-    expected = _expected_for(cases)
+    expected = {**_expected_from_run(answers), **_expected_for(cases)}
     client = make_client(settings)
     sem = asyncio.Semaphore(4)
     rows: list[dict[str, Any]] = []

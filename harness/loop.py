@@ -114,7 +114,7 @@ def render_case(case: Case) -> str:
         parts.append(a.content.strip())
         parts.append("</artefact>")
     parts.append("</case>")
-    parts.append("Work this case now. Start with use_playbook.")
+    parts.append("Work this case now. Start with use_playbook. Tool names in a playbook are indicative; use the tools actually offered in this environment.")
     return "\n".join(parts)
 
 

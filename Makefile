@@ -30,6 +30,9 @@ demo:
 eval:
 	$(PY) eval --answers $(OUT) --cases $(CASES) $(ARGS)
 
+report:
+	$(PY) report --run $(OUT) --cases $(CASES) --open
+
 mutate:
 	$(PY) mutate --case $(CASE) --out runs/mutations $(ARGS)
 
