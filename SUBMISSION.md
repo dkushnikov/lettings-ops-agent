@@ -5,7 +5,7 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 | Field | Value |
 |---|---|
 | Public repository URL | https://github.com/dkushnikov/lettings-ops-agent |
-| Team name | <!-- TODO(event) --> |
+| Team name | D&D |
 | Track | Property Management |
 | Team members | Dmitry Kushnikov, Dmitry Taranov |
 | Commit hash at code freeze (16:30 BST) | <!-- TODO(event): output of `make freeze` --> |

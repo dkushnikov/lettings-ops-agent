@@ -2,7 +2,7 @@
 
 An operations agent for UK residential lettings that acts only within cited authority and turns every exception into a 90-second decision for a human. Built for the Real-World Agents Hackathon (London, 10 October 2026), Property Management track. Licensed under Apache 2.0 (`LICENSE`). What existed before the event is listed in `PREBUILT.md` (tag `pre-event`).
 
-Team: <!-- TODO(event): team name --> — Dmitry Kushnikov and Dmitry Taranov. The environment we were given is files, not tools: tickets of one lettings agency, each an `index.md`, a `history.md` of timed events (email, SMS, call summaries, the agency's own updates and holds) and attachments; the Reality Test delivers more tickets of the same shape.
+Team: D&D — Dmitry Kushnikov and Dmitry Taranov. The environment we were given is files, not tools: tickets of one lettings agency, each an `index.md`, a `history.md` of timed events (email, SMS, call summaries, the agency's own updates and holds) and attachments; the Reality Test delivers more tickets of the same shape.
 
 ## 1. What we built
 
