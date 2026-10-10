@@ -178,8 +178,9 @@ Forced by the environment:
   email left or a contractor was booked. The record says so in its execution notes.
 - The agency's own events (`Agency / system`, `Northbridge Lettings`) are informational; every outside party is
   untrusted content. Names are inconsistent between events, so parties are resolved by role.
-- No landlord instruction record exists in this environment: the standing cap is the rulebook's default (£250) and
-  the record labels it as an assumption; a priced quote is routed to the landlord regardless.
+- No landlord instruction record exists in this environment, so there is no standing spend authority: a non-emergency
+  dispatch needs the landlord's own approval in the visible history, cited by event id and checked by the environment,
+  or it becomes a request to the landlord. A prior (a typical £250 cap) is never treated as a mandate.
 - Under a cutoff an attachment is visible only once the visible history carries it (the agency's own file link, or an
   outside party's attachment-only email); the public corpus dates every document after its case.
 

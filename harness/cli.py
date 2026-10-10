@@ -69,13 +69,25 @@ def _parse_deadline(text: str | None) -> datetime | None:
     return now.replace(hour=int(hh), minute=int(mm), second=0, microsecond=0)
 
 
+def detect_adapter(cases: Path) -> str:
+    """Pick the adapter from the folder layout when none is given: organisers' cases carry index.md, fixtures carry case.yaml."""
+    if cases.is_dir():
+        if any(d.is_dir() and (d / "index.md").exists() for d in cases.iterdir()):
+            return "dwelly"
+        if any(d.is_dir() and (d / "case.yaml").exists() for d in cases.iterdir()) or any(cases.glob("*.json")):
+            return "mock"
+    return "mock"
+
+
 def cmd_run(args: argparse.Namespace) -> int:
     settings = Settings.from_env(model=args.model, effort=args.effort, concurrency=args.concurrency, case_timeout_s=args.timeout, max_steps=args.max_steps, reviewer=args.reviewer)
+    args.adapter = args.adapter or detect_adapter(Path(args.cases))
     adapter = build_adapter(args.adapter, args.tools_module, args)
     cases = _select(adapter.load_cases(Path(args.cases)), args.case, args.limit)
     if not cases:
-        print("No cases found.", file=sys.stderr)
+        print(f"No cases found in {args.cases} with adapter '{args.adapter}' (dwelly expects NNN/index.md + history.md; mock expects case.yaml). Nothing written.", file=sys.stderr)
         return 2
+    print(f"adapter: {args.adapter} · cases: {len(cases)}", file=sys.stderr)
     if args.adapter == "dwelly":
         import yaml as _yaml
 
@@ -237,7 +249,7 @@ def build_parser() -> argparse.ArgumentParser:
     def add_run_args(sp: argparse.ArgumentParser, demo: bool = False) -> None:
         sp.add_argument("--cases", default="fixtures")
         sp.add_argument("--out", default=None if demo else "runs/latest")
-        sp.add_argument("--adapter", choices=["mock", "generic", "dwelly"], default="mock")
+        sp.add_argument("--adapter", choices=["mock", "generic", "dwelly"], default=None, help="default: detected from the folder (index.md → dwelly, case.yaml → mock)")
         sp.add_argument("--tools-module", default=None, help="pkg.module:build_registry for the generic adapter")
         sp.add_argument("--cutoff", type=int, default=None, help="dwelly: show only history events up to this number (decision point)")
         sp.add_argument("--cutoffs", default=None, help="dwelly: YAML file mapping case number → last visible event (per-case decision points)")

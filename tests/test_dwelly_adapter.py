@@ -93,3 +93,23 @@ def test_attachments_follow_the_cutoff():
 def test_case_metadata_names_the_agency():
     case = load_dwelly_case(CASE)
     assert case.metadata["agency"] == "Northbridge Lettings"
+
+
+async def test_ledger_checks_that_the_approval_event_is_the_landlords():
+    from harness.executor import ActionExecutor
+    from harness.gate import PolicyGate
+    from harness.rulebook import Rulebook
+    from harness.schema import ActionStatus
+
+    adapter = DwellyCasesAdapter()
+    case = next(c for c in adapter.load_cases(ROOT / "fixtures-dwelly" / "Property Management") if c.id.endswith("001"))
+    landlord = next(a.id for a in case.artefacts if "landlord" in str(a.metadata.get("from", "")).lower())
+    other = next(a.id for a in case.artefacts if a.id.startswith("event-") and "landlord" not in str(a.metadata.get("from", "")).lower())
+    ex = ActionExecutor(adapter.tools_for(case), PolicyGate(Rulebook.load(ROOT / "agent" / "rulebook.yaml")), case_id=case.id)
+    base = {"trade": "gardener", "description": "clear the communal garden", "urgency": "routine", "estimated_cost_gbp": 180}
+    blocked = await ex.execute("assign_contractor", base, urgency="routine", seq=1)
+    assert blocked.status == ActionStatus.needs_approval and "APR-SPEND-OVER-CAP" in blocked.gate.rule_ids
+    fake = await ex.execute("assign_contractor", {**base, "landlord_approval_ref": other}, urgency="routine", seq=2)
+    assert fake.status == ActionStatus.failed and "not a landlord message" in (fake.error or "")
+    real = await ex.execute("assign_contractor", {**base, "landlord_approval_ref": landlord}, urgency="routine", seq=3)
+    assert real.status == ActionStatus.completed and real.gate.rule_ids == ["CAP-DISPATCH-APPROVED"]

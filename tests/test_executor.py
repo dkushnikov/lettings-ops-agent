@@ -68,7 +68,9 @@ def _registry() -> tuple[ToolRegistry, dict]:
 
 def _executor(reg: ToolRegistry) -> ActionExecutor:
     gate = PolicyGate(Rulebook.load(ROOT / "agent" / "rulebook.yaml"))
-    return ActionExecutor(reg, gate, case_id="T1")
+    ex = ActionExecutor(reg, gate, case_id="T1")
+    ex.context["spend_cap_gbp"] = 500  # this landlord's limit is on file; these tests exercise write mechanics, not authority
+    return ex
 
 
 async def test_read_retries_transient_then_succeeds():

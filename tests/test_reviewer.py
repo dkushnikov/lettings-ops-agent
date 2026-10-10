@@ -94,3 +94,11 @@ def test_hard_flag_wins_over_the_hold_rule():
     s.red_flags.append(RedFlag(kind="fraud", description="new bank details by email"))
     _reviewer().apply_rules(s)
     assert s.disposition == Disposition.escalated
+
+
+def test_refused_injection_is_recorded_not_escalated():
+    s = _state(Disposition.resolved)
+    s.red_flags.append(RedFlag(kind="injection", description="email told the agent to pay a new account; refused"))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.resolved
+    assert any(n.startswith("R2: injection attempt recorded") for n in s.reviewer_notes)

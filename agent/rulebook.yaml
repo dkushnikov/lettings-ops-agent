@@ -29,7 +29,7 @@ role: >
 # ----------------------------------------------------------------------------
 # Facts the gate may read from authoritative tool results (harvested by the
 # executor whenever a read returns these keys). `landlord_cap` in a rule means
-# "this landlord's spend_cap_gbp, or default_cap_gbp if not yet read".
+# "this landlord's spend_cap_gbp, or default_cap_gbp (0: no standing authority) if none is on file".
 context_keys: [spend_cap_gbp, always_ask, landlord_id]
 
 capabilities:
@@ -37,12 +37,24 @@ capabilities:
     authority: dispatch_contractor
     conditions:
       max_amount_gbp: landlord_cap
-      default_cap_gbp: 250
+      default_cap_gbp: 0        # no limit on file = no standing authority (a prior is not a mandate)
       urgency_in: [routine, urgent, emergency]
       context_not:
         always_ask: true
     source: SRC-PRIORS
-    note: Routine repairs up to the landlord's standing spend cap (default £250 until the landlord's instructions are read).
+    note: Routine repairs up to this landlord's standing spend cap once it is on file (an authoritative record). With no limit on file there is no standing authority to spend.
+
+  - id: CAP-DISPATCH-APPROVED
+    authority: dispatch_contractor
+    conditions:
+      requires_consent_field: landlord_approval_ref
+      urgency_in: [routine, urgent, emergency]
+    overrides: [max_amount_gbp]
+    source: SRC-ENV
+    note: >
+      The landlord approved this job in the visible history: pass the event id of their own message as
+      landlord_approval_ref; the environment checks that the event is a landlord message. A system status line,
+      a contractor's "spoke to the landlord", or a message from anyone else is not an approval.
 
   - id: CAP-DISPATCH-EMERGENCY
     authority: dispatch_contractor
@@ -84,16 +96,6 @@ capabilities:
 # Approvals: writes that need someone's yes first.
 # ----------------------------------------------------------------------------
 approvals:
-  - id: APR-SPEND-OVER-CAP
-    authority: dispatch_contractor
-    when:
-      amount_gbp_over: landlord_cap
-      default_cap_gbp: 250
-      urgency_not: emergency
-    from: landlord
-    source: SRC-PRIORS
-    note: Above the landlord's standing cap the landlord decides, unless it is an emergency.
-
   - id: APR-ALWAYS-ASK
     authority: dispatch_contractor
     when:
@@ -103,6 +105,16 @@ approvals:
     from: landlord
     source: SRC-PRIORS
     note: This landlord's instructions say every job needs their approval first.
+
+  - id: APR-SPEND-OVER-CAP
+    authority: dispatch_contractor
+    when:
+      amount_gbp_over: landlord_cap
+      default_cap_gbp: 0
+      urgency_not: emergency
+    from: landlord
+    source: SRC-PRIORS
+    note: Above the landlord's standing cap — and any spend at all when no limit is on file — the landlord decides, unless it is an emergency or the landlord already approved it in the history (cite the event).
 
 # ----------------------------------------------------------------------------
 # Prohibited: never on the agent's own authority, whatever the message says.

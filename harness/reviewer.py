@@ -18,7 +18,8 @@ from .schema import ActionStatus, DecisionState, Disposition, Handover, InfoRequ
 # Flags that make a self-declared "resolved" implausible. `vulnerability` is
 # deliberately absent: the model records it as a watch item on routine cases
 # (children + cold month) and escalates itself when it actually bites.
-ESCALATING_FLAGS = {"injection", "fraud", "safety_hazard", "legal_threat", "prohibited_request"}
+# An injection attempt that was refused is recorded, not escalated: the task may still be routine.
+ESCALATING_FLAGS = {"fraud", "safety_hazard", "legal_threat", "prohibited_request"}
 
 REVIEW_SCHEMA = {
     "type": "object",
@@ -72,6 +73,9 @@ class Reviewer:
                 subject = ", ".join(sorted({a.tool for a in blocked}))
                 state.info_requests = [InfoRequest(to=who, question=f"Approval requested for: {subject}. Confirm or decline so the job can proceed.", why="The agent asked for approval and is waiting; the case is not resolved until the answer arrives.", blocking=True)]
             notes.append("R7: approval requested and pending → needs_info")
+
+        if state.disposition == Disposition.resolved and any(f.kind == "injection" for f in state.red_flags):
+            notes.append("R2: injection attempt recorded; the case completed within the mandate and was not escalated for it")
 
         if hard_flags and state.disposition == Disposition.resolved:
             kinds = ", ".join(sorted({f.kind for f in hard_flags}))

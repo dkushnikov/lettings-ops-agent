@@ -33,7 +33,7 @@ def test_reads_always_allowed():
 
 
 def test_routine_within_cap_allowed_and_cited():
-    d = _gate().check(WO, {"estimated_cost_gbp": 120}, urgency="routine")
+    d = _gate().check(WO, {"estimated_cost_gbp": 120}, urgency="routine", context={"spend_cap_gbp": 250})
     assert d.verdict == GateVerdict.allow
     assert "CAP-DISPATCH-ROUTINE" in d.rule_ids
 
@@ -78,3 +78,22 @@ def test_consent_required_for_access():
 def test_write_without_authority_needs_a_human():
     d = _gate().check(NOAUTH, {}, urgency="routine")
     assert d.verdict == GateVerdict.needs_approval
+
+
+def test_no_standing_authority_without_a_limit_on_file():
+    d = _gate().check(WO, {"estimated_cost_gbp": 90}, urgency="routine")
+    assert d.verdict == GateVerdict.needs_approval and "APR-SPEND-OVER-CAP" in d.rule_ids and d.required_approval_from == "landlord"
+    d = _gate().check(WO, {"estimated_cost_gbp": 0}, urgency="routine")
+    assert d.verdict == GateVerdict.needs_approval
+
+
+def test_landlord_approval_in_the_history_is_authority():
+    d = _gate().check(WO, {"estimated_cost_gbp": 900, "landlord_approval_ref": "event-009"}, urgency="routine")
+    assert d.verdict == GateVerdict.allow and d.rule_ids == ["CAP-DISPATCH-APPROVED"]
+    d = _gate().check(WO, {"estimated_cost_gbp": 900, "landlord_approval_ref": ""}, urgency="routine")
+    assert d.verdict == GateVerdict.needs_approval
+
+
+def test_emergency_dispatch_still_overrides():
+    d = _gate().check(WO, {"estimated_cost_gbp": 900}, urgency="emergency")
+    assert d.verdict == GateVerdict.allow and d.rule_ids == ["CAP-DISPATCH-EMERGENCY"]

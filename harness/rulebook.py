@@ -168,7 +168,7 @@ class Rulebook:
         if isinstance(value, str) and value == "landlord_cap":
             cap = context.get("spend_cap_gbp")
             if cap is None:
-                cap = rule.get("default_cap_gbp", 250)
+                cap = rule.get("default_cap_gbp", 0)  # a prior is not a mandate: no limit on file, no standing spend
             return float(cap)
         return float(value)
 
@@ -180,7 +180,8 @@ class Rulebook:
             if amount is None:
                 # Unknown amount: be conservative, treat as exceeding.
                 return False
-            if amount > cls._limit(cond["max_amount_gbp"], cond, context):
+            limit = cls._limit(cond["max_amount_gbp"], cond, context)
+            if limit <= 0 or amount > limit:
                 return False
         if "requires_consent_field" in cond:
             if not bool(tool_input.get(cond["requires_consent_field"])):

@@ -51,7 +51,7 @@ def _registry():
 
     reg.add(BoundTool(make_spec("get_property", "read a property", {"type": "object", "properties": {"property_id": {"type": "string"}}, "required": ["property_id"]}), get_property))
 
-    async def create_work_order(property_id: str, estimated_cost_gbp: float, idempotency_key: str | None = None):
+    async def create_work_order(property_id: str, estimated_cost_gbp: float, idempotency_key: str | None = None, **kw):
         return {"work_order_id": "WO-7"}
 
     reg.add(
@@ -93,7 +93,7 @@ def test_terminal_definitions_have_no_refs():
 async def test_happy_path_resolved_with_gate_and_terminal():
     script = [
         _response([_tool_use("use_playbook", {"name": "maintenance-request", "case_type": "maintenance_request", "urgency": "routine", "why": "drip"}, "t1")]),
-        _response([_tool_use("get_property", {"property_id": "P-001"}, "t2"), _tool_use("create_work_order", {"property_id": "P-001", "estimated_cost_gbp": 120}, "t3")]),
+        _response([_tool_use("get_property", {"property_id": "P-001"}, "t2"), _tool_use("create_work_order", {"property_id": "P-001", "estimated_cost_gbp": 120, "landlord_approval_ref": "email-01"}, "t3")]),
         _response([
             _tool_use(
                 "finalize",
@@ -113,7 +113,7 @@ async def test_happy_path_resolved_with_gate_and_terminal():
     assert state.disposition == Disposition.resolved
     assert state.playbook == "maintenance-request" and state.urgency == "routine"
     assert [a.status for a in state.actions] == [ActionStatus.completed, ActionStatus.completed]
-    assert state.actions[1].gate.rule_ids == ["CAP-DISPATCH-ROUTINE"]
+    assert state.actions[1].gate.rule_ids == ["CAP-DISPATCH-APPROVED"]
     assert state.steps == 3 and state.input_tokens == 300
     assert any(e["event"] == "terminal" and e["ok"] for e in events)
 

@@ -19,7 +19,7 @@ def _gate() -> PolicyGate:
 
 def test_landlord_cap_from_context_lowers_the_limit():
     g = _gate()
-    assert g.check(WO, {"estimated_cost_gbp": 200}, urgency="routine").verdict == GateVerdict.allow
+    assert g.check(WO, {"estimated_cost_gbp": 200}, urgency="routine", context={"spend_cap_gbp": 250}).verdict == GateVerdict.allow
     d = g.check(WO, {"estimated_cost_gbp": 200}, urgency="routine", context={"spend_cap_gbp": 150})
     assert d.verdict == GateVerdict.needs_approval and "APR-SPEND-OVER-CAP" in d.rule_ids
 
@@ -51,8 +51,10 @@ async def test_executor_harvests_context_from_reads():
     reg.add(BoundTool(WO, create_work_order))
     ex = ActionExecutor(reg, _gate(), case_id="X")
     first = await ex.execute("create_work_order", {"property_id": "P-002", "estimated_cost_gbp": 200}, urgency="routine", seq=1)
-    assert first.status == ActionStatus.completed  # default cap 250 applies before the instructions are read
+    assert first.status == ActionStatus.needs_approval  # no limit on file yet: a prior is not a mandate
     await ex.execute("get_landlord_instructions", {"property_id": "P-002"}, urgency="routine", seq=2)
     assert ex.context["spend_cap_gbp"] == 150
     second = await ex.execute("create_work_order", {"property_id": "P-002", "estimated_cost_gbp": 200, "description": "again"}, urgency="routine", seq=3)
-    assert second.status == ActionStatus.needs_approval
+    assert second.status == ActionStatus.needs_approval  # over this landlord's own cap
+    third = await ex.execute("create_work_order", {"property_id": "P-002", "estimated_cost_gbp": 120}, urgency="routine", seq=4)
+    assert third.status == ActionStatus.completed  # within the cap that is now on file
