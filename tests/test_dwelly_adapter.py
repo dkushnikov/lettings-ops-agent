@@ -67,3 +67,17 @@ def test_write_expected_keeps_hidden_parts(tmp_path: Path):
     assert n == 3
     text = (tmp_path / "property-003.yaml").read_text(encoding="utf-8")
     assert "outcome:" in text and "later_events" in text and "Paid" in text
+
+
+def test_attachments_follow_the_cutoff():
+    events = parse_history((CASE / "history.md").read_text(encoding="utf-8"))
+    parsed = parse_index((CASE / "index.md").read_text(encoding="utf-8"))
+    first = {name: next((e.number for e in events if name in e.body or Path(name).stem in e.body), None) for name in parsed.attachments}
+    assert first and all(v is not None for v in first.values()), first
+    early = load_dwelly_case(CASE, cutoff=min(first.values()) - 1)
+    assert not [a for a in early.artefacts if a.kind == ArtefactKind.document]
+    assert "## Attachments" not in next(a for a in early.artefacts if a.id == "index").content
+    assert early.metadata["attachments_hidden"] == len(parsed.attachments)
+    late = load_dwelly_case(CASE, cutoff=max(first.values()))
+    assert len([a for a in late.artefacts if a.kind == ArtefactKind.document]) == len(parsed.attachments)
+    assert late.metadata["attachments_hidden"] == 0

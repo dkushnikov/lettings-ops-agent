@@ -86,6 +86,15 @@ class Reviewer:
                 state.info_requests = [InfoRequest(to=who, question=f"Approval needed for: {', '.join(sorted({a.tool for a in blocked}))}", why="The policy gate blocked these actions and no approval was requested.", blocking=True)]
             notes.append("R3: resolved with blocked writes and no approval request → needs_info")
 
+        on_hold = [a for a in state.actions if a.status == ActionStatus.completed and "hold" in a.tool]
+        if state.disposition == Disposition.resolved and (state.hold_reason or state.stage == "on_hold" or on_hold):
+            who = _hold_party(state.hold_reason) or "property_manager"
+            state.disposition = Disposition.needs_info
+            if not state.info_requests:
+                question = state.next_step or state.hold_reason or "Confirm the next step so the case can proceed."
+                state.info_requests = [InfoRequest(to=who, question=question, why="The case is on hold waiting for this party; it is not resolved until they answer.", blocking=True)]
+            notes.append("R8: resolved while on hold → needs_info")
+
         if state.disposition == Disposition.escalated and state.handover is None:
             state.handover = Handover(to="property_manager", question=f"Decide the next action on case {state.case_id}.", summary=[f.statement for f in state.facts][:5], gap="Agent escalated without a handover card.", default_if_timeout="Case stays open in the human queue.")
             notes.append("R4: escalated without handover → minimal card built")
@@ -159,3 +168,15 @@ class Reviewer:
             elif not state.info_requests:
                 state.disposition = target
                 state.info_requests = [InfoRequest(to="property_manager", question=verdict.get("handover_question") or "Reviewer: clarification needed.", why="; ".join(verdict.get("issues", [])), blocking=True)]
+
+
+_HOLD_PARTIES = {"landlord": "landlord", "provider": "contractor", "contractor": "contractor", "tenant": "tenant"}
+
+
+def _hold_party(reason: str) -> str:
+    """'Waiting for Provider — …' → 'contractor'; unknown or 'Other' → ''."""
+    low = (reason or "").lower()
+    for key, who in _HOLD_PARTIES.items():
+        if f"waiting for {key}" in low or low.startswith(key):
+            return who
+    return ""

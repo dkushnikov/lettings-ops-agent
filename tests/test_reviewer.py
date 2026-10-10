@@ -68,3 +68,29 @@ def test_needs_info_without_question_escalates():
     s = _state(Disposition.needs_info)
     _reviewer().apply_rules(s)
     assert s.disposition == Disposition.escalated
+
+
+def test_resolved_while_on_hold_becomes_needs_info():
+    s = _state(Disposition.resolved)
+    s.stage = "on_hold"
+    s.hold_reason = "Waiting for Provider — Clarke to confirm attendance date and access"
+    s.next_step = "Clarke to confirm the attendance date for job NBL-007-0235"
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.needs_info
+    assert s.info_requests and s.info_requests[0].to == "contractor" and "attendance" in s.info_requests[0].question
+    assert any(n.startswith("R8") for n in s.reviewer_notes)
+
+
+def test_resolved_with_a_hold_action_and_no_reason_still_flips():
+    s = _state(Disposition.resolved)
+    s.actions.append(ActionRecord(seq=1, tool="put_on_hold", tool_class=ToolClass.write, status=ActionStatus.completed))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.needs_info and s.info_requests[0].to == "property_manager"
+
+
+def test_hard_flag_wins_over_the_hold_rule():
+    s = _state(Disposition.resolved)
+    s.hold_reason = "Waiting for Landlord"
+    s.red_flags.append(RedFlag(kind="fraud", description="new bank details by email"))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.escalated

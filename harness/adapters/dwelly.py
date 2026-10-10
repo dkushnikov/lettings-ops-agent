@@ -117,15 +117,16 @@ def parse_history(md: str) -> list[HistoryEvent]:
     return events
 
 
-def _visible_details(parsed: ParsedCase) -> str:
+def _visible_details(parsed: ParsedCase, attachments: list[str] | None = None) -> str:
+    attachments = parsed.attachments if attachments is None else attachments
     lines = [f"# {parsed.title}", "", "## Case details"]
     for k, v in parsed.details.items():
         if k in ("status", "completed", "updated"):
             continue  # these reveal the ending
         lines.append(f"- {k.replace('_', ' ')}: {v}")
     lines += ["", "## Initial request", parsed.initial_request]
-    if parsed.attachments:
-        lines += ["", "## Attachments", *[f"- {a}" for a in parsed.attachments]]
+    if attachments:
+        lines += ["", "## Attachments", *[f"- {a}" for a in attachments]]
     return "\n".join(lines)
 
 
@@ -136,9 +137,15 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
     events = parse_history(history_md)
     if cutoff is not None:
         events = [e for e in events if e.number <= cutoff]
+    # Under a cutoff a document exists for the agent only once a visible event (or the initial request) refers to it;
+    # every PDF in the public corpus is dated after its case, so an unreferenced attachment would leak the future.
+    visible_attachments = list(parsed.attachments)
+    if cutoff is not None:
+        bodies = "\n".join([parsed.initial_request, *(e.body for e in events)])
+        visible_attachments = [name for name in parsed.attachments if name in bodies or Path(name).stem in bodies]
 
     artefacts: list[Artefact] = [
-        Artefact(id="index", kind=ArtefactKind.record, title=parsed.title, source="index.md", content=_visible_details(parsed) if hide_outcome else index_md, trust="authoritative")
+        Artefact(id="index", kind=ArtefactKind.record, title=parsed.title, source="index.md", content=_visible_details(parsed, visible_attachments) if hide_outcome else index_md, trust="authoritative")
     ]
     for e in events:
         header = f"[{e.timestamp}] {e.channel} · from: {e.sender or '-'} · to: {e.recipient or '-'}"
@@ -146,12 +153,11 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
     if with_attachments:
         att_dir = case_dir / "attachments"
         if att_dir.exists():
-            referenced = {name for name in parsed.attachments}
             for f in sorted(att_dir.iterdir()):
                 if not f.is_file():
                     continue
-                if cutoff is not None and referenced and f.name not in referenced:
-                    pass
+                if cutoff is not None and f.name not in visible_attachments:
+                    continue  # referenced only after the decision point, or never
                 if f.suffix.lower() in (".png", ".jpg", ".jpeg", ".gif"):
                     content = f"[image attachment: {f.name} — not transcribed]"
                 else:
@@ -168,7 +174,7 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
         title=parsed.title,
         received_at=parsed.details.get("created"),
         artefacts=artefacts,
-        metadata={"track": track, "case_number": case_dir.name, "property": parsed.details.get("property", ""), "source_role": parsed.details.get("source_role", ""), "events_visible": len(events), "cutoff": cutoff},
+        metadata={"track": track, "case_number": case_dir.name, "property": parsed.details.get("property", ""), "source_role": parsed.details.get("source_role", ""), "events_visible": len(events), "cutoff": cutoff, "attachments_hidden": len(parsed.attachments) - len(visible_attachments)},
         env={"format": "dwelly"},
     )
 
