@@ -8,11 +8,9 @@ The organisers gave us files, not tools: tickets from one lettings agency. Each 
 
 ## 1. What we built
 
-A multi-actor agentic system for residential lettings. Landlords use it to monitor their properties, assign contractors and see each tenant's karma, their track record across tickets. The interface is a web app that looks like a pixel-art video game, so a landlord who has never used property software can see the whole portfolio at a glance.
+An agent for the maintenance desk of a residential lettings agency. It works each ticket the way a careful property manager would: reads what tenants, landlords and contractors sent, does what it is allowed to do on its own, and asks the right person when a decision is theirs. A companion browser demo, Lettings Village (https://github.com/dkushnikov/dwelly-hackaton-demo), is a pixel village where tenants, landlords, contractors and Dwelly operators share six homes; it drives this same agent and shows every decision with its evidence, policy gate, next owner and handover.
 
 There are three actors besides the agent: landlord, tenant and contractor. The agent works each ticket for them. It reads the messages, calls and documents, does what it is allowed to do on its own, and asks the right person when a decision is theirs. A simulator plays all three actors (`evalkit/actors/`), so we can test the agent in multi-turn conversations, not just on single snapshots.
-
-<!-- TODO: the web app: where its code lives, its screens, and how karma is computed. -->
 
 The agent is defined by four files, not code:
 
@@ -38,9 +36,7 @@ Most of a property manager's day goes on exceptions, not routine work: a record 
 
 ## 3. Architecture
 
-The web app is the landlord's view: properties, open tickets, contractors and tenant karma. The agent works each ticket and writes the records the web app shows.
-
-<!-- TODO: web app stack and how it reads the agent's records (files, API). -->
+The browser demo is a view over the same records: it runs the agent through the harness contract (an environment adapter with `load_cases` and `tools_for`, the record files it writes back) and renders each decision as a story. Nothing in this repository depends on it.
 
 ```
 case files ──► loader ──► decision loop (Anthropic Messages API)
@@ -77,9 +73,9 @@ More detail:
 
 ## 4. How to run it
 
-### The web app
+### The browser demo
 
-<!-- TODO: install and start commands, URL, and which run's records it loads. -->
+Lettings Village lives in its own repository (https://github.com/dkushnikov/dwelly-hackaton-demo): Python 3.12 and `uvicorn`, no npm dependencies, quick start in its README. It loads this repository's agent through the harness contract.
 
 ### The agent
 
@@ -163,8 +159,6 @@ Each case was cut at the first message from an outside party. The agent did not 
 What changed between the runs: a status block and closing checklist in every record, a reviewer rule that a case on hold is not resolved, landlord replies treated as approval, priced quotes sent to the landlord before work starts, a time budget inside the loop; then no standing spend without a limit on file, a landlord's approval as a verifiable event, an emergency make-safe ceiling, a safety pass over the case material, and a reviewer that treats a safety keyword as a finding rather than an escalation. Six cases still score 1 on outcome; in all of them the agent asks or waits where the agency went ahead. The judge's noise is about one point per case, so a two-point difference between runs is not a signal. Replay any run step by step with `make cases-browser RUNS="runs/<run>"`.
 
 ## 5. Models, APIs and external services used
-
-<!-- TODO: web app framework, pixel-art assets and their licence, any hosting. -->
 
 - **Anthropic Claude** through the official Python SDK (`anthropic`): Messages API with tool use, adaptive thinking and prompt caching. The agent uses `claude-opus-5` at effort `high` (`LOA_MODEL`, `LOA_EFFORT`); the judge and the simulated actors use the same model at effort `medium`.
 - **The organisers' case files.** The adapter gives the agent read tools (`get_case_details`, `search_history`, `get_attachment`, `get_action_ledger`) and write tools (`assign_contractor`, `request_landlord_approval`, `notify_*`, `schedule_access`, `put_on_hold`, `add_note`, `create_human_task`, `close_request`). Writes go into a ledger; nothing is actually sent.
