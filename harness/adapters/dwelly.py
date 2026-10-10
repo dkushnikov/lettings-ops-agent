@@ -186,15 +186,17 @@ def iter_case_dirs(root: Path) -> list[Path]:
     return out
 
 
-def write_expected(root: Path, out_dir: Path, *, cutoff: int | None = None) -> int:
+def write_expected(root: Path, out_dir: Path, *, cutoff: int | None = None, cutoffs: dict[str, int] | None = None) -> int:
     """Keep the hidden parts (overview, outcome, later events) for the judge only."""
     out_dir.mkdir(parents=True, exist_ok=True)
+    cutoffs = cutoffs or {}
     n = 0
     for case_dir in iter_case_dirs(root):
         parsed = parse_index((case_dir / "index.md").read_text(encoding="utf-8", errors="replace"))
         events = parse_history((case_dir / "history.md").read_text(encoding="utf-8", errors="replace")) if (case_dir / "history.md").exists() else []
-        later = [e for e in events if cutoff is not None and e.number > cutoff]
-        case = load_dwelly_case(case_dir, cutoff=cutoff, with_attachments=False)
+        case_cutoff = cutoff_for(case_dir, cutoff, cutoffs)
+        later = [e for e in events if case_cutoff is not None and e.number > case_cutoff]
+        case = load_dwelly_case(case_dir, cutoff=case_cutoff, with_attachments=False)
         payload = {
             "source": "organisers' public case; outcome text is an example, not the only acceptable decision",
             "status": parsed.details.get("status"),
@@ -309,17 +311,33 @@ def build_registry(case: Case, ledger: CaseLedger | None = None) -> ToolRegistry
     return reg
 
 
+def load_cutoffs(path: str | Path | None) -> dict[str, int]:
+    """Per-case decision points: a YAML mapping of case directory name → last visible event number."""
+    if not path:
+        return {}
+    data = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
+    return {str(k).zfill(3) if str(k).isdigit() else str(k): int(v) for k, v in data.items()}
+
+
+def cutoff_for(case_dir: Path, default: int | None, cutoffs: dict[str, int]) -> int | None:
+    return cutoffs.get(case_dir.name, cutoffs.get(case_dir.name.lstrip("0") or case_dir.name, default))
+
+
 class DwellyCasesAdapter:
     name = "dwelly"
 
-    def __init__(self, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True):
+    def __init__(self, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, cutoffs: dict[str, int] | None = None):
         self.hide_outcome = hide_outcome
         self.cutoff = cutoff
+        self.cutoffs = cutoffs or {}
         self.with_attachments = with_attachments
         self._ledgers: dict[str, CaseLedger] = {}
 
     def load_cases(self, path: Path) -> list[Case]:
-        return [load_dwelly_case(d, hide_outcome=self.hide_outcome, cutoff=self.cutoff, with_attachments=self.with_attachments) for d in iter_case_dirs(Path(path))]
+        return [
+            load_dwelly_case(d, hide_outcome=self.hide_outcome, cutoff=cutoff_for(d, self.cutoff, self.cutoffs), with_attachments=self.with_attachments)
+            for d in iter_case_dirs(Path(path))
+        ]
 
     def tools_for(self, case: Case) -> ToolRegistry:
         ledger = CaseLedger(case)

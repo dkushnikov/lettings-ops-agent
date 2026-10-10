@@ -31,11 +31,12 @@ def build_adapter(name: str, tools_module: str | None, args: argparse.Namespace 
 
         return MockAdapter()
     if name == "dwelly":
-        from .adapters.dwelly import DwellyCasesAdapter
+        from .adapters.dwelly import DwellyCasesAdapter, load_cutoffs
 
         return DwellyCasesAdapter(
             hide_outcome=not bool(getattr(args, "show_outcome", False)),
             cutoff=getattr(args, "cutoff", None),
+            cutoffs=load_cutoffs(getattr(args, "cutoffs", None)),
             with_attachments=not bool(getattr(args, "no_attachments", False)),
         )
     return GenericAdapter(tools_module)
@@ -74,9 +75,9 @@ def cmd_run(args: argparse.Namespace) -> int:
         print("No cases found.", file=sys.stderr)
         return 2
     if args.adapter == "dwelly" and getattr(args, "emit_expected", False):
-        from .adapters.dwelly import write_expected
+        from .adapters.dwelly import load_cutoffs, write_expected
 
-        n_exp = write_expected(Path(args.cases), Path(args.out) / "_expected", cutoff=args.cutoff)
+        n_exp = write_expected(Path(args.cases), Path(args.out) / "_expected", cutoff=args.cutoff, cutoffs=load_cutoffs(args.cutoffs))
         print(f"wrote {n_exp} hidden-outcome expectation file(s) to {Path(args.out) / '_expected'} (judge only)")
     agent = build_agent(settings)
     meta = asyncio.run(run_batch(cases, adapter, agent, settings, Path(args.out), force=args.force, deadline=_parse_deadline(args.deadline), progress=not args.no_progress))
@@ -198,6 +199,7 @@ def build_parser() -> argparse.ArgumentParser:
         sp.add_argument("--adapter", choices=["mock", "generic", "dwelly"], default="mock")
         sp.add_argument("--tools-module", default=None, help="pkg.module:build_registry for the generic adapter")
         sp.add_argument("--cutoff", type=int, default=None, help="dwelly: show only history events up to this number (decision point)")
+        sp.add_argument("--cutoffs", default=None, help="dwelly: YAML file mapping case number → last visible event (per-case decision points)")
         sp.add_argument("--show-outcome", action="store_true", help="dwelly: keep overview/outcome visible (never for evaluation)")
         sp.add_argument("--no-attachments", action="store_true", help="dwelly: skip attachment text")
         sp.add_argument("--emit-expected", action="store_true", help="dwelly: write hidden outcome + later events to <out>/_expected for the judge")
