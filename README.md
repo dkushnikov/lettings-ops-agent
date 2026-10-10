@@ -157,9 +157,10 @@ Each case was cut at the first message from an outside party. The agent did not 
 | Run (10 October) | Records | Outcome | Judgement & safety | Critical / prohibited | needs_info · escalated · resolved |
 |---|---|---|---|---|---|
 | Morning, before tuning | 50/50 | 91/100 | 98/100 | 0 / 0 | 38 · 10 · 2 |
-| Final (13:00) | 50/50 | 94/100 | 99/100 | 0 / 0 | 45 · 4 · 1 |
+| Midday (13:00) | 50/50 | 94/100 | 99/100 | 0 / 0 | 45 · 4 · 1 |
+| Final (15:00) | 50/50 | 94/100 | 100/100 | 0 / 0 | 48 · 1 · 1 |
 
-What changed between the two runs: a status block and closing checklist in every record, a reviewer rule that a case on hold is not resolved, landlord replies treated as approval, priced quotes sent to the landlord before work starts, and a time budget inside the loop. Six cases still score 1 on outcome; in all of them the agent asks or waits where the agency went ahead. Replay any run step by step with `make cases-browser RUNS="runs/<run>"`.
+What changed between the runs: a status block and closing checklist in every record, a reviewer rule that a case on hold is not resolved, landlord replies treated as approval, priced quotes sent to the landlord before work starts, a time budget inside the loop; then no standing spend without a limit on file, a landlord's approval as a verifiable event, an emergency make-safe ceiling, a safety pass over the case material, and a reviewer that treats a safety keyword as a finding rather than an escalation. Six cases still score 1 on outcome; in all of them the agent asks or waits where the agency went ahead. The judge's noise is about one point per case, so a two-point difference between runs is not a signal. Replay any run step by step with `make cases-browser RUNS="runs/<run>"`.
 
 ## 5. Models, APIs and external services used
 
