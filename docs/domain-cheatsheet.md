@@ -6,7 +6,7 @@ Status of everything here: **prior**. Drafted before the event from public sourc
 
 | Decision | Agent may | Human decides |
 |---|---|---|
-| Dispatch a routine repair within the standing cap | yes (CAP-DISPATCH-ROUTINE) | — |
+| Dispatch a routine repair | only on the landlord's own approval in the history (CAP-DISPATCH-APPROVED) or a limit on file; no standing cap by default | — |
 | Spend above the cap, not an emergency | ask the landlord (APR-SPEND-OVER-CAP) | landlord |
 | Make the occupant safe and dispatch in an emergency | yes, cap overridden (CAP-DISPATCH-EMERGENCY), landlord told after | welfare follow-up |
 | Whether a repair is tenant-payable | never (PRO-TENANT-LIABILITY) | property manager |

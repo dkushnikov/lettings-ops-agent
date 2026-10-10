@@ -21,7 +21,9 @@ The agent is defined by four files, not code:
 
 Playbooks say *how* to do something; the rulebook says *whether* the agent may. A playbook cannot grant permission. The model and the loop can be swapped.
 
-Example: public case 050, a broken window, at the point where the landlord replies "yes please send someone". The agent took that reply as approval instead of asking again. It sent a glazier within the £250 standing limit, raised the urgency because the flat was not secure, updated the tenant and the landlord, and put the ticket on hold until the tenant offers access times, with a date to chase. The record shows the current stage, the next step, and three of nine closing steps done, each linked to the event that did it.
+Example: public case 050, a broken window, at the point where the landlord replies "yes please send someone". The agent took that reply as approval instead of asking again. It sent a glazier on that approval, citing the landlord's event (CAP-DISPATCH-APPROVED), raised the urgency because the flat was not secure, updated the tenant and the landlord, and put the ticket on hold until the tenant offers access times, with a date to chase. The record shows the current stage, the next step, and three of nine closing steps done, each linked to the event that did it.
+
+An escalation is a 90-second decision for a person, not a shrug. From public case 018 in the final run (a gardening job the agency told the landlord was done, with nothing on file): **Question:** was the work actually carried out, and who authorises offsetting its cost against the rent? **Gap:** no evidence of the visit, no cost figure, no invoice, no landlord approval of any amount; the landlord's reply is a thanks whose signature does not match the landlord record. **Options:** verify with the tenant and the contractor and, if the work was done, obtain the invoice and forward it; if not, correct the record with the landlord and reassign; if the garden is communal, refer to block management and close without payment. **Recommended:** verify first; no rent offset until an invoice exists. **If nobody answers:** the case stays on hold and the job is reassigned after two working days.
 
 ## 2. What operational problem it solves
 
@@ -37,6 +39,8 @@ Most of a property manager's day goes on exceptions, not routine work: a record 
 ## 3. Architecture
 
 The browser demo is a view over the same records: it runs the agent through the harness contract (an environment adapter with `load_cases` and `tools_for`, the record files it writes back) and renders each decision as a story. Nothing in this repository depends on it.
+
+To deploy against a real ticket system, implement `build_registry(case)` for its API in a module the generic adapter loads (`harness/adapters/generic.py`); `agent/tools.yaml` annotates each tool for the gate (read or write, the authority a write needs, the amount field). The gate, rulebook, reviewer and recorder are unchanged, and writes stay deny-by-default until the rulebook grants them. In the hackathon environment writes go to a per-case ledger; every record says so under its header.
 
 ```
 case files ──► loader ──► decision loop (Anthropic Messages API)
@@ -59,7 +63,7 @@ How it is built:
 - **No double bookings.** Reads can be retried. Each write has an idempotency key; if the response is lost, the agent checks what happened instead of sending it again.
 - **Every case ends in one of three states:** `resolved`, `needs_info` or `escalated`. There is a step limit per case; anything unfinished becomes an escalation with context.
 - **Two outputs per case.** `ANSWER.md` is the decision with its evidence and authority. `REASONING.md` is the full step-by-step trace.
-- **A reviewer checks the work.** Rules R1–R8 compare the record with what actually happened, and can downgrade `resolved` to `needs_info` or `escalated`. An LLM reviewer is available with `LOA_REVIEWER=llm`.
+- **A reviewer checks the work.** Rules R1–R11 (and R3a) compare the record with what actually happened, and can downgrade `resolved` to `needs_info` or `escalated`. An LLM reviewer is available with `LOA_REVIEWER=llm`.
 
 The adapter `harness/adapters/dwelly.py` reads the organisers' case folders, hides the real outcome, can cut the history at a chosen point for our own testing, and records write tools in a ledger instead of sending anything. Two other adapters (`harness/adapters/generic.py` and `mockworld/`) plug into the same harness.
 
@@ -156,7 +160,9 @@ Each case was cut at the first message from an outside party. The agent did not 
 | Midday (13:00) | 50/50 | 94/100 | 99/100 | 0 / 0 | 45 · 4 · 1 |
 | Final (15:00) | 50/50 | 94/100 | 100/100 | 0 / 0 | 48 · 1 · 1 |
 
-What changed between the runs: a status block and closing checklist in every record, a reviewer rule that a case on hold is not resolved, landlord replies treated as approval, priced quotes sent to the landlord before work starts, a time budget inside the loop; then no standing spend without a limit on file, a landlord's approval as a verifiable event, an emergency make-safe ceiling, a safety pass over the case material, and a reviewer that treats a safety keyword as a finding rather than an escalation. Six cases still score 1 on outcome; in all of them the agent asks or waits where the agency went ahead. The judge's noise is about one point per case, so a two-point difference between runs is not a signal. Replay any run step by step with `make cases-browser RUNS="runs/<run>"`.
+What changed between the runs: a status block and closing checklist in every record, a reviewer rule that a case on hold is not resolved, landlord replies treated as approval, priced quotes sent to the landlord before work starts, a time budget inside the loop; then no standing spend without a limit on file, a landlord's approval as a verifiable event, an emergency make-safe ceiling, a safety pass over the case material, and a reviewer that treats a safety keyword as a finding rather than an escalation. Six cases still score 1 on outcome; in all of them the agent asks or waits where the agency went ahead. The judge's noise is about one point per case, so a two-point difference between runs is not a signal.
+
+Provenance: these are our own judge's scores (`evalkit/judge.py`, `claude-opus-5` at effort medium) on the 50 public cases the agent was tuned on; read them as a regression signal, not a benchmark. `needs_info` is the correct wait on a named party (usually the landlord's approval or a tenant's access window) with the next step and a chase date in the record, not a give-up; under a cutoff most public cases are mid-flight, so most records end there. A judge built separately from this repository, with its own rubric and 38 unseen mutated cases, scored the agent 89.5 at `b8f7b5b` against 75.8 for a plain `claude-opus-5` baseline, and 95–98 on five re-tested cases at `e1e05ab`. Replay any run step by step with `make cases-browser RUNS="runs/<run>"`.
 
 ## 5. Models, APIs and external services used
 
@@ -177,7 +183,6 @@ API keys come from the environment and are never committed. A pre-commit secret 
 
 Assumptions forced by the environment:
 
-<<<<<<< HEAD
 - A case is one ticket at one decision point: the history as given is everything the agent may know. In our own
   evaluation the decision point is a cutoff in the public history; in the Reality Test it is the case as delivered.
 - Writes are recorded, not executed: a `completed` action means the ledger accepted it with a receipt, not that an
@@ -189,13 +194,6 @@ Assumptions forced by the environment:
   or it becomes a request to the landlord. A prior (a typical £250 cap) is never treated as a mandate.
 - Under a cutoff an attachment is visible only once the visible history carries it (the agency's own file link, or an
   outside party's attachment-only email); the public corpus dates every document after its case.
-=======
-- A case is one ticket at one moment. The history up to that point is all the agent knows.
-- Writes are recorded, not executed. "Completed" means the ledger accepted it, not that an email was sent or a contractor booked.
-- The agency's own events are trusted; messages from everyone else are not. Names vary between events, so people are matched by role.
-- There is no landlord instruction record, so the spend limit defaults to £250 and the record says so. Priced quotes always go to the landlord.
-- An attachment becomes visible only once the history mentions it.
->>>>>>> 0017665 (Updated readme to match the submission criteria)
 
 - Emergency authority covers making safe (attendance, isolation, temporary heaters, boarding, a locksmith) up to £250 without approval; the repair above that is put to the on-call manager or the landlord at once. Before a case can end as resolved, a deterministic safety pass checks every document and message for safety words the record did not address.
 

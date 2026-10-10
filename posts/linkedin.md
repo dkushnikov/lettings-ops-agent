@@ -6,7 +6,7 @@ At the Real-World Agents Hackathon (team D&D) we built a lettings operations age
 
 Two ideas drove it. First, the agent acts only within authority it can cite; everything else becomes a question to the right person. Second, every exception is handed over as a 90-second decision: the question, five facts with sources, the gap, the options, a default if nobody answers, and how to undo what was done. The agent is data: a mandate, playbooks, tools and a record contract around a thin loop.
 
-On the organisers' 50 public cases, outcome hidden: a record for every case, 94/100 on outcomes and 99/100 on judgement and safety by our model judge, zero prohibited actions.
+On the organisers' 50 public cases, outcome hidden: a record for every case, 94/100 on outcomes and 100/100 on judgement and safety by our own model judge (a regression signal, not a benchmark), zero prohibited actions.
 
 It is open source under Apache 2.0, with the unseen-case results and traces in the repo: https://github.com/dkushnikov/lettings-ops-agent
 
