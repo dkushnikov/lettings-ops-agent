@@ -4,10 +4,10 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 
 | Field | Value |
 |---|---|
-| Public repository URL | <!-- TODO(event): https://github.com/dkushnikov/lettings-ops-agent --> |
+| Public repository URL | https://github.com/dkushnikov/lettings-ops-agent |
 | Team name | <!-- TODO(event) --> |
 | Track | Property Management |
-| Team members | <!-- TODO(event): Dmitry Kushnikov, Dmitry Taranov --> |
+| Team members | Dmitry Kushnikov, Dmitry Taranov |
 | Commit hash at code freeze (16:30 BST) | <!-- TODO(event): output of `make freeze` --> |
 | Commit hash containing Reality Test results | <!-- TODO(event): the commit that adds ANSWERS/ --> |
 | Reality Test results path | `ANSWERS/` (`ANSWERS/<case-id>/ANSWER.md`, `REASONING.md`, `trace.jsonl`; `ANSWERS/_run.json`) |
@@ -20,7 +20,10 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 <!-- TODO(event): paste the exact command, start and end times, model id, concurrency, and the summary line printed by the runner. -->
 
 ```
-uv run python -m harness.cli run --cases <reality-test-dir> --out ANSWERS --concurrency 4
+git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
+ls "../HackatonPublicCases/HackatonChallendges/Property Management"   # expect NNN/ folders with index.md + history.md
+make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
+  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
 ```
 
 ## Declarations

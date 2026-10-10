@@ -88,3 +88,8 @@ def test_attachments_follow_the_cutoff():
     assert early.metadata["attachments_hidden"] == len(parsed.attachments)
     late = load_dwelly_case(CASE)
     assert late.metadata["attachments_hidden"] == 0
+
+
+def test_case_metadata_names_the_agency():
+    case = load_dwelly_case(CASE)
+    assert case.metadata["agency"] == "Northbridge Lettings"

@@ -5,7 +5,8 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 ## 16:00 — feature freeze and checks
 
 - [ ] No code changes after this point. Open editors closed.
-- [ ] `make check` green.
+- [ ] `make check` green; `make rehearse` green (fresh clone → setup → run → verify).
+- [ ] `git status` clean before `make freeze` (it stages everything).
 - [ ] `make secrets-scan` clean (gitleaks over the working tree and history).
 - [ ] `.env` not tracked: `git status --ignored` shows it ignored.
 - [ ] `LICENSE` present (Apache 2.0), `NOTICE` present.
@@ -24,12 +25,15 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 
 - [ ] `make freeze` → creates tag `freeze-1630`, prints the commit hash; paste it into `SUBMISSION.md`.
 - [ ] `git push --tags`.
-- [ ] Reality Test cases copied to the agreed directory (do not edit them).
-- [ ] Count the cases. The runner prints the capacity estimate: `T ≈ ⌈N / C⌉ × t_case + margin`. If T exceeds 20 minutes, raise concurrency only if the rate-limit headroom measured at 14:00 allows it.
-- [ ] Launch:
+- [ ] Reality Test cases pulled: `git -C ../HackatonPublicCases pull` (do not edit them). Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `HackatonChallendges/Property Management`, change only `CASES=`.
+- [ ] Count the cases. The runner prints the capacity estimate: `T ≈ ⌈N / C⌉ × t_case + margin`. Measured today: 50 cases at concurrency 6 take about 16 minutes with no 429s; 100 cases would take about 32, so raise concurrency to 8 only if the count is above 60.
+- [ ] Launch (the exact form tested all day; `--id-style number` → `ANSWERS/<case number>/`):
 
 ```
-uv run python -m harness.cli run --cases <reality-test-dir> --out ANSWERS --concurrency 4
+git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
+ls "../HackatonPublicCases/HackatonChallendges/Property Management"   # expect NNN/ folders with index.md + history.md
+make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
+  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
 ```
 
 - [ ] Watch the dashboard. 429s → the runner backs off by itself; do not restart it. A crash → restart the same command; checkpoints skip finished cases.

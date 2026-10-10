@@ -123,16 +123,42 @@ Options (pass them through `ARGS="..."` with `make`):
 
 ```
 make freeze                     # tag freeze-1630, record the hash
-uv run python -m harness.cli run --cases <reality-test-dir> --out ANSWERS --concurrency 4
+git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
+ls "../HackatonPublicCases/HackatonChallendges/Property Management"   # expect NNN/ folders with index.md + history.md
+make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
+  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
 ```
+
+The same adapter and flags produced every number below; `--id-style number` writes `ANSWERS/<case number>/`.
+
+### Results on the organisers' public cases
+
+Protocol: all 50 public Property Management cases, each cut at the first message from an outside party
+(`--auto-cutoff first-external`), with the overview, outcome and status hidden from the agent and handed only to the
+judge (`--emit-expected`). The judge is a model (`claude-opus-5`, effort medium) scoring outcome and
+judgement & safety 0–2 against the hidden outcome, with critical failures and prohibited actions as separate flags; a
+model's verdict is evidence to read, not ground truth. Concurrency 6, about 16 minutes per full run.
+
+| Run (10 October) | Records | Outcome | Judgement & safety | Critical / prohibited | needs_info · escalated · resolved |
+|---|---|---|---|---|---|
+| Morning, before tuning | 50/50 | 91/100 | 98/100 | 0 / 0 | 38 · 10 · 2 |
+| Final (13:00) | 50/50 | 94/100 | 99/100 | 0 / 0 | 45 · 4 · 1 |
+
+Between the two: the status block and the definition of done in every record, workflow stages and hold reasons as
+mandate data, reviewer rule R8 (a case on hold is not resolved), landlord replies treated as authority for landlord-owned
+decisions, a priced quote routed to the landlord before work starts, attachments gated by the decision point, a time
+budget inside the loop. The 11 cases the morning judge scored lowest went 13 → 18 of 22 across the day's three passes.
+Six cases still score 1 on outcome, all "defensible alternative": the agent asks or holds where the agency went ahead.
+The corpus itself is described in [`docs/pm-cases-analysis.md`](docs/pm-cases-analysis.md); every record of every run
+can be replayed step by step with `make cases-browser RUNS="runs/<run>"`.
 
 Output per case: `ANSWERS/<case-id>/ANSWER.md`, `REASONING.md`, `trace.jsonl`, `_state.json`; run metadata in `ANSWERS/_run.json`. Cases that hit the timeout or an unrecoverable error still produce a record: an escalation with the state so far and a system note explaining why.
 
 ## 5. Models, APIs and external services
 
-- Anthropic Claude via the official Python SDK (`anthropic`), Messages API with tool use, adaptive thinking and prompt caching. Default model `claude-opus-5`, set by `LOA_MODEL`. <!-- TODO(event): final model and effort used for the Reality Test. -->
-- The hackathon environment's tools. <!-- TODO(event): list them and their transport. -->
-- Optional: ElevenLabs speech-to-text for call recordings, used only if audio is supplied. <!-- TODO(event): confirm whether used. -->
+- Anthropic Claude via the official Python SDK (`anthropic`), Messages API with tool use, adaptive thinking and prompt caching. Model `claude-opus-5`, effort `high` (`LOA_MODEL`, `LOA_EFFORT`); the judge and the simulator's director use the same model at effort `medium`.
+- The organisers' environment is files, not tools: a case is `index.md` (details, initial request, attachments list), `history.md` (every event with channel, from, to, time) and `attachments/`. The Dwelly adapter (`harness/adapters/dwelly.py`) turns them into artefacts with trust classes, offers read tools over them (`get_case_details`, `search_history`, `get_attachment`, `get_action_ledger`) and records write tools in a ledger with receipts (`assign_contractor`, `request_landlord_approval`, `notify_*`, `schedule_access`, `put_on_hold`, `add_note`, `create_human_task`, `close_request`). Nothing is sent anywhere.
+- No speech-to-text was used: the corpus carries calls as written third-person summaries.
 - Python packages: `pydantic`, `pyyaml`, `rich`, `pypdf`. No other services.
 
 API keys are read from the environment and never committed; a pre-commit secret scan (gitleaks) and log redaction guard the traces.
@@ -144,7 +170,18 @@ API keys are read from the environment and never committed; a pre-commit secret 
 - Deciding that a repair is tenant-payable, sending legal correspondence, changing payment details and moving money are human decisions by construction.
 - Every case ends with a record even when the model or a tool fails; a fallback escalation is a floor, not a score.
 
-<!-- TODO(event): assumptions forced by the environment (case boundaries, tool semantics, what "completed" means). -->
+Forced by the environment:
+
+- A case is one ticket at one decision point: the history as given is everything the agent may know. In our own
+  evaluation the decision point is a cutoff in the public history; in the Reality Test it is the case as delivered.
+- Writes are recorded, not executed: a `completed` action means the ledger accepted it with a receipt, not that an
+  email left or a contractor was booked. The record says so in its execution notes.
+- The agency's own events (`Agency / system`, `Northbridge Lettings`) are informational; every outside party is
+  untrusted content. Names are inconsistent between events, so parties are resolved by role.
+- No landlord instruction record exists in this environment: the standing cap is the rulebook's default (£250) and
+  the record labels it as an assumption; a priced quote is routed to the landlord regardless.
+- Under a cutoff an attachment is visible only once the visible history carries it (the agency's own file link, or an
+  outside party's attachment-only email); the public corpus dates every document after its case.
 
 ## 7. Known limitations
 
@@ -153,7 +190,16 @@ API keys are read from the environment and never committed; a pre-commit secret 
 - Voice is input only: transcripts are evidence ranked below documents and records.
 - The mock world is a test fixture, not a model of any real operator.
 
-<!-- TODO(event): what broke or was cut on the day. -->
+On the day:
+
+- One of fifty cases hit the 240-second budget and left an empty fallback record (found at 12:30, fixed: a time
+  budget inside the loop, the live state kept on timeout, 360 seconds by default).
+- Two records carried a stray tool-call tag in the decision text (fixed in the sanitiser).
+- `make run` split a cases path with a space into two arguments; the Reality Test command would have failed (fixed).
+- Not built: the Dispatcher's "which ticket does this message belong to" decision, a running Supervisor over live
+  tickets, a structured resolution-and-payer object, tenancy and appliance models (`docs/system-design.md` §5).
+- The multi-actor simulator (`make sim`) is a development instrument: its director and judge are models, and its
+  scenarios' end states are still being calibrated against the agent's conservative dispositions.
 
 ## 8. What we would build next
 

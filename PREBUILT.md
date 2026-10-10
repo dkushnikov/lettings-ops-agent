@@ -34,11 +34,20 @@ Mock world and evaluation:
 
 Documents: `README.md` skeleton, `PLAN.md`, `RUNBOOK.md`, `SUBMISSION.md` template, `docs/domain-cheatsheet.md`, `docs/rules-extraction-prompt.md`, `posts/` drafts, `video/SCRIPT.md`.
 
-## Built during the event
+## Built during the event (10 October)
 
-- The adapter from the organisers' data and tools to the harness (`harness/adapters/` or `mockworld` replaced).
-- Rulebook content extracted from the environment's documents and merged with source SRC-ENV.
-- Playbook edits reflecting the environment's workflows.
-- All handling specific to the provided cases, the demo case, the video, and the Reality Test results in `ANSWERS/`.
+- `harness/adapters/dwelly.py` — the organisers' case format (index.md, history.md, attachments) as artefacts with
+  trust classes; decision points by cutoff; hidden outcome handed only to the judge; read tools and a write ledger.
+- The record's status block (recap, stage and hold, last update, next step) and the definition-of-done checklist;
+  workflow stages, side states, hold reasons and manual-mode triggers as mandate data in `agent/rulebook.yaml`;
+  `definition_of_done` in all five playbooks.
+- Reviewer rule R8 (resolved while on hold → needs_info); decision routing by owner; landlord replies as authority;
+  a priced quote to the landlord before work; attachments gated by the decision point; a time budget inside the loop
+  and the live state kept on timeout; tool-call markup stripped from records.
+- `docs/system-design.md` (the ticket, roles, models; implemented vs designed), `docs/pm-cases-analysis.md` and
+  `docs/pm-cases-cheatsheet.md` with `data/pm-cases-index.json` (`make pm-index`).
+- `evalkit/report.py` (run report), `evalkit/casebrowser.py` (case browser with cutoffs, run overlay and step-by-step
+  replay; `make replay`), `evalkit/simulate.py` with `evalkit/actors/` (multi-actor scenarios, by Dmitry Taranov).
+- The Reality Test results in `ANSWERS/`, the video, the posts.
 
-<!-- TODO(event): list the files changed after `pre-event`, e.g. `git diff --stat pre-event..freeze-1630`. -->
+<!-- TODO(event): `git diff --stat pre-event..freeze-1630 | tail -1` at the freeze. -->

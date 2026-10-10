@@ -17,6 +17,7 @@ not leak the answer. `write_expected` keeps the hidden parts for the judge.
 from __future__ import annotations
 
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -160,6 +161,13 @@ def visible_attachments_at(parsed: ParsedCase, events: list[HistoryEvent], cutof
     return [name for name in parsed.attachments if name in by_name or name in by_order]
 
 
+def agency_name(events: list[HistoryEvent]) -> str:
+    """The managing agency's own name as it appears in the history ("Northbridge Lettings"), so the agent does not
+    mistake its principal for a third party (one record did). "Agency / system" is the automation, not the name."""
+    names = Counter(e.sender for e in events if e.trust != "untrusted" and e.sender and "system" not in e.sender.lower() and "agency" not in e.sender.lower())
+    return names.most_common(1)[0][0] if names else ""
+
+
 def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, id_style: str = "track") -> Case:
     index_md = (case_dir / "index.md").read_text(encoding="utf-8", errors="replace")
     parsed = parse_index(index_md)
@@ -199,7 +207,7 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
         title=parsed.title,
         received_at=parsed.details.get("created"),
         artefacts=artefacts,
-        metadata={"track": track, "case_number": case_dir.name, "property": parsed.details.get("property", ""), "source_role": parsed.details.get("source_role", ""), "events_visible": len(events), "cutoff": cutoff, "attachments_hidden": len(parsed.attachments) - len(visible_attachments)},
+        metadata={"track": track, "case_number": case_dir.name, "property": parsed.details.get("property", ""), "source_role": parsed.details.get("source_role", ""), "agency": agency_name(events), "events_visible": len(events), "cutoff": cutoff, "attachments_hidden": len(parsed.attachments) - len(visible_attachments)},
         env={"format": "dwelly"},
     )
 
