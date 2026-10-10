@@ -59,6 +59,16 @@ Tool names are the mock world's; on the day use the environment's equivalents fr
 7. **Inform.** `notify_tenant` with what will happen and when it is confirmed, not hoped. `notify_landlord` whenever money or access is involved. A chase to a contractor or a landlord carries a reply-by time and what happens if it passes; the tenant is told that time, not a hope.
 8. **Record.** `log_crm_note` with the work order id, estimate, and who was told what. Finish with `finalize` (resolved), `request_info` (waiting on a person) or `escalate` (a human must decide).
 
+## First steps for the tenant
+
+Put these in the first reply to the tenant when the fault fits. Skip any the tenant says they already tried, and keep the repair moving: they are things to try while the job is arranged, not a condition for it.
+
+- **Blocked or slow drain (sink, basin, bath, shower).** Pull hair and debris out of the plughole or from under the trap cover; use a plunger, with a damp cloth over the overflow hole; then try an enzyme drain cleaner, following the label. No caustic or acid drain unblockers: they damage pipes and seals.
+- **Blocked toilet.** Plunger only; do not keep flushing.
+- **Tell us straight away** if water overflows or backs up, or there is a sewage smell. Water overflowing onto the floor or sewage backing up is an emergency (rulebook `emergency.definitions`): switch to `emergency-hazard`. A smell alone raises the urgency to `urgent`.
+
+Do not suggest who will pay for a call-out if the steps fail (PRO-TENANT-LIABILITY).
+
 ## Decision points
 
 | Situation | Move | Rule |
