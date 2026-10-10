@@ -73,6 +73,9 @@ make check                      # lint + tests
 make run CASES=fixtures OUT=runs/dev   # process cases, write records
 make eval                       # score records against fixtures' expectations
 make demo                       # one fixture end to end, no environment needed
+make sim-list                   # multi-actor scenarios (evalkit/actors/scenarios.yaml)
+make sim SC=SC-01,SC-04         # play selected scenarios against the agent, graded, to the console
+make sim-all                    # play every scenario (ARGS="--concurrency 4 -v" for more)
 make rehearse                   # fresh clone → setup → run → verify
 make mutate CASE=fixtures/F01-routine-tap   # adversarial variants along the Reality-Test axes
 make rules-extract DOCS=<dir>   # environment documents → candidate rules in agent/rulebook_staging.md

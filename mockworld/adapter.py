@@ -58,9 +58,12 @@ class MockAdapter:
 
     name = "mock"
 
-    def __init__(self, world_path: Path | str = DEFAULT_WORLD_PATH):
-        with open(world_path, encoding="utf-8") as fh:
-            self._data: dict[str, Any] = yaml.safe_load(fh)
+    def __init__(self, world_path: Path | str = DEFAULT_WORLD_PATH, data: dict[str, Any] | None = None):
+        # `data` replaces the YAML world (the scenario simulator seeds its own property).
+        if data is None:
+            with open(world_path, encoding="utf-8") as fh:
+                data = yaml.safe_load(fh)
+        self._data: dict[str, Any] = data
         self._worlds: dict[str, World] = {}
         self._fail_counters: dict[str, dict[str, int]] = {}
 
