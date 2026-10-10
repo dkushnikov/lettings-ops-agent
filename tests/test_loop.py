@@ -211,3 +211,22 @@ async def test_next_step_defaults_from_the_handover():
     assert state.disposition == Disposition.escalated
     assert state.recap == "Disputed liability"
     assert state.next_step == "Pull the check-in inventory before replying"
+
+
+async def test_time_budget_nudge_and_live_state_holder():
+    from harness.loop import TIME_NUDGE
+
+    agent = _agent(
+        [
+            _response([_tool_use("get_property", {"property_id": "P1"}, "t1")]),
+            _response([_tool_use("escalate", {"decision": "out of time", "handover": {"question": "Continue?"}}, "t2")]),
+        ]
+    )
+    agent.settings.case_timeout_s = 0.0  # soft deadline hits after the first tool round
+    holder: dict = {}
+    case = Case(id="c3", title="Slow", artefacts=[])
+    state = await agent.run(case, _registry(), holder=holder)
+    assert holder["state"] is state
+    second_call = agent.client.calls[1]["messages"]
+    assert any(isinstance(b, dict) and b.get("type") == "text" and b["text"] == TIME_NUDGE for m in second_call if isinstance(m.get("content"), list) for b in m["content"])
+    assert state.disposition == Disposition.escalated

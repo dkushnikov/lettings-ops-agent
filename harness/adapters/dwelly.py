@@ -130,6 +130,36 @@ def _visible_details(parsed: ParsedCase, attachments: list[str] | None = None) -
     return "\n".join(lines)
 
 
+_SIGNATURE_ONLY = re.compile(r"^(thanks|thank you|many thanks|regards|kind regards|best regards|best wishes|cheers)\b", re.I)
+
+
+def _signature_only(body: str) -> bool:
+    """An outside party's email reduced to its sign-off ('Thanks & Regards, Miles Fletcher, 07700 …'): in the corpus
+    that is how an attachment-only email looks. 'Yes please' or '👍' are short but not sign-offs."""
+    text = (body or "").strip()
+    return 0 < len(text) <= 120 and bool(_SIGNATURE_ONLY.match(text))
+
+
+def visible_attachments_at(parsed: ParsedCase, events: list[HistoryEvent], cutoff: int | None) -> list[str]:
+    """Which listed attachments the agent may see at a decision point.
+
+    Without a cutoff: all. With one, a document exists only once the visible history carries it: the agency's own
+    emails link the file by name ("Attachments: [attachment-01-….pdf](attachments/…)"), so a name or stem match is the
+    primary signal; an outside party's attachment-only email survives in the corpus as a bare sign-off, so each visible
+    sign-off-only external message reveals the next still-unmatched file in index order. Every PDF in the corpus is
+    dated after its case, so an unreferenced attachment would otherwise leak the outcome.
+    """
+    if cutoff is None:
+        return list(parsed.attachments)
+    visible = [e for e in events if e.number <= cutoff]
+    joined = "\n".join([parsed.initial_request, *(e.body for e in visible)])
+    by_name = {name for name in parsed.attachments if name in joined or Path(name).stem in joined}
+    unmatched = [name for name in parsed.attachments if name not in by_name]
+    sign_offs = sum(1 for e in visible if e.trust == "untrusted" and _signature_only(e.body))
+    by_order = set(unmatched[:sign_offs])
+    return [name for name in parsed.attachments if name in by_name or name in by_order]
+
+
 def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, id_style: str = "track") -> Case:
     index_md = (case_dir / "index.md").read_text(encoding="utf-8", errors="replace")
     parsed = parse_index(index_md)
@@ -137,12 +167,7 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
     events = parse_history(history_md)
     if cutoff is not None:
         events = [e for e in events if e.number <= cutoff]
-    # Under a cutoff a document exists for the agent only once a visible event (or the initial request) refers to it;
-    # every PDF in the public corpus is dated after its case, so an unreferenced attachment would leak the future.
-    visible_attachments = list(parsed.attachments)
-    if cutoff is not None:
-        bodies = "\n".join([parsed.initial_request, *(e.body for e in events)])
-        visible_attachments = [name for name in parsed.attachments if name in bodies or Path(name).stem in bodies]
+    visible_attachments = visible_attachments_at(parsed, events, cutoff)
 
     artefacts: list[Artefact] = [
         Artefact(id="index", kind=ArtefactKind.record, title=parsed.title, source="index.md", content=_visible_details(parsed, visible_attachments) if hide_outcome else index_md, trust="authoritative")

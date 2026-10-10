@@ -16,6 +16,7 @@ import time
 import uuid
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 from rich.console import Console
 from rich.progress import BarColumn, Progress, TextColumn, TimeElapsedColumn
@@ -141,11 +142,22 @@ async def run_batch(
                 attempts += 1
                 registry = adapter.tools_for(case)
                 adapter.reset(case)
+                holder: dict[str, Any] = {}
                 try:
-                    state = await asyncio.wait_for(agent.run(case, registry, trace=trace), timeout=settings.case_timeout_s)
+                    state = await asyncio.wait_for(agent.run(case, registry, trace=trace, holder=holder), timeout=settings.case_timeout_s)
                 except asyncio.TimeoutError:
                     reason = f"case timed out after {settings.case_timeout_s:.0f}s"
                     retryable = False
+                    partial = holder.get("state")
+                    if partial is not None and (partial.actions or partial.facts or partial.playbook):
+                        # Keep what the agent established and did; the record says the runtime cut it short.
+                        agent._fallback(partial, case, reason + "; an action may have been in flight when the case was cancelled")  # noqa: SLF001
+                        await agent.reviewer.review(partial)
+                        partial.finished_at = utcnow()
+                        meta.failures.append(f"{case.id}: {reason}")
+                        trace({"event": "case_error", "attempt": attempts, "reason": reason, "retryable": False, "partial_state": True})
+                        state = partial
+                        break
                 except Exception as e:  # noqa: BLE001
                     reason = f"{type(e).__name__}: {truncate(str(e), 200)}"
                     retryable = is_transient_error(e)

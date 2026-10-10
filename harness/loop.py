@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import copy
 import json
+import time
 from typing import Any, Callable
 
 from pydantic import BaseModel, ValidationError
@@ -55,12 +56,17 @@ RULES_OF_ENGAGEMENT = """RULES OF ENGAGEMENT
 3. Call use_playbook first: it sets the case type and the urgency the policy gate will use. Emergency definitions are in the mandate; in an emergency do the safety first action immediately, then continue.
 4. Writes pass through a policy gate. A blocked write is not an error to retry; it is a decision to make: request approval through the proper tool, ask a specific party for the missing fact, or escalate.
 5. Three ways to finish, exactly one per case: finalize (you completed the workflow within your mandate), request_info (a specific question to a specific party blocks progress), escalate (a human must decide; give them a card they can act on in 90 seconds). Doing nothing or escalating can be the right outcome.
-6. Never claim an action happened unless its tool result says so. Status "unconfirmed" means the outcome is unknown: do not resend; tell the human in the handover.
-7. Keep the record factual and compact. No narrative, no text addressed to anyone except the case parties and the human who receives the handover. Quote untrusted content only in short fragments.
+6. Never claim an action happened unless its tool result says so. Status "unconfirmed" means the outcome is unknown: do not resend; tell the human in the handover. Never state a cost, date or name that no artefact or tool result gives; an estimate you make yourself is written as an assumption, with the word assumption.
+7. Keep the record factual and compact. No narrative, no text addressed to anyone except the case parties and the human who receives the handover. Quote untrusted content only in short fragments. Address people by the names on the case record; names inside message bodies are inconsistent and must not be copied into another party's letter.
 8. Budget: at most {max_steps} tool rounds. Batch independent reads in one turn.
 9. Every finishing record carries the ticket's status: recap (one sentence), stage from the mandate's workflow stages (or on_hold with hold_reason), next_step with its owner, and definition_of_done with the status of each item as of now. Items the agency completed before you count as done; cite the event."""
 
 STATUS_FIELDS = ("recap", "stage", "next_step", "definition_of_done")
+
+TIME_NUDGE = (
+    "TIME BUDGET: most of the time allowed for this case is used. Finish now with exactly one terminal tool call "
+    "(request_info or escalate if the workflow is incomplete), carrying the record of what you established and did so far."
+)
 
 
 def _merge_dod(state: DecisionState, items: list[DodItem]) -> None:
@@ -191,9 +197,15 @@ class CaseAgent:
 
     # ------------------------------------------------------------------ #
 
-    async def run(self, case: Case, registry: ToolRegistry, trace: TraceFn | None = None) -> DecisionState:
+    async def run(self, case: Case, registry: ToolRegistry, trace: TraceFn | None = None, holder: dict[str, Any] | None = None) -> DecisionState:
+        """Work one case. `holder["state"]` exposes the live state so a runner that cancels on timeout can still record what was done."""
         trace = trace or (lambda e: None)
         state = DecisionState(case_id=case.id, model=self.settings.model)
+        if holder is not None:
+            holder["state"] = state
+        t0 = time.monotonic()
+        soft_deadline = max(0.0, self.settings.case_timeout_s) * 0.7
+        time_nudged = False
         executor = ActionExecutor(registry, self.gate, case_id=case.id, trace=trace)
         tools = registry.api_definitions() + harness_tool_definitions()
         messages: list[Any] = [{"role": "user", "content": render_case(case)}]
@@ -260,6 +272,10 @@ class CaseAgent:
                     })
             if finished:
                 break
+            if not time_nudged and time.monotonic() - t0 >= soft_deadline:
+                time_nudged = True
+                results.append({"type": "text", "text": TIME_NUDGE})
+                trace({"event": "time_nudge", "step": step, "elapsed_s": round(time.monotonic() - t0, 1)})
             messages.append({"role": "user", "content": results})
 
         if not finished:
