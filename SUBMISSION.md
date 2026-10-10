@@ -21,9 +21,9 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 
 ```
 git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
-ls "../HackatonPublicCases/Property Management"   # expect NNN/ folders with index.md + history.md
+ls "../HackatonPublicCases/HackatonChallendges/Property Management"   # expect NNN/ folders with index.md + history.md
 make run ARGS="--adapter dwelly --id-style number --concurrency 6 --deadline 16:52" \
-  CASES="../HackatonPublicCases/Property Management" OUT=ANSWERS
+  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
 ```
 
 ## Declarations

@@ -25,16 +25,16 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 
 - [ ] `make freeze` → creates tag `freeze-1630`, prints the commit hash; paste it into `SUBMISSION.md`.
 - [ ] `git push --tags`.
-- [ ] Reality Test cases received (the form says they arrive at 16:30; try `git -C ../HackatonPublicCases pull` first, else the channel the organisers use). Do not edit them. Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `Property Management`, change only `CASES=`.
+- [ ] Reality Test cases received: the organisers' README says results are submitted only for the cases in `HackatonChallendges/` (the public examples under `Property Management/` must not be submitted). `git -C ../HackatonPublicCases pull`, then check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `HackatonChallendges/Property Management`, change only `CASES=`.
 - [ ] Count the cases. The runner prints the capacity estimate: `T ≈ ⌈N / C⌉ × t_case + margin`. Measured today: 50 cases at concurrency 6 take about 16 minutes with no 429s; 100 cases would take about 32, so raise concurrency to 8 only if the count is above 60.
 - [ ] No runner alive before launching: `pgrep -fl "harness.cli run"` prints nothing (the 15:20 rehearsal reused one case from a runner that was still writing when the folder was removed).
 - [ ] Launch (the exact form tested all day; `--id-style number` → `ANSWERS/<case number>/`):
 
 ```
 git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
-ls "../HackatonPublicCases/Property Management"   # expect NNN/ folders with index.md + history.md
+ls "../HackatonPublicCases/HackatonChallendges/Property Management"   # expect NNN/ folders with index.md + history.md
 make run ARGS="--adapter dwelly --id-style number --concurrency 6 --deadline 16:52" \
-  CASES="../HackatonPublicCases/Property Management" OUT=ANSWERS
+  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
 ```
 
 - [ ] Watch the dashboard. 429s → the runner backs off by itself; do not restart it. A crash → restart the same command; checkpoints skip finished cases.
