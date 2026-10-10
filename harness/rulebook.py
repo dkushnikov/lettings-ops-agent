@@ -229,6 +229,11 @@ class Rulebook:
         for e in self.escalation_triggers:
             first = f" First: {e['first']}" if e.get("first") else ""
             lines.append(f"- {e['id']}: {e.get('description', '')}{first}")
+        routing = self.raw.get("decision_routing") or []
+        if routing:
+            lines.append("Decision routing (who owns the decision decides how the case ends):")
+            for r in routing:
+                lines.append(f"- {r['id']} [{r.get('owner')}]: {r.get('decisions', '')} → {r.get('how', '')}")
         em = self.emergency
         if em:
             lines.append("Emergency definitions: " + "; ".join(em.get("definitions", [])))

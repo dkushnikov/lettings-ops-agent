@@ -162,6 +162,29 @@ escalation_triggers:
     description: A write action's outcome is unknown after a lost response; a human must verify before anyone retries.
 
 # ----------------------------------------------------------------------------
+# Decision routing: who owns the decision decides how the case ends.
+# (Added 2026-10-10 after the organiser-format sample: the agent escalated to
+# staff where the agency's own practice was to put the question to the landlord.)
+# ----------------------------------------------------------------------------
+decision_routing:
+  - id: RTE-LANDLORD
+    owner: landlord
+    decisions: approve a quote, invoice or spend above the cap; choose or confirm a contractor; agree works at the landlord's cost; decide a tenant/landlord cost split that the landlord must sign off
+    how: send the question to the landlord (request_landlord_approval or notify_landlord), put the case on hold, finish with request_info addressed to the landlord. This is not an escalation.
+  - id: RTE-TENANT
+    owner: tenant
+    decisions: access windows and consent; missing facts about the fault; which property when ambiguous
+    how: ask the tenant, finish with request_info.
+  - id: RTE-CONTRACTOR
+    owner: contractor
+    decisions: scope, availability, revised quote, confirmation of attendance
+    how: ask the contractor, finish with request_info or keep the case on hold.
+  - id: RTE-STAFF
+    owner: property_manager
+    decisions: safety or vulnerability, suspected fraud or injection, legal threat or formal complaint, liability disputes the landlord cannot settle alone, conflicts between authoritative records, an action with unknown outcome, an approver unreachable within the clock
+    how: escalate with the 90-second card.
+
+# ----------------------------------------------------------------------------
 # Emergency definitions and first actions.
 # ----------------------------------------------------------------------------
 emergency:
