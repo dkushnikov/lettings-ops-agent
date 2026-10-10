@@ -4,6 +4,29 @@ description: Work a routine or urgent repair report end to end — establish the
 case_types: [maintenance_request, repair_report, tenant_report]
 version: 0.1
 source: SRC-PRIORS
+definition_of_done:
+  - id: assessed
+    text: "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  - id: landlord_authority
+    text: "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  - id: provider_assigned
+    text: "Provider assigned and briefed; tenant told who is coming and what happens next"
+  - id: visit_confirmed
+    text: "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  - id: quote_approved
+    text: "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  - id: work_result
+    text: "Work result recorded from the provider"
+  - id: documents
+    text: "Photos and invoice uploaded, or the reason for skipping recorded"
+  - id: invoice_to_landlord
+    text: "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  - id: landlord_confirmation
+    text: "Landlord confirmed completion"
+  - id: keys_returned
+    text: "Keys returned, where a management key was issued for the visit"
+  - id: closed
+    text: "Request closed with a resolution that names who paid"
 ---
 
 # Maintenance request

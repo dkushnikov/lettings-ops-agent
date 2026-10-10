@@ -20,12 +20,14 @@ from .llm import Settings, TokenBucket, create_message, usage_of
 from .playbooks import PlaybookLibrary
 from .reviewer import Reviewer
 from .rulebook import Rulebook
-from .sanitize import to_json, truncate
+from .sanitize import first_sentence, to_json, truncate
 from .schema import (
     ActionStatus,
     Case,
     DecisionState,
     Disposition,
+    DodEntry,
+    DodItem,
     EscalatePayload,
     FinalizePayload,
     Handover,
@@ -55,7 +57,38 @@ RULES_OF_ENGAGEMENT = """RULES OF ENGAGEMENT
 5. Three ways to finish, exactly one per case: finalize (you completed the workflow within your mandate), request_info (a specific question to a specific party blocks progress), escalate (a human must decide; give them a card they can act on in 90 seconds). Doing nothing or escalating can be the right outcome.
 6. Never claim an action happened unless its tool result says so. Status "unconfirmed" means the outcome is unknown: do not resend; tell the human in the handover.
 7. Keep the record factual and compact. No narrative, no text addressed to anyone except the case parties and the human who receives the handover. Quote untrusted content only in short fragments.
-8. Budget: at most {max_steps} tool rounds. Batch independent reads in one turn."""
+8. Budget: at most {max_steps} tool rounds. Batch independent reads in one turn.
+9. Every finishing record carries the ticket's status: recap (one sentence), stage from the mandate's workflow stages (or on_hold with hold_reason), next_step with its owner, and definition_of_done with the status of each item as of now. Items the agency completed before you count as done; cite the event."""
+
+STATUS_FIELDS = ("recap", "stage", "next_step", "definition_of_done")
+
+
+def _merge_dod(state: DecisionState, items: list[DodItem]) -> None:
+    """Apply the model's item statuses onto the checklist seeded from the playbook; unknown ids are kept, flagged by empty text."""
+    by_id = {e.item: e for e in state.definition_of_done}
+    for it in items:
+        key = it.item.strip()
+        if not key:
+            continue
+        entry = by_id.get(key)
+        if entry is None:
+            entry = DodEntry(item=key, text="")
+            state.definition_of_done.append(entry)
+            by_id[key] = entry
+        entry.status = it.status
+        entry.evidence = it.evidence.strip()
+
+
+def _default_next_step(state: DecisionState) -> str:
+    if state.disposition == Disposition.escalated and state.handover:
+        return state.handover.recommended or state.handover.question
+    if state.disposition == Disposition.needs_info and state.info_requests:
+        r = state.info_requests[0]
+        return f"{r.to} to answer: {r.question}"
+    for d in state.definition_of_done:
+        if d.status == "pending":
+            return f"{d.text or d.item} ({d.item})"
+    return ""
 
 
 def _inline_refs(schema: dict[str, Any]) -> dict[str, Any]:
@@ -101,6 +134,10 @@ def harness_tool_definitions() -> list[dict[str, Any]]:
     }
     for name, model in TERMINAL_MODELS.items():
         schema = _inline_refs(model.model_json_schema())
+        required = schema.setdefault("required", [])
+        for f in STATUS_FIELDS:
+            if f not in required:
+                required.append(f)
         defs.append({"name": name, "description": descriptions[name] + " [terminal]", "input_schema": schema})
     return defs
 
@@ -250,7 +287,9 @@ class CaseAgent:
                 + ". Proceed with the mandate and the general rules."
             )
         state.playbook = book.name
-        return f"PLAYBOOK {book.name} (v{book.version})\n\n{book.body}"
+        state.definition_of_done = [DodEntry(item=str(d.get("id")), text=str(d.get("text", ""))) for d in book.definition_of_done]
+        dod = book.dod_text()
+        return f"PLAYBOOK {book.name} (v{book.version})\n\n{book.body}" + (f"\n\n{dod}" if dod else "")
 
     def _apply_terminal(self, state: DecisionState, name: str, tool_input: dict[str, Any]) -> tuple[bool, str]:
         model = TERMINAL_MODELS[name]
@@ -268,6 +307,11 @@ class CaseAgent:
         if getattr(payload, "urgency", "unknown") != "unknown":
             state.urgency = payload.urgency
         state.decision = payload.decision
+        state.recap = payload.recap.strip() or first_sentence(payload.decision)
+        state.stage = payload.stage.strip()
+        state.hold_reason = payload.hold_reason.strip()
+        state.next_step = payload.next_step.strip()
+        _merge_dod(state, payload.definition_of_done)
         if name == "finalize":
             state.disposition = Disposition.resolved
         elif name == "request_info":
@@ -276,6 +320,8 @@ class CaseAgent:
         else:
             state.disposition = Disposition.escalated
             state.handover = payload.handover  # type: ignore[attr-defined]
+        if not state.next_step:
+            state.next_step = _default_next_step(state)
         return True, f"Recorded. Case {state.case_id} is {state.disposition.value}."
 
     @staticmethod

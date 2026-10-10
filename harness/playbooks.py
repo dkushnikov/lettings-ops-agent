@@ -23,6 +23,19 @@ class Playbook:
     version: str = "0.1"
     source: str = ""
     path: Path | None = None
+    definition_of_done: list[dict] = field(default_factory=list)
+
+    def dod_text(self) -> str:
+        """The definition of done as shown to the agent with the playbook."""
+        if not self.definition_of_done:
+            return ""
+        lines = [
+            "DEFINITION OF DONE — report the status of every item in definition_of_done when you finish. "
+            "An item the agency already completed in the visible history is done; cite the event."
+        ]
+        for d in self.definition_of_done:
+            lines.append(f"- {d.get('id')}: {d.get('text', '')}")
+        return "\n".join(lines)
 
 
 def _split_frontmatter(text: str) -> tuple[dict, str]:
@@ -50,6 +63,7 @@ def load_playbooks(root: str | Path) -> list[Playbook]:
                 version=str(meta.get("version", "0.1")),
                 source=str(meta.get("source", "")),
                 path=skill,
+                definition_of_done=[d for d in (meta.get("definition_of_done") or []) if isinstance(d, dict) and d.get("id")],
             )
         )
     return books

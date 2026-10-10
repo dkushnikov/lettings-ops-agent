@@ -52,6 +52,7 @@ Design rules:
 - **Review before done.** A deterministic reviewer (rules R1–R7) checks the record against the action log and can downgrade `resolved` to `needs_info` or `escalated`; an LLM review pass is available with `LOA_REVIEWER=llm`.
 
 The Vision this serves, the structural domains, and the split between invariants and implementations are written up in VAST form in [`docs/VAST.md`](docs/VAST.md).
+The system the agent lives inside (the ticket with its event stream, stages and hold, status block and definition of done; the four roles; the property, tenancy, quote and visit models) is in [`docs/system-design.md`](docs/system-design.md), with what is implemented today against what is designed.
 
 Directory map: `harness/` runtime · `agent/` the agent definition · `mockworld/` test environment · `fixtures/` synthetic cases · `evalkit/` mutations, judge, reports and the case-corpus extractor · `tests/` · `ANSWERS/` Reality Test output · `data/` structured index of the organisers' public cases · `docs/` cheat-sheets, analysis and prompts · `video/` · `posts/`.
 

@@ -249,3 +249,40 @@ clocks:
 data_handling:
   - Health, age and family details of occupants stay inside the case record; share with contractors only what access requires.
   - Quote untrusted content sparingly and label it as quoted.
+
+# --------------------------------------------------------------------------- #
+# Workflow: the agency's own pipeline, as the public cases run it (docs/pm-cases-analysis.md, section c).
+# The record names the stage the ticket is at when the decision is made. Vocabulary is data: change it here.
+workflow:
+  stages:
+    - id: intake
+      text: request logged, issue categorised, urgency set, damage-limiting advice given to the tenant
+    - id: landlord_approval
+      text: landlord asked whether to instruct a contractor or use their own ("Please complete landlord approval step first")
+    - id: provider_selection
+      text: provider and category chosen and assigned; tenant and provider briefed
+    - id: visit_scheduling
+      text: visit slot offered, confirmed or rescheduled; reminders while the provider is silent
+    - id: quote_approval
+      text: a quote (amount, VAT, provider) is with the landlord; work waits for approval
+    - id: work_in_progress
+      text: approved work being carried out
+    - id: result
+      text: work result reported by the provider (photos, invoice)
+    - id: final_checks
+      text: documents uploaded or skip reason given; invoice forwarded; landlord confirmation; key return where a key was issued
+    - id: closed
+      text: all checks completed; the resolution names who paid
+  side_states:
+    - on_hold                  # "Put on hold by <staff>. Reason: … Comment: …"
+    - paused                   # property NOT TENANTED, or a visit / move-out / hold deadline exceeded
+    - closed_without_payment   # tenant fixed it, landlord's own contractor, warranty, resolved itself, tenant replaced the appliance
+    - closed_by_supervisor
+  hold_reasons: [Waiting for Landlord, Waiting for Provider, Waiting for Tenant, Other]
+  modes: [auto, manual]
+  manual_triggers:
+    - a free-text reply arrives from the landlord, provider or tenant ("Please check if we need to provide a response…")
+    - the message could not be parsed ("expected data could not be extracted")
+    - a wait expired with no reply (3 days for landlord or tenant; 3+ reminders to the provider)
+    - an exception — property not tenanted, or a missed visit / move-out / hold deadline
+  priority_rule: numeric priority may be raised but never lowered ("Priority cannot be decreased")

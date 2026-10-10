@@ -239,6 +239,26 @@ class Disposition(str, Enum):
 Urgency = Literal["emergency", "urgent", "routine", "unknown"]
 
 
+DodStatus = Literal["done", "pending", "skipped", "not_applicable"]
+
+
+class DodItem(BaseModel):
+    """One item of the playbook's definition of done, with its status at the time of the decision."""
+
+    item: str = Field(description="Item id from the playbook's definition_of_done")
+    status: DodStatus = Field(
+        default="pending",
+        description="done | pending | skipped | not_applicable — the state of the ticket as a whole, counting steps the agency completed before you",
+    )
+    evidence: str = Field(default="", description="Event id or action seq that shows it, or the reason for skipped / not_applicable")
+
+
+class DodEntry(DodItem):
+    """A definition-of-done item as kept in the state: the playbook's text travels with it."""
+
+    text: str = ""
+
+
 class DecisionState(BaseModel):
     """Compiled truth about one case. Rendered into ANSWER.md and REASONING.md."""
 
@@ -248,6 +268,12 @@ class DecisionState(BaseModel):
     urgency: Urgency = "unknown"
     disposition: Disposition | None = None
     decision: str = ""
+    # Ticket status at the moment of the decision (the "Current Status" of the record).
+    recap: str = ""
+    stage: str = ""
+    hold_reason: str = ""
+    next_step: str = ""
+    definition_of_done: list[DodEntry] = Field(default_factory=list)
     facts: list[Fact] = Field(default_factory=list)
     conflicts: list[Conflict] = Field(default_factory=list)
     red_flags: list[RedFlag] = Field(default_factory=list)
@@ -298,6 +324,23 @@ class DecisionState(BaseModel):
 
 
 class TerminalCommon(BaseModel):
+    recap: str = Field(default="", description="One sentence (at most 160 characters): what the case is and what you did or decided")
+    stage: str = Field(
+        default="",
+        description="Workflow stage the ticket is at after your work, from the mandate's workflow stages, or a side state such as on_hold or paused",
+    )
+    hold_reason: str = Field(
+        default="",
+        description="If the ticket is on hold: the reason from the mandate's hold reasons plus a short comment (who or what is awaited, until when)",
+    )
+    next_step: str = Field(
+        default="",
+        description="The single next step and its owner, e.g. 'Landlord to approve the £172.51 + VAT quote (emailed; 3-day clock)'",
+    )
+    definition_of_done: list[DodItem] = Field(
+        default_factory=list,
+        description="Status of every item of the playbook's definition of done as of now, counting steps already completed in the visible history (cite the event)",
+    )
     case_type: str | None = None
     urgency: Urgency = "unknown"
     facts: list[Fact] = Field(default_factory=list)

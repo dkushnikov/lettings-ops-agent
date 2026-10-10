@@ -4,6 +4,21 @@ description: Recover when execution fails — a contractor no-show, a job left i
 case_types: [contractor_failure, no_show, incomplete_job, unconfirmed_action, tool_failure]
 version: 0.1
 source: SRC-PRIORS
+definition_of_done:
+  - id: state_established
+    text: "State of the earlier action established from the action record (completed, failed, unconfirmed)"
+  - id: cause_known
+    text: "Contractor's explanation and the tenant's account recorded as evidence"
+  - id: recovery_decided
+    text: "Recovery chosen: rebook, reassign after a confirmed cancellation, or escalate an unconfirmed order"
+  - id: recovery_booked
+    text: "New window or new contractor confirmed; no second order while the first is unconfirmed"
+  - id: tenant_informed
+    text: "Tenant told what happened and the next confirmed step"
+  - id: pattern_recorded
+    text: "Repeat failure by the same contractor recorded for the landlord and the office"
+  - id: closed
+    text: "Original job completed and the request closed"
 ---
 
 # Contractor failure

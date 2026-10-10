@@ -36,6 +36,16 @@ def strip_tool_markup(text: str) -> str:
     return re.sub(r"[ \t]+\n", "\n", out)
 
 
+def first_sentence(text: str, max_chars: int = 160) -> str:
+    """The first sentence of a free-text field, markup-free, capped — used as a recap when none was given."""
+    t = _WS.sub(" ", strip_tool_markup(text or "")).strip()
+    if not t:
+        return ""
+    m = re.match(r"(.+?[.!?])(\s|$)", t)
+    out = m.group(1) if m else t
+    return out if len(out) <= max_chars else out[: max_chars - 1].rstrip() + "…"
+
+
 def redact_secrets(text: str) -> str:
     out = strip_tool_markup(text)
     for pat in _SECRET_PATTERNS:

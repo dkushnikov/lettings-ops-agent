@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from .sanitize import jsonable, redact_secrets, truncate
+from .sanitize import first_sentence, jsonable, redact_secrets, truncate
 from .schema import ActionRecord, ActionStatus, Case, DecisionState, Disposition, RunMeta, ToolClass
 
 
@@ -80,6 +80,42 @@ def execution_notes(state: DecisionState) -> list[str]:
     return notes
 
 
+def _last_event(case: Case) -> tuple[str, str]:
+    """Id and timestamp of the latest visible event artefact (the ticket's 'last update' at the decision point)."""
+    best = ("", "")
+    for a in case.artefacts:
+        ts = str((a.metadata or {}).get("timestamp") or "")
+        if ts and ts >= best[1]:
+            best = (a.id, ts)
+    return best
+
+
+_DOD_MARK = {"done": "[x]", "pending": "[ ]", "skipped": "[-]", "not_applicable": "[n/a]"}
+
+
+def render_status(case: Case, state: DecisionState) -> list[str]:
+    """The 'Current Status' block: recap, stage and hold, last update, next step, definition of done."""
+    lines: list[str] = ["## Status", ""]
+    lines.append(f"**Recap:** {redact_secrets(state.recap or first_sentence(state.decision) or '(none)')}")
+    hold = f" · **Hold:** {redact_secrets(state.hold_reason)}" if state.hold_reason else ""
+    lines.append(f"**Stage:** {state.stage or '-'}{hold}")
+    last_id, last_ts = _last_event(case)
+    last = last_ts or (case.received_at or "-")
+    decided = state.finished_at.strftime("%Y-%m-%d %H:%M UTC") if state.finished_at else "-"
+    lines.append(f"**Last update:** {last}" + (f" ({last_id})" if last_id else "") + f" · **Decided:** {decided}")
+    lines.append(f"**Next step:** {redact_secrets(state.next_step or '-')}")
+    if state.definition_of_done:
+        done = sum(1 for d in state.definition_of_done if d.status == "done")
+        applicable = sum(1 for d in state.definition_of_done if d.status != "not_applicable")
+        lines.append("")
+        lines.append(f"Definition of done ({done}/{applicable} done):")
+        for d in state.definition_of_done:
+            ev = f" — {redact_secrets(truncate(d.evidence, 200))}" if d.evidence else ""
+            text = redact_secrets(d.text) if d.text else "(not in the playbook's list)"
+            lines.append(f"- {_DOD_MARK.get(d.status, '[ ]')} {d.item}: {text}{ev}")
+    return lines
+
+
 def render_answer(case: Case, state: DecisionState) -> str:
     disp = state.disposition.value.upper() if state.disposition else "UNKNOWN"
     lines: list[str] = []
@@ -89,6 +125,8 @@ def render_answer(case: Case, state: DecisionState) -> str:
     if state.fallback:
         lines.append("")
         lines.append("> Harness fallback: the agent did not finish on its own; this record was escalated by the runtime. See System notes.")
+    lines.append("")
+    lines += render_status(case, state)
     lines.append("")
     lines.append("## 1. Decision")
     lines.append("")

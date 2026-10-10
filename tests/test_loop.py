@@ -153,3 +153,61 @@ async def test_step_budget_exhausted_falls_back():
     script = [_response([_tool_use("get_property", {"property_id": "P-001"}, f"t{i}")]) for i in range(10)]
     state = await _agent(script).run(_case(), _registry())
     assert state.fallback is True and state.steps == 4
+
+
+def test_terminal_schemas_require_the_status_fields():
+    for d in harness_tool_definitions():
+        if d["name"] in ("finalize", "request_info", "escalate"):
+            req = d["input_schema"]["required"]
+            assert {"recap", "stage", "next_step", "definition_of_done"} <= set(req), d["name"]
+            assert "item" in d["input_schema"]["properties"]["definition_of_done"]["items"]["properties"]
+
+
+async def test_playbook_seeds_the_checklist_and_finalize_merges_it():
+    agent = _agent(
+        [
+            _response([_tool_use("use_playbook", {"name": "maintenance-request", "case_type": "maintenance_request", "urgency": "routine", "why": "dripping tap"}, "t1")]),
+            _response(
+                [
+                    _tool_use(
+                        "finalize",
+                        {
+                            "decision": "Plumber booked within cap. Tenant told the slot.",
+                            "recap": "Dripping tap: plumber booked within the standing cap.",
+                            "stage": "visit_scheduling",
+                            "next_step": "Provider to attend Tuesday AM; tenant confirmed",
+                            "definition_of_done": [
+                                {"item": "landlord_authority", "status": "done", "evidence": "CAP-DISPATCH-ROUTINE, under cap"},
+                                {"item": "provider_assigned", "status": "done", "evidence": "action 2"},
+                                {"item": "keys_returned", "status": "not_applicable", "evidence": "tenant present"},
+                            ],
+                        },
+                        "t2",
+                    )
+                ]
+            ),
+        ]
+    )
+    case = Case(id="c1", title="Tap", artefacts=[Artefact(id="a1", kind=ArtefactKind("email"), title="t", source="s", content="The kitchen tap drips.", trust="untrusted")])
+    state = await agent.run(case, _registry())
+    assert state.disposition == Disposition.resolved
+    assert state.recap.startswith("Dripping tap") and state.stage == "visit_scheduling"
+    by_id = {d.item: d for d in state.definition_of_done}
+    assert len(by_id) == 11, "the whole playbook checklist is seeded, not only the items the model mentioned"
+    assert by_id["landlord_authority"].status == "done" and by_id["landlord_authority"].text.startswith("Landlord approval")
+    assert by_id["work_result"].status == "pending"
+    assert by_id["keys_returned"].status == "not_applicable"
+    assert "DEFINITION OF DONE" in str(agent.client.calls[1]["messages"])
+
+
+async def test_next_step_defaults_from_the_handover():
+    agent = _agent(
+        [
+            _response([_tool_use("escalate", {"decision": "Disputed liability", "handover": {"question": "Who pays for the basin?", "summary": ["cracked basin"], "gap": "check-in inventory", "recommended": "Pull the check-in inventory before replying"}}, "t1")]),
+        ]
+    )
+    case = Case(id="c2", title="Basin", artefacts=[])
+    state = await agent.run(case, _registry())
+    assert state.disposition == Disposition.escalated
+    assert state.recap == "Disputed liability"
+    assert state.next_step == "Pull the check-in inventory before replying"

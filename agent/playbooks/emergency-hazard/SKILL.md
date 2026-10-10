@@ -4,6 +4,21 @@ description: Handle a report that matches an emergency definition — make the o
 case_types: [emergency_hazard, gas_leak, electrical_fault, flood, no_heating, insecure_property]
 version: 0.1
 source: SRC-PRIORS
+definition_of_done:
+  - id: made_safe
+    text: "First safety action for the hazard sent to the occupant, acknowledged where possible"
+  - id: emergency_dispatch
+    text: "Emergency contractor instructed under the emergency mandate with a confirmed attendance time"
+  - id: landlord_informed
+    text: "Landlord told of the hazard, the dispatch and the expected cost band"
+  - id: welfare
+    text: "Vulnerable occupant identified; a welfare call or temporary measure arranged by a human"
+  - id: hazard_cleared
+    text: "Contractor confirms the hazard is cleared, or a human owns the case until it is"
+  - id: follow_up_work
+    text: "Any permanent repair raised as a maintenance request with the landlord's approval"
+  - id: closed
+    text: "Outcome confirmed by a human and the request closed"
 ---
 
 # Emergency hazard

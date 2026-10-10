@@ -4,6 +4,21 @@ description: Arrange a contractor visit — tenant consent, notice, windows that
 case_types: [access_scheduling, appointment, contractor_visit, inspection_booking]
 version: 0.1
 source: SRC-PRIORS
+definition_of_done:
+  - id: job_known
+    text: "Purpose and urgency of the visit confirmed"
+  - id: windows_offered
+    text: "Two contractor-confirmed windows offered to the tenant with the required notice"
+  - id: tenant_agreed
+    text: "Tenant agreed a window, or consented to entry with the management key"
+  - id: booked
+    text: "Visit booked and confirmed to both the tenant and the contractor (slot, access arrangement, pets noted)"
+  - id: reminders
+    text: "Reminder sent on the day; any reschedule confirmed to both sides"
+  - id: keys
+    text: "Key handover recorded and key return confirmed after the visit, where a key was issued"
+  - id: logged
+    text: "Window, agreement and access arrangement logged"
 ---
 
 # Access scheduling

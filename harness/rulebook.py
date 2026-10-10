@@ -246,4 +246,21 @@ class Rulebook:
             lines.append(f"- {ck['id']} [{ck.get('status')}]: {ck.get('name')} — {ck.get('basis', '')}")
         for d in self.raw.get("data_handling", []) or []:
             lines.append(f"Data handling: {d}")
+        wf = self.raw.get("workflow") or {}
+        if wf:
+            stages = []
+            for st in wf.get("stages", []) or []:
+                if isinstance(st, dict):
+                    stages.append(f"{st.get('id')} ({st.get('text', '')})" if st.get("text") else str(st.get("id")))
+                else:
+                    stages.append(str(st))
+            lines.append("WORKFLOW STAGES (name the one the ticket is at in `stage`, in this order): " + " → ".join(stages))
+            if wf.get("side_states"):
+                lines.append("Side states: " + ", ".join(str(x) for x in wf["side_states"]))
+            if wf.get("hold_reasons"):
+                lines.append("Hold reasons (use in hold_reason, with a comment): " + ", ".join(str(x) for x in wf["hold_reasons"]))
+            for t in wf.get("manual_triggers", []) or []:
+                lines.append(f"Manual-mode trigger — where the agency's automation stops and a person decides; here you decide: {t}")
+            if wf.get("priority_rule"):
+                lines.append(f"Priority rule: {wf['priority_rule']}")
         return "\n".join(lines)

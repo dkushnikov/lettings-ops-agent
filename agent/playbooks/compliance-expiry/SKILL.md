@@ -4,6 +4,21 @@ description: Handle an expiring, expired or disputed safety certificate (gas CP1
 case_types: [compliance_expiry, certificate_renewal, gas_safety, eicr, epc]
 version: 0.1
 source: SRC-PRIORS
+definition_of_done:
+  - id: certificate_read
+    text: "Certificate record read and the clock computed from the authoritative document"
+  - id: conflict_resolved
+    text: "Any disagreement between the certificate and the CRM resolved by the source hierarchy and corrected"
+  - id: inspection_booked
+    text: "Qualified contractor booked for the renewal or the remedial work"
+  - id: access_arranged
+    text: "Access agreed with the tenant within the clock"
+  - id: landlord_informed
+    text: "Landlord told the status, the booking and the legal duty"
+  - id: certificate_filed
+    text: "New certificate received and filed; remedials closed within their clock"
+  - id: closed
+    text: "Request closed with the certificate reference"
 ---
 
 # Compliance expiry

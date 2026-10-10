@@ -94,3 +94,48 @@ def test_tool_markup_never_reaches_the_record():
     assert strip_tool_markup(leaked) == "Did not dispatch.\nmaintenance_request\nEscalated."
     assert "<parameter" not in redact_secrets(leaked)
     assert redact_secrets("<invoke name=\"finalize\">x</invoke> token: abcdefghijkl1234") == "x [REDACTED]"
+
+
+def test_status_block_and_definition_of_done_render():
+    from harness.recorder import render_answer
+    from harness.schema import Artefact, ArtefactKind, Case, DecisionState, Disposition, DodEntry
+
+    case = Case(
+        id="003",
+        title="Check-out clean",
+        received_at="2026-01-01 09:00:00 UTC",
+        artefacts=[
+            Artefact(id="event-001", kind=ArtefactKind("email"), title="e1", source="history.md", content="x", trust="untrusted", metadata={"timestamp": "2026-01-01 09:00:00 UTC"}),
+            Artefact(id="event-012", kind=ArtefactKind("note"), title="e12", source="history.md", content="y", trust="informational", metadata={"timestamp": "2026-01-04 15:30:00 UTC"}),
+        ],
+    )
+    state = DecisionState(case_id="003", disposition=Disposition.needs_info, decision="Quote sent to the landlord. Waiting.", urgency="routine")
+    state.recap = "Check-out clean quoted at £180 + VAT; landlord asked to approve."
+    state.stage = "quote_approval"
+    state.hold_reason = "Waiting for Landlord — quote emailed 2026-01-04, 3-day clock"
+    state.next_step = "Landlord to approve the quote"
+    state.definition_of_done = [
+        DodEntry(item="landlord_authority", text="Landlord approval obtained", status="done", evidence="event-009"),
+        DodEntry(item="quote_approved", text="Quote approved before work", status="pending"),
+        DodEntry(item="keys_returned", text="Keys returned", status="not_applicable", evidence="tenanted repair, no key issued"),
+    ]
+    out = render_answer(case, state)
+    head = out.split("## 1. Decision")[0]
+    assert "## Status" in head
+    assert "**Recap:** Check-out clean quoted" in head
+    assert "**Stage:** quote_approval · **Hold:** Waiting for Landlord" in head
+    assert "**Last update:** 2026-01-04 15:30:00 UTC (event-012)" in head
+    assert "**Next step:** Landlord to approve the quote" in head
+    assert "Definition of done (1/2 done):" in head
+    assert "- [x] landlord_authority: Landlord approval obtained — event-009" in head
+    assert "- [ ] quote_approved: Quote approved before work" in head
+    assert "- [n/a] keys_returned: Keys returned — tenanted repair, no key issued" in head
+
+
+def test_recap_falls_back_to_the_first_sentence():
+    from harness.recorder import render_answer
+    from harness.schema import Case, DecisionState, Disposition
+
+    state = DecisionState(case_id="c", disposition=Disposition.resolved, decision="Plumber booked within cap. Tenant notified of the slot.")
+    out = render_answer(Case(id="c"), state)
+    assert "**Recap:** Plumber booked within cap." in out
