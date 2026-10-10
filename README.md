@@ -49,7 +49,9 @@ Design rules:
 - **Hard limits, not warnings.** A step cap per case; anything unfinished becomes an escalation with context. Every case ends in one of three states: `resolved`, `needs_info`, `escalated`.
 - **Compiled truth and timeline.** `ANSWER.md` is the decision with its evidence and authority; `REASONING.md` is the compiled state followed by the chronological trace. Untrusted content appears as paraphrase or short labelled quotes.
 - **Playbooks as skills.** One playbook is loaded per case type; deviations from it are recorded.
-- **Review before done.** A second model pass checks the planned record against the rulebook and can downgrade `resolved` to `needs_info` or `escalated`.
+- **Review before done.** A deterministic reviewer (rules R1–R7) checks the record against the action log and can downgrade `resolved` to `needs_info` or `escalated`; an LLM review pass is available with `LOA_REVIEWER=llm`.
+
+The Vision this serves, the structural domains, and the split between invariants and implementations are written up in VAST form in [`docs/VAST.md`](docs/VAST.md).
 
 Directory map: `harness/` runtime · `agent/` the agent definition · `mockworld/` test environment · `fixtures/` synthetic cases · `evalkit/` mutations and judge · `tests/` · `ANSWERS/` Reality Test output · `docs/` cheat-sheet and prompts · `video/` · `posts/`.
 
