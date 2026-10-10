@@ -25,7 +25,7 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 
 - [ ] `make freeze` → creates tag `freeze-1630`, prints the commit hash; paste it into `SUBMISSION.md`.
 - [ ] `git push --tags`.
-- [ ] Reality Test cases pulled: `git -C ../HackatonPublicCases pull` (do not edit them). Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `Property Management`, change only `CASES=`.
+- [ ] Reality Test cases received (the form says they arrive at 16:30; try `git -C ../HackatonPublicCases pull` first, else the channel the organisers use). Do not edit them. Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `Property Management`, change only `CASES=`.
 - [ ] Count the cases. The runner prints the capacity estimate: `T ≈ ⌈N / C⌉ × t_case + margin`. Measured today: 50 cases at concurrency 6 take about 16 minutes with no 429s; 100 cases would take about 32, so raise concurrency to 8 only if the count is above 60.
 - [ ] Launch (the exact form tested all day; `--id-style number` → `ANSWERS/<case number>/`):
 
@@ -38,7 +38,7 @@ make run ARGS="--adapter dwelly --id-style number --concurrency 6 --deadline 16:
 
 - [ ] Watch the dashboard. 429s → the runner backs off by itself; do not restart it. A crash → restart the same command; checkpoints skip finished cases.
 - [ ] `--deadline 16:52`: a case not started by then gets a fallback record instead of holding the run past the freeze; running cases finish on their own budget (540 s).
-- [ ] `ANSWERS/` already holds the pre-freeze records generated from the public cases (~15:00). If the pulled cases changed, `rm -rf ANSWERS` before launching: the runner reuses finished case folders (checkpoint) and would not regenerate them. If the cases did not change, the existing records stand and the run is a no-op.
+- [ ] `ANSWERS/` holds only Reality Test results (the form: unseen cases received at 16:30, committed by 17:00). The 15:20 rehearsal on the public cases lives in `runs/answers-rehearsal/`, not in the repository. Before launching, `ANSWERS/` must be absent: the runner reuses finished case folders (checkpoint) and would not regenerate them.
 
 ## 16:50 — stop launching, start verifying
 
