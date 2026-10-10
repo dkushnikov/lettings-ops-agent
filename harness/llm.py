@@ -24,7 +24,7 @@ class Settings:
     effort: str = "high"
     reviewer: str = "rules"  # rules | llm
     concurrency: int = 4
-    case_timeout_s: float = 360.0
+    case_timeout_s: float = 540.0
     max_steps: int = 12
     retry_budget: int = 1
     tpm_budget: int = 200_000
@@ -51,7 +51,7 @@ class Settings:
             effort=env("LOA_EFFORT", "high"),
             reviewer=env("LOA_REVIEWER", "rules"),
             concurrency=env("LOA_CONCURRENCY", 4, int),
-            case_timeout_s=env("LOA_CASE_TIMEOUT_S", 360.0, float),
+            case_timeout_s=env("LOA_CASE_TIMEOUT_S", 540.0, float),
             max_steps=env("LOA_MAX_STEPS", 12, int),
             retry_budget=env("LOA_RETRY_BUDGET", 1, int),
             tpm_budget=env("LOA_TPM_BUDGET", 200_000, int),

@@ -265,3 +265,9 @@ def test_evaluation_scaffolding_is_not_rendered():
     case = Case(id="c7", title="Meta", artefacts=[], metadata={"property": "Flat 1", "cutoff": 9, "attachments_hidden": 2, "events_visible": 9})
     text = render_case(case)
     assert "Flat 1" in text and "cutoff" not in text and "attachments_hidden" not in text
+
+
+def test_case_time_budget_default_fits_six_slow_steps():
+    from harness.llm import Settings
+
+    assert Settings().case_timeout_s == 540.0

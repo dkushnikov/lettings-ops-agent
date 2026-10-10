@@ -130,6 +130,10 @@ def render_answer(case: Case, state: DecisionState) -> str:
     lines.append("")
     lines.append("## 1. Decision")
     lines.append("")
+    overrides = [n for n in state.reviewer_notes if "→" in n]
+    if overrides:
+        lines.append("Reviewer override (deterministic rules applied after the agent finished): " + "; ".join(redact_secrets(n) for n in overrides) + ". The agent's own reasoning follows.")
+        lines.append("")
     lines.append(redact_secrets(state.decision or "(no decision text)"))
     if state.safety_actions:
         lines.append("")

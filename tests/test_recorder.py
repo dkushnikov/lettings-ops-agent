@@ -139,3 +139,12 @@ def test_recap_falls_back_to_the_first_sentence():
     state = DecisionState(case_id="c", disposition=Disposition.resolved, decision="Plumber booked within cap. Tenant notified of the slot.")
     out = render_answer(Case(id="c"), state)
     assert "**Recap:** Plumber booked within cap." in out
+
+
+def test_reviewer_override_is_stated_in_the_decision_section():
+    s = _state()
+    s.decision = "No escalation: nothing here needs a human decision."
+    s.reviewer_notes.append("R2: red flags (fraud) → escalated (checked before any needs_info rule)")
+    head = render_answer(_case(), s).split("## 1. Decision", 1)[1][:600]
+    assert head.index("Reviewer override") < head.index("No escalation") and "→ escalated" in head
+    assert "Reviewer override" not in render_answer(_case(), _state())

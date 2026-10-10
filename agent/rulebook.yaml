@@ -355,3 +355,6 @@ safety_pass:
     - Before calling a property ready for move-in, confirm smoke and carbon monoxide alarms were tested; a check-out
       report's detector section ("Tested? No") beats its boilerplate.
     - A specific line in a document beats a general statement in the same document.
+    - A keyword in the material is a check to make and record, not a hazard by itself. Record a red flag of kind
+      safety_hazard only for a hazard that is reported or observed (a gas smell, sparks, water near electrics, an
+      alarm that failed its test before move-in); otherwise name the check and its result in the record.

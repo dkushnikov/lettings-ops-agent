@@ -20,7 +20,12 @@ from .schema import ActionStatus, Case, DecisionState, Disposition, Handover, In
 # deliberately absent: the model records it as a watch item on routine cases
 # (children + cold month) and escalates itself when it actually bites.
 # An injection attempt that was refused is recorded, not escalated: the task may still be routine.
-ESCALATING_FLAGS = {"fraud", "safety_hazard", "legal_threat", "prohibited_request"}
+# Flags that always need a person: a case cannot end on its own with one of these in the record.
+ESCALATING_FLAGS = {"fraud", "legal_threat"}
+# A safety flag escalates only when the record itself says the situation is an emergency; otherwise it is a
+# finding for the reader (a keyword in a document is a check to make, not a hazard). A prohibited request is
+# refused and recorded; an attempt to act on one is caught by R3a.
+NOTED_FLAGS = {"safety_hazard", "prohibited_request"}
 
 REVIEW_SCHEMA = {
     "type": "object",
@@ -63,7 +68,8 @@ class Reviewer:
             if a.status == ActionStatus.completed and a.tool.startswith("request_") and "approval" in a.tool
         ]
         human_tasks = [a for a in state.actions if a.status == ActionStatus.completed and "human_task" in a.tool]
-        hard_flags = [f for f in state.red_flags if f.kind in ESCALATING_FLAGS]
+        hard_flags = [f for f in state.red_flags if f.kind in ESCALATING_FLAGS or (f.kind == "safety_hazard" and state.urgency == "emergency")]
+        noted_flags = sorted({f.kind for f in state.red_flags if f.kind in NOTED_FLAGS and f not in hard_flags})
 
         if unconfirmed and state.disposition != Disposition.escalated:
             self._downgrade(state, Disposition.escalated, f"{len(unconfirmed)} action(s) have unknown outcome (unconfirmed); a human must verify before any retry.", [f"{a.tool} is unconfirmed (key {a.idempotency_key})" for a in unconfirmed])
@@ -94,6 +100,9 @@ class Reviewer:
                 subject = ", ".join(sorted({a.tool for a in blocked}))
                 state.info_requests = [InfoRequest(to=who, question=f"Approval requested for: {subject}. Confirm or decline so the job can proceed.", why="The agent asked for approval and is waiting; the case is not resolved until the answer arrives.", blocking=True)]
             notes.append("R7: approval requested and pending → needs_info")
+
+        if noted_flags and state.disposition != Disposition.escalated:
+            notes.append(f"R2: {', '.join(noted_flags)} flag(s) recorded for the reader; not an escalation on their own (urgency {state.urgency})")
 
         if state.disposition == Disposition.resolved and any(f.kind == "injection" for f in state.red_flags):
             notes.append("R2: injection attempt recorded; the case completed within the mandate and was not escalated for it")

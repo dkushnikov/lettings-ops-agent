@@ -2,7 +2,18 @@ from pathlib import Path
 
 from harness.reviewer import Reviewer
 from harness.rulebook import Rulebook
-from harness.schema import ActionRecord, ActionStatus, DecisionState, Disposition, GateDecision, GateVerdict, Handover, RedFlag, ToolClass
+from harness.schema import (
+    ActionRecord,
+    ActionStatus,
+    DecisionState,
+    Disposition,
+    GateDecision,
+    GateVerdict,
+    Handover,
+    InfoRequest,
+    RedFlag,
+    ToolClass,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -180,3 +191,28 @@ def test_safety_pass_adds_to_the_handover_when_escalated():
     s.handover = Handover(to="property_manager", question="Decide.", summary=["x"], gap="")
     _reviewer().apply_rules(s, case)
     assert s.disposition == Disposition.escalated and "burning smell" in (s.handover.gap or "")
+
+
+def test_safety_flag_escalates_only_in_an_emergency():
+    s = _state(Disposition.needs_info)
+    s.urgency = "routine"
+    s.info_requests = [InfoRequest(to="landlord", question="Which contractor fitted the oven?", why="warranty", blocking=True)]
+    s.red_flags.append(RedFlag(kind="safety_hazard", description="Safety-pass keyword 'electrical': the fault is electrical in nature; no hazard reported"))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.needs_info
+    assert any(n.startswith("R2") and "not an escalation" in n for n in s.reviewer_notes)
+    e = _state(Disposition.needs_info)
+    e.urgency = "emergency"
+    e.info_requests = list(s.info_requests)
+    e.red_flags.append(RedFlag(kind="safety_hazard", description="Gas smell by the boiler; an 82-year-old occupant"))
+    _reviewer().apply_rules(e)
+    assert e.disposition == Disposition.escalated and e.handover is not None
+    assert any(n.startswith("R2") and "escalated" in n for n in e.reviewer_notes)
+
+
+def test_prohibited_request_is_noted_not_escalated():
+    s = _state(Disposition.resolved)
+    s.red_flags.append(RedFlag(kind="prohibited_request", description="An earlier agency email told the tenant the call-out would be billed to them"))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.resolved
+    assert any("prohibited_request" in n for n in s.reviewer_notes)

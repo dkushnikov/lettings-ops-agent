@@ -222,7 +222,7 @@ Open findings are kept in [`docs/findings.md`](docs/findings.md) with their stat
 
 Found and fixed on the day:
 
-- One of 50 cases hit the 240-second limit and left an empty record. Fixed with a time budget inside the loop and a 360-second default.
+- One of 50 cases hit the 240-second limit and left an empty record. Fixed with a time budget inside the loop and a 540-second default (six slow steps fit).
 - Two records contained a stray tool-call tag. Fixed in the text sanitiser.
 - `make run` broke on a case path containing a space, which would have failed the Reality Test. Fixed.
 
