@@ -5,7 +5,7 @@ import pytest
 from harness.executor import ActionExecutor, idempotency_key
 from harness.gate import PolicyGate
 from harness.rulebook import Rulebook
-from harness.schema import ActionStatus, ToolClass
+from harness.schema import ActionRecord, ActionStatus, ToolClass
 from harness.tools import BoundTool, LostResponseError, ToolRegistry, ToolRejected, TransientToolError, make_spec
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -131,3 +131,23 @@ async def test_unknown_tool_fails_cleanly():
 @pytest.mark.parametrize("a,b", [({"x": 1, "y": 2}, {"y": 2, "x": 1})])
 def test_idempotency_key_is_order_independent(a, b):
     assert idempotency_key("c", "t", a) == idempotency_key("c", "t", b)
+
+
+async def test_trace_events_carry_stable_action_ids():
+    reg, _ = _registry()
+    events: list[dict] = []
+    ex = _executor(reg)
+    ex.trace = events.append
+    rec = await ex.execute("create_work_order", {"property_id": "P-1", "estimated_cost_gbp": 100}, urgency="routine", seq=3)
+    gate_ev = next(e for e in events if e["event"] == "gate")
+    result_ev = next(e for e in events if e["event"] == "tool_result")
+    assert rec.action_id == rec.idempotency_key == gate_ev["action_id"] == result_ev["action_id"]
+    assert gate_ev["action_seq"] == result_ev["action_seq"] == rec.seq == 3
+    assert gate_ev["case_id"] == result_ev["case_id"] == "T1"
+    assert gate_ev["property_id"] == result_ev["property_id"] == "P-1"
+    events.clear()
+    blocked = await ex.execute("create_work_order", {"property_id": "P-1", "estimated_cost_gbp": 900}, urgency="routine", seq=4)
+    assert events[0]["event"] == "gate" and events[0]["action_id"] == blocked.action_id != rec.action_id
+    again = await ex.execute("create_work_order", {"estimated_cost_gbp": 100, "property_id": "P-1"}, urgency="routine", seq=5)
+    assert again.action_id == rec.action_id, "the same proposal keeps its id across repeated calls"
+    assert ActionRecord.model_validate({"seq": 1, "tool": "x", "tool_class": "read"}).action_id is None, "old records still load"

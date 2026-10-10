@@ -79,20 +79,29 @@ class ActionExecutor:
             for k in self._context_keys:
                 if k in d and d[k] is not None:
                     if self.context.get(k) != d[k]:
-                        self.trace({"event": "context", "key": k, "value": d[k]})
+                        self.trace({"event": "context", "key": k, "value": d[k], "case_id": self.case_id})
                     self.context[k] = d[k]
 
+    def _ids(self, name: str, tool_input: dict[str, Any], seq: int) -> dict[str, Any]:
+        """Identifiers every trace event of one action carries, so a viewer can join proposal, verdict, attempt and receipt."""
+        ids: dict[str, Any] = {"case_id": self.case_id, "action_seq": seq, "action_id": idempotency_key(self.case_id, name, tool_input)}
+        pid = tool_input.get("property_id")
+        if isinstance(pid, str) and pid:
+            ids["property_id"] = pid
+        return ids
+
     async def execute(self, name: str, tool_input: dict[str, Any], *, urgency: str, seq: int) -> ActionRecord:
+        ids = self._ids(name, tool_input, seq)
         tool = self.registry.get(name)
         if tool is None:
-            rec = ActionRecord(seq=seq, tool=name, tool_class=ToolClass.read, input=tool_input, status=ActionStatus.failed, error="unknown tool")
-            self.trace({"event": "tool_unknown", "tool": name})
+            rec = ActionRecord(seq=seq, tool=name, tool_class=ToolClass.read, input=tool_input, status=ActionStatus.failed, error="unknown tool", action_id=ids["action_id"])
+            self.trace({"event": "tool_unknown", "tool": name, **ids})
             return rec
 
         spec = tool.spec
         decision = self.gate.check(spec, tool_input, urgency=urgency, context=self.context)
-        rec = ActionRecord(seq=seq, tool=name, tool_class=spec.tool_class, input=jsonable(tool_input), gate=decision, started_at=utcnow())
-        self.trace({"event": "gate", "tool": name, "verdict": decision.verdict.value, "rules": decision.rule_ids, "reason": decision.reason})
+        rec = ActionRecord(seq=seq, tool=name, tool_class=spec.tool_class, input=jsonable(tool_input), gate=decision, started_at=utcnow(), action_id=ids["action_id"])
+        self.trace({"event": "gate", "tool": name, "verdict": decision.verdict.value, "rules": decision.rule_ids, "reason": decision.reason, **ids})
 
         if decision.verdict != GateVerdict.allow:
             rec.status = ActionStatus.needs_approval if decision.verdict == GateVerdict.needs_approval else ActionStatus.blocked
@@ -105,7 +114,7 @@ class ActionExecutor:
         else:
             await self._run_write(tool, tool_input, rec)
         rec.finished_at = utcnow()
-        self.trace({"event": "tool_result", "tool": name, "status": rec.status.value, "attempts": rec.attempts, "error": rec.error, "receipt": rec.receipt})
+        self.trace({"event": "tool_result", "tool": name, "status": rec.status.value, "attempts": rec.attempts, "error": rec.error, "receipt": rec.receipt, **ids})
         return rec
 
     async def _run_read(self, tool, tool_input: dict[str, Any], rec: ActionRecord) -> None:
@@ -182,7 +191,7 @@ class ActionExecutor:
                 rec.status = ActionStatus.completed
                 rec.result = jsonable(existing)
                 rec.receipt = receipt_of(existing) + " (confirmed by read-back)"
-                self.trace({"event": "reconciled", "tool": tool.spec.name})
+                self.trace({"event": "reconciled", "tool": tool.spec.name, "case_id": self.case_id, "action_seq": rec.seq, "action_id": rec.action_id})
                 return
         rec.status = ActionStatus.unconfirmed
         rec.error = (rec.error or "") + "; outcome unknown — not retried, human must verify before anyone resends"

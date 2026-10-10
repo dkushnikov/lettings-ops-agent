@@ -140,6 +140,8 @@ class ActionRecord(BaseModel):
     error: str | None = None
     attempts: int = 0
     idempotency_key: str | None = None
+    # Stable id shared by the proposal, the gate verdict, the attempt and the receipt of one action; equals the idempotency key for writes.
+    action_id: str | None = None
     receipt: str | None = None
     started_at: datetime | None = None
     finished_at: datetime | None = None
