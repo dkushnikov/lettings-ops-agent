@@ -92,6 +92,14 @@ capabilities:
     source: SRC-PRIORS
     note: Delivering a handover to a human queue is always allowed.
 
+  - id: CAP-CLOSE
+    authority: close_request
+    source: SRC-ENV
+    note: >
+      Closing a request is the last step of the workflow, not a note: only after the final checks in the playbook's
+      definition of done (work result, documents or a skip reason, invoice to the landlord, landlord confirmation,
+      keys where issued). The reviewer checks the checklist; a closure with items still pending becomes needs_info.
+
 # ----------------------------------------------------------------------------
 # Approvals: writes that need someone's yes first.
 # ----------------------------------------------------------------------------

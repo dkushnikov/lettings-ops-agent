@@ -115,6 +115,15 @@ class Reviewer:
                 state.info_requests = [InfoRequest(to=who, question=question, why="The case is on hold waiting for this party; it is not resolved until they answer.", blocking=True)]
             notes.append("R8: resolved while on hold → needs_info")
 
+        closed_stages = {"closed", "closed_without_payment", "closed_by_supervisor"}
+        pending_dod = [d for d in state.definition_of_done if d.status == "pending"]
+        if state.disposition == Disposition.resolved and pending_dod and state.stage not in closed_stages:
+            first = pending_dod[0]
+            state.disposition = Disposition.needs_info
+            if not state.info_requests:
+                state.info_requests = [InfoRequest(to="property_manager", question=f"The workflow is not complete: {first.text or first.item} ({len(pending_dod)} checklist item(s) pending). Confirm the next step.", why="A case is resolved only when its definition of done is complete or the ticket is closed.", blocking=True)]
+            notes.append(f"R10: resolved with {len(pending_dod)} checklist item(s) pending and the ticket not closed → needs_info")
+
         if state.disposition == Disposition.escalated and state.handover is None:
             state.handover = Handover(to="property_manager", question=f"Decide the next action on case {state.case_id}.", summary=[f.statement for f in state.facts][:5], gap="Agent escalated without a handover card.", default_if_timeout="Case stays open in the human queue.")
             notes.append("R4: escalated without handover → minimal card built")

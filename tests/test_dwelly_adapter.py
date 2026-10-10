@@ -137,3 +137,21 @@ async def test_ledger_rejects_lookalike_senders_and_records_once():
     assert again.status == ActionStatus.completed and (again.result or {}).get("duplicate") is True
     ledger = await ex.execute("get_action_ledger", {}, urgency="routine", seq=7)
     assert len([e for e in (ledger.result or []) if e.get("action") == "assign_contractor"]) == 1
+
+
+def test_event_ids_are_normalised_for_the_approval_ref():
+    from harness.adapters.dwelly import normalise_event_id
+
+    assert normalise_event_id("event-9") == "event-009"
+    assert normalise_event_id("Event 012") == "event-012"
+    assert normalise_event_id("#7") == "event-007"
+    assert normalise_event_id("12") == "event-012"
+    assert normalise_event_id("event-012") == "event-012"
+    assert normalise_event_id("attachment-01") == "attachment-01"
+
+
+def test_close_request_has_its_own_authority():
+    adapter = DwellyCasesAdapter()
+    case = next(iter(adapter.load_cases(ROOT / "fixtures-dwelly" / "Property Management")))
+    spec = adapter.tools_for(case).get("close_request").spec
+    assert spec.authority == "close_request"

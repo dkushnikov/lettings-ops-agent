@@ -163,6 +163,14 @@ def visible_attachments_at(parsed: ParsedCase, events: list[HistoryEvent], cutof
 
 
 _EVENT_ID_RE = re.compile(r"^event-\d{3}$")
+_LOOSE_EVENT_RE = re.compile(r"^\s*(?:event[\s_-]*)?#?0*(\d{1,3})\s*$", re.I)
+
+
+def normalise_event_id(value: str) -> str:
+    """'event-9', 'Event 009', '#9' and '9' all name event-009; anything else is returned stripped for the strict check."""
+    text = (value or "").strip()
+    m = _LOOSE_EVENT_RE.match(text)
+    return f"event-{int(m.group(1)):03d}" if m else text
 _LANDLORD_SENDER_RE = re.compile(r"^landlord(\s*[(<\-–:]|$)")
 
 
@@ -315,7 +323,7 @@ class CaseLedger:
 
     def assign_contractor(self, trade: str, description: str, urgency: str, estimated_cost_gbp: float, contractor_hint: str = "", landlord_approval_ref: str = "", **kw: Any) -> dict[str, Any]:
         raw = "" if landlord_approval_ref is None else str(landlord_approval_ref)
-        ref = raw.strip()
+        ref = normalise_event_id(raw)
         if raw and not ref:
             raise ToolRejected("landlord_approval_ref was supplied blank; cite the event id of the landlord's own message or ask the landlord")
         if ref:
@@ -377,7 +385,7 @@ def build_registry(case: Case, ledger: CaseLedger | None = None) -> ToolRegistry
     reg.add(BoundTool(make_spec("put_on_hold", "Put the request on hold with a reason (e.g. waiting for provider / landlord / tenant).", _obj({"reason": {"type": "string"}, "until": {"type": "string"}}, ["reason"]), tool_class=ToolClass.write, authority="log_note", side_effect="changes request status (recorded)"), L.put_on_hold))
     reg.add(BoundTool(make_spec("add_note", "Add an internal note to the case.", _obj({"note": {"type": "string"}}, ["note"]), tool_class=ToolClass.write, authority="log_note", side_effect="appends a note (recorded)"), L.add_note))
     reg.add(BoundTool(make_spec("create_human_task", "Hand the case to a human queue with a summary.", _obj({"queue": {"type": "string"}, "title": {"type": "string"}, "summary": {"type": "string"}}, ["queue", "title", "summary"]), tool_class=ToolClass.write, authority="create_human_task", side_effect="creates a human task (recorded)"), L.create_human_task))
-    reg.add(BoundTool(make_spec("close_request", "Close the request with a resolution note. Only when the work is verifiably done.", _obj({"resolution": {"type": "string"}}, ["resolution"]), tool_class=ToolClass.write, authority="log_note", side_effect="closes the request (recorded)"), L.close_request))
+    reg.add(BoundTool(make_spec("close_request", "Close the request with a resolution note. Only when the work is verifiably done.", _obj({"resolution": {"type": "string"}}, ["resolution"]), tool_class=ToolClass.write, authority="close_request", side_effect="closes the request (recorded)"), L.close_request))
     return reg
 
 

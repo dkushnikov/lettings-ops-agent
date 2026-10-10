@@ -132,3 +132,18 @@ def test_emergency_dispatch_needs_a_human_confirmation():
     s.actions.append(ActionRecord(seq=1, tool="assign_contractor", tool_class=ToolClass.write, status=ActionStatus.completed, gate=GateDecision(verdict=GateVerdict.allow, rule_ids=["CAP-DISPATCH-EMERGENCY"])))
     _reviewer().apply_rules(s)
     assert s.disposition == Disposition.escalated and any(n.startswith("R9") for n in s.reviewer_notes)
+
+
+def test_resolved_with_pending_checklist_is_not_resolved():
+    from harness.schema import DodEntry
+
+    s = _state(Disposition.resolved)
+    s.stage = "visit_scheduling"
+    s.definition_of_done = [DodEntry(item="assessed", text="Assessed", status="done"), DodEntry(item="work_result", text="Work result recorded", status="pending")]
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.needs_info and "Work result recorded" in s.info_requests[0].question
+    t = _state(Disposition.resolved)
+    t.stage = "closed"
+    t.definition_of_done = [DodEntry(item="keys_returned", text="Keys", status="pending")]
+    _reviewer().apply_rules(t)
+    assert t.disposition == Disposition.resolved  # a closed ticket may carry a pending item the agency skipped

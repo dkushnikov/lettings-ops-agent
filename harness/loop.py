@@ -62,6 +62,8 @@ RULES_OF_ENGAGEMENT = """RULES OF ENGAGEMENT
 9. Every finishing record carries the ticket's status: recap (one sentence), stage from the mandate's workflow stages (or on_hold with hold_reason), next_step with its owner, and definition_of_done with the status of each item as of now. Items the agency completed before you count as done; cite the event."""
 
 STATUS_FIELDS = ("recap", "stage", "next_step", "definition_of_done")
+# Evaluation scaffolding the agent must not see: where the history was cut and what was hidden.
+HIDDEN_METADATA = {"cutoff", "attachments_hidden", "events_visible"}
 
 TIME_NUDGE = (
     "TIME BUDGET: most of the time allowed for this case is used. Finish now with exactly one terminal tool call "
@@ -150,8 +152,9 @@ def harness_tool_definitions() -> list[dict[str, Any]]:
 
 def render_case(case: Case) -> str:
     parts = [f"<case id=\"{case.id}\" title=\"{case.title}\" received_at=\"{case.received_at or ''}\">"]
-    if case.metadata:
-        parts.append(f"<metadata>{json.dumps(case.metadata, ensure_ascii=False)}</metadata>")
+    shown = {k: v for k, v in (case.metadata or {}).items() if k not in HIDDEN_METADATA}
+    if shown:
+        parts.append(f"<metadata>{json.dumps(shown, ensure_ascii=False)}</metadata>")
     for a in case.artefacts:
         parts.append(f'<artefact id="{a.id}" kind="{a.kind.value}" trust="{a.trust}" title="{a.title}">')
         parts.append(a.content.strip().replace("<artefact", "&lt;artefact").replace("</artefact", "&lt;/artefact"))
