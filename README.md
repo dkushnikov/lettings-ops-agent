@@ -202,6 +202,14 @@ Assumptions forced by the environment:
 
 ## 7. Known limitations
 
+Open findings are kept in [`docs/findings.md`](docs/findings.md) with their state; the ones that matter most:
+
+- A landlord's cited approval is verified for provenance (the event exists and the landlord wrote it), not for consent:
+  what it approves, for how much, and whether a later message withdrew it is the model's reading, cited in the record
+  for a person to check.
+- An emergency dispatch rests on the model's own urgency assessment; the reviewer therefore escalates every emergency
+  dispatch for a person to confirm.
+
 - The gate can only enforce what the rulebook can express (amounts, urgency, consent, approver). Subtler policy is left to the reviewer and the human.
 - No memory between runs, and no learning over time.
 - The agent is proactive inside a ticket, but nothing yet watches all live tickets in the background.
