@@ -12,8 +12,8 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 | Commit hash containing Reality Test results | `f96e8c6` |
 | Reality Test results path | `ANSWERS/` (`ANSWERS/<case-id>/ANSWER.md`, `REASONING.md`, `trace.jsonl`; `ANSWERS/_run.json`) |
 | Demo video path inside the repository | `video/demo.mp4` (plain git file, 42 MB) |
-| LinkedIn post URL | <!-- TODO(event) --> |
-| X post URL | <!-- TODO(event) --> |
+| LinkedIn post URL | https://lnkd.in/p/eEDmMpMB |
+| X post URL | https://x.com/reDim89/status/2108931675359211552 |
 
 ## Reality Test run record
 
