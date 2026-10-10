@@ -2,7 +2,7 @@
 
 An operations agent for UK residential lettings that acts only within cited authority and turns every exception into a 90-second decision for a human. Built for the Real-World Agents Hackathon (London, 10 October 2026), Property Management track. Licensed under Apache 2.0 (`LICENSE`). What existed before the event is listed in `PREBUILT.md` (tag `pre-event`).
 
-<!-- TODO(event): team name and members; one sentence on the environment we were given. -->
+Team: <!-- TODO(event): team name --> — Dmitry Kushnikov and Dmitry Taranov. The environment we were given is files, not tools: tickets of one lettings agency, each an `index.md`, a `history.md` of timed events (email, SMS, call summaries, the agency's own updates and holds) and attachments; the Reality Test delivers more tickets of the same shape.
 
 ## 1. What we built
 
@@ -15,7 +15,7 @@ A system that takes operational cases (emails, call transcripts, documents, CRM 
 
 The model and the loop are swappable. Playbooks say *how*; the rulebook says *whether*; a playbook cannot grant authority.
 
-<!-- TODO(event): the one case that shows it best, in three sentences. -->
+The case that shows it best is public case 050, a broken window, cut at the landlord's reply "yes please send someone". The agent read the approval from the history instead of asking again, instructed a glazier within the £250 standing cap under CAP-DISPATCH-ROUTINE, raised the urgency to urgent for the security risk, briefed the tenant and the landlord, and held the ticket for the tenant's access windows with a dated chase. Its record opens with the status block (stage visit_scheduling, next step: tenant to reply with two windows) and a checklist showing three of nine closing steps done, each citing the event or action that did it.
 
 ## 2. What operational problem it solves
 
@@ -58,7 +58,7 @@ Directory map: `harness/` runtime · `agent/` the agent definition · `mockworld
 
 The organisers' 50 public Property Management cases are analysed in [`docs/pm-cases-analysis.md`](docs/pm-cases-analysis.md) (corpus shape, taxonomy, the agency's workflow as it actually runs, where humans step in, traps for an automated agent, vocabulary for playbooks) with a one-page [`docs/pm-cases-cheatsheet.md`](docs/pm-cases-cheatsheet.md). Both are written from `data/pm-cases-index.json`, rebuilt with `make pm-index`.
 
-<!-- TODO(event): how the organisers' environment was adapted (files / REST / MCP), and which adapter module does it. -->
+The organisers' environment was adapted as files: `harness/adapters/dwelly.py` reads each case folder into artefacts with trust classes, hides the outcome, cuts the history at a decision point for our own evaluation, exposes read tools over the case and records write tools in a ledger with receipts. `harness/adapters/generic.py` (a tools module plus `agent/tools.yaml`) and `mockworld/` are the other two adapters; the harness does not know which one it is running against.
 
 ## 4. How to run
 
