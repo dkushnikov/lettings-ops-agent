@@ -147,6 +147,12 @@ def cmd_report(args: argparse.Namespace) -> int:
     return report_main(run=Path(args.run), cases=Path(args.cases) if args.cases else None, open_browser=args.open)
 
 
+def cmd_cases_browser(args: argparse.Namespace) -> int:
+    from evalkit.casebrowser import main as browser_main
+
+    return browser_main(cases=Path(args.cases), out=Path(args.out), runs=[Path(r) for r in (args.runs or [])], open_browser=args.open)
+
+
 def cmd_rehearse(args: argparse.Namespace) -> int:
     """Fresh clone → sync → run two fixtures → check outputs. What a judge would do."""
     tmp = Path(tempfile.mkdtemp(prefix="loa-rehearse-"))
@@ -265,6 +271,13 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--cases", default="fixtures")
     sp.add_argument("--open", action="store_true")
     sp.set_defaults(fn=cmd_report)
+
+    sp = sub.add_parser("cases-browser", help="static HTML browser over the organisers' cases (search, filters, history cut points, run overlay)")
+    sp.add_argument("--cases", required=True, help="track directory, e.g. ../HackatonPublicCases/Property Management")
+    sp.add_argument("--out", default="runs/cases/index.html")
+    sp.add_argument("--runs", action="append", default=None, help="run directory to overlay (repeatable)")
+    sp.add_argument("--open", action="store_true")
+    sp.set_defaults(fn=cmd_cases_browser)
 
     sp = sub.add_parser("rehearse", help="fresh clone → sync → run → verify")
     sp.add_argument("--cases", default="fixtures")

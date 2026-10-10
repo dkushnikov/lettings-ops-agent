@@ -11,3 +11,5 @@ runs/
 *.log
 # Video working files; the final demo.mp4 is tracked via Git LFS
 video/raw/
+.idea/
+.vscode/

@@ -2,6 +2,7 @@ CASES ?= fixtures
 OUT ?= runs/latest
 ARGS ?=
 TAG ?= freeze-1630
+CASES_ROOT ?= ../HackatonPublicCases/Property Management
 N ?= 20
 C ?= 4
 PY = uv run python -m harness.cli
@@ -29,6 +30,9 @@ demo:
 
 eval:
 	$(PY) eval --answers $(OUT) --cases $(CASES) $(ARGS)
+
+cases-browser:
+	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html --open
 
 report:
 	$(PY) report --run $(OUT) --cases $(CASES) --open
