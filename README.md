@@ -144,7 +144,7 @@ Options (pass with `ARGS="..."`):
 ```
 make freeze                     # tag freeze-1630, record the hash
 git -C ../HackatonPublicCases pull      # Reality Test cases arrive at 16:30
-make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
+make run ARGS="--adapter dwelly --id-style number --concurrency 6 --deadline 16:52" \
   CASES="../HackatonPublicCases/Property Management" OUT=ANSWERS
 ```
 

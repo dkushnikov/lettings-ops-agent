@@ -32,11 +32,12 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 ```
 git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
 ls "../HackatonPublicCases/Property Management"   # expect NNN/ folders with index.md + history.md
-make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
+make run ARGS="--adapter dwelly --id-style number --concurrency 6 --deadline 16:52" \
   CASES="../HackatonPublicCases/Property Management" OUT=ANSWERS
 ```
 
 - [ ] Watch the dashboard. 429s → the runner backs off by itself; do not restart it. A crash → restart the same command; checkpoints skip finished cases.
+- [ ] `--deadline 16:52`: a case not started by then gets a fallback record instead of holding the run past the freeze; running cases finish on their own budget (540 s).
 - [ ] `ANSWERS/` already holds the pre-freeze records generated from the public cases (~15:00). If the pulled cases changed, `rm -rf ANSWERS` before launching: the runner reuses finished case folders (checkpoint) and would not regenerate them. If the cases did not change, the existing records stand and the run is a no-op.
 
 ## 16:50 — stop launching, start verifying

@@ -155,3 +155,20 @@ def test_close_request_has_its_own_authority():
     case = next(iter(adapter.load_cases(ROOT / "fixtures-dwelly" / "Property Management")))
     spec = adapter.tools_for(case).get("close_request").spec
     assert spec.authority == "close_request"
+
+
+def test_environment_note_and_unreviewed_images_in_metadata(tmp_path):
+    import shutil
+
+    src = ROOT / "fixtures-dwelly" / "Property Management"
+    adapter = DwellyCasesAdapter()
+    case = next(iter(adapter.load_cases(src)))
+    assert case.metadata["environment_note"].startswith("Case files only")
+    assert case.metadata["images_not_reviewed"] == []
+    first = sorted(p for p in src.iterdir() if p.is_dir())[0]
+    dst = tmp_path / "Property Management" / first.name
+    shutil.copytree(first, dst)
+    (dst / "attachments").mkdir(exist_ok=True)
+    (dst / "attachments" / "photo-99.png").write_bytes(b"\x89PNG\r\n")
+    case2 = next(iter(adapter.load_cases(tmp_path / "Property Management")))
+    assert "photo-99.png" in case2.metadata["images_not_reviewed"]

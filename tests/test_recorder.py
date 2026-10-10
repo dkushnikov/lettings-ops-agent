@@ -148,3 +148,16 @@ def test_reviewer_override_is_stated_in_the_decision_section():
     head = render_answer(_case(), s).split("## 1. Decision", 1)[1][:600]
     assert head.index("Reviewer override") < head.index("No escalation") and "→ escalated" in head
     assert "Reviewer override" not in render_answer(_case(), _state())
+
+
+def test_environment_note_images_and_ledger_status_render():
+    case = _case()
+    case.metadata = {"environment_note": "Case files only: writes are recorded in the ledger; nothing was delivered.", "images_not_reviewed": ["photo-01.jpg"]}
+    s = _state()
+    s.actions.append(ActionRecord(seq=3, tool="notify_landlord", tool_class=ToolClass.write, status=ActionStatus.completed, receipt='{"ledger": "ACT-1"}', gate=GateDecision(verdict=GateVerdict.allow, reason="ok")))
+    text = render_answer(case, s)
+    head = text.split("## Status", 1)[0]
+    assert "**Environment:** Case files only" in head and "photo-01.jpg" in head and "not transcribed" in head
+    assert "| notify_landlord | completed (ledger) |" in text and "| get_property | completed |" in text
+    plain = render_answer(_case(), s)
+    assert "Environment:" not in plain and "completed (ledger)" not in plain

@@ -63,7 +63,7 @@ RULES_OF_ENGAGEMENT = """RULES OF ENGAGEMENT
 
 STATUS_FIELDS = ("recap", "stage", "next_step", "definition_of_done")
 # Evaluation scaffolding the agent must not see: where the history was cut and what was hidden.
-HIDDEN_METADATA = {"cutoff", "attachments_hidden", "events_visible"}
+HIDDEN_METADATA = {"cutoff", "attachments_hidden", "events_visible", "environment_note", "images_not_reviewed"}
 
 TIME_NUDGE = (
     "TIME BUDGET: most of the time allowed for this case is used. Finish now with exactly one terminal tool call "

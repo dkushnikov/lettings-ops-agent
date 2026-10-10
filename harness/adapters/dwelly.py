@@ -32,6 +32,8 @@ from ..tools import BoundTool, ToolRegistry, ToolRejected, make_spec
 HIDDEN_SECTIONS = ("overview", "outcome", "history")
 # Senders that are the agency's own side (notes, system updates, the branch).
 AGENCY_MARKERS = ("agency", "system", "lettings")
+# Stated under every record's header: in this environment a write is a ledger entry, not a delivery.
+ENVIRONMENT_NOTE = "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party."
 EVENT_RE = re.compile(r'<a id="event-(\d+)"></a>\s*\n## (.+?) — event (\d+)\s*\n(.*?)(?=<a id="event-|\Z)', re.S)
 META_RE = re.compile(r"^- \*\*(.+?):\*\* (.*)$", re.M)
 
@@ -226,7 +228,7 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
         title=parsed.title,
         received_at=parsed.details.get("created"),
         artefacts=artefacts,
-        metadata={"track": track, "case_number": case_dir.name, "property": parsed.details.get("property", ""), "source_role": parsed.details.get("source_role", ""), "agency": agency_name(events), "events_visible": len(events), "cutoff": cutoff, "attachments_hidden": len(parsed.attachments) - len(visible_attachments)},
+        metadata={"track": track, "case_number": case_dir.name, "property": parsed.details.get("property", ""), "source_role": parsed.details.get("source_role", ""), "agency": agency_name(events), "events_visible": len(events), "cutoff": cutoff, "attachments_hidden": len(parsed.attachments) - len(visible_attachments), "environment_note": ENVIRONMENT_NOTE, "images_not_reviewed": [a.title for a in artefacts if a.kind == ArtefactKind.document and str(a.content).startswith("[image attachment:")]},
         env={"format": "dwelly"},
     )
 

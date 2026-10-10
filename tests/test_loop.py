@@ -271,3 +271,11 @@ def test_case_time_budget_default_fits_six_slow_steps():
     from harness.llm import Settings
 
     assert Settings().case_timeout_s == 540.0
+
+
+def test_environment_note_is_not_rendered_into_the_prompt():
+    from harness.loop import render_case
+
+    case = Case(id="c8", title="Env", artefacts=[], metadata={"property": "Flat 2", "environment_note": "Case files only", "images_not_reviewed": ["p.png"]})
+    text = render_case(case)
+    assert "Flat 2" in text and "environment_note" not in text and "p.png" not in text

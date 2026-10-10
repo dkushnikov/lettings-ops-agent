@@ -43,9 +43,9 @@ def _md_escape(text: Any) -> str:
     return redact_secrets(s.replace("|", "\\|").replace("\n", " ").strip())
 
 
-def _status_badge(status: ActionStatus) -> str:
+def _status_badge(status: ActionStatus, ledger: bool = False) -> str:
     return {
-        ActionStatus.completed: "completed",
+        ActionStatus.completed: "completed (ledger)" if ledger else "completed",
         ActionStatus.unconfirmed: "UNCONFIRMED",
         ActionStatus.blocked: "blocked by gate",
         ActionStatus.needs_approval: "needs approval",
@@ -122,6 +122,15 @@ def render_answer(case: Case, state: DecisionState) -> str:
     lines.append(f"# ANSWER — Case {case.id}" + (f" — {case.title}" if case.title else ""))
     lines.append("")
     lines.append(f"**Disposition:** {disp} · **Urgency:** {state.urgency} · **Case type:** {state.case_type or '-'} · **Playbook:** {state.playbook or '-'}")
+    meta = case.metadata or {}
+    ledger = bool(meta.get("environment_note"))
+    if ledger:
+        lines.append("")
+        lines.append(f"**Environment:** {redact_secrets(str(meta['environment_note']))}")
+    images = [str(x) for x in (meta.get("images_not_reviewed") or [])]
+    if images:
+        lines.append("")
+        lines.append("**Attachments not reviewed:** " + ", ".join(redact_secrets(x) for x in images) + " — image files are not transcribed for the agent; a person should look at them before relying on anything they may show.")
     if state.fallback:
         lines.append("")
         lines.append("> Harness fallback: the agent did not finish on its own; this record was escalated by the runtime. See System notes.")
@@ -178,13 +187,16 @@ def render_answer(case: Case, state: DecisionState) -> str:
     lines.append("")
     lines.append("## 3. Actions (proposed → attempted → completed)")
     lines.append("")
+    if ledger and any(a.tool_class == ToolClass.write for a in state.actions):
+        lines.append("Writes in this environment are recorded in the case ledger, not delivered: `completed (ledger)` means the ledger accepted the instruction and returned a receipt.")
+        lines.append("")
     if state.actions:
         lines.append("| # | Tool | Status | Key inputs | Result / receipt | Gate |")
         lines.append("|---|---|---|---|---|---|")
         for a in state.actions:
             gate = ", ".join(a.gate.rule_ids) if a.gate and a.gate.rule_ids else (a.gate.verdict.value if a.gate else "-")
             receipt = a.receipt or (a.error or "")
-            lines.append(f"| {a.seq} | {a.tool} | {_status_badge(a.status)} | {_key_inputs(a)} | {_md_escape(truncate(receipt, 160))} | {_md_escape(gate)} |")
+            lines.append(f"| {a.seq} | {a.tool} | {_status_badge(a.status, ledger=ledger and a.tool_class == ToolClass.write)} | {_key_inputs(a)} | {_md_escape(truncate(receipt, 160))} | {_md_escape(gate)} |")
     else:
         lines.append("No tool actions were taken.")
     lines.append("")
