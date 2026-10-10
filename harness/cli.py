@@ -1,4 +1,4 @@
-"""Command line: run · demo · eval · sim · mutate · rehearse · freeze · capacity · video-check · rules-extract."""
+"""Command line: run · demo · eval · sim · runs-board · mutate · rehearse · freeze · capacity · video-check · rules-extract."""
 
 from __future__ import annotations
 
@@ -142,10 +142,12 @@ def cmd_sim(args: argparse.Namespace) -> int:
     ids = [s for raw in (args.scenario or []) for s in raw.split(",") if s.strip()]
     agent = None
     sim_settings = None
+    out = None
     if not args.list:
         settings = Settings.from_env(model=args.model, effort=args.effort, case_timeout_s=args.timeout, max_steps=args.max_steps, reviewer=args.reviewer)
         agent = build_agent(settings)
         sim_settings = sim_settings_from(settings, args.sim_model, args.sim_effort)
+        out = Path(args.out) if args.out else Path("runs") / "sim" / datetime.now().strftime("%Y%m%d-%H%M%S")
     return sim_main(
         scenario_ids=ids,
         run_all=args.all,
@@ -157,6 +159,7 @@ def cmd_sim(args: argparse.Namespace) -> int:
         concurrency=args.concurrency,
         judge=not args.no_judge,
         verbose=args.verbose,
+        out=out,
     )
 
 
@@ -188,6 +191,12 @@ def cmd_cases_browser(args: argparse.Namespace) -> int:
     from evalkit.casebrowser import main as browser_main
 
     return browser_main(cases=Path(args.cases), out=Path(args.out), runs=[Path(r) for r in (args.runs or [])], open_browser=args.open)
+
+
+def cmd_runs_board(args: argparse.Namespace) -> int:
+    from evalkit.runsboard import main as board_main
+
+    return board_main(runs=Path(args.runs), out=Path(args.out), open_browser=args.open)
 
 
 def cmd_rehearse(args: argparse.Namespace) -> int:
@@ -307,6 +316,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--reviewer", choices=["rules", "llm"], default=None)
     sp.add_argument("--no-judge", action="store_true", help="play the episodes without grading")
     sp.add_argument("--verbose", "-v", action="store_true", help="full message bodies and director notes")
+    sp.add_argument("--out", default=None, help="directory for the episode files: summary.json plus one JSON per scenario (default: runs/sim/<YYYYMMDD-HHMMSS>)")
     sp.set_defaults(fn=cmd_sim)
 
     sp = sub.add_parser("mutate", help="derive adversarial variants of a case")
@@ -333,6 +343,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--runs", action="append", default=None, help="run directory to overlay (repeatable)")
     sp.add_argument("--open", action="store_true")
     sp.set_defaults(fn=cmd_cases_browser)
+
+    sp = sub.add_parser("runs-board", help="static HTML board over every run under runs/: case runs and simulator episodes, newest first")
+    sp.add_argument("--runs", default="runs", help="directory holding the runs")
+    sp.add_argument("--out", default="runs/board/index.html")
+    sp.add_argument("--open", action="store_true")
+    sp.set_defaults(fn=cmd_runs_board)
 
     sp = sub.add_parser("rehearse", help="fresh clone → sync → run → verify")
     sp.add_argument("--cases", default="fixtures")

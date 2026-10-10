@@ -8,7 +8,7 @@ SC ?=
 C ?= 4
 PY = uv run python -m harness.cli
 
-.PHONY: setup check test lint run demo eval sim sim-all sim-list cases-browser replay pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
+.PHONY: setup check test lint run demo eval sim sim-all sim-list board cases-browser replay pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
 
 setup:
 	uv sync
@@ -40,6 +40,10 @@ sim:
 
 sim-all:
 	$(PY) sim --all $(ARGS)
+
+# One page over every run under runs/: case runs (_run.json, _eval.json, per-case _state.json) and sim episodes (runs/sim/<stamp>/summary.json).
+board:
+	$(PY) runs-board --runs runs --out runs/board/index.html --open
 
 cases-browser:
 	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html $(foreach r,$(RUNS),--runs $(r)) --open

@@ -12,7 +12,9 @@ against the scenario's `checks` and `end_state`; disposition, stage, red flags
 and DoD items are also compared deterministically.
 
 A development instrument: the director and the judge are models, so a verdict
-is evidence to read, not ground truth. Output goes to the console.
+is evidence to read, not ground truth. Output goes to the console and, per run,
+to a directory of JSON files (`summary.json` plus one file per episode) that the
+runs board (`evalkit/runsboard.py`) reads.
 """
 
 from __future__ import annotations
@@ -21,6 +23,7 @@ import asyncio
 import copy
 import dataclasses
 import json
+import subprocess
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -32,12 +35,13 @@ from rich.markup import escape
 from rich.table import Table
 
 from harness.llm import Settings, create_message
-from harness.sanitize import truncate
+from harness.sanitize import redact_secrets, truncate
 from harness.schema import ActionStatus, Artefact, ArtefactKind, Case, DecisionState, ToolClass
 from harness.tools import ToolRegistry
 
 console = Console()
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
 ACTORS_DIR = Path(__file__).resolve().parent / "actors"
 SCENARIOS_PATH = ACTORS_DIR / "scenarios.yaml"
 ACTOR_FILES = ("landlord", "tenant", "contractor")
@@ -839,6 +843,136 @@ def print_summary(episodes: list[Episode], wall_s: float) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Persistence: one directory per run, summary.json plus one JSON per episode
+# --------------------------------------------------------------------------- #
+
+
+def git_commit(root: Path = REPO_ROOT) -> dict[str, Any]:
+    """Short hash of HEAD and whether tracked files are modified; empty when not a git checkout."""
+    try:
+        sha = subprocess.run(["git", "-C", str(root), "rev-parse", "--short", "HEAD"], capture_output=True, text=True, timeout=5)
+        if sha.returncode != 0:
+            return {"commit": "", "dirty": False}
+        status = subprocess.run(["git", "-C", str(root), "status", "--porcelain", "--untracked-files=no"], capture_output=True, text=True, timeout=5)
+        return {"commit": sha.stdout.strip(), "dirty": bool(status.stdout.strip())}
+    except Exception:  # noqa: BLE001
+        return {"commit": "", "dirty": False}
+
+
+def _episode_tokens(ep: Episode) -> tuple[int, int]:
+    return (
+        sum(t.state.input_tokens for t in ep.ticks if t.state),
+        sum(t.state.output_tokens for t in ep.ticks if t.state),
+    )
+
+
+def episode_row(ep: Episode) -> dict[str, Any]:
+    """One episode as the summary table shows it: ids, ticks, final and expected state, check counts, verdict."""
+    g = ep.grade or {}
+    should = g.get("should") or []
+    must_not = g.get("must_not") or []
+    end = ep.scenario.get("end_state")
+    state = ep.final_state
+    tokens_in, tokens_out = _episode_tokens(ep)
+    return {
+        "id": ep.sid,
+        "title": str(ep.scenario.get("title", "")),
+        "ticks": len(ep.ticks),
+        "final_disposition": state.disposition.value if state and state.disposition else None,
+        "final_stage": state.stage if state else None,
+        "fallback": bool(state.fallback) if state else False,
+        "expected_disposition": end.get("disposition") if isinstance(end, dict) else None,
+        "expected_stage": end.get("stage") if isinstance(end, dict) else None,
+        "expected": f"{end.get('disposition', '')}/{end.get('stage', '')}" if isinstance(end, dict) else str(end or ""),
+        "should_passed": sum(1 for s in should if s.get("verdict") == "pass"),
+        "should_total": len(should),
+        "must_not_violated": sum(1 for m in must_not if m.get("violated")),
+        "must_not_total": len(must_not),
+        "end_state_match": g.get("end_state_match"),
+        "critical_failure": bool(g.get("critical_failure")),
+        "grader_error": g.get("error"),
+        "verdict": verdict(ep),
+        "end_reason": ep.end_reason,
+        "tokens_in": tokens_in,
+        "tokens_out": tokens_out,
+        "file": f"{_episode_filename(ep)}",
+    }
+
+
+def _episode_filename(ep: Episode) -> str:
+    return "".join(ch if ch.isalnum() or ch in "-_." else "_" for ch in ep.sid) + ".json"
+
+
+def episode_record(ep: Episode) -> dict[str, Any]:
+    """Everything about one episode: what the console prints plus the full transcript of events, each tick's
+    agent record (actions with gate verdict and receipt) and world effects, the director's notes and the grade."""
+    ticks = []
+    for t in ep.ticks:
+        ticks.append({
+            "tick": t.tick,
+            "time": t.time.isoformat(),
+            "error": t.error,
+            "summary": summarise_tick(t.state, t.effects),
+            "effects": t.effects,
+            "state": t.state.model_dump(mode="json") if t.state is not None else None,
+        })
+    return {
+        "id": ep.sid,
+        "title": str(ep.scenario.get("title", "")),
+        "verdict": verdict(ep),
+        "end_reason": ep.end_reason,
+        "summary": episode_row(ep),
+        "scenario": ep.scenario,
+        "opening_history": opening_history(ep.scenario),
+        "events": [{**dataclasses.asdict(ev), "time": ev.time.isoformat()} for ev in ep.events],
+        "ticks": ticks,
+        "director_notes": list(ep.director_notes),
+        "grade": ep.grade,
+        "final_record": final_record(ep.final_state),
+        "transcript": transcript(ep),
+    }
+
+
+def write_run(
+    episodes: list[Episode],
+    out: Path,
+    *,
+    wall_s: float,
+    max_ticks: int,
+    judge: bool,
+    agent_settings: Settings | None = None,
+    sim_settings: Settings | None = None,
+    root: Path = REPO_ROOT,
+) -> Path:
+    """Write `out/summary.json` and `out/<scenario id>.json`; returns the directory."""
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    rows = [episode_row(ep) for ep in episodes]
+    counts: dict[str, int] = {}
+    for r in rows:
+        counts[r["verdict"]] = counts.get(r["verdict"], 0) + 1
+    summary = {
+        "kind": "sim",
+        "timestamp": datetime.now().astimezone().isoformat(timespec="seconds"),
+        **git_commit(root),
+        "wall_s": round(float(wall_s), 1),
+        "max_ticks": max_ticks,
+        "judge": judge,
+        "agent": {"model": agent_settings.model, "effort": agent_settings.effort} if agent_settings else {},
+        "director": {"model": sim_settings.model, "effort": sim_settings.effort} if sim_settings else {},
+        "scenarios": rows,
+        "verdicts": dict(sorted(counts.items())),
+        "tokens_in": sum(r["tokens_in"] for r in rows),
+        "tokens_out": sum(r["tokens_out"] for r in rows),
+    }
+    for ep in episodes:
+        text = json.dumps(episode_record(ep), ensure_ascii=False, indent=1, default=str)
+        (out / _episode_filename(ep)).write_text(redact_secrets(text), encoding="utf-8")
+    (out / "summary.json").write_text(redact_secrets(json.dumps(summary, ensure_ascii=False, indent=1, default=str)), encoding="utf-8")
+    return out
+
+
+# --------------------------------------------------------------------------- #
 # Entry point
 # --------------------------------------------------------------------------- #
 
@@ -902,6 +1036,7 @@ def main(
     concurrency: int,
     judge: bool,
     verbose: bool,
+    out: Path | None = None,
 ) -> int:
     import time
 
@@ -927,9 +1062,13 @@ def main(
     )
     started = time.monotonic()
     episodes = asyncio.run(_run_all(chosen, lib, agent=agent, sim_settings=sim_settings, max_ticks=max_ticks, concurrency=concurrency, judge=judge, verbose=verbose))
+    wall_s = time.monotonic() - started
     for ep in episodes:
         print_episode(ep, verbose)
-    print_summary(episodes, time.monotonic() - started)
+    print_summary(episodes, wall_s)
+    if out is not None:
+        write_run(episodes, out, wall_s=wall_s, max_ticks=max_ticks, judge=judge, agent_settings=agent.settings, sim_settings=sim_settings)
+        console.print(f"Episode files: {out}  (summary.json + one JSON per scenario; `make board` lists every run)")
     return 0 if all(verdict(ep) in ("PASS", "UNGRADED") for ep in episodes) else 1
 
 

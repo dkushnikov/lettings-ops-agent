@@ -1,5 +1,6 @@
 """Scenario simulator: library, world seeding, episode loop and verdicts with a fake agent and a scripted director."""
 
+import json
 from pathlib import Path
 
 import pytest
@@ -16,6 +17,7 @@ from evalkit.simulate import (
     seed_world,
     select,
     verdict,
+    write_run,
 )
 from harness.schema import DecisionState, Disposition, DodEntry, Handover, RedFlag
 
@@ -154,6 +156,37 @@ def test_crashed_episode_is_an_error():
     ep = Episode(scenario=SCENARIO, end_reason="simulator error: AuthenticationError: 401")
     assert verdict(ep) == "ERROR"
     assert verdict(Episode(scenario=SCENARIO, end_reason="script complete")) == "UNGRADED"
+
+
+async def test_episode_files_are_written(tmp_path: Path):
+    cases = []
+    director = _director([_fire(0), _fire(1), _fire(2, body="Call summary: contractor booked Friday.")])
+    ep = await run_episode(SCENARIO, agent_fn=_agent(cases), director=director, world_data=WORLD)
+    ep.grade = {
+        "should": [{"check": "Ask the landlord", "verdict": "pass", "evidence": "ev02"}],
+        "must_not": [{"check": "Dispatch over the cap", "violated": False, "evidence": ""}],
+        "end_state_match": "partial", "critical_failure": False, "summary": "held for the landlord",
+        "deterministic": deterministic_checks(ep),
+    }
+    out = write_run([ep], tmp_path / "sim" / "stamp", wall_s=1.5, max_ticks=10, judge=True)
+    summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+    assert summary["kind"] == "sim" and summary["timestamp"] and "commit" in summary and summary["wall_s"] == 1.5
+    assert summary["verdicts"] == {"PARTIAL": 1}
+    row = summary["scenarios"][0]
+    assert row["id"] == "SC-T1" and row["ticks"] == 3 and row["verdict"] == "PARTIAL" and row["end_reason"] == "script complete"
+    assert row["final_disposition"] == "needs_info" and row["final_stage"] == "landlord_approval"
+    assert (row["expected_disposition"], row["expected_stage"]) == ("resolved", "closed")
+    assert (row["should_passed"], row["should_total"], row["must_not_violated"], row["must_not_total"]) == (1, 1, 0, 1)
+    assert row["file"] == "SC-T1.json"
+    rec = json.loads((out / "SC-T1.json").read_text(encoding="utf-8"))
+    assert rec["verdict"] == "PARTIAL" and rec["grade"]["deterministic"]["disposition"] == ["resolved", "needs_info"]
+    assert len(rec["events"]) == len(ep.events) and rec["events"][0]["body"] == "tap drips" and rec["events"][0]["time"].startswith("2026-10-05")
+    assert [t["tick"] for t in rec["ticks"]] == [1, 2, 3]
+    assert rec["ticks"][0]["effects"][0]["op"] == "request_landlord_approval"
+    assert rec["ticks"][0]["state"]["disposition"] == "needs_info" and "actions" in rec["ticks"][0]["state"]
+    assert any("Approval requested from the landlord" in line for line in rec["ticks"][0]["summary"])
+    assert rec["final_record"]["disposition"] == "needs_info" and rec["transcript"].startswith("OPENING:")
+    assert rec["scenario"]["id"] == "SC-T1" and rec["director_notes"]
 
 
 def test_script_triggers_survive_yaml_boolean_keys():

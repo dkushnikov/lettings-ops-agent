@@ -102,6 +102,7 @@ Other commands:
 make sim-list                   # list multi-actor scenarios
 make sim SC=SC-01,SC-04         # play chosen scenarios against the agent
 make sim-all                    # play every scenario
+make board                      # one HTML page over every run under runs/ (case runs and sim episodes)
 make rehearse                   # fresh clone → setup → run → verify
 make mutate CASE=fixtures/F01-routine-tap   # generate harder variants of a case
 make rules-extract DOCS=<dir>   # draft rules from an agency's documents
@@ -114,7 +115,7 @@ Settings (model, effort, concurrency, timeouts, limits) live in `.env`; see `.en
 
 ### Multi-actor simulation
 
-The simulator plays the scenarios in `evalkit/actors/scenarios.yaml`. A tenant, landlord and contractor reply in character between agent runs, then a judge model grades each episode. Results print to the console. The actors and the judge are models, so read a verdict as evidence, not as ground truth.
+The simulator plays the scenarios in `evalkit/actors/scenarios.yaml`. A tenant, landlord and contractor reply in character between agent runs, then a judge model grades each episode. Results print to the console and go to `runs/sim/<timestamp>/` (`summary.json` plus one JSON per episode: the transcript, the agent's records, the grade); `make board` builds one HTML page over every run. The actors and the judge are models, so read a verdict as evidence, not as ground truth.
 
 ```
 make sim SC=SC-01                       # one scenario ("1" also works)
@@ -134,6 +135,7 @@ Options (pass with `ARGS="..."`):
 - `--no-judge`: skip grading.
 - `-v`: full messages and actor notes.
 - `--scenarios PATH`: use a different scenario file.
+- `--out DIR`: where the episode files go (default `runs/sim/<YYYYMMDD-HHMMSS>`); `--list` writes nothing.
 
 ### Reality Test
 
