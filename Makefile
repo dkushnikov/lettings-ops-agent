@@ -48,7 +48,9 @@ cases-browser:
 # make replay CASE=038 CUTOFF=9   (CUTOFF omitted → first external message)
 replay:
 	@test -n "$(CASE)" || (echo "usage: make replay CASE=038 [CUTOFF=9]" && exit 2)
-	rm -rf runs/replay-$(CASE) runs/replay-cases && mkdir -p runs/replay-cases && ln -s "$(abspath $(CASES_ROOT))/$(CASE)" runs/replay-cases/$(CASE)
+	rm -rf runs/replay-$(CASE) runs/replay-cases && mkdir -p runs/replay-cases
+	@target="$(CASES_ROOT)/$(CASE)"; case "$$target" in /*) ;; *) target="$(CURDIR)/$$target";; esac; \
+	  test -f "$$target/index.md" || (echo "no case at $$target" && exit 2); ln -s "$$target" "runs/replay-cases/$(CASE)"
 	$(PY) run --cases runs/replay-cases --out runs/replay-$(CASE) --adapter dwelly --id-style number --emit-expected $(if $(CUTOFF),--cutoff $(CUTOFF),--auto-cutoff first-external) $(ARGS)
 	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html --runs runs/replay-$(CASE) $(foreach r,$(RUNS),--runs $(r))
 	open "file://$(abspath runs/cases/index.html)#$(notdir $(CASES_ROOT))/$(CASE)" || true
