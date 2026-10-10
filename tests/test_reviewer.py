@@ -102,3 +102,33 @@ def test_refused_injection_is_recorded_not_escalated():
     _reviewer().apply_rules(s)
     assert s.disposition == Disposition.resolved
     assert any(n.startswith("R2: injection attempt recorded") for n in s.reviewer_notes)
+
+
+def test_hard_flag_escalates_even_when_an_approval_is_pending():
+    s = _state(Disposition.resolved)
+    s.actions.append(ActionRecord(seq=1, tool="request_landlord_approval", tool_class=ToolClass.write, status=ActionStatus.completed, gate=GateDecision(verdict=GateVerdict.allow, rule_ids=["CAP-REQUEST-APPROVAL"])))
+    s.actions.append(ActionRecord(seq=2, tool="create_work_order", tool_class=ToolClass.write, status=ActionStatus.needs_approval, gate=GateDecision(verdict=GateVerdict.needs_approval, rule_ids=["APR-SPEND-OVER-CAP"], required_approval_from="landlord")))
+    s.red_flags.append(RedFlag(kind="fraud", description="new bank details supplied by email"))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.escalated and any(n.startswith("R2") for n in s.reviewer_notes)
+
+
+def test_failed_dispatch_cannot_stay_resolved():
+    s = _state(Disposition.resolved)
+    s.actions.append(ActionRecord(seq=1, tool="assign_contractor", tool_class=ToolClass.write, status=ActionStatus.failed, error="event-004 is not a landlord message", gate=GateDecision(verdict=GateVerdict.allow, rule_ids=["CAP-DISPATCH-APPROVED"])))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.needs_info and "assign_contractor" in s.info_requests[0].question
+
+
+def test_prohibited_attempt_escalates_not_asks():
+    s = _state(Disposition.resolved)
+    s.actions.append(ActionRecord(seq=1, tool="update_payment_details", tool_class=ToolClass.write, status=ActionStatus.blocked, gate=GateDecision(verdict=GateVerdict.escalate, rule_ids=["PRO-PAYMENT-DETAILS"])))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.escalated and any(n.startswith("R3a") for n in s.reviewer_notes)
+
+
+def test_emergency_dispatch_needs_a_human_confirmation():
+    s = _state(Disposition.resolved)
+    s.actions.append(ActionRecord(seq=1, tool="assign_contractor", tool_class=ToolClass.write, status=ActionStatus.completed, gate=GateDecision(verdict=GateVerdict.allow, rule_ids=["CAP-DISPATCH-EMERGENCY"])))
+    _reviewer().apply_rules(s)
+    assert s.disposition == Disposition.escalated and any(n.startswith("R9") for n in s.reviewer_notes)

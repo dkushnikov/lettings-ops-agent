@@ -154,7 +154,7 @@ def render_case(case: Case) -> str:
         parts.append(f"<metadata>{json.dumps(case.metadata, ensure_ascii=False)}</metadata>")
     for a in case.artefacts:
         parts.append(f'<artefact id="{a.id}" kind="{a.kind.value}" trust="{a.trust}" title="{a.title}">')
-        parts.append(a.content.strip())
+        parts.append(a.content.strip().replace("<artefact", "&lt;artefact").replace("</artefact", "&lt;/artefact"))
         parts.append("</artefact>")
     parts.append("</case>")
     parts.append("Work this case now. Start with use_playbook. Tool names in a playbook are indicative; use the tools actually offered in this environment.")
@@ -260,6 +260,7 @@ class CaseAgent:
                     results.append({"type": "tool_result", "tool_use_id": tu.id, "content": msg, "is_error": not ok})
                     if ok:
                         finished = True
+                        break  # nothing after a valid finish is executed, whatever else the batch carried
                 else:
                     seq += 1
                     rec = await executor.execute(name, tool_input, urgency=state.urgency, seq=seq)
@@ -356,6 +357,9 @@ class CaseAgent:
         state.fallback = True
         state.system_notes.append(f"harness fallback: {reason}")
         state.disposition = Disposition.escalated
+        state.stage = state.stage or "on_hold"
+        state.hold_reason = state.hold_reason or f"Other — runtime fallback ({reason}); a person must pick the case up"
+        state.next_step = state.next_step or "Property manager to review the record and decide the next action"
         if not state.decision:
             state.decision = f"Escalated by the harness: {reason}. No autonomous resolution was recorded."
         facts = [f.statement for f in state.facts][:5]

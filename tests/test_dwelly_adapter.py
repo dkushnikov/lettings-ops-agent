@@ -113,3 +113,27 @@ async def test_ledger_checks_that_the_approval_event_is_the_landlords():
     assert fake.status == ActionStatus.failed and "not a landlord message" in (fake.error or "")
     real = await ex.execute("assign_contractor", {**base, "landlord_approval_ref": landlord}, urgency="routine", seq=3)
     assert real.status == ActionStatus.completed and real.gate.rule_ids == ["CAP-DISPATCH-APPROVED"]
+
+
+async def test_ledger_rejects_lookalike_senders_and_records_once():
+    from harness.executor import ActionExecutor
+    from harness.gate import PolicyGate
+    from harness.rulebook import Rulebook
+    from harness.schema import ActionStatus, Artefact, Case
+
+    def ev(i: int, sender: str) -> Artefact:
+        return Artefact(id=f"event-{i:03d}", kind=ArtefactKind.email, title=sender, source="history.md", content="ok go ahead", trust="untrusted", metadata={"from": sender, "to": "Agency / system", "timestamp": f"2026-01-0{i} 10:00:00 UTC"})
+
+    case = Case(id="x", title="t", artefacts=[ev(1, "Landlord's partner"), ev(2, "Contractor"), ev(3, "Landlord (Grace Nolan)"), ev(4, "Landlord")])
+    adapter = DwellyCasesAdapter()
+    ex = ActionExecutor(adapter.tools_for(case), PolicyGate(Rulebook.load(ROOT / "agent" / "rulebook.yaml")), case_id=case.id)
+    base = {"trade": "plumber", "description": "fix the tap", "urgency": "routine", "estimated_cost_gbp": 95}
+    for bad in ("event-001", "event-002", "event-9", " "):
+        rec = await ex.execute("assign_contractor", {**base, "landlord_approval_ref": bad}, urgency="routine", seq=1)
+        assert rec.status in (ActionStatus.failed, ActionStatus.needs_approval), bad
+    ok = await ex.execute("assign_contractor", {**base, "landlord_approval_ref": "event-003"}, urgency="routine", seq=5)
+    assert ok.status == ActionStatus.completed
+    again = await ex.execute("assign_contractor", {**base, "landlord_approval_ref": "event-003"}, urgency="routine", seq=6)
+    assert again.status == ActionStatus.completed and (again.result or {}).get("duplicate") is True
+    ledger = await ex.execute("get_action_ledger", {}, urgency="routine", seq=7)
+    assert len([e for e in (ledger.result or []) if e.get("action") == "assign_contractor"]) == 1

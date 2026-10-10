@@ -16,6 +16,7 @@ not leak the answer. `write_expected` keeps the hidden parts for the judge.
 
 from __future__ import annotations
 
+import json
 import re
 from collections import Counter
 from dataclasses import dataclass, field
@@ -161,6 +162,16 @@ def visible_attachments_at(parsed: ParsedCase, events: list[HistoryEvent], cutof
     return [name for name in parsed.attachments if name in by_name or name in by_order]
 
 
+_EVENT_ID_RE = re.compile(r"^event-\d{3}$")
+_LANDLORD_SENDER_RE = re.compile(r"^landlord(\s*[(<\-–:]|$)")
+
+
+def _is_landlord(sender: str) -> bool:
+    """Exactly the landlord's own role as the organisers write it ("Landlord", "Landlord (Grace Nolan)"), not a partner,
+    an agent writing to the landlord, or a contractor who "spoke to the landlord"."""
+    return bool(_LANDLORD_SENDER_RE.match((sender or "").strip().lower()))
+
+
 def agency_name(events: list[HistoryEvent]) -> str:
     """The managing agency's own name as it appears in the history ("Northbridge Lettings"), so the agent does not
     mistake its principal for a third party (one record did). "Agency / system" is the automation, not the name."""
@@ -262,7 +273,12 @@ class CaseLedger:
         self.entries: list[dict[str, Any]] = []
 
     def _record(self, action: str, **params: Any) -> dict[str, Any]:
-        entry = {"id": f"ACT-{len(self.entries) + 1}", "action": action, **params, "recorded": True}
+        # Idempotent by content: a retried or repeated identical write is one ledger entry, not two.
+        signature = json.dumps({"action": action, **params}, sort_keys=True, ensure_ascii=False, default=str)
+        for entry in self.entries:
+            if entry.get("_signature") == signature:
+                return {"id": entry["id"], "action": action, "recorded": True, "duplicate": True, "note": "Identical to an earlier recorded action; not recorded twice."}
+        entry = {"id": f"ACT-{len(self.entries) + 1}", "action": action, **params, "recorded": True, "_signature": signature}
         self.entries.append(entry)
         return {"id": entry["id"], "action": action, "recorded": True, "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."}
 
@@ -298,13 +314,18 @@ class CaseLedger:
     # writes ------------------------------------------------------------ #
 
     def assign_contractor(self, trade: str, description: str, urgency: str, estimated_cost_gbp: float, contractor_hint: str = "", landlord_approval_ref: str = "", **kw: Any) -> dict[str, Any]:
-        ref = (landlord_approval_ref or "").strip()
+        raw = "" if landlord_approval_ref is None else str(landlord_approval_ref)
+        ref = raw.strip()
+        if raw and not ref:
+            raise ToolRejected("landlord_approval_ref was supplied blank; cite the event id of the landlord's own message or ask the landlord")
         if ref:
             # The approval must be the landlord's own visible message: provenance the record can cite and a judge can check.
+            if not _EVENT_ID_RE.match(ref):
+                raise ToolRejected(f"{ref!r} is not an event id (expected event-NNN)")
             event = next((a for a in self.case.artefacts if a.id == ref), None)
             sender = str((event.metadata or {}).get("from", "")) if event is not None else ""
-            if event is None or "landlord" not in sender.lower():
-                raise ToolRejected(f"{ref} is not a landlord message in the visible history (found: {sender or 'nothing'}); only the landlord's own message approves spend")
+            if event is None or not _is_landlord(sender):
+                raise ToolRejected(f"{ref} is not a landlord message in the visible history (sender: {sender or 'nothing'}); only the landlord's own message approves spend")
         return self._record("assign_contractor", trade=trade, description=description, urgency=urgency, estimated_cost_gbp=estimated_cost_gbp, contractor_hint=contractor_hint, landlord_approval_ref=ref)
 
     def request_landlord_approval(self, subject: str, amount_gbp: float, rationale: str, **kw: Any) -> dict[str, Any]:

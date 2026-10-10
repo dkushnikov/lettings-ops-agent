@@ -54,6 +54,9 @@ class Reviewer:
         notes = state.reviewer_notes
         unconfirmed = [a for a in state.actions if a.status == ActionStatus.unconfirmed]
         blocked = [a for a in state.actions if a.status in (ActionStatus.blocked, ActionStatus.needs_approval)]
+        failed_writes = [a for a in state.actions if a.status == ActionStatus.failed and a.tool_class.value == "write"]
+        prohibited_blocked = [a for a in blocked if a.gate and (a.gate.verdict.value == "escalate" or any(r.startswith("PRO-") for r in a.gate.rule_ids))]
+        emergency_dispatch = [a for a in state.actions if a.status == ActionStatus.completed and a.gate and "CAP-DISPATCH-EMERGENCY" in a.gate.rule_ids]
         approvals_requested = [
             a for a in state.actions
             if a.status == ActionStatus.completed and a.tool.startswith("request_") and "approval" in a.tool
@@ -64,6 +67,23 @@ class Reviewer:
         if unconfirmed and state.disposition != Disposition.escalated:
             self._downgrade(state, Disposition.escalated, f"{len(unconfirmed)} action(s) have unknown outcome (unconfirmed); a human must verify before any retry.", [f"{a.tool} is unconfirmed (key {a.idempotency_key})" for a in unconfirmed])
             notes.append("R1: unconfirmed write → escalated")
+
+        # Mandatory escalations run before any rule that can turn a case into needs_info, so they cannot be masked.
+        if hard_flags and state.disposition != Disposition.escalated:
+            kinds = ", ".join(sorted({f.kind for f in hard_flags}))
+            detail = "; ".join(f"{f.kind}: {f.description}" for f in hard_flags[:3])
+            was = state.disposition.value if state.disposition else "unset"
+            self._downgrade(state, Disposition.escalated, f"The record carries red flags that need a human's confirmation ({detail}); the case cannot end as {was}.", [f.description for f in hard_flags][:5])
+            notes.append(f"R2: red flags ({kinds}) → escalated (checked before any needs_info rule)")
+
+        if prohibited_blocked and state.disposition != Disposition.escalated:
+            names = ", ".join(sorted({a.tool for a in prohibited_blocked}))
+            self._downgrade(state, Disposition.escalated, f"The agent attempted a prohibited action ({names}); the gate blocked it and a person must review the request.", [f"{a.tool}: {', '.join(a.gate.rule_ids)}" for a in prohibited_blocked][:5])
+            notes.append("R3a: prohibited action attempted and blocked → escalated")
+
+        if emergency_dispatch and state.disposition != Disposition.escalated:
+            self._downgrade(state, Disposition.escalated, "An emergency dispatch was made on the agent's own urgency assessment; a person confirms the emergency, the contractor and the spend.", [f"{a.tool} under CAP-DISPATCH-EMERGENCY (action {a.seq})" for a in emergency_dispatch][:5])
+            notes.append("R9: emergency dispatch → escalated for human confirmation")
 
         dispatched = [a for a in state.actions if a.status == ActionStatus.completed and a.tool_class.value == "write" and (a.gate and any(r.startswith("CAP-DISPATCH") for r in a.gate.rule_ids))]
         if state.disposition == Disposition.resolved and approvals_requested and blocked and not dispatched:
@@ -77,18 +97,14 @@ class Reviewer:
         if state.disposition == Disposition.resolved and any(f.kind == "injection" for f in state.red_flags):
             notes.append("R2: injection attempt recorded; the case completed within the mandate and was not escalated for it")
 
-        if hard_flags and state.disposition == Disposition.resolved:
-            kinds = ", ".join(sorted({f.kind for f in hard_flags}))
-            detail = "; ".join(f"{f.kind}: {f.description}" for f in hard_flags[:3])
-            self._downgrade(state, Disposition.escalated, f"The agent closed this case as resolved, but recorded red flags that need a human's confirmation ({detail}).", [f.description for f in hard_flags][:5])
-            notes.append(f"R2: red flags ({kinds}) on a resolved case → escalated")
-
-        if state.disposition == Disposition.resolved and blocked and not approvals_requested and not human_tasks:
+        if state.disposition == Disposition.resolved and (blocked or failed_writes) and not approvals_requested and not human_tasks:
             who = next((a.gate.required_approval_from for a in blocked if a.gate and a.gate.required_approval_from), "property_manager") or "property_manager"
             state.disposition = Disposition.needs_info
             if not state.info_requests:
-                state.info_requests = [InfoRequest(to=who, question=f"Approval needed for: {', '.join(sorted({a.tool for a in blocked}))}", why="The policy gate blocked these actions and no approval was requested.", blocking=True)]
-            notes.append("R3: resolved with blocked writes and no approval request → needs_info")
+                names = ", ".join(sorted({a.tool for a in blocked + failed_writes}))
+                why = "The policy gate blocked these actions and no approval was requested." if blocked else "These writes failed in the environment; the work they describe did not happen."
+                state.info_requests = [InfoRequest(to=who, question=f"Approval or a decision is needed for: {names}", why=why, blocking=True)]
+            notes.append("R3: resolved with blocked or failed writes and no approval request → needs_info")
 
         on_hold = [a for a in state.actions if a.status == ActionStatus.completed and "hold" in a.tool]
         if state.disposition == Disposition.resolved and (state.hold_reason or state.stage == "on_hold" or on_hold):
@@ -169,8 +185,8 @@ class Reviewer:
             target = Disposition(verdict["downgrade_to"])
             if target == Disposition.escalated:
                 self._downgrade(state, target, verdict.get("handover_question") or "Reviewer requested human review.", verdict.get("issues", []))
-            elif not state.info_requests:
-                state.disposition = target
+            elif state.disposition != Disposition.escalated and not state.info_requests:
+                state.disposition = target  # an escalation set by the deterministic rules is never softened by the model review
                 state.info_requests = [InfoRequest(to="property_manager", question=verdict.get("handover_question") or "Reviewer: clarification needed.", why="; ".join(verdict.get("issues", [])), blocking=True)]
 
 

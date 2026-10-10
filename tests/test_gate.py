@@ -97,3 +97,11 @@ def test_landlord_approval_in_the_history_is_authority():
 def test_emergency_dispatch_still_overrides():
     d = _gate().check(WO, {"estimated_cost_gbp": 900}, urgency="emergency")
     assert d.verdict == GateVerdict.allow and d.rule_ids == ["CAP-DISPATCH-EMERGENCY"]
+
+
+def test_blank_or_malformed_amounts_and_refs():
+    g = _gate()
+    assert g.check(WO, {"estimated_cost_gbp": 90, "landlord_approval_ref": "   "}, urgency="routine").verdict == GateVerdict.needs_approval
+    assert g.check(WO, {"estimated_cost_gbp": -5}, urgency="routine").verdict == GateVerdict.deny
+    d = g.check(WO, {"estimated_cost_gbp": 0}, urgency="routine")
+    assert d.verdict == GateVerdict.needs_approval and d.required_approval_from == "landlord" and "APR-SPEND-OVER-CAP" in d.rule_ids

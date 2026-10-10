@@ -8,6 +8,7 @@ prohibited? Every answer cites rule ids.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -100,6 +101,8 @@ class Rulebook:
         an always-ask instruction) so the mandate can be per landlord.
         """
         context = context or {}
+        if amount_gbp is not None and (not math.isfinite(amount_gbp) or amount_gbp < 0):
+            return GateDecision(verdict=GateVerdict.deny, reason="Invalid amount: a finite, non-negative number of pounds is required.")
         if authority is None:
             # A write tool without a declared authority is outside the mandate.
             return GateDecision(
@@ -184,7 +187,7 @@ class Rulebook:
             if limit <= 0 or amount > limit:
                 return False
         if "requires_consent_field" in cond:
-            if not bool(tool_input.get(cond["requires_consent_field"])):
+            if not str(tool_input.get(cond["requires_consent_field"]) or "").strip():
                 return False
         for k, v in (cond.get("context_not") or {}).items():
             if context.get(k) == v:
@@ -204,7 +207,10 @@ class Rulebook:
         if "amount_gbp_over" in when:
             if amount is None:
                 return True  # unknown spend above a cap rule: ask
-            return amount > cls._limit(when["amount_gbp_over"], when, context)
+            limit = cls._limit(when["amount_gbp_over"], when, context)
+            if limit <= 0:
+                return True  # no limit on file: any spend, even £0, is the landlord's decision
+            return amount > limit
         return True
 
     # ---- prompt rendering ----------------------------------------------- #
