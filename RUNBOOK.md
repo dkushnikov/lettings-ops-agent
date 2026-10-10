@@ -46,6 +46,8 @@ make run ARGS="--adapter dwelly --id-style number --concurrency 6 --deadline 16:
 - [ ] Stop launching optional reruns. Running cases finish; the fallback closes anything that cannot.
 - [ ] Verify every case folder: `ANSWER.md`, `REASONING.md`, `trace.jsonl` present; `_run.json` written; the runner's summary shows 0 missing.
 - [ ] Spot-read one escalated and one resolved record: disposition, authority citations, handover card.
+- [ ] Pre-push integrity check (read-only): `uv run --directory /Users/dkushnikov/Claude/source-judge python tools/check_answers.py ANSWERS --cases "<the Reality Test cases dir>"` → "OK — nothing blocking"; a warning that `_run.json` commit ≠ HEAD is expected once docs commits followed the freeze.
+- [ ] `make secrets-scan` green (`.gitleaks.toml` allowlists the records' idempotency keys and action ids; anything else it finds is real).
 - [ ] `git add ANSWERS && git commit -m "Reality Test results"` and `git push`.
 - [ ] Open the repository on GitHub and confirm `ANSWERS/` is visible; note the commit hash into `SUBMISSION.md`.
 

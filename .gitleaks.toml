@@ -1,0 +1,13 @@
+# Record fields that look like keys to gitleaks but are not secrets: idempotency keys and action ids
+# the harness writes into every case record (ANSWERS/*/_state.json, trace.jsonl).
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Harness record identifiers"
+regexTarget = "line"
+regexes = [
+  '''"idempotency_key": "[A-Za-z0-9_.:\-]+"''',
+  '''"action_id": "[A-Za-z0-9_.:\-]+"''',
+  '''"key": "[A-Za-z0-9_.:\-]+"''',
+]
