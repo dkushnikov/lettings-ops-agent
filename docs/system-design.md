@@ -157,3 +157,26 @@ closest fit for the stage and hold fields; FreeScout is the lightweight option; 
 models belong in a CRM object store such as Twenty. The repository does not depend on any of them: in the Reality Test
 the ticket is a folder, and the record contract (`ANSWER.md` = status + four sections, `REASONING.md` = compiled truth
 and timeline, `_state.json` = the machine-readable ticket write-back) is the integration surface.
+
+## 7. Live testing with synthetic personas
+
+The agent never talks to a person directly: it reads the ticket and writes to it. Synthetic personas (a landlord with
+their property and contract, one or more tenants, contractors, and a Dwelly operator as a new kind of actor) therefore
+interact through the two surfaces the organisers' format already defines.
+
+1. **Inbound — the event stream.** A persona appends an event to `history.md`: channel, from (the role), to, timestamp,
+   body. The adapter turns it into an untrusted artefact at the next decision point. Nothing else is needed.
+2. **Outbound — the ledger.** The agent's `notify_tenant`, `notify_landlord`, `notify_contractor`,
+   `request_landlord_approval`, `schedule_access`, `put_on_hold`, `create_human_task` and `close_request` calls are
+   recorded with their inputs in `_state.json` and `trace.jsonl`. A driver turns each outbound action into a message for
+   the addressed persona; `create_human_task` and an `escalate` finish go to the operator persona.
+3. **The loop.** One round = run the agent at the current history → deliver its outbound actions → each persona replies
+   or stays silent according to its brief (a landlord who answers "👍", a contractor who goes quiet for three days, a
+   tenant who names a different flat) → append the replies as events → next round. The record's `clocks` and
+   `promises` tell the driver what "three days later" means, so a ten-day ticket plays in minutes.
+4. **Persona briefs are data**, like playbooks: `personas/<role>.md` with name, role, property, what they know, what
+   they want, how they reply, quirks. The operator persona answers human tasks and may flip the ticket to manual.
+
+What exists today: the adapter, the ledger and the replay (`make replay CASE=… CUTOFF=…`) cover one round. The driver
+that plays the personas (`simulate`) is about 150 lines over the existing adapter and loop; it is not built at the
+hackathon.

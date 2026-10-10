@@ -169,7 +169,7 @@ escalation_triggers:
 decision_routing:
   - id: RTE-LANDLORD
     owner: landlord
-    decisions: approve a quote, invoice or spend above the cap; choose or confirm a contractor; agree works at the landlord's cost; decide a tenant/landlord cost split that the landlord must sign off
+    decisions: approve a priced quote before the work starts — even inside the standing cap, unless the earlier approval named this amount (the provider brief says "only proceed after receiving our approval"); approve an invoice or spend above the cap; choose or confirm a contractor; agree works at the landlord's cost; decide a tenant/landlord cost split that the landlord must sign off
     how: send the question to the landlord (request_landlord_approval or notify_landlord), put the case on hold, finish with request_info addressed to the landlord. This is not an escalation.
   - id: RTE-TENANT
     owner: tenant
