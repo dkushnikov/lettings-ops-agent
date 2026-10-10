@@ -62,3 +62,12 @@ Protocol: five-minute sync at the top of every hour. The judge's verdict on a ca
 - [ ] `video/demo.mp4` ≤ 60 s inside the repository
 - [ ] LinkedIn and X posts published with the repository link
 - [ ] Form: repo URL, team, track, members, hash, results path, video path, post URLs
+
+## Day-of facts (from the Hacker Guide, read 10:00)
+
+- Freeze: **16:30 code + video frozen and submitted to the form; 17:00 Reality Test results frozen.** Confirmed; the strict reading was right.
+- Environment = **files, no tools**: public cases at https://github.com/DwellyOrg/HackatonPublicCases (200 cases, 50 per track). Each case: `index.md` (case details, initial request, overview, outcome, attachments list), `history.md` (events with timestamp, channel Email/SMS/Call/Note/Update/Hold, from, to, body), `attachments/` (PDF, PNG, CSV). Submission cases will be in `HackatonChallendges/`. Numbers repeat across tracks.
+- Organisers' own evaluation hygiene: pick a decision point in the history, show only earlier events and attachments, hide overview/outcome/later events, compare the decision with later evidence. The recorded outcome is an example, not the only acceptable decision.
+- Our adapter: `make run ARGS="--adapter dwelly --cutoff <N> --emit-expected" CASES="<track dir>" OUT=runs/<name>` then `make eval` / `make report`. Actions are recorded in a per-case ledger (no live system); the record shows them with parameters.
+- Venue: Landing Canary Wharf, Level One, 12 Bank Street, E14 4DD. Agenda: 16:30–17:00 Reality Test; 17:00–17:30 judging + video presentations; 17:30–19:00 winners.
+- Claude: own subscription expected; API credits emailed to the registered address; Anthropic Applied AI person on site. ElevenLabs Creator coupon via their Discord bot (same email as registration).
