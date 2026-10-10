@@ -201,6 +201,8 @@ class Rulebook:
     def _approval_triggers(cls, when: dict[str, Any], amount: float | None, urgency: str, context: dict[str, Any]) -> bool:
         if "urgency_not" in when and urgency == when["urgency_not"]:
             return False
+        if "urgency_in" in when and urgency not in when["urgency_in"]:
+            return False
         for k, v in (when.get("context") or {}).items():
             if context.get(k) != v:
                 return False
@@ -253,6 +255,11 @@ class Rulebook:
             lines.append(f"- {ck['id']} [{ck.get('status')}]: {ck.get('name')} — {ck.get('basis', '')}")
         for d in self.raw.get("data_handling", []) or []:
             lines.append(f"Data handling: {d}")
+        sp = self.raw.get("safety_pass") or {}
+        if sp:
+            lines.append("SAFETY PASS (the reviewer blocks `resolved` when a document or message carries one of these and the record does not address it): " + ", ".join(str(k) for k in sp.get("keywords", [])))
+            for n in sp.get("notes", []) or []:
+                lines.append(f"- {n}")
         wf = self.raw.get("workflow") or {}
         if wf:
             stages = []

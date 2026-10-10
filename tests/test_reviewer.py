@@ -2,7 +2,7 @@ from pathlib import Path
 
 from harness.reviewer import Reviewer
 from harness.rulebook import Rulebook
-from harness.schema import ActionRecord, ActionStatus, DecisionState, Disposition, GateDecision, GateVerdict, RedFlag, ToolClass
+from harness.schema import ActionRecord, ActionStatus, DecisionState, Disposition, GateDecision, GateVerdict, Handover, RedFlag, ToolClass
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -147,3 +147,36 @@ def test_resolved_with_pending_checklist_is_not_resolved():
     t.definition_of_done = [DodEntry(item="keys_returned", text="Keys", status="pending")]
     _reviewer().apply_rules(t)
     assert t.disposition == Disposition.resolved  # a closed ticket may carry a pending item the agency skipped
+
+
+def _case_with(text: str):
+    from harness.schema import Artefact, ArtefactKind, Case
+
+    return Case(id="S1", title="Check-out clean", artefacts=[Artefact(id="attachment-01", kind=ArtefactKind.document, title="check-out report", source="attachments/r.pdf", content=text, trust="informational")])
+
+
+def test_safety_pass_blocks_resolved_when_a_document_item_is_unaddressed():
+    case = _case_with("Closer adjusted. Balcony doors fine. Detector section: Tested? No. Paint damage in hall.")
+    s = _state(Disposition.resolved)
+    s.stage = "closed"
+    s.decision = "Cleaning invoice forwarded; flat ready for move-in."
+    _reviewer().apply_rules(s, case)
+    assert s.disposition == Disposition.needs_info and "detector" in s.info_requests[0].question.lower()
+    assert any(n.startswith("R11") for n in s.reviewer_notes)
+
+
+def test_safety_pass_passes_when_the_record_addresses_it():
+    case = _case_with("Detector section: Tested? No.")
+    s = _state(Disposition.resolved)
+    s.stage = "closed"
+    s.safety_actions.append("Smoke and CO detectors were not tested at check-out: inspection booked before move-in.")
+    _reviewer().apply_rules(s, case)
+    assert s.disposition == Disposition.resolved and not any(n.startswith("R11") for n in s.reviewer_notes)
+
+
+def test_safety_pass_adds_to_the_handover_when_escalated():
+    case = _case_with("Tenant mentions a burning smell from the socket.")
+    s = _state(Disposition.escalated)
+    s.handover = Handover(to="property_manager", question="Decide.", summary=["x"], gap="")
+    _reviewer().apply_rules(s, case)
+    assert s.disposition == Disposition.escalated and "burning smell" in (s.handover.gap or "")

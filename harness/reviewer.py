@@ -9,11 +9,12 @@ as routine). An optional LLM review can be enabled with LOA_REVIEWER=llm.
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from .llm import Settings, create_message
 from .rulebook import Rulebook
-from .schema import ActionStatus, DecisionState, Disposition, Handover, InfoRequest
+from .schema import ActionStatus, Case, DecisionState, Disposition, Handover, InfoRequest
 
 # Flags that make a self-declared "resolved" implausible. `vulnerability` is
 # deliberately absent: the model records it as a watch item on routine cases
@@ -40,8 +41,8 @@ class Reviewer:
         self.settings = settings
         self.client = client
 
-    async def review(self, state: DecisionState) -> None:
-        self.apply_rules(state)
+    async def review(self, state: DecisionState, case: Case | None = None) -> None:
+        self.apply_rules(state, case)
         if self.settings is not None and self.settings.reviewer == "llm" and self.client is not None:
             try:
                 await self.llm_review(state)
@@ -50,7 +51,7 @@ class Reviewer:
 
     # ------------------------------------------------------------------ #
 
-    def apply_rules(self, state: DecisionState) -> None:
+    def apply_rules(self, state: DecisionState, case: Case | None = None) -> None:
         notes = state.reviewer_notes
         unconfirmed = [a for a in state.actions if a.status == ActionStatus.unconfirmed]
         blocked = [a for a in state.actions if a.status in (ActionStatus.blocked, ActionStatus.needs_approval)]
@@ -115,6 +116,20 @@ class Reviewer:
                 state.info_requests = [InfoRequest(to=who, question=question, why="The case is on hold waiting for this party; it is not resolved until they answer.", blocking=True)]
             notes.append("R8: resolved while on hold → needs_info")
 
+        if case is not None:
+            missed = self._safety_misses(state, case)
+            if missed:
+                items = "; ".join(f"{word} ({art})" for word, art in missed[:6])
+                if state.disposition == Disposition.resolved:
+                    state.disposition = Disposition.needs_info
+                    if not state.info_requests:
+                        state.info_requests = [InfoRequest(to="property_manager", question=f"Safety items in the case material are not addressed in the record: {items}. Confirm they were checked or raise them.", why="A document or message mentions a safety matter the record neither acts on nor notes.", blocking=True)]
+                    notes.append(f"R11: safety pass — unaddressed item(s) {items} → needs_info")
+                else:
+                    if state.handover is not None:
+                        state.handover.gap = (state.handover.gap + " " if state.handover.gap else "") + f"Safety items not addressed in the record: {items}."
+                    notes.append(f"R11: safety pass — unaddressed item(s) noted: {items}")
+
         closed_stages = {"closed", "closed_without_payment", "closed_by_supervisor"}
         pending_dod = [d for d in state.definition_of_done if d.status == "pending"]
         if state.disposition == Disposition.resolved and pending_dod and state.stage not in closed_stages:
@@ -140,6 +155,36 @@ class Reviewer:
             names = ", ".join(f"{a.tool} (key {a.idempotency_key})" for a in unconfirmed)
             if not all((a.idempotency_key or a.tool) in state.handover.gap for a in unconfirmed):
                 state.handover.gap = (state.handover.gap + " " if state.handover.gap else "") + f"Unconfirmed actions: {names}."
+
+    def _safety_misses(self, state: DecisionState, case: Case) -> list[tuple[str, str]]:
+        """Safety words present in the case material and absent from everything the record says."""
+        words = [str(w).lower() for w in ((self.rulebook.raw.get("safety_pass") or {}).get("keywords") or [])]
+        if not words:
+            return []
+        record = " ".join(
+            [state.decision, state.recap, state.next_step, state.hold_reason]
+            + [f.statement for f in state.facts]
+            + [r.description + " " + (r.action_taken or "") for r in state.red_flags]
+            + list(state.safety_actions) + list(state.withheld_actions) + list(state.assumptions) + list(state.uncertainty)
+            + [d.evidence for d in state.definition_of_done]
+            + [r.question + " " + r.why for r in state.info_requests]
+            + ([state.handover.question, state.handover.gap or "", *state.handover.summary, *state.handover.options] if state.handover else [])
+            + [json.dumps(a.input, ensure_ascii=False, default=str) for a in state.actions]
+        ).lower()
+        misses: list[tuple[str, str]] = []
+        seen: set[str] = set()
+        for a in case.artefacts:
+            text = (a.content or "").lower()
+            for w in words:
+                if w in seen or not re.search(r"(?<![a-z])" + re.escape(w) + r"(?![a-z])", text):
+                    continue
+                stem = w.split()[0] if w not in ("not tested", "tested? no") else "tested"
+                if re.search(r"(?<![a-z])" + re.escape(stem), record):
+                    seen.add(w)
+                    continue
+                seen.add(w)
+                misses.append((w, a.id))
+        return misses
 
     @staticmethod
     def _downgrade(state: DecisionState, to: Disposition, reason: str, facts: list[str]) -> None:

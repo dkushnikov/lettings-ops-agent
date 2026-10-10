@@ -46,8 +46,8 @@ def test_routine_over_cap_needs_landlord_approval():
     assert "BLOCKED" in explain(d)
 
 
-def test_emergency_overrides_cap():
-    d = _gate().check(WO, {"estimated_cost_gbp": 900}, urgency="emergency")
+def test_emergency_overrides_the_landlord_cap_for_making_safe():
+    d = _gate().check(WO, {"estimated_cost_gbp": 240}, urgency="emergency", context={"spend_cap_gbp": 100, "always_ask": True})
     assert d.verdict == GateVerdict.allow
     assert "CAP-DISPATCH-EMERGENCY" in d.rule_ids
 
@@ -94,9 +94,13 @@ def test_landlord_approval_in_the_history_is_authority():
     assert d.verdict == GateVerdict.needs_approval
 
 
-def test_emergency_dispatch_still_overrides():
-    d = _gate().check(WO, {"estimated_cost_gbp": 900}, urgency="emergency")
+def test_emergency_make_safe_is_covered_the_repair_is_not():
+    d = _gate().check(WO, {"estimated_cost_gbp": 200}, urgency="emergency")
     assert d.verdict == GateVerdict.allow and d.rule_ids == ["CAP-DISPATCH-EMERGENCY"]
+    d = _gate().check(WO, {"estimated_cost_gbp": 600}, urgency="emergency")
+    assert d.verdict == GateVerdict.needs_approval and "APR-EMERGENCY-REPAIR" in d.rule_ids and d.required_approval_from == "on_call_manager"
+    d = _gate().check(WO, {"estimated_cost_gbp": 600, "landlord_approval_ref": "event-004"}, urgency="emergency")
+    assert d.verdict == GateVerdict.allow and d.rule_ids == ["CAP-DISPATCH-APPROVED"]
 
 
 def test_blank_or_malformed_amounts_and_refs():

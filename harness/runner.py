@@ -154,7 +154,7 @@ async def run_batch(
                     if partial is not None and (partial.actions or partial.facts or partial.playbook):
                         # Keep what the agent established and did; the record says the runtime cut it short.
                         agent._fallback(partial, case, reason + "; an action may have been in flight when the case was cancelled")  # noqa: SLF001
-                        await agent.reviewer.review(partial)
+                        await agent.reviewer.review(partial, case)
                         partial.finished_at = utcnow()
                         meta.failures.append(f"{case.id}: {reason}")
                         trace({"event": "case_error", "attempt": attempts, "reason": reason, "retryable": False, "partial_state": True})

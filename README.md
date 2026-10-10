@@ -202,6 +202,8 @@ Assumptions forced by the environment:
 - An attachment becomes visible only once the history mentions it.
 >>>>>>> 0017665 (Updated readme to match the submission criteria)
 
+- Emergency authority covers making safe (attendance, isolation, temporary heaters, boarding, a locksmith) up to £250 without approval; the repair above that is put to the on-call manager or the landlord at once. Before a case can end as resolved, a deterministic safety pass checks every document and message for safety words the record did not address.
+
 ## 7. Known limitations
 
 Open findings are kept in [`docs/findings.md`](docs/findings.md) with their state; the ones that matter most:
