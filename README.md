@@ -73,6 +73,9 @@ make check                      # lint + tests
 make run CASES=fixtures OUT=runs/dev   # process cases, write records
 make eval                       # score records against fixtures' expectations
 make demo                       # one fixture end to end, no environment needed
+make sim-list                   # multi-actor scenarios (evalkit/actors/scenarios.yaml)
+make sim SC=SC-01,SC-04         # play selected scenarios against the agent, graded, to the console
+make sim-all                    # play every scenario (ARGS="--concurrency 4 -v" for more)
 make rehearse                   # fresh clone → setup → run → verify
 make mutate CASE=fixtures/F01-routine-tap   # adversarial variants along the Reality-Test axes
 make rules-extract DOCS=<dir>   # environment documents → candidate rules in agent/rulebook_staging.md
@@ -82,6 +85,37 @@ make secrets-scan               # gitleaks over the repository
 ```
 
 Configuration lives in `.env` (see `.env.example`): model, effort, concurrency, per-case timeout, step cap, retry budget, token budget per minute.
+
+### Running the multi-actor simulation
+
+The simulator plays the scenarios in `evalkit/actors/scenarios.yaml` against the agent, with a tenant, landlord and contractor (`evalkit/actors/*.yaml`) replying in character between agent runs. A judge model then grades each episode against the scenario's checks and end state. Output goes to the console. The director and judge are models, so treat a verdict as evidence to read, not ground truth. It needs `ANTHROPIC_API_KEY` in `.env`.
+
+```
+make sim-list                                  # list the scenarios
+make sim SC=SC-01                              # one scenario
+make sim SC=SC-01,SC-04                        # several (comma-separated; "1" also means SC-01)
+make sim SC=SC-02 ARGS="-v"                    # full message bodies and director notes
+make sim-all ARGS="--concurrency 4"            # every scenario, four in parallel
+```
+
+The same commands without `make`:
+
+```
+uv run python -m harness.cli sim --list
+uv run python -m harness.cli sim --scenario SC-01 --scenario SC-04 --max-ticks 8
+uv run python -m harness.cli sim --all --sim-model claude-opus-5 --sim-effort medium --no-judge
+```
+
+Options (pass them through `ARGS="..."` with `make`):
+
+- `--max-ticks N` — agent runs per scenario (default 10).
+- `--concurrency N` — scenarios in parallel (default 2).
+- `--model`, `--effort` — the agent's model and effort.
+- `--sim-model`, `--sim-effort` — the director and judge model (defaults: the agent's model, effort `medium`).
+- `--timeout`, `--max-steps`, `--reviewer rules|llm` — per-tick agent limits and reviewer, as for `run`.
+- `--no-judge` — play the episodes without grading.
+- `--verbose` / `-v` — full message bodies and director notes.
+- `--scenarios PATH` — an alternative scenario file.
 
 ### How the Reality Test was run
 

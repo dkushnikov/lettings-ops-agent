@@ -4,10 +4,11 @@ ARGS ?=
 TAG ?= freeze-1630
 CASES_ROOT ?= ../HackatonPublicCases/Property Management
 N ?= 20
+SC ?=
 C ?= 4
 PY = uv run python -m harness.cli
 
-.PHONY: setup check test lint run demo eval cases-browser replay pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
+.PHONY: setup check test lint run demo eval sim sim-all sim-list cases-browser replay pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
 
 setup:
 	uv sync
@@ -30,6 +31,15 @@ demo:
 
 eval:
 	$(PY) eval --answers "$(OUT)" --cases "$(CASES)" $(ARGS)
+
+sim-list:
+	$(PY) sim --list
+
+sim:
+	$(PY) sim --scenario "$(SC)" $(ARGS)
+
+sim-all:
+	$(PY) sim --all $(ARGS)
 
 cases-browser:
 	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html $(foreach r,$(RUNS),--runs $(r)) --open

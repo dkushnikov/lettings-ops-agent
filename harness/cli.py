@@ -1,4 +1,4 @@
-"""Command line: run · demo · eval · mutate · rehearse · freeze · capacity · video-check · rules-extract."""
+"""Command line: run · demo · eval · sim · mutate · rehearse · freeze · capacity · video-check · rules-extract."""
 
 from __future__ import annotations
 
@@ -121,6 +121,31 @@ def cmd_eval(args: argparse.Namespace) -> int:
         print("evalkit.judge not available yet.", file=sys.stderr)
         return 2
     return judge_main(answers=Path(args.answers), cases=Path(args.cases), model=args.model)
+
+
+def cmd_sim(args: argparse.Namespace) -> int:
+    from evalkit.simulate import main as sim_main
+    from evalkit.simulate import sim_settings_from
+
+    ids = [s for raw in (args.scenario or []) for s in raw.split(",") if s.strip()]
+    agent = None
+    sim_settings = None
+    if not args.list:
+        settings = Settings.from_env(model=args.model, effort=args.effort, case_timeout_s=args.timeout, max_steps=args.max_steps, reviewer=args.reviewer)
+        agent = build_agent(settings)
+        sim_settings = sim_settings_from(settings, args.sim_model, args.sim_effort)
+    return sim_main(
+        scenario_ids=ids,
+        run_all=args.all,
+        list_only=args.list,
+        scenarios_path=Path(args.scenarios),
+        agent=agent,
+        sim_settings=sim_settings,
+        max_ticks=args.max_ticks,
+        concurrency=args.concurrency,
+        judge=not args.no_judge,
+        verbose=args.verbose,
+    )
 
 
 def cmd_mutate(args: argparse.Namespace) -> int:
@@ -253,6 +278,24 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--cases", default="fixtures")
     sp.add_argument("--model", default=None)
     sp.set_defaults(fn=cmd_eval)
+
+    sp = sub.add_parser("sim", help="play multi-actor scenarios (tenant, landlord, contractor) against the agent and grade them")
+    sp.add_argument("--scenario", "-s", action="append", help="scenario id, e.g. SC-01 or 1; repeatable or comma-separated")
+    sp.add_argument("--all", action="store_true", help="run every scenario")
+    sp.add_argument("--list", action="store_true", help="list scenarios and exit")
+    sp.add_argument("--scenarios", default=str(ROOT / "evalkit" / "actors" / "scenarios.yaml"))
+    sp.add_argument("--max-ticks", type=int, default=10, help="agent runs per scenario")
+    sp.add_argument("--concurrency", type=int, default=2, help="scenarios in parallel")
+    sp.add_argument("--model", default=None, help="agent model")
+    sp.add_argument("--effort", default=None, help="agent effort")
+    sp.add_argument("--sim-model", default=None, help="director and judge model (default: agent model)")
+    sp.add_argument("--sim-effort", default=None, help="director and judge effort (default: medium)")
+    sp.add_argument("--timeout", type=float, default=None, help="per-tick agent seconds")
+    sp.add_argument("--max-steps", type=int, default=None)
+    sp.add_argument("--reviewer", choices=["rules", "llm"], default=None)
+    sp.add_argument("--no-judge", action="store_true", help="play the episodes without grading")
+    sp.add_argument("--verbose", "-v", action="store_true", help="full message bodies and director notes")
+    sp.set_defaults(fn=cmd_sim)
 
     sp = sub.add_parser("mutate", help="derive adversarial variants of a case")
     sp.add_argument("--case", required=True)
