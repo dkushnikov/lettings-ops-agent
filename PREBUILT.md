@@ -50,4 +50,4 @@ Documents: `README.md` skeleton, `PLAN.md`, `RUNBOOK.md`, `SUBMISSION.md` templa
   replay; `make replay`), `evalkit/simulate.py` with `evalkit/actors/` (multi-actor scenarios, by Dmitry Taranov).
 - The Reality Test results in `ANSWERS/`, the video, the posts.
 
-<!-- TODO(event): `git diff --stat pre-event..freeze-1630 | tail -1` at the freeze. -->
+`git diff --stat pre-event..freeze-1630 | tail -1` at the freeze: 75 files changed, 19068 insertions(+), 205 deletions(-)
