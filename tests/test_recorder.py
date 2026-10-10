@@ -85,3 +85,12 @@ def test_quote_untrusted_is_short_and_labelled():
 def test_redact_patterns():
     assert "[REDACTED]" in redact_secrets("Authorization: Bearer abcdefghijklmnopqrstuvwxyz0123")
     assert "[REDACTED]" in redact_secrets("api_key=ABCDEFGHIJKLMNOPQRS")
+
+
+def test_tool_markup_never_reaches_the_record():
+    from harness.sanitize import redact_secrets, strip_tool_markup
+
+    leaked = 'Did not dispatch.\n<parameter name="case_type">maintenance_request\n</parameter>Escalated.'
+    assert strip_tool_markup(leaked) == "Did not dispatch.\nmaintenance_request\nEscalated."
+    assert "<parameter" not in redact_secrets(leaked)
+    assert redact_secrets("<invoke name=\"finalize\">x</invoke> token: abcdefghijkl1234") == "x [REDACTED]"

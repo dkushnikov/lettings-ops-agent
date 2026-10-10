@@ -25,10 +25,19 @@ _SECRET_PATTERNS = [
 
 _CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
 _WS = re.compile(r"\s+")
+# Tool-call pseudo-markup the model sometimes writes into free text (observed in two of fifty
+# PM records: `<parameter name="case_type">`). It is never content; a judge reading the record
+# must not see it.
+_TOOL_MARKUP = re.compile(r"</?(?:antml:)?(?:invoke|parameter|function_calls|function_results)\b[^>]*>")
+
+
+def strip_tool_markup(text: str) -> str:
+    out = _TOOL_MARKUP.sub("", text)
+    return re.sub(r"[ \t]+\n", "\n", out)
 
 
 def redact_secrets(text: str) -> str:
-    out = text
+    out = strip_tool_markup(text)
     for pat in _SECRET_PATTERNS:
         out = pat.sub("[REDACTED]", out)
     return out
