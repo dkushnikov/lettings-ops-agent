@@ -1,0 +1,531 @@
+{
+ "case_id": "021",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "needs_info",
+ "decision": "Kept the case open on the landlord-managed route and did not instruct an agency contractor: the landlord elected to use his own contractor (event-010, event-015), there is no standing spend cap on file and no landlord approval naming an amount, so APR-SPEND-OVER-CAP blocks any dispatch. Completion is unverified — the only evidence is the landlord relaying a text from his plumber (event-018), with no report, invoice or record of gas/electrical checks, and no tenant confirmation (event-019, event-020 unanswered). Asked the tenant to confirm restoration and to describe the letterbox fault promised a follow-up on 13 May (ACT-1), and asked the landlord for the plumber's report/invoice, confirmation of any gas or electrical work and the engineer's registration, plus a spend limit if he wants us to take over (ACT-2). Case on hold to 19 May 17:00 (ACT-4). No liability decided (PRO-TENANT-LIABILITY).",
+ "recap": "No hot water since 6 May on the landlord's own-contractor route; completion unverified, so I chased the tenant for confirmation and the landlord for the plumber's report, and held the case.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — confirmation hot water/boiler power restored and letterbox detail (reply-by 19 May 17:00); in parallel Waiting for Landlord — plumber's report/invoice and confirmation of any gas or electrical work (same reply-by).",
+ "next_step": "Tenant (Iris Vale) to confirm by 19 May 17:00 whether hot water and boiler power are working and describe the letterbox fault; if still not working, or if no reply, the property manager re-opens the repair with the landlord and seeks authority to instruct an agency contractor.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-003, event-004, event-005 — fault taken from the tenant, categorised Electrical, urgency set to urgent; tenant had already checked the boiler switch (event-001).",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-010, event-015 — landlord chose to use his own contractor; no agency spend authorised or needed.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "event-010, event-018 — landlord's own plumber attended but was never named to the agency; tenant was told the landlord would arrange the work (event-008).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No slot was ever confirmed to the agency; attendance on 14 May is reported second-hand (event-018).",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "Landlord-managed repair at the landlord's own cost; no quote came to the agency.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-018 — hearsay only; report requested from the landlord (ACT-2) and confirmation from the tenant (ACT-1).",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos, report or gas/electrical check record on file; requested at ACT-2.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "The landlord instructed and will pay his own contractor directly (event-010); no agency invoice arises.",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-018 — landlord believes it is fixed but gave no description or documentation; written confirmation requested (ACT-2).",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key was issued; access was handled by the household (event-003, event-008).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Case on hold to 19 May 17:00 (ACT-4); open secondary report of a faulty letterbox (event-017).",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 6 May 2025 that the shower and hot water were not working and that the boiler had no power despite the switch being checked.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The agency acknowledged the report on 6 May 2025 and treated the loss of hot water as urgent.",
+   "source_ids": [
+    "event-002",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The file was categorised as Electrical on the strength of 'no boiler power'; no inspection, diagnosis or agency contractor attendance is recorded.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The landlord, Ravi Sethi, elected to arrange his own contractor on 6 May and the agency approval workflow was stopped; no agency appointment was booked.",
+   "source_ids": [
+    "event-007",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 11 May the tenant reported 'Nothing done about it'; on 13 May the tenant again reported no hot water and that nobody had attended.",
+   "source_ids": [
+    "event-012",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "On 12 May the landlord said his plumber would likely attend that evening and that the agency could send its own contractor the next day if he did not; no agency contractor was booked and no amount or cap was named.",
+   "source_ids": [
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "On 15 May the landlord said his plumber attended on 14 May and fixed the issue, based on a text from the plumber; no work description, report, invoice or record of boiler/electrical checks was provided.",
+   "source_ids": [
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The tenant has not confirmed restoration: a voicemail and an email on 15 May are unanswered as at the last entry on 16 May.",
+   "source_ids": [
+    "event-019",
+    "event-020",
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "The tenant reported a non-working letterbox on 13 May and the agency promised to follow up; no detail or assessment was recorded.",
+   "source_ids": [
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No standing spend cap or landlord standing instruction is on file for this property, and no landlord message approves a priced agency job.",
+   "source_ids": [
+    "get_case_details",
+    "event-010",
+    "event-015"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F11",
+   "statement": "Access notes: a household member may be at home but does not speak English, and small birds are kept at the property.",
+   "source_ids": [
+    "event-001",
+    "event-003"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The fault was categorised as electrical (no boiler power) but the landlord sent a plumber, and the reported fix carries no description of any electrical or gas check.",
+   "fact_ids": [
+    "F3",
+    "F7"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-015",
+    "event-018"
+   ],
+   "resolution": "Asked the landlord what was found and done and whether any gas or electrical work was carried out, with the engineer's registration (ACT-2).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Landlord states the fault is fixed; the tenant has given no confirmation and the last tenant contact (13 May) said it was still not working.",
+   "fact_ids": [
+    "F5",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-017",
+    "event-018",
+    "event-020"
+   ],
+   "resolution": "Asked the tenant to confirm by 19 May 17:00 (ACT-1); case held open rather than closed.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "other",
+   "description": "The tenant was told on 6 May that a call-out 'might be chargeable' if an inspection found only a switch left off, before any inspection took place; liability is not the agent's to decide.",
+   "source_ids": [
+    "event-004"
+   ],
+   "action_taken": "Recorded in the case note (ACT-3); no liability statement made to either party; goes to a manager if charging is raised (PRO-TENANT-LIABILITY, ESC-LEGAL)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Completion rests on a second-hand account of a plumber's text message, with no report, invoice or confirmation from the property.",
+   "source_ids": [
+    "event-018"
+   ],
+   "action_taken": "Documentation requested from the landlord and confirmation from the tenant before any closure (ACT-1, ACT-2, ACT-4)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "021",
+    "title": "Hot-water service report",
+    "received_at": "2025-05-06 08:14:00 UTC",
+    "track": "Property Management",
+    "case_number": "021",
+    "property": "17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Maya Chen (Property Manager, Northbridge Lettings)",
+    "events_visible": 21,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Hot-water service report\n\n## Case details\n- source role: Tenant\n- created: 2025-05-06 08:14:00 UTC\n- property: 17 Wrenfold Quay, Larkhollow, ZZ1 1ZZ\n\n## Initial request\nThe tenant reports that the shower and hot water are not working. They have checked the boiler switch and report that the boiler has no power."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "021-get_case_details-ac5a7a42c3df",
+   "receipt": "{\"id\": \"021\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:42:02.799093Z",
+   "finished_at": "2026-10-10T15:42:02.799195Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "021-get_action_ledger-6e8dacc3a132",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:42:02.799324Z",
+   "finished_at": "2026-10-10T15:42:02.799374Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello Iris, re maintenance request NBL-021 (17 Wrenfold Quay) — two things, please.\n\n1) Hot water: the landlord has told us his plumber attended on 14 May and reported the fault fixed (we have no report or invoice yet). We still have no confirmation from you. Please reply by 5pm on 19 May 2025 to say whether the hot water and the boiler power are now working. If it is still not working, say so and we will put the repair back in front of the landlord straight away.\n\n2) Letterbox: you mentioned this on our call on 13 May. No need to raise it separately — please reply to this email with: what exactly is wrong (flap, lock, or the box itself), whether the front door still locks and closes securely, and whether it is your own door or a shared/communal letterbox.\n\nIf anything about the door makes the property insecure, tell us immediately and we will treat it as an emergency.\n\nFor any visit we will agree a time with you first. Please let us know a contact we can use for access and whether anyone needs the appointment explained in another language; we will also tell any contractor that birds are kept at the property so doors and windows are kept shut.\n\nMaya Chen, Northbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-notify_tenant-d3024b853fed",
+   "action_id": "021-notify_tenant-d3024b853fed",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:42:45.535752Z",
+   "finished_at": "2026-10-10T15:42:45.536033Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Sethi, re 17 Wrenfold Quay, Larkhollow — maintenance request NBL-021 (no hot water, boiler reported as having no power, first reported 6 May).\n\nThank you for your update on 15 May that your plumber attended on 14 May and believed the issue fixed. To close our file we still need the following from you; please reply by 5pm on 19 May 2025:\n\n1) The plumber's written report or invoice, and a description of what was found and done.\n2) Confirmation of whether any work was carried out on the gas appliance or on the electrical supply to the boiler, and the name plus Gas Safe or NICEIC/NAPIT registration of the person who did it. The tenant reported the boiler had no power, so the fault was categorised as electrical on our file; your contractor attended as a plumber.\n3) Confirmation that no further work is outstanding.\n\nWe have asked the tenant to confirm whether hot water has actually been restored; we have no confirmation from the property yet. If the tenant reports it is still not working, we will come back to you the same day. If you would prefer us to instruct one of our own contractors at that point, please tell us and give us a spend limit so we can act without waiting for a further approval — we have no standing spend authority on file for this property.\n\nMaya Chen, Northbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-notify_landlord-48b1d7306122",
+   "action_id": "021-notify_landlord-48b1d7306122",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:42:45.536200Z",
+   "finished_at": "2026-10-10T15:42:45.536387Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "NBL-021 status review. Fault: no hot water / boiler reported dead, reported 06/05 (event-001, event-003); CLK-S11 running from 06/05. Route: landlord-managed — Ravi Sethi elected to use his own contractor (event-010), reconfirmed 12/05 (event-015); agency approval workflow stopped (event-007). No agency contractor instructed and none instructable: no standing spend cap on file and no landlord approval naming an amount (APR-SPEND-OVER-CAP) — dispatch withheld.\n\nOpen points: (a) completion is hearsay only — landlord relayed a text from his plumber, no report, invoice, or record of gas/electrical checks (event-018); (b) tenant has not confirmed restoration — voicemail and email of 15/05 unanswered (event-019, event-020); (c) file categorised Electrical on the strength of \"no boiler power\" (event-005) but a plumber attended (event-015/018) — safety check raised with the landlord, not a reported hazard; (d) letterbox fault reported by tenant 13/05 with a promise to follow up and no detail captured (event-017) — details requested from tenant, including whether the door still secures (would become an emergency, security definition).\n\nLiability: event-004 told the tenant a call-out \"might be chargeable\" if an inspection found only a switch off. No inspection took place and no liability is decided here (PRO-TENANT-LIABILITY); if the landlord or tenant raises charging, it goes to a manager.\n\nOccupant details (household member does not speak English; birds kept at property) stay in the case record; contractors get only address, access window and the \"keep doors/windows shut, birds present\" instruction (PRO-PII)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-add_note-ef1b4ffb3bb3",
+   "action_id": "021-add_note-ef1b4ffb3bb3",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:42:45.536529Z",
+   "finished_at": "2026-10-10T15:42:45.536696Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant — confirmation that hot water and boiler power are restored after the landlord's plumber attended 14/05 (event-018), plus letterbox details promised on 13/05 (event-017); also Waiting for Landlord for the plumber's report/invoice and confirmation of any gas or electrical work (ACT-1, ACT-2).",
+    "until": "2025-05-19 17:00 UTC"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-put_on_hold-44e888c3d21d",
+   "action_id": "021-put_on_hold-44e888c3d21d",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:42:48.240783Z",
+   "finished_at": "2026-10-10T15:42:48.241037Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Follow up on the letterbox report of 13 May",
+   "due": null,
+   "source_id": "event-017",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Reply-by 17:00 on 19 May 2025 requested for confirmation of hot water and letterbox details; repair goes back to the landlord the same day if it is still not working",
+   "due": "2025-05-19 17:00",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Reply-by 17:00 on 19 May 2025 requested for the plumber's report/invoice and confirmation of any gas or electrical work",
+   "due": "2025-05-19 17:00",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency",
+   "what": "Own contractor to attend and complete the hot-water repair",
+   "due": null,
+   "source_id": "event-010",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time",
+   "status": "in_force",
+   "basis": "Reported 6 May 2025; hot water is an essential service and the loss ran at least to 13 May on tenant evidence (event-017).",
+   "deadline": null,
+   "note": "Nine days elapsed before any claimed fix; keep the elapsed time visible if the fault is still live."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 06/05 08:14, acknowledged 06/05 08:31 (event-002).",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "CLK-GAS-CP12",
+   "name": "Gas safety record",
+   "status": "in_force",
+   "basis": "Work on a boiler by an unnamed contractor; no CP12 or Gas Safe detail on file.",
+   "deadline": null,
+   "note": "Check raised with the landlord (ACT-2); no certificate record available in this case file."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Is the hot water and the boiler power now working at 17 Wrenfold Quay after the landlord's plumber attended on 14 May? Please reply by 17:00 on 19 May 2025.",
+   "why": "Completion is only hearsay from the landlord (event-018); the tenant owns the fact of whether the fault is cured (RTE-TENANT). Voicemail and email of 15 May are unanswered (event-019, event-020).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Regarding the letterbox you reported on 13 May: what exactly is faulty (flap, lock, or the box), does the front door still lock and close securely, and is it your own door or a shared/communal letterbox?",
+   "why": "Promised follow-up on event-017 with no detail captured; door security would change the urgency to emergency (security definition).",
+   "blocking": false
+  },
+  {
+   "to": "landlord",
+   "question": "Please send the plumber's report or invoice for the 14 May visit, confirm what was found and done, state whether any gas appliance or electrical work was carried out and by whom (Gas Safe / NICEIC registration), and confirm nothing is outstanding. If you want Northbridge to take the job over, give us a spend limit.",
+   "why": "Landlord owns the choice of contractor and the spend (RTE-LANDLORD); no documentation exists for a boiler fault first categorised as electrical (event-005) that a plumber attended (event-015, event-018), and no standing cap is on file.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "APR-SPEND-OVER-CAP",
+  "RTE-TENANT",
+  "RTE-LANDLORD",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CAP-CLOSE",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the reply-by date of 17:00 on 19 May 2025 is my own working deadline (three days from the last file entry of 16 May), not a date given by any party."
+ ],
+ "uncertainty": [
+  "Whether hot water is actually restored — no evidence from inside the property since 13 May (event-017).",
+  "What the plumber did, and whether a gas appliance or the boiler's electrical supply was worked on by a suitably registered person (event-018).",
+  "Whether the letterbox fault affects door security; no detail was captured (event-017).",
+  "Whether any spend cap or standing instruction exists for this landlord — none is visible in this case file."
+ ],
+ "safety_actions": [
+  "Asked the landlord to confirm whether any gas appliance or electrical work was done on the boiler and by whom, with Gas Safe / NICEIC registration (ACT-2) — the fault was logged as electrical (event-005) and a plumber attended (event-018).",
+  "Asked the tenant whether the front door still locks and closes securely in connection with the letterbox fault, and told them to report immediately if the property is insecure (ACT-1) — an insecure property is an emergency under the rulebook.",
+  "Occupant language need and the presence of birds held in the case record only; contractors to be told the access window and 'birds present, keep doors and windows shut' and nothing more (ACT-3, PRO-PII)."
+ ],
+ "withheld_actions": [
+  "Did not instruct an agency contractor: no standing spend cap on file and no landlord message approving a priced job (APR-SPEND-OVER-CAP); the landlord's 12 May remark that we 'could' send one the next day names no amount and is superseded by his 15 May report that his plumber had attended (event-015, event-018).",
+  "Did not close the request: work result, documents, invoice and landlord/tenant confirmation are all missing (CAP-CLOSE).",
+  "Did not state or imply who pays for any call-out (PRO-TENANT-LIABILITY).",
+  "Did not schedule access: no visit to book while the landlord's contractor route stands and no tenant consent or slot is on file (CAP-SCHEDULE-ACCESS)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:41:59.168523Z",
+ "finished_at": "2026-10-10T15:43:46.050020Z",
+ "input_tokens": 39125,
+ "output_tokens": 8869,
+ "cache_read_tokens": 56748
+}

@@ -1,0 +1,551 @@
+{
+ "case_id": "010",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Kept the case moving within authority and stopped short of any spend. There is no landlord standing cap on file and the only approval recorded is for the original laminate-repair scope (event-006); the landlord's own messages (event-004, event-016) ask for quotes and estimates only, so no dispatch or order is authorised (APR-SPEND-OVER-CAP, CAP-DISPATCH-APPROVED not available). I chased the contractor for the missing cupboards-and-doors-only estimate, a VAT-inclusive total and a visit slot with a 2-working-day reply-by (ACT-2), asked the tenant for fresh access windows after 16-18 September lapsed and gave interim precautions for the sharp edges (ACT-1), told the landlord why no payable total can yet be put to him (ACT-3), and referred the unsettled 15% commission basis, cap and VAT treatment to the office (ACT-4). Case on hold (ACT-6), waiting on named parties.",
+ "recap": "Kitchen cabinet repair stalled: no approval beyond laminate repair, one estimate missing, no visit booked; chased contractor, tenant and landlord, commission question to office.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — Alderline Joinery owes the cupboards-and-doors-only estimate, a VAT-inclusive full-kitchen total and a visit slot (reply-by 2 working days, ACT-2); also Waiting for Landlord on the replacement decision and the office on the commission basis (ACT-4).",
+ "next_step": "Alderline Joinery to supply the cupboards-and-doors-only estimate, a VAT-inclusive total and attendance dates within 2 working days (ACT-2); if silent, office to decide on re-tendering.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-002 report logged and acknowledged; urgency set routine this turn; interim precautions for sharp edges given to tenant ACT-1",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "event-006 approval covers the laminate-repair scope only; event-004 and event-016 request quotes/estimates, not approval (event-026)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-007 Alderline Joinery instructed and briefed; tenant told in event-008 and updated ACT-1",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "tenant windows offered event-010, never taken up (event-012, event-021); chased ACT-2, fresh windows requested ACT-1",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "full-kitchen figures with landlord since event-025; total unconfirmed (VAT, electrical estimate, commission basis event-022/event-023); second estimate outstanding",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "no visit and no work carried out",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "no visit, so no photos or invoice exist",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "no invoice raised",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "no work to confirm",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "no management key issued; tenant provides access in person around the dogs (index, event-008)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "case on hold ACT-6",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported peeling kitchen-cabinet laminate with sharp edges that had caused multiple cuts and doors that do not close, on 4 September 2025; two dogs must be secured for access.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The only approval recorded is for the original laminate-repair scope; it does not cover a full kitchen or replacement cupboards and doors.",
+   "source_ids": [
+    "event-006",
+    "event-026"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord's own messages asked for a quote (6 Sep) and for two up-to-date estimates — full kitchen, and cupboards and doors only (10 Sep); neither approved work.",
+   "source_ids": [
+    "event-004",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Contractor's 24 September figures: supply £4,850 + VAT; removal and fitting incl. tiled splashback £3,800 + VAT; waste removal £230 + VAT; electrical work estimated £380 + VAT, to be checked. No cupboards-and-doors-only estimate supplied.",
+   "source_ids": [
+    "event-024"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The commission basis (15% cited), whether a cap applies and the VAT treatment of the resulting total were left unsettled, and the contractor said this could change the quoted amount.",
+   "source_ids": [
+    "event-022",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "No visit has ever been booked: the contractor did not take any of the tenant's 16/17/18 September windows and those dates have passed.",
+   "source_ids": [
+    "event-010",
+    "event-012",
+    "event-019",
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No landlord standing spend cap or standing instruction is on file in the case record, so there is no standing authority to spend.",
+   "source_ids": [
+    "get_case_details",
+    "get_action_ledger"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Scope conflict: the instructed scope on file is a laminate repair, while the contractor states the panels cannot be repaired and only a replacement is practical — without a site visit or written survey.",
+   "fact_ids": [
+    "F2",
+    "F4"
+   ],
+   "source_ids": [
+    "event-006",
+    "event-012",
+    "event-014"
+   ],
+   "resolution": "Not decided by me: scope belongs to the contractor's survey and the spend decision to the landlord; both asked (ACT-2, ACT-3).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Sharp exposed laminate edges reported to have caused cuts to the occupant; the fault has been open since 4 September with no visit.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "action_taken": "Interim precautions sent to the tenant (cover edges, keep doors and dogs clear, report any further injury) ACT-1; injury and the delay flagged to the landlord ACT-3 and to the office for an interim make-safe decision ACT-4."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Quoted amount is not a payable total: line items are plus VAT, the £380 electrical line is an unverified estimate, and the commission basis, any cap and its VAT treatment are unsettled.",
+   "source_ids": [
+    "event-022",
+    "event-023",
+    "event-024",
+    "event-025"
+   ],
+   "action_taken": "No total stated to the landlord; question referred to the office (ACT-4) and the contractor asked for a VAT-inclusive total (ACT-2)."
+  },
+  {
+   "kind": "other",
+   "description": "Contractor asserts a previous full-kitchen quote as justification for expanding scope but has produced neither the earlier quote nor a site visit.",
+   "source_ids": [
+    "event-012",
+    "event-014"
+   ],
+   "action_taken": "Treated as evidence only, not authority (PRO-INSTRUCTIONS-FROM-CONTENT); survey/visit and the missing second estimate requested (ACT-2)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "010",
+    "title": "Kitchen cabinet maintenance request",
+    "received_at": "2025-09-04 12:08:37 UTC",
+    "track": "Property Management",
+    "case_number": "010",
+    "property": "42 Brackenveil Row, Oakhollow, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Nia Calder (Property Manager, Northbridge Lettings)",
+    "events_visible": 26,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Kitchen cabinet maintenance request\n\n## Case details\n- source role: Tenant\n- created: 2025-09-04 12:08:37 UTC\n- property: 42 Brackenveil Row, Oakhollow, ZZ1 1ZZ\n\n## Initial request\nTenant reports peeling laminate on kitchen cabinets, with sharp edges that have caused cuts, and several cabinet doors that do not close properly. Two dogs are at the property, so access needs to be arranged in advance."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "010-get_case_details-a7ac9724bea6",
+   "receipt": "{\"id\": \"010\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:37:25.743765Z",
+   "finished_at": "2026-10-10T15:37:25.743874Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "010-get_action_ledger-b063f0ae2e1f",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:37:25.744027Z",
+   "finished_at": "2026-10-10T15:37:25.744083Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Marr, an update on your kitchen cabinet report (42 Brackenveil Row).\n\nThe contractor who attended to quote considers the peeling laminate cannot be repaired panel by panel, so the landlord has asked us to obtain replacement estimates. One estimate has arrived and is with the landlord; a second is still outstanding from the contractor. No work can start until the landlord approves an amount, so I cannot yet give you a date.\n\nIn the meantime, please take care around the damaged edges: keep the affected doors and panels out of use where you can, cover any exposed sharp laminate edge with strong tape as a temporary measure, and keep the dogs away from the loose sections. If anyone is cut again, please tell us straight away so it is on the record.\n\nThe dates you offered (16, 17 and 18 September) have now passed with no visit booked — I am sorry for that. Could you send three fresh windows that suit you, with the usual note about securing the dogs, so a visit can be fixed as soon as the contractor confirms? I will not book anything without your agreement."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "010-notify_tenant-a4c9e709a948",
+   "action_id": "010-notify_tenant-a4c9e709a948",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:38:19.499771Z",
+   "finished_at": "2026-10-10T15:38:19.499942Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Kellan Rook, Alderline Joinery — 42 Brackenveil Row, Oakhollow, ZZ1 1ZZ, kitchen cabinets.\n\nTwo items are outstanding from your side:\n1. The second estimate the landlord asked for: replacement cupboards and doors only, retaining the existing appliances, worktops and flooring. Your email of 24 September covered the full-kitchen figures only.\n2. A visit slot. No attendance has been booked since you were instructed; the tenant's September windows have lapsed and fresh windows are being requested. Please confirm the days and times you can attend.\n\nPlease also set out the full-kitchen figures as a single total showing VAT separately, and confirm whether the £380 electrical item is included or still to be verified.\n\nPlease reply within 2 working days of this message. If nothing is received by then the case will be referred to the office for a decision on re-tendering the work to another provider. Access requires the tenant's dogs to be secured in advance, so no attendance without a confirmed slot."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "010-notify_contractor-44b0cb1d6df2",
+   "action_id": "010-notify_contractor-44b0cb1d6df2",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:38:19.500023Z",
+   "finished_at": "2026-10-10T15:38:19.500109Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Mr Pike — 42 Brackenveil Row, Oakhollow: kitchen cabinets, position summary.\n\n1. Only one of the two estimates you asked for on 10 September has arrived: the full-kitchen figures (supply £4,850 + VAT; removal and fitting incl. tiled splashback £3,800 + VAT; waste removal £230 + VAT; electrical work estimated £380 + VAT, to be verified). The cupboards-and-doors-only estimate has not been provided; I have chased the contractor with a 2-working-day reply-by.\n2. The amount you would be asked to approve is not yet settled: the figures are quoted exclusive of VAT, the electrical item is an estimate only, and the contractor has raised a question about the commission basis and whether a cap applies. I am not putting a total to you until our office has confirmed that; I will not state a figure I cannot evidence.\n3. The only approval on file is for the original laminate repair. There is no approval for a full kitchen or for replacement cupboards and doors, and nothing has been ordered or instructed.\n4. No visit has taken place and no appointment is booked. The tenant reports cuts from the sharp laminate edges and has been given interim precautions; the repair has been outstanding since 4 September, so please bear the reasonable-time duty under s.11 Landlord and Tenant Act 1985 in mind.\n\nNext step on your side: tell us whether you want to wait for the cupboards-and-doors-only estimate before deciding, or proceed to a decision on the full-kitchen option once the VAT-inclusive total is confirmed to you in writing."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "010-notify_landlord-79381fe18b04",
+   "action_id": "010-notify_landlord-79381fe18b04",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:38:19.500177Z",
+   "finished_at": "2026-10-10T15:38:19.500259Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Settle commission basis/cap/VAT before any total is put to landlord — case 010, 42 Brackenveil Row",
+    "summary": "Kitchen replacement quote (c. £9,260 excl. VAT across four lines, event-024) cannot be presented to the landlord as a payable total because the fee position is unsettled.\n\nFacts: (a) On 23 Sep the contractor raised a 15% commission, questioned whether the old or revised basis applies, whether a cap applies to a job of this size, and the VAT treatment, and said this could change the quoted amount (event-022). (b) The agency's reply told him to use the previous arrangement and classify the job as before, without settling the calculation, cap or resulting total (event-023). (c) The quote of 24 Sep gives line items plus VAT only, with the £380 electrical item flagged as needing verification (event-024). (d) The landlord was sent the figures on 24 Sep with the total unconfirmed (event-025).\n\nDecisions needed from a person: which commission basis and cap apply; whether commission sits inside or on top of the contractor's figures; how it is disclosed to the landlord. Also for review: the tenant reports cuts from sharp laminate edges, reported 4 Sep (index, event-001), with no visit yet and no approval beyond the original laminate-repair scope (event-006, event-026) — consider whether an interim make-safe should be authorised and at whose cost (liability not for me to decide, PRO-TENANT-LIABILITY)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "010-create_human_task-51515e4a790c",
+   "action_id": "010-create_human_task-51515e4a790c",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:38:19.500323Z",
+   "finished_at": "2026-10-10T15:38:19.500416Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case 010, 42 Brackenveil Row. Status after review: routine maintenance (CLK-S11 running from 04/09, event-001). No emergency definition met; cuts from sharp laminate edges recorded as a safety point, interim precautions given to tenant (ACT-1). Authority: only landlord approval on file is the original laminate-repair scope (event-006); landlord's own messages event-004 and event-016 ask for quotes/estimates only and are not approval for replacement (event-026). No landlord standing spend cap on file, so no dispatch authority for replacement work (APR-SPEND-OVER-CAP). Contractor chased for the missing cupboards-and-doors-only estimate, a VAT-inclusive total and a visit slot, reply-by 2 working days (ACT-2). Landlord updated that no payable total can be put to him yet (ACT-3). Commission basis/cap/VAT question from event-022/023 referred to the office (ACT-4). Tenant asked for fresh access windows; 16-18/09 lapsed (event-010, event-021). Nothing instructed, nothing ordered."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "010-add_note-ed6f954d493e",
+   "action_id": "010-add_note-ed6f954d493e",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:38:26.950893Z",
+   "finished_at": "2026-10-10T15:38:26.951286Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — Alderline Joinery to supply the cupboards-and-doors-only estimate, a VAT-inclusive full-kitchen total and a visit slot (reply-by 2 working days, ACT-2); in parallel Waiting for Landlord on the replacement decision and the office on the commission basis (ACT-4).",
+    "until": "2 working days from the contractor chase (ACT-2)"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-6",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "010-put_on_hold-a4a739adae49",
+   "action_id": "010-put_on_hold-a4a739adae49",
+   "receipt": "{\"id\": \"ACT-6\"}",
+   "started_at": "2026-10-10T15:38:26.951462Z",
+   "finished_at": "2026-10-10T15:38:26.951658Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Update once the landlord decides and a slot is confirmed; no date promised because none is booked",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "If no reply within 2 working days the case goes to the office for a decision on re-tendering",
+   "due": "2 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Updated quote would be sent (23 Sep, 'that evening'); full-kitchen figures arrived 24 Sep, cupboards-and-doors-only estimate still outstanding",
+   "due": null,
+   "source_id": "event-023",
+   "status": "broken"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Price returned for approval before any work proceeds",
+   "due": null,
+   "source_id": "event-005",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 4 September 2025 (event-001); still no visit or approved scope",
+   "deadline": null,
+   "note": "Delay flagged to the landlord (ACT-3) and the office (ACT-4)."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 4 September, same day (event-002)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send the replacement cupboards-and-doors-only estimate (retaining existing appliances, worktops and flooring), state the full-kitchen figures as a single total with VAT shown separately, confirm whether the £380 electrical item is included or still to be verified, and give dates/times you can attend.",
+   "why": "The landlord asked for two estimates on 10 September (event-016); only the full-kitchen figures arrived (event-024) and no visit slot has ever been chosen (event-012, event-019, event-021).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Please send three fresh access windows (with the dogs secured) now that 16-18 September have passed.",
+   "why": "The offered windows lapsed without a booking (event-010, event-021); access needs tenant consent (CAP-SCHEDULE-ACCESS).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Do you want to wait for the cupboards-and-doors-only estimate before deciding, or move to a decision on the full-kitchen option once the VAT-inclusive total is confirmed in writing?",
+   "why": "Only the original laminate-repair scope is approved (event-006, event-026); replacement work is a landlord decision (RTE-LANDLORD).",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "APR-SPEND-OVER-CAP",
+  "CAP-NOTIFY",
+  "CAP-SCHEDULE-ACCESS",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the September line items at 20% VAT would come to roughly £11,100 including VAT — my own arithmetic, not quoted by the contractor, so it was not stated to the landlord or used as an approval figure."
+ ],
+ "uncertainty": [
+  "No landlord standing spend cap or written standing instruction is visible in this case record; treated as no standing authority to spend.",
+  "Whether the laminate can in fact be repaired has never been established by a site visit — the contractor's view (event-012, event-014) is untested.",
+  "Whether commission sits inside or on top of the contractor's figures, and whether a cap applies, is unresolved (event-022, event-023)."
+ ],
+ "safety_actions": [
+  "Interim precautions for the sharp laminate edges given to the tenant and a request to report any further injury (ACT-1).",
+  "Injury and the open-since-4-September delay put to the landlord (ACT-3) and to the office with an interim make-safe question (ACT-4).",
+  "Safety-pass keywords checked: 'injury/cuts' — reported, addressed above; no gas, electrical, damp/mould or detector hazard reported in this case. The £380 electrical line (event-024) is prospective work on a possible new kitchen, not a reported electrical fault."
+ ],
+ "withheld_actions": [
+  "Did not instruct any replacement work: no standing cap and no landlord approval message for replacement (APR-SPEND-OVER-CAP; event-006 covers laminate repair only).",
+  "Did not book a visit: the tenant's offered windows have lapsed and no new consent is on file (CAP-SCHEDULE-ACCESS).",
+  "Did not state a payable total or commission figure to the landlord — unsettled (event-022, event-023).",
+  "Did not express any view on who pays for the damage or the reported cuts (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R2: safety_hazard flag(s) recorded for the reader; not an escalation on their own (urgency routine)"
+ ],
+ "started_at": "2026-10-10T15:37:21.959316Z",
+ "finished_at": "2026-10-10T15:39:16.976077Z",
+ "input_tokens": 47222,
+ "output_tokens": 9623,
+ "cache_read_tokens": 56748
+}

@@ -1,0 +1,536 @@
+{
+ "case_id": "006",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Treated as a landlord information request, not a repair: no fault, hazard, access need or spend exists, so no contractor, approval or quote step applies. Chased the tenant for the reading (ACT-3), updated the landlord (ACT-4), raised an office task to trace the reading the tenant says was already sent by phone/email (ACT-2), and placed the case on hold Waiting for Tenant (ACT-5). The case now waits on a named party (the tenant) for a fact only they hold.",
+ "recap": "Landlord wants current solar generation readings; tenant says already sent but none is on file — chased tenant, told landlord, office asked to trace; on hold.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — the generation figure or photo of the meter/inverter display, or the date/address of the earlier email so the office can locate it; until 2025-09-23 (3 business days from the 18 September request).",
+ "next_step": "Tenant (Ivo Mercer) to send the current kWh reading or a photo of the meter/inverter display, or the date/address of the earlier message; office task ACT-2 to search mailbox and call log for 4–8 September in parallel.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-007 and ACT-1: classified as an information request, routine, no fault or hazard; no damage-limiting advice applicable.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "not_applicable",
+   "evidence": "No works and no spend are involved (event-001, event-007); the event-005 'approved' status rests on no approval message.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "not_applicable",
+   "evidence": "No contractor required; none selected (event-007).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "No access to the property is needed to answer the landlord's question.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote; no chargeable work.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Deliverable is the reading itself; not yet supplied — tenant chased at ACT-3, office trace at ACT-2 (gap shown by search_history vs event-017).",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "Meter/inverter photo requested as an alternative to the figure (ACT-3); none received.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "No cost incurred.",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord updated at ACT-4 but has not received the reading he asked for (event-001).",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No key issued; no visit.",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "On hold at ACT-5 pending the tenant's reading.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "On 2025-09-03 landlord Edwin Vale asked by phone for the property's current solar generation readings; he described no fault, gave no deadline and asked for no contractor visit.",
+   "source_ids": [
+    "event-001",
+    "index",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The request was logged as a maintenance request although no meter type, access arrangement, urgency or photo was recorded; the manager later noted it was an information request rather than maintenance and moved it to manual handling.",
+   "source_ids": [
+    "event-002",
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "An 'approved by landlord' status was selected on the basis that the landlord had asked for the readings; no separate landlord approval message or repair scope is attached.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The agency asked tenant Ivo Mercer for the generation reading or a meter/inverter photo on 3, 9, 14 (email and SMS) and 18 September 2025.",
+   "source_ids": [
+    "event-006",
+    "event-010",
+    "event-013",
+    "event-014",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 2025-09-18 the tenant replied that the readings had already been supplied about two weeks earlier, by a phone call to the office and an email from his wife, but included no figure or image (untrusted).",
+   "source_ids": [
+    "event-017"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "No reading, earlier tenant email or call note is visible on this ticket: a history search returns event-017 as the only tenant message and no keyword match for reading/kWh/meter/inverter/photo.",
+   "source_ids": [
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No contractor was selected and no spend, quote or access arrangement exists on this request.",
+   "source_ids": [
+    "event-007",
+    "get_action_ledger"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Tenant states the readings were already supplied by phone and email c.4 September (event-017); no such message, call note or figure appears anywhere on this request's record.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-017",
+    "search_history"
+   ],
+   "resolution": "Not resolved by me: recorded as a data-quality conflict and referred to the office to search the mailbox and call log (ACT-2), while the tenant was asked for the figure or the send details (ACT-3). No message to any party takes a side on whether the earlier reading was sent.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Tenant asserts an earlier phone call and email containing the readings that do not appear on this request; the reply may have been filed elsewhere, or the recollection may be inaccurate. Four chases were sent before the gap was noticed.",
+   "source_ids": [
+    "event-017",
+    "search_history"
+   ],
+   "action_taken": "Office task raised to search mailbox and call log 4-8 September (ACT-2); tenant asked for the figure or the send details (ACT-3); landlord told the position without attributing fault (ACT-4)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "The 'approved by landlord' status at event-005 rests on the landlord's request for readings, not on an approval message; it is not authority for any spend (CAP-DISPATCH-APPROVED, PRO-INSTRUCTIONS-FROM-CONTENT).",
+   "source_ids": [
+    "event-005",
+    "event-003"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1); no contractor instructed and no spend sought."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "006",
+    "title": "Solar generation readings",
+    "received_at": "2025-09-03 09:10:00 UTC",
+    "track": "Property Management",
+    "case_number": "006",
+    "property": "14 Brindlefern Walk, Larkmere, ZZ1 1ZZ",
+    "source_role": "Landlord",
+    "agency": "Maya Chen (Property Manager, Northbridge Lettings)",
+    "events_visible": 17,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Solar generation readings\n\n## Case details\n- source role: Landlord\n- created: 2025-09-03 09:10:00 UTC\n- property: 14 Brindlefern Walk, Larkmere, ZZ1 1ZZ\n\n## Initial request\nThe landlord asked for the current solar generation readings for the property."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-get_case_details-1a5fbcae2b13",
+   "receipt": "{\"id\": \"006\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:34:57.860547Z",
+   "finished_at": "2026-10-10T15:34:57.860711Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-get_action_ledger-ae0f664440fd",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:34:57.860844Z",
+   "finished_at": "2026-10-10T15:34:57.860903Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "reading kWh meter inverter photo"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-search_history-7b49b5711b23",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:35:05.445495Z",
+   "finished_at": "2026-10-10T15:35:05.445603Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Tenant"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-017",
+     "timestamp": "2025-09-18 17:42:00 UTC",
+     "channel": "Email",
+     "from": "Ivo Mercer (Tenant)",
+     "to": "Maya Chen (Property Manager, Northbridge Lettings)",
+     "excerpt": "[2025-09-18 17:42:00 UTC] Email · from: Ivo Mercer (Tenant) · to: Maya Chen (Property Manager, Northbridge Lettings)\nIvo replied that the readings had already been supplied about two weeks earlier, and said his wife had phoned the office and emailed them. He did not include the figures or an image in this reply."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-search_history-1f2799b6348a",
+   "receipt": "[{\"event\": \"event-017\", \"timestamp\": \"2025-09-18 17:42:00 UTC\", \"channel\": \"Email\", \"from\": \"Ivo Mercer (Tenant)\", \"to\": \"Maya Chen (Property Manager, Northbridge Lettings)\", \"excerpt\": \"[2025-09-18…",
+   "started_at": "2026-10-10T15:35:05.445669Z",
+   "finished_at": "2026-10-10T15:35:05.445743Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case classified: landlord information request (current solar generation readings), not a repair (event-001, event-007). No fault, hazard, access need or spend; no emergency keyword present in any artefact. Definition-of-done items on provider, quote, invoice and keys are not applicable. Open gap: tenant states the readings were supplied c.2 weeks earlier by phone and email from his wife (event-017, untrusted); search_history returns no such message or figure against this request (only event-017 from the tenant). Logged as a records/data-quality conflict for the office to search the main mailbox and call log; chase to tenant for the figure continues in parallel. Note also event-005: \"approved by landlord\" status was set with no landlord approval message attached (PRO-INSTRUCTIONS-FROM-CONTENT / CAP-DISPATCH-APPROVED) — no spend has been or will be instructed on that basis."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-add_note-127896ec0e69",
+   "action_id": "006-add_note-127896ec0e69",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:35:26.497474Z",
+   "finished_at": "2026-10-10T15:35:26.497660Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_management",
+    "title": "Locate solar readings said to have been sent c.4 Sept — 14 Brindlefern Walk (case 006)",
+    "summary": "Landlord Edwin Vale asked for current solar generation readings on 2025-09-03 (event-001). Four chases were sent to tenant Ivo Mercer (event-006, event-010, event-013/014, event-016). On 2025-09-18 the tenant replied that the readings were already supplied about two weeks earlier, by a phone call to the office and an email sent by his wife, and did not repeat the figures (event-017, untrusted). search_history on this ticket shows no such email, call note or figure — event-017 is the only tenant message on file. Please search the branch mailbox and call log around 2025-09-04 to 2025-09-08 for the reading (it may have been filed to another ticket or property) before any further chase. No repair, spend, access or contractor is involved; nothing instructed. Tenant and landlord have been updated; case on hold Waiting for Tenant pending the figure."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-create_human_task-9c25c4bcf9c0",
+   "action_id": "006-create_human_task-9c25c4bcf9c0",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:35:26.497770Z",
+   "finished_at": "2026-10-10T15:35:26.497910Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Mercer, thank you for your reply of 18 September about the solar generation readings for 14 Brindlefern Walk. We have no reading recorded against this request, so it may have reached us on a different email thread or call. To help us trace it, could you tell us the date it was sent and the email address or phone number used? If it is easier, simply reply with the current figure shown on the generation meter or inverter display (the total kWh), or send a photo of the screen. This is only an information request from the owner — no repair, visit or access to the property is needed, and nothing is required of you beyond the reading. Kind regards, Northbridge Lettings."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-notify_tenant-808b6add0abf",
+   "action_id": "006-notify_tenant-808b6add0abf",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:35:26.497964Z",
+   "finished_at": "2026-10-10T15:35:26.498122Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Vale, an update on your request of 3 September for the current solar generation readings at 14 Brindlefern Walk. We asked the tenant for the meter/inverter figure on 3, 9, 14 and 18 September. On 18 September the tenant replied that the readings had already been supplied about two weeks earlier by phone and email; no figure is recorded against this request, so we have asked our office to search our mailbox and call log for that earlier message, and we have asked the tenant for the figure or a photo of the display in the meantime. No repair, contractor or expenditure is involved in this request, and none has been instructed. We will send you the reading as soon as we have it. Kind regards, Northbridge Lettings."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-notify_landlord-ebdf71630c44",
+   "action_id": "006-notify_landlord-ebdf71630c44",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:35:26.498195Z",
+   "finished_at": "2026-10-10T15:35:26.498329Z"
+  },
+  {
+   "seq": 9,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant — current solar generation reading (figure or photo of meter/inverter display), or the date/address of the earlier email so the office can trace it (ACT-2, ACT-3; tenant claim at event-017).",
+    "until": "2025-09-23 (3 business days from the request of 18 September)"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-put_on_hold-5556baf90085",
+   "action_id": "006-put_on_hold-5556baf90085",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:35:30.226027Z",
+   "finished_at": "2026-10-10T15:35:30.226109Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Send the solar generation reading as soon as it is obtained; office to trace the message the tenant says was already sent",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "tenant",
+   "to": "agency",
+   "what": "Provide the current kWh reading or a photo of the meter/inverter display, or the date/address of the earlier message",
+   "due": "2025-09-23",
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge within one working day",
+   "status": "prior",
+   "basis": "Tenant reply of 2025-09-18 (event-017) acknowledged by ACT-3",
+   "deadline": null,
+   "note": "Met by the reply sent to the tenant."
+  },
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "No repair reported; request is for information only (event-001)",
+   "deadline": null,
+   "note": "Not engaged."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Please send the current total kWh figure shown on the solar generation meter or inverter display at 14 Brindlefern Walk, or a photo of the screen; if the readings were sent previously, please tell us the date and the email address or phone number used.",
+   "why": "The landlord's request (event-001) can only be answered with the figure; no reading is recorded against this request and event-017 did not include one.",
+   "blocking": true
+  },
+  {
+   "to": "property_manager",
+   "question": "Search the branch mailbox and call log for 4-8 September 2025 for a solar reading for 14 Brindlefern Walk that may have been filed to another ticket or property.",
+   "why": "Tenant states at event-017 that the readings were supplied by phone and email two weeks earlier; nothing matching is visible on this ticket.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-TENANT",
+  "APR-SPEND-OVER-CAP",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "PRO-PII",
+  "ESC-CONFLICT"
+ ],
+ "assumptions": [
+  "Assumption: the earlier phone call and email the tenant refers to, if they exist, were filed against another ticket or property rather than deleted — stated as an assumption and given to the office to verify (ACT-2), not asserted to any party.",
+  "Assumption: 3 business days is a reasonable hold period for the tenant's reply, consistent with the intervals the agency itself used (event-008, event-011)."
+ ],
+ "uncertainty": [
+  "Whether a reading was in fact supplied c.4 September and where it is filed.",
+  "The meter type (generation meter vs inverter display) at the property was never recorded (event-002), so the tenant may need guidance on which figure to read."
+ ],
+ "safety_actions": [
+  "Safety pass: checked every artefact for the listed keywords (gas, electrical, detector, damp/mould, injury, child, pregnant, elderly, 'not tested'). None appears; the request concerns a solar generation meter reading only, with no reported fault, no loss of service and no occupant vulnerability disclosed. No emergency definition is engaged and no make-safe step is required.",
+  "No occupant health or family detail was passed to any third party (PRO-PII); the reference to the tenant's wife is kept inside the case record and the internal office task."
+ ],
+ "withheld_actions": [
+  "No contractor dispatched: no fault, no scope and no spend authority on file (APR-SPEND-OVER-CAP, default cap £0); the event-005 'approved' status is not a landlord approval.",
+  "No access booked: the request needs no entry to the property (CAP-SCHEDULE-ACCESS).",
+  "Not closed: the landlord's question is unanswered, so closure would leave the definition of done incomplete (CAP-CLOSE).",
+  "Not escalated as a decision for a human: no safety, liability, legal or spend question arises; the records gap was routed as an office task instead."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:34:54.831462Z",
+ "finished_at": "2026-10-10T15:36:14.334597Z",
+ "input_tokens": 39780,
+ "output_tokens": 6412,
+ "cache_read_tokens": 56748
+}

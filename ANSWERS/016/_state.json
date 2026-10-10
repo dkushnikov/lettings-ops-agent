@@ -1,0 +1,589 @@
+{
+ "case_id": "016",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "escalated",
+ "decision": "Escalate to the property manager for fire-safety and welfare review while the case sits on hold with the landlord. A smoke alarm has been out of service at an occupied property since 7 August 2025 (event-001), the landlord's own fitter left it unmounted on 31 August (event-010) and nothing on file shows it mounted or tested (event-014). The occupant was hospitalised and discharged in September and asked for contact to be reduced (event-011, event-012, event-013), and an unverified person attended the property on 20 September who was not sent by this agency (event-015, event-016). That combination — vulnerability plus a fire-safety device out of service, plus an unidentified caller — is ESC-VULNERABLE, ESC-SAFETY and ESC-FRAUD, which a person must decide, not me. Within my own authority I have: sent the tenant one consolidated message with interim fire-safety advice and caller-verification advice (ACT-1); asked the landlord, with a 3-working-day reply-by, either for his electrician's details and a firm date or for authority for us to instruct our own (ACT-2, APR-SPEND-OVER-CAP — no spend cap on file, so no standing authority); recorded the file note (ACT-3) and placed the case on hold (ACT-4). I did not instruct a contractor: there is no landlord approval in the visible history for an agency-instructed job and no standing cap, and the matter does not meet an emergency definition in the mandate.",
+ "recap": "Smoke alarm unmounted and untested since 7 Aug; landlord's own fitter left it incomplete — tenant advised, landlord chased for details or authority, escalated for fire-safety and welfare review.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — electrician's name and firm date, or authority for us to instruct (ACT-2, reply-by 3 working days); in parallel with the property-manager review.",
+ "next_step": "Landlord (Ronan Vale) to supply the electrician's details and a firm attendance date, or approve Northbridge Lettings instructing an electrician (ACT-2, 3-working-day clock); property manager to decide on the fire-safety override and welfare follow-up.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-002 categorised and acknowledged same day; urgency set urgent and interim fire-safety advice given in ACT-1",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "Landlord elected to use his own electrician (event-004) but it was left incomplete (event-010); approval or details re-requested in ACT-2, no reply yet",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "No provider identity on file; landlord's fitter never named (event-007, event-010)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No confirmed appointment; the 31/08 attendance was unconfirmed and incomplete (event-009, event-010)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No quote exists; £120 in ACT-2 is my assumption, awaiting the landlord",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Alarm still unmounted and untested (event-010, event-014)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos, no invoice, no alarm test record on file",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "Landlord is arranging and paying his own contractor; no agency invoice exists unless the override in the handover is authorised",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Completion confirmation requested on 07/08 (event-005) and chased; never received",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; the tenant is in occupation and grants access",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Cannot close: alarm not mounted or tested (event-014); case on hold (ACT-4) and escalated",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant Elise Rowan reported on 07/08/2025 that the smoke alarm at 26 Tallowmere Close had come away from the ceiling; no photos supplied.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The agency acknowledged the report the same morning, 07/08/2025 (NBL-016).",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord replied on 07/08/2025 that he would use his own electrician; no name, scope or date given.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "On 12/08/2025 the landlord said the electrician would contact the tenant and complete the work by the following weekend at the latest; no contractor details or appointment followed.",
+   "source_ids": [
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 02/09/2025 the tenant reported that a fitter had attended, removed the bracket and could not refit the alarm because the box contained no bracket; the alarm remained unmounted.",
+   "source_ids": [
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "There is no evidence on file that the alarm has been mounted or tested at any point since.",
+   "source_ids": [
+    "event-014",
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The tenant was in hospital on 07/09/2025, was discharged on 11/09/2025, and asked the agency to reduce contact while recovering.",
+   "source_ids": [
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "An unannounced person attended the property on Saturday 20/09/2025 and was refused entry; identity, organisation and purpose were never verified, and no agency visit was booked.",
+   "source_ids": [
+    "event-015",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No landlord spend cap or standing instruction is recorded for this landlord, so the default standing authority is nil.",
+   "source_ids": [
+    "search_history",
+    "get_case_details"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F10",
+   "statement": "No quote, invoice or contractor identity for the alarm work exists anywhere in the case file.",
+   "source_ids": [
+    "search_history",
+    "get_action_ledger"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The landlord's 12/08 promise that the work would be completed by the following weekend (event-007) conflicts with the tenant's accounts of 27/08, 02/09 and 11/09 that it was not done (event-009, event-010, event-013).",
+   "fact_ids": [
+    "F4",
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-007",
+    "event-009",
+    "event-010",
+    "event-013"
+   ],
+   "resolution": "Tenant's first-hand, later accounts of the state of the alarm are preferred; treated as outstanding and chased with the landlord (ACT-2).",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Smoke alarm detached and left unmounted and untested at an occupied property since 07/08/2025 - a fire-detection device out of service for over six weeks.",
+   "source_ids": [
+    "event-001",
+    "event-010",
+    "event-014"
+   ],
+   "action_taken": "Interim fire-safety advice to the tenant (ACT-1); landlord pressed for a date or authority to instruct (ACT-2); escalated to the property manager."
+  },
+  {
+   "kind": "vulnerability",
+   "description": "Occupant hospitalised 07/09-11/09/2025 and asked for reduced contact while recovering; vulnerability combined with a fire-safety device out of service (ESC-VULNERABLE).",
+   "source_ids": [
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "action_taken": "Contact limited to one consolidated message (ACT-1); health details withheld from any contractor brief (PRO-PII); welfare follow-up handed to the property manager."
+  },
+  {
+   "kind": "fraud",
+   "description": "Unidentified caller at the property on 20/09/2025 claiming to be there 'to check something'; not arranged by this agency and never verified.",
+   "source_ids": [
+    "event-015",
+    "event-016"
+   ],
+   "action_taken": "Tenant told no visit was booked by us and to admit no one without a name given in advance and photo ID (ACT-1); referred to the property manager."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "016",
+    "title": "Smoke alarm maintenance request",
+    "received_at": "2025-08-07 09:58:12 UTC",
+    "track": "Property Management",
+    "case_number": "016",
+    "property": "26 Tallowmere Close, Fenbarrow, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Maya Chen (Property Manager, Northbridge Lettings)",
+    "events_visible": 17,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Smoke alarm maintenance request\n\n## Case details\n- source role: Tenant\n- created: 2025-08-07 09:58:12 UTC\n- property: 26 Tallowmere Close, Fenbarrow, ZZ1 1ZZ\n\n## Initial request\nThe smoke alarm has come away from the ceiling and needs attention."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "016-get_case_details-2614f9eaa021",
+   "receipt": "{\"id\": \"016\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:39:23.043792Z",
+   "finished_at": "2026-10-10T15:39:23.043935Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "016-get_action_ledger-d6e967135332",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:39:23.044116Z",
+   "finished_at": "2026-10-10T15:39:23.044187Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "spend cap approval standing instruction contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "016-search_history-380b958b0101",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:39:41.904884Z",
+   "finished_at": "2026-10-10T15:39:41.904975Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "smoke alarm tested mounted"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "016-search_history-da6148982399",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:39:41.905027Z",
+   "finished_at": "2026-10-10T15:39:41.905087Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Rowan, about request NBL-016 (smoke alarm, 26 Tallowmere Close). We have kept contact to a minimum as you asked on 11 September, and this is one message with two things you need to know.\n\n1) Safety: our file shows the alarm has not been refitted or tested since the fitter's visit (your call of 2 September). Until it is back on the ceiling and tested, please treat the property as having no working smoke alarm on that storey: keep internal doors closed at night and keep escape routes clear. If you have a working battery alarm, placing it on the ceiling or high on a wall in the hallway helps. Please do not attempt to refit the mains alarm yourself.\n\n2) Callers: we have not booked anyone to attend, so the person who knocked on Saturday was not arranged by us. Please do not let anyone in unless we have given you their name and a time in advance, and always ask for photo ID. If anyone attends unannounced, you are entitled to refuse entry and to call us.\n\nWe are now pressing the landlord for the electrician's details and a firm date, or for authority to send our own electrician. We will contact you to agree a time that suits you before anyone attends; nothing is booked yet. No reply is needed unless you wish to tell us when you would prefer a visit."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "016-notify_tenant-6a3ad17a216b",
+   "action_id": "016-notify_tenant-6a3ad17a216b",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:40:06.065226Z",
+   "finished_at": "2026-10-10T15:40:06.065320Z"
+  },
+  {
+   "seq": 6,
+   "tool": "request_landlord_approval",
+   "tool_class": "write",
+   "input": {
+    "subject": "NBL-016, 26 Tallowmere Close: smoke alarm still unmounted since 7 Aug — electrician details and firm date, or authority for us to instruct",
+    "amount_gbp": 120,
+    "rationale": "Reported 7 August (event-001). You said you would use your own electrician (event-004) and that the work would be done by the following weekend at the latest (event-007). On 2 September the tenant reported that a fitter attended, removed the bracket and could not refit the alarm because there was no bracket in the box; the alarm is still unmounted and untested (event-010, event-014). Nothing on file shows it has been mounted or tested since.\n\nA smoke alarm out of service is a fire-safety matter and the repair clock under s.11 Landlord and Tenant Act 1985 has been running for over six weeks. We need one of two things from you, please, by return and no later than 3 working days:\n(a) the electrician's name and contact details and a firm attendance date, so we can agree access with the tenant; or\n(b) your approval for Northbridge Lettings to instruct our own electrician to supply and fit the correct bracket and alarm head and test it.\n\nThe £120 figure is our own assumption of a typical electrician call-out plus parts for this work, including VAT; we have no quote on file and no standing spend limit recorded for you, so we cannot instruct anyone without your approval. If a quote comes in above that figure we will put it to you before any work starts."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-REQUEST-APPROVAL"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "request_landlord_approval",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "016-request_landlord_approval-d81f7e1dcff1",
+   "action_id": "016-request_landlord_approval-d81f7e1dcff1",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:40:06.065369Z",
+   "finished_at": "2026-10-10T15:40:06.065424Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "NBL-016 status review. Fault: smoke alarm detached from ceiling, reported 07/08/2025 (event-001); still unmounted and untested as at the last evidence on file (event-010, event-014). Landlord elected to use his own electrician (event-004) and promised completion \"by the following weekend at the latest\" (event-007) — promise broken; fitter attended but could not complete for want of a bracket (event-010). No landlord spend cap or standing instruction found on file (search_history returned nothing), so there is no standing authority to instruct: APR-SPEND-OVER-CAP applies. Actions taken now: single consolidated safety and caller-verification message to tenant (contact kept minimal per event-013); approval request to landlord with a 3-working-day reply-by for either electrician details and a date or authority for us to instruct; £120 figure is our own assumption, not a quote. Safety pass: smoke alarm untested — no evidence of a test since installation; to be tested and recorded before this request is closed. Unverified caller at the property on 20/09 (event-015, event-016) not arranged by this agency; identity never established — recorded as a possible fraud/safety concern for the office. Occupant recently hospitalised (event-011, event-012, event-013) — welfare follow-up required, health details not to be shared with contractors (PRO-PII)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "016-add_note-fb757dd425d1",
+   "action_id": "016-add_note-fb757dd425d1",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:40:06.065466Z",
+   "finished_at": "2026-10-10T15:40:06.065509Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — reply to ACT-2: electrician's name and a firm attendance date, or authority for Northbridge Lettings to instruct an electrician (no spend cap on file). Case also referred to the property manager for fire-safety and welfare review.",
+    "until": "3 working days from the approval request (reply-by stated to the landlord)"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "016-put_on_hold-cc472e13a19a",
+   "action_id": "016-put_on_hold-cc472e13a19a",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:40:10.864618Z",
+   "finished_at": "2026-10-10T15:40:10.864860Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "We will contact you to agree a time before anyone attends; nothing is booked yet.",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Any quote above the £120 assumed figure will be put to the landlord before work starts.",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency",
+   "what": "Electrician to contact the tenant and complete the work by the following weekend at the latest (said 12/08/2025).",
+   "due": "2025-08-17",
+   "source_id": "event-007",
+   "status": "broken"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Pause in proactive contact while the tenant recovered.",
+   "due": null,
+   "source_id": "event-014",
+   "status": "kept"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 07/08/2025 (event-001); still outstanding",
+   "deadline": null,
+   "note": "Over six weeks elapsed on a fire-detection device; drives the override question put to the property manager."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 07/08/2025, same day (event-002)",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "APR-SPEND-OVER-CAP",
+   "name": "Landlord reply-by on the approval request",
+   "status": "sop",
+   "basis": "Reply-by stated to the landlord in ACT-2",
+   "deadline": "3 working days from ACT-2",
+   "note": "On expiry the case returns to the property-manager queue."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "A smoke alarm at 26 Tallowmere Close has been out of service for over six weeks and the landlord's own electrician has not completed it: do we override and instruct our own electrician now at the landlord's cost, and who takes the welfare and unidentified-caller follow-up?",
+  "summary": [
+   "Smoke alarm came away from the ceiling, reported by the tenant 07/08/2025 (event-001); no evidence on file that it has been mounted or tested since (event-014).",
+   "Landlord said he would use his own electrician (event-004) and promised completion 'by the following weekend at the latest' on 12/08 (event-007) - not met.",
+   "Tenant reported on 02/09 that a fitter removed the bracket and could not refit the alarm because the box contained no bracket; alarm left unmounted (event-010).",
+   "Tenant was in hospital on 07/09, discharged 11/09, and asked us to stop repeated calls and emails while unwell (event-012, event-013).",
+   "On 20/09 an unannounced caller attended and was refused entry; identity, organisation and authority never verified, and not arranged by this agency (event-015, event-016)."
+  ],
+  "gap": "No landlord spend cap or standing instruction on file (search_history: no results), so there is no standing authority to spend. No electrician name, no quote and no confirmed appointment anywhere in the history. Whether the 20/09 caller was connected to the alarm work is unknown. Whether the alarm head is serviceable, and whether it is mains-wired or battery, has never been established.",
+  "options": [
+   "Wait the 3 working days for the landlord's reply to ACT-2, then act on his answer - keeps his chosen contractor and cost control, but the alarm stays out of service meanwhile.",
+   "Override now: instruct a vetted electrician to fit the correct bracket and alarm head and test it, recharged to the landlord - fastest route to a working alarm, but the spend goes ahead without his approval and may be disputed.",
+   "Treat it as a fire-safety emergency and dispatch today under the emergency make-safe ceiling - removes the risk immediately, but a detached smoke alarm is not in the mandate's emergency definitions."
+  ],
+  "recommended": "Option 2 if the landlord has not answered ACT-2 within the 3 working days; in either case book the visit with the tenant in advance with a named attendee, given the unverified caller.",
+  "default_if_timeout": "If the landlord does not reply by the 3-working-day reply-by, the case returns to this queue for a decision on instructing our own electrician; the alarm remains out of service until then.",
+  "deadline": "Landlord reply-by: 3 working days from ACT-2. CLK-S11 'reasonable time' running since 07/08/2025.",
+  "undo": "Nothing irreversible has been done: no contractor instructed, no access booked, no spend committed. ACT-2 can be withdrawn by a follow-up email to the landlord and the hold (ACT-4) lifted at any time.",
+  "context_refs": [
+   "event-001",
+   "event-004",
+   "event-007",
+   "event-010",
+   "event-012",
+   "event-013",
+   "event-014",
+   "event-015",
+   "event-016",
+   "ACT-1",
+   "ACT-2",
+   "ACT-3",
+   "ACT-4"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-REQUEST-APPROVAL",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "ESC-VULNERABLE",
+  "ESC-SAFETY",
+  "ESC-FRAUD",
+  "RTE-LANDLORD",
+  "RTE-STAFF",
+  "PRO-PII",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the £120 incl. VAT figure in the landlord approval request (ACT-2) is my own estimate of an electrician call-out plus parts for a smoke-alarm bracket and head; no quote exists on file.",
+  "Assumption: the alarm is the storey's only smoke detector, since the file records no other; this is why the tenant was given interim fire-safety advice (ACT-1)."
+ ],
+ "uncertainty": [
+  "Whether the alarm is mains-wired or battery, and whether the head itself is serviceable, is not established in any artefact.",
+  "Whether the 20/09 caller was connected to the alarm work is unknown (event-015, event-016).",
+  "Whether the property has another working smoke alarm on that storey is not recorded.",
+  "Whether the landlord has a spend cap recorded elsewhere in agency systems that this case file does not expose."
+ ],
+ "safety_actions": [
+  "Told the tenant to treat the property as having no working smoke alarm on that storey, to keep internal doors closed at night and escape routes clear, and not to refit the mains alarm themselves (ACT-1).",
+  "Told the tenant that no visit is booked by the agency and to admit no one without a name given in advance and photo ID (ACT-1).",
+  "Recorded that the alarm must be mounted and tested, with the test result on file, before this request can be closed (ACT-3)."
+ ],
+ "withheld_actions": [
+  "Did not instruct a contractor: no landlord approval for an agency-instructed job in the visible history and no spend cap on file (APR-SPEND-OVER-CAP).",
+  "Did not book an access window: no provider and no tenant-agreed slot (CAP-SCHEDULE-ACCESS requires tenant consent).",
+  "Did not treat the case as an emergency dispatch: a detached smoke alarm is not in the mandate's emergency definitions, so the £250 make-safe ceiling was not used.",
+  "Did not state or imply who pays for the fitter's abortive visit (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 6,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:39:19.643018Z",
+ "finished_at": "2026-10-10T15:42:16.751644Z",
+ "input_tokens": 58182,
+ "output_tokens": 15826,
+ "cache_read_tokens": 85122
+}

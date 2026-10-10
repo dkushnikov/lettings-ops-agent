@@ -1,0 +1,563 @@
+{
+ "case_id": "008",
+ "case_type": "emergency_hazard",
+ "playbook": "emergency-hazard",
+ "urgency": "emergency",
+ "disposition": "escalated",
+ "decision": "Treated as an emergency hazard (water ingress onto a live ceiling light fitting with an enlarging ceiling bulge in Flat 2). Repeated the make-safe instructions to the Flat 2 occupant, instructed Vellum Electrical as an emergency make-safe attendance within the £250 ceiling (CAP-DISPATCH-EMERGENCY), sent the Flat 3 tenant the written scope and plumber's name she asked for plus a stopcock request, and updated the landlord. Entry to Flat 3 after the tenant's express refusal, with the landlord declining to authorise and no delegated override on the agency record, is not a decision I may take: escalated to the property manager/director under ESC-SAFETY and RTE-STAFF, with welfare follow-up for both flats.",
+ "recap": "Active leak into Flat 2 onto a wet light fitting and bulging ceiling; emergency electrical make-safe instructed, parties updated, Flat 3 entry decision escalated.",
+ "stage": "work_in_progress",
+ "hold_reason": "",
+ "next_step": "Agency director / duty manager (Devra Senn) to decide on emergency entry to Flat 3 against the full tenancy wording, and to make a welfare call to Bevin Orlo (Flat 2) — before 17:30 today.",
+ "definition_of_done": [
+  {
+   "item": "made_safe",
+   "status": "done",
+   "evidence": "event-003 and event-017 (Arlen's instructions), reinforced this session by ACT-3; tenant acknowledged at event-004 and event-023",
+   "text": "First safety action for the hazard sent to the occupant, acknowledged where possible"
+  },
+  {
+   "item": "emergency_dispatch",
+   "status": "done",
+   "evidence": "ACT-1 emergency electrical make-safe to Vellum Electrical, window 12:30-13:15 confirmed at event-014/event-018; plumber attended 10:30 (event-016, event-021)",
+   "text": "Emergency contractor instructed under the emergency mandate with a confirmed attendance time"
+  },
+  {
+   "item": "landlord_informed",
+   "status": "done",
+   "evidence": "ACT-4 (hazard, dispatch and GBP 250 make-safe cap); earlier calls event-006, event-011, event-019",
+   "text": "Landlord told of the hazard, the dispatch and the expected cost band"
+  },
+  {
+   "item": "welfare",
+   "status": "pending",
+   "evidence": "No vulnerability recorded for either occupant (get_case_details, case file); welfare call to Bevin Orlo requested from the duty manager in the handover",
+   "text": "Vulnerable occupant identified; a welfare call or temporary measure arranged by a human"
+  },
+  {
+   "item": "hazard_cleared",
+   "status": "pending",
+   "evidence": "No contractor report yet; electrician attendance window 12:30-13:15 open (event-018); source untraced and uncontrolled (event-016, event-021)",
+   "text": "Contractor confirms the hazard is cleared, or a human owns the case until it is"
+  },
+  {
+   "item": "follow_up_work",
+   "status": "pending",
+   "evidence": "No scope or quote possible until the source is traced in Flat 3; landlord told no repair above the cap starts without his approval (ACT-4)",
+   "text": "Any permanent repair raised as a maintenance request with the landlord's approval"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Open emergency handed to a human; closure requires confirmed outcome",
+   "text": "Outcome confirmed by a human and the request closed"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Water is entering Flat 2 through the bedroom ceiling at a light fitting, below Flat 3's bathroom; dripping has increased and a damp ceiling bulge is reportedly enlarging.",
+   "source_ids": [
+    "event-001",
+    "event-002",
+    "event-012",
+    "event-017",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The electrical safety of the wet fitting and its circuit is unestablished; the wall switch being off does not make it safe and on-site testing is required.",
+   "source_ids": [
+    "event-003",
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Flat 2's occupant has left the bedroom, keeps the door closed, and reports no sparks, smoke or fallen material.",
+   "source_ids": [
+    "event-004",
+    "event-017",
+    "event-023"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Brindle Flow Plumbing attended Flat 2 and the common riser at 10:30 with the building manager; no source located, riser labels do not confirm a Flat 3 branch, no valve operated.",
+   "source_ids": [
+    "event-016",
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Vellum Electrical offered and maintained an attendance window of 12:30-13:15 for the wet fitting, subject to access, which Bevin Orlo agreed to provide.",
+   "source_ids": [
+    "event-014",
+    "event-015",
+    "event-018",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Flat 3's tenant withholds consent to entry until she returns, not before 17:30, and asked that no key be used; she requested the plumber's name and proposed work in writing before reconsidering.",
+   "source_ids": [
+    "event-009",
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The landlord of Flat 3 is away, has no key, gave no standing permission, and has not authorised entry against the tenant's refusal; he asked the agency to check the full tenancy wording.",
+   "source_ids": [
+    "event-006",
+    "event-011",
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The duty manager found no documented delegated authority for staff to override the occupant's refusal; the route is the full agreement plus an agency director decision, and emergency services if there is immediate danger.",
+   "source_ids": [
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No occupant vulnerability (age, health, pregnancy, children, disability) is recorded anywhere in the case file for either flat.",
+   "source_ids": [
+    "get_case_details",
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The landlord points to tenancy clauses for repairs on notice and emergency repairs but cannot say whether entry is permitted after a refusal; the duty manager finds no delegated authority to override. The difference decides whether anyone may enter Flat 3 before 17:30.",
+   "fact_ids": [
+    "F6",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-011",
+    "event-019",
+    "event-022"
+   ],
+   "resolution": "Full tenancy agreement to be retrieved and the entry decision taken by the agency director; recorded and escalated, no entry attempted.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Water dripping onto a ceiling light fitting with unestablished circuit status, plus an enlarging ceiling bulge (collapse risk) in Flat 2.",
+   "source_ids": [
+    "event-002",
+    "event-012",
+    "event-017",
+    "event-023"
+   ],
+   "action_taken": "Make-safe instructions repeated to the occupant (ACT-3); emergency electrician instructed to test and isolate (ACT-1); escalated under ESC-SAFETY."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Common riser labels are incomplete and no valve can be confirmed as serving Flat 3, so no supply could be isolated from outside the flat.",
+   "source_ids": [
+    "event-010",
+    "event-016",
+    "event-021"
+   ],
+   "action_taken": "Recorded; riser isolation not attempted; source tracing depends on Flat 3 access."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "008",
+    "title": "Water ingress affecting two flats",
+    "received_at": "2025-06-18 08:12:00 UTC",
+    "track": "Property Management",
+    "case_number": "008",
+    "property": "Flat 3, 8 Tallowmere Row, Ossin Vale, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Arlen Quist (Property Manager, Northbridge Lettings)",
+    "events_visible": 24,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Water ingress affecting two flats\n\n## Case details\n- source role: Tenant\n- created: 2025-06-18 08:12:00 UTC\n- property: Flat 3, 8 Tallowmere Row, Ossin Vale, ZZ1 1ZZ\n\n## Initial request\nWater is entering the flat below from an unidentified source. Please help coordinate an inspection and next steps."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "008-get_case_details-bb21983431ec",
+   "receipt": "{\"id\": \"008\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:36:46.114808Z",
+   "finished_at": "2026-10-10T15:36:46.114976Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "008-get_action_ledger-6dcf99a69c47",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:36:46.115202Z",
+   "finished_at": "2026-10-10T15:36:46.115266Z"
+  },
+  {
+   "seq": 3,
+   "tool": "assign_contractor",
+   "tool_class": "write",
+   "input": {
+    "trade": "electrician",
+    "description": "EMERGENCY make-safe only, Flat 2, 8 Tallowmere Row, Ossin Vale ZZ1 1ZZ: water dripping through bedroom ceiling onto a light fitting; occupant reports an enlarging damp bulge beside the fitting (event-012, event-017, event-023). Attend in the agreed 12:30-13:15 window (event-014, event-018), test and isolate the affected circuit, make the fitting and ceiling area electrically safe, and report the circuit status. Occupant Bevin Orlo is out of the bedroom and will provide access (event-015, event-023). Make-safe works only, capped at GBP 250; any further repair must be quoted and approved before it starts.",
+    "urgency": "emergency",
+    "estimated_cost_gbp": 250,
+    "contractor_hint": "Runa Elt, Vellum Electrical (already arranged, event-014)"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-DISPATCH-EMERGENCY"
+    ],
+    "reason": "Safety duty overrides the landlord's cap for MAKING SAFE (s.11 Landlord and Tenant Act 1985, gas and electrical safety regulations): attendance, isolation, temporary heaters, boarding, a locksmith, up to £250 without anyone's approval. The repair itself above that is not covered: it goes to the landlord or the on-call manager now, with the quote and the deadline (APR-EMERGENCY-REPAIR). Notify the landlord immediately after dispatch.\n",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "assign_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-assign_contractor-4d7039d2bee3",
+   "action_id": "008-assign_contractor-4d7039d2bee3",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:37:21.623289Z",
+   "finished_at": "2026-10-10T15:37:21.623538Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Ms Mallow (Flat 3) - as you asked on the call at 11:48 (event-020), here is the proposed work in writing. Plumber: Daro Fen, Brindle Flow Plumbing. Proposed scope in Flat 3: non-destructive leak tracing around the bathroom (checking visible pipework, under the bath/basin, around the WC and the floor), and identifying a valve that can safely isolate the supply if a leak is found. No ceilings or floors would be opened and no work would be carried out beyond that without contacting you first. An electrician, Runa Elt of Vellum Electrical, is attending Flat 2 between 12:30 and 13:15 because water is reaching a ceiling light fitting there; the ceiling below your bathroom is now dripping faster with a visible bulge (event-012, event-017, event-023). We have not entered Flat 3 and will not use a key without your agreement. Two things would help: (1) if you are willing, we can attend as soon as you are home from 17:30 today, or earlier if you can meet us; (2) if you can, please turn off the water at your stopcock, or tell us by reply if you would like us to talk you through where it usually is. Please reply with a time that works, or call us."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-notify_tenant-6ada61a41e2d",
+   "action_id": "008-notify_tenant-6ada61a41e2d",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:37:21.623636Z",
+   "finished_at": "2026-10-10T15:37:21.623752Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Mr Orlo (Flat 2) - thank you for the update at 12:38 (event-023). Please continue to keep out of the bedroom and keep the door closed, keep everyone away from the bulging area of ceiling, and do not touch the light fitting, the wet ceiling or nearby switches. Do not try to operate an unfamiliar breaker at the consumer unit. The electrician, Runa Elt of Vellum Electrical, is due between 12:30 and 13:15 to test and make the circuit safe; please let him in and tell him about the bulge. If you see sparks, smoke, a burning smell, any part of the ceiling starting to fall, or anything that feels dangerous, leave the flat and call 999. Call us straight away if the bulge grows further or water starts coming through anywhere else."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-notify_tenant-50ff2340b34c",
+   "action_id": "008-notify_tenant-50ff2340b34c",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:37:21.623825Z",
+   "finished_at": "2026-10-10T15:37:21.623913Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Mr Pell - update on Flat 3, 8 Tallowmere Row. Water is still entering Flat 2 below your bathroom: faster dripping, a wet ceiling light fitting and an enlarging ceiling bulge reported at 10:02, 11:02 and 12:38 (event-012, event-017, event-023). Brindle Flow Plumbing attended Flat 2 and the common riser at 10:30 with the building manager: no source found and no valve confirmed as serving Flat 3, so nothing could be isolated (event-016, event-021). We have instructed Vellum Electrical as an emergency make-safe attendance in Flat 2, window 12:30-13:15, to test and isolate the affected circuit. This is make-safe work under our emergency authority, capped at GBP 250; no repair above that will start without your approval. Flat 3 remains inaccessible: Ms Mallow does not consent to entry before she returns at 17:30 (event-009, event-020) and you have not authorised entry in your absence (event-006, event-011, event-019). We have not entered and will not use a key without consent. Our duty manager found no documented authority for staff to override a refusal (event-022), so the question of emergency entry to Flat 3 is now with our director. We have written to Ms Mallow with the plumber's name and the proposed scope, and asked her to turn off her stopcock. We will come back to you before any entry and with any repair quote."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-notify_landlord-e069c35f7b11",
+   "action_id": "008-notify_landlord-e069c35f7b11",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:37:21.623990Z",
+   "finished_at": "2026-10-10T15:37:21.624078Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Emergency hazard (water ingress onto live ceiling fitting + enlarging ceiling bulge, Flat 2). Actions this session: ACT-1 emergency make-safe dispatch to Vellum Electrical (Runa Elt), window 12:30-13:15, capped GBP 250 under CAP-DISPATCH-EMERGENCY (no landlord approval sought or needed for make-safe); ACT-2 written scope + stopcock request to Yara Mallow (Flat 3) per her request at event-020; ACT-3 repeat safety instruction to Bevin Orlo (Flat 2) per event-023; ACT-4 landlord update per CAP-DISPATCH-EMERGENCY notify duty. Unresolved and outside my authority: entry to Flat 3 after the tenant's refusal (event-009, event-020), landlord not authorising (event-011, event-019), no delegated override authority on the agency record (event-022). Full tenancy wording not available to me; no tenancy document in the case file. Referred to a human for the entry decision and welfare follow-up."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-add_note-047d06f0f93c",
+   "action_id": "008-add_note-047d06f0f93c",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:37:29.733933Z",
+   "finished_at": "2026-10-10T15:37:29.734170Z"
+  },
+  {
+   "seq": 8,
+   "tool": "definition_of_done",
+   "tool_class": "read",
+   "input": {
+    "facts": "[{\"id\": \"F1\", \"statement\": \"Water is entering Flat 2 through the bedroom ceiling at a light fitting, below Flat 3's bathroom; dripping has increased and a damp ceiling bulge is reportedly enlarging.\", \"source_ids\": [\"event-001\", \"event-002\", \"event-012\", \"event-017\", \"event-023\"], \"confidence\": \"high\"}, {\"id\": \"F2\", \"statement\": \"The electrical safety of the wet fitting and its circuit is unestablished; the wall switch being off does not make it safe, and testing on site is required.\", \"source_ids\": [\"event-003\", \"event-018\"], \"confidence\": \"high\"}, {\"id\": \"F3\", \"statement\": \"Flat 2's occupant has left the bedroom, keeps the door closed, and reports no sparks, smoke or fallen material.\", \"source_ids\": [\"event-004\", \"event-017\", \"event-023\"], \"confidence\": \"medium\"}, {\"id\": \"F4\", \"statement\": \"Brindle Flow Plumbing attended Flat 2 and the common riser at 10:30 with the building manager; no source was located, riser labels do not confirm a Flat 3 branch, and no valve was operated.\", \"source_ids\": [\"event-016\", \"event-021\"], \"confidence\": \"high\"}, {\"id\": \"F5\", \"statement\": \"Vellum Electrical offered and maintained an attendance window of 12:30-13:15 for the wet fitting, subject to tenant access, which Bevin Orlo agreed to provide.\", \"source_ids\": [\"event-014\", \"event-015\", \"event-018\", \"event-023\"], \"confidence\": \"high\"}, {\"id\": \"F6\", \"statement\": \"Flat 3's tenant withholds consent to entry until she returns, not before 17:30, and asked that no key be used; she requested the plumber's name and proposed work in writing before reconsidering.\", \"source_ids\": [\"event-009\", \"event-020\"], \"confidence\": \"high\"}, {\"id\": \"F7\", \"statement\": \"The landlord of Flat 3 is away, has no key, has given no standing permission, and has not authorised entry against the tenant's refusal; he asked the agency to check the full tenancy wording.\", \"source_ids\": [\"event-006\", \"event-011\", \"event-019\"], \"confidence\": \"high\"}, {\"id\": \"F8\", \"statement\": \"The duty manager found no documented delegated authority for staff to override the occupant's refusal; the escalation route is the full agreement plus an agency director decision, and emergency services if there is immediate danger.\", \"source_ids\": [\"event-022\"], \"confidence\": \"high\"}, {\"id\": \"F9\", \"statement\": \"No occupant vulnerability (age, health, pregnancy, children, disability) is recorded anywhere in the case file for either flat.\", \"source_ids\": [\"get_case_details\", \"event-001\", \"event-002\"], \"confidence\": \"medium\"}]",
+    "assumptions": "[\"Assumption: the GBP 250 figure on ACT-1 is the emergency make-safe ceiling in CAP-DISPATCH-EMERGENCY, not a quoted price; no contractor has given a price for this job.\", \"Assumption: the suspected source is in or above Flat 3's bathroom because of the position of the ingress (event-001, event-002); this is unconfirmed and no one has stated Flat 3 is the source.\"]",
+    "uncertainty": "[\"Whether the tenancy agreement contains an emergency-access clause that applies after a refusal - the document is not in the case file.\", \"Whether the electrician attended in the 12:30-13:15 window and whether the circuit is now isolated.\", \"Whether the leak originates in Flat 3 at all, and whether any isolation point exists for it.\"]",
+    "conflicts": "[{\"description\": \"Landlord points to tenancy clauses for 'repairs on notice' and 'emergency repairs' but cannot say whether entry is permitted after refusal; the duty manager finds no delegated authority to override. The difference decides whether anyone may enter Flat 3 before 17:30.\", \"fact_ids\": [\"F6\", \"F7\", \"F8\"], \"source_ids\": [\"event-011\", \"event-019\", \"event-022\"], \"resolved_by\": \"unresolved\", \"resolution\": \"Full tenancy agreement to be retrieved and the entry decision taken by the agency director; recorded and escalated, no entry attempted.\"}]",
+    "red_flags": "[{\"kind\": \"safety_hazard\", \"description\": \"Water dripping onto a ceiling light fitting with an unestablished circuit status, plus an enlarging ceiling bulge (collapse risk) in Flat 2.\", \"source_ids\": [\"event-002\", \"event-012\", \"event-017\", \"event-023\"], \"action_taken\": \"Make-safe instructions repeated to the occupant (ACT-3); emergency electrician instructed to test and isolate (ACT-1); escalated under ESC-SAFETY.\"}, {\"kind\": \"data_quality\", \"description\": \"Common riser labels are incomplete and no valve can be confirmed as serving Flat 3, so no supply could be isolated from outside the flat.\", \"source_ids\": [\"event-010\", \"event-016\", \"event-021\"], \"action_taken\": \"Recorded; isolation from the riser not attempted; source tracing depends on Flat 3 access.\"}]",
+    "safety_actions": "[\"Repeated to Flat 2 occupant: stay out of the bedroom, door closed, keep away from the bulging ceiling, do not touch the fitting, wet ceiling or nearby switches, do not operate an unfamiliar consumer-unit breaker, leave and call 999 on sparks, smoke, burning smell or falling material (ACT-3, triggered by event-023)\", \"Emergency electrical make-safe attendance instructed for the wet fitting in Flat 2 within the 12:30-13:15 window, capped at the GBP 250 make-safe ceiling (ACT-1, triggered by event-002 and event-018)\", \"Asked the Flat 3 tenant in writing to turn off her stopcock or be talked through where it is, as a damage-limiting step that needs no entry (ACT-2, water first action)\", \"No entry to Flat 3 attempted and no key used, consent being withheld (event-009, event-020)\"]",
+    "promises": "[{\"by\": \"agency\", \"to\": \"landlord\", \"what\": \"Contact the landlord before any non-routine entry to Flat 3 and before any repair above the make-safe cap\", \"due\": \"before entry\", \"status\": \"open\", \"source_id\": \"ACT-4\"}, {\"by\": \"agency\", \"to\": \"tenant (Flat 3)\", \"what\": \"Non-destructive leak tracing only; nothing opened and no further work without contacting her first\", \"due\": \"at attendance\", \"status\": \"open\", \"source_id\": \"ACT-2\"}, {\"by\": \"contractor (Vellum Electrical)\", \"to\": \"agency\", \"what\": \"Attend Flat 2 between 12:30 and 13:15 to inspect and test the wet fitting and circuit\", \"due\": \"2025-06-18 13:15 UTC\", \"status\": \"open\", \"source_id\": \"event-018\"}, {\"by\": \"tenant (Flat 2)\", \"to\": \"agency\", \"what\": \"Meet the electrician and stay out of the affected bedroom\", \"due\": \"2025-06-18 13:15 UTC\", \"status\": \"open\", \"source_id\": \"event-015\"}]",
+    "clocks": "[{\"rule_id\": \"CLK-S11\", \"name\": \"Repairs within a reasonable time once reported\", \"status\": \"in_force\", \"basis\": \"Section 11, Landlord and Tenant Act 1985; reported 2025-06-18 08:12 UTC\", \"deadline\": null, \"note\": \"Active ingress affecting a second flat - reasonable time is same-day make-safe.\"}, {\"rule_id\": \"CLK-AWAAB-PRS\", \"name\": \"Awaab's Law emergency-hazard timescale (reference only)\", \"status\": \"proposed\", \"basis\": \"Social-housing baseline, 24 hours for emergency hazards; not a private-sector legal deadline\", \"deadline\": \"2025-06-19 08:12 UTC\", \"note\": \"Reference point for the make-safe clock, not an obligation here.\"}, {\"rule_id\": \"CLK-SOP-ACK\", \"name\": \"Acknowledge tenant report within one working day\", \"status\": \"prior\", \"basis\": \"Tenant reports acknowledged same morning\", \"deadline\": null, \"note\": \"Met: event-002, event-009.\"}]",
+    "authority_citations": "[\"CAP-DISPATCH-EMERGENCY\", \"CAP-NOTIFY\", \"CAP-LOG\", \"APR-EMERGENCY-REPAIR\", \"ESC-SAFETY\", \"ESC-CONFLICT\", \"RTE-STAFF\", \"RTE-TENANT\", \"PRO-TENANT-LIABILITY\", \"PRO-LEGAL\", \"PRO-PII\"]",
+    "withheld_actions": "[\"Did not authorise or arrange entry to Flat 3 - the tenant refuses consent (event-009, event-020), the landlord has not authorised (event-019) and no delegated override exists (event-022).\", \"Did not schedule_access for Flat 3 - no tenant consent, so the consent field cannot be set truthfully.\", \"Did not instruct any valve in the common riser to be operated - no valve confirmed to serve Flat 3 (event-016, event-021).\", \"Did not discuss liability or who pays for the Flat 2 ceiling damage (PRO-TENANT-LIABILITY, PRO-LEGAL).\", \"Did not request landlord approval for a repair: no quote or scope exists until the source is traced.\"]",
+    "hold_reason": ""
+   },
+   "status": "failed",
+   "gate": null,
+   "result": null,
+   "error": "unknown tool",
+   "attempts": 0,
+   "idempotency_key": null,
+   "action_id": "008-definition_of_done-90799dad9d7d",
+   "receipt": null,
+   "started_at": null,
+   "finished_at": null
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Contact the landlord before any non-routine entry to Flat 3 and before any repair above the make-safe cap",
+   "due": "before entry",
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant (Flat 3)",
+   "what": "Non-destructive leak tracing only; nothing opened and no further work without contacting her first",
+   "due": "at attendance",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "contractor (Vellum Electrical)",
+   "to": "agency",
+   "what": "Attend Flat 2 between 12:30 and 13:15 to inspect and test the wet fitting and circuit",
+   "due": "2025-06-18 13:15 UTC",
+   "source_id": "event-018",
+   "status": "open"
+  },
+  {
+   "by": "tenant (Flat 2)",
+   "to": "agency",
+   "what": "Meet the electrician and stay out of the affected bedroom",
+   "due": "2025-06-18 13:15 UTC",
+   "source_id": "event-015",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Section 11, Landlord and Tenant Act 1985; reported 2025-06-18 08:12 UTC",
+   "deadline": null,
+   "note": "Active ingress affecting a second flat - reasonable time means same-day make-safe."
+  },
+  {
+   "rule_id": "CLK-AWAAB-PRS",
+   "name": "Awaab's Law emergency-hazard timescale (reference only)",
+   "status": "proposed",
+   "basis": "Social-housing baseline of 24 hours for emergency hazards; not a private-sector legal deadline",
+   "deadline": "2025-06-19 08:12 UTC",
+   "note": "Reference point only."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a tenant report within one working day",
+   "status": "prior",
+   "basis": "Both tenants contacted the same morning",
+   "deadline": null,
+   "note": "Met at event-002 and event-009."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Flat 3, 8 Tallowmere Row: do we enter Flat 3 before 17:30 without the tenant's consent to stop an active leak, and who makes the welfare call to Flat 2?",
+  "summary": [
+   "Flat 2 (below): water dripping onto a bedroom ceiling light fitting, dripping faster and the ceiling bulge reportedly enlarging; occupant out of the room, no sparks/smoke, nothing fallen (event-012, event-017, event-023).",
+   "Brindle Flow Plumbing and the building manager attended Flat 2 and the common riser at 10:30: no source found, riser labels incomplete, no valve confirmed to serve Flat 3, nothing isolated (event-016, event-021).",
+   "Vellum Electrical instructed as emergency make-safe, window 12:30-13:15, capped GBP 250 under CAP-DISPATCH-EMERGENCY (ACT-1); the electrician says the fitting cannot be assumed safe from the wall-switch position (event-018).",
+   "Flat 3 tenant Yara Mallow refuses entry before she returns at 17:30 and asked that no key be used (event-009, event-020); landlord Niko Pell is away, has no key and has not authorised entry (event-006, event-011, event-019).",
+   "Duty manager found no documented delegated authority to override a refusal; full tenancy wording unchecked; route is the full agreement plus an agency director decision (event-022)."
+  ],
+  "gap": "Whether the tenancy agreement contains an emergency-access clause that survives a refusal; whether the electrician has attended and isolated the circuit; the leak source and whether any valve can isolate Flat 3; whether Yara can or will turn off her stopcock.",
+  "options": [
+   "Obtain and read the full tenancy agreement now; if an emergency-access clause applies, the director authorises accompanied entry to Flat 3 with the plumber and a witness, notifying Yara first",
+   "Hold entry until Yara returns at 17:30 and book the plumber for 17:30-18:30 with her consent; keep the Flat 2 bedroom isolated meanwhile",
+   "If the ceiling collapses, water reaches the fitting uncontrolled, or there is any immediate danger, call emergency services and follow their direction (event-022)"
+  ],
+  "recommended": "Pull the full tenancy agreement and get the director's decision within the hour; in parallel keep the 17:30 consented slot with Yara as the fallback and have the plumber on standby.",
+  "default_if_timeout": "No entry to Flat 3 before 17:30; electrician makes the Flat 2 circuit safe in the 12:30-13:15 window; plumber attends Flat 3 at 17:30 with Yara's consent; duty manager welfare-calls Bevin Orlo this afternoon.",
+  "deadline": "2025-06-18 17:30 UTC (Yara's return; CLK-S11 reasonable time, CLK-AWAAB-PRS 24h as reference only)",
+  "undo": "ACT-1 (electrical make-safe) can be cancelled with Vellum Electrical only if Runa Elt has not yet attended; messages ACT-2 to ACT-4 cannot be unsent.",
+  "context_refs": [
+   "event-012",
+   "event-016",
+   "event-018",
+   "event-020",
+   "event-022",
+   "event-023",
+   "ACT-1"
+  ]
+ },
+ "authority_citations": [
+  "CAP-DISPATCH-EMERGENCY",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-EMERGENCY-REPAIR",
+  "ESC-SAFETY",
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "RTE-TENANT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-LEGAL",
+  "PRO-PII"
+ ],
+ "assumptions": [
+  "Assumption: the GBP 250 figure on ACT-1 is the emergency make-safe ceiling in CAP-DISPATCH-EMERGENCY, not a quoted price; no contractor has given a price for this job.",
+  "Assumption: the suspected source is in or above Flat 3's bathroom because of the position of the ingress (event-001, event-002); this is unconfirmed."
+ ],
+ "uncertainty": [
+  "Whether the tenancy agreement contains an emergency-access clause that applies after a refusal - the document is not in the case file.",
+  "Whether the electrician attended in the 12:30-13:15 window and whether the circuit is now isolated.",
+  "Whether the leak originates in Flat 3 at all, and whether any isolation point exists for it."
+ ],
+ "safety_actions": [
+  "Repeated to the Flat 2 occupant: stay out of the bedroom, door closed, keep away from the bulging ceiling, do not touch the fitting, wet ceiling or nearby switches, do not operate an unfamiliar breaker, leave and call 999 on sparks, smoke, burning smell or falling material (ACT-3, triggered by event-023)",
+  "Emergency electrical make-safe attendance instructed for the wet fitting in Flat 2, window 12:30-13:15, capped at the GBP 250 make-safe ceiling (ACT-1, triggered by event-002 and event-018)",
+  "Asked the Flat 3 tenant in writing to turn off her stopcock or be talked through where it is - a damage-limiting step needing no entry (ACT-2, water first action)",
+  "No entry to Flat 3 attempted and no key used, consent being withheld (event-009, event-020)"
+ ],
+ "withheld_actions": [
+  "Did not authorise or arrange entry to Flat 3 - tenant refuses consent (event-009, event-020), landlord has not authorised (event-019), no delegated override exists (event-022).",
+  "Did not call schedule_access for Flat 3 - no tenant consent, so the consent field cannot be set truthfully.",
+  "Did not instruct any riser valve to be operated - no valve confirmed to serve Flat 3 (event-016, event-021).",
+  "Did not discuss liability or who pays for the Flat 2 ceiling damage (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+  "Did not request landlord approval for a repair - no quote or scope exists until the source is traced."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:36:43.028953Z",
+ "finished_at": "2026-10-10T15:39:19.636925Z",
+ "input_tokens": 62872,
+ "output_tokens": 14921,
+ "cache_read_tokens": 70935
+}

@@ -1,0 +1,531 @@
+{
+ "case_id": "018",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "needs_info",
+ "decision": "The landlord took the work in hand himself on 18/08/2025 (event-007), so there is no provider for Northbridge to chase and, with no spend cap or standing instruction on file, no authority to instruct one (APR-SPEND-OVER-CAP, default cap £0). Three waiting periods have expired with no landlord update and the tenant reports the proofing still undone (event-010, event-017, event-018). I chased the landlord with a two-option ask and a hard reply-by of 5pm Tue 16/09/2025 (ACT-1), updated the tenant with that time and interim hygiene/safety advice without promising a date (ACT-2), put the case on hold Waiting for Landlord (ACT-3) and recorded the scope gap and safety checks (ACT-4). The case now waits on one named party for a landlord-owned decision (RTE-LANDLORD), so it finishes as request_info rather than an escalation; if 16/09 passes with no reply, the next step is a referral to the property manager.",
+ "recap": "Rats in kitchen; landlord is doing the works himself but proofing is undone after 4 weeks — chased landlord for a completion date or written authority to instruct, reply-by 16/09.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — Gareth Vale to give the proofing completion date and pest report, or written authority for Northbridge to instruct a pest contractor; reply-by 5pm Tue 16/09/2025 (ACT-1, ACT-3).",
+ "next_step": "Landlord (Gareth Vale) to reply by 5pm Tue 16/09/2025 with the proofing completion date and pest-control report, or written authority for Northbridge to instruct and quote; if no reply, refer to the property manager.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "Urgency set to urgent (rats inside the kitchen, event-001); acknowledged event-002; hygiene and escalation advice given to tenant in ACT-2",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "Landlord elected to arrange the works with his own contractor (event-006, event-007); no Northbridge spend authorised",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "Landlord's contractor not named on file; asked in ACT-1. No Northbridge provider may be instructed (no cap on file, APR-SPEND-OVER-CAP)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "Expected proofing visit did not take place (event-017); no slot confirmed",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "Works are at the landlord's own arrangement and cost; no Northbridge quote exists",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No completion evidence or pest-control report on file (event-011, event-018)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "Pest-control report promised to the tenant by the contractor (event-001) never received; requested from the landlord in ACT-1",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "No agency-instructed work; landlord pays his own contractor direct",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Confirmation requested 18/08 (event-007) and chased 11/09 (ACT-1); not received",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant reports no access restrictions (event-001)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Case on hold Waiting for Landlord (ACT-3)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported rats outside and inside the kitchen, including beneath the sink, on 14/08/2025, after four days away; a small dog lives at the property and there are no access restrictions.",
+   "source_ids": [
+    "event-001",
+    "index"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Agency acknowledged the report to the tenant the same day and said landlord approval would be sought before works (14/08/2025).",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord was asked on 17/08/2025 whether Northbridge should arrange works or he would use his own contractor; he replied asking for a call and gave no written approval.",
+   "source_ids": [
+    "event-003",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "On 18/08/2025 the agency recorded that the landlord would arrange the works directly and asked him for an expected completion date; no contractor, scope or date was recorded.",
+   "source_ids": [
+    "event-007",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Tenant was told on 18/08/2025 that the landlord would arrange works and that he or his contractor might contact them about access.",
+   "source_ids": [
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "On 01/09/2025 the tenant reported pest-control visits ongoing and the openings beneath the kitchen sink still unsealed.",
+   "source_ids": [
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "On 07/09/2025 the tenant said pest control attended and removed its equipment, and that separate contractors were expected the next day for the wall area; on 08/09/2025 nobody attended.",
+   "source_ids": [
+    "event-014",
+    "event-017"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "Three automated waiting-period expiries were recorded (07/09, 08/09, 11/09) with no landlord update and no evidence the proofing is complete.",
+   "source_ids": [
+    "event-012",
+    "event-015",
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No landlord spend cap, standing instruction, pest-control report, diagnosis, quote or completion evidence is on file; a history search returned no such record.",
+   "source_ids": [
+    "search_history",
+    "event-011",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "Tenant prefers phone contact and offered to report any rearranged appointment.",
+   "source_ids": [
+    "event-017"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Scope of the outstanding proofing is inconsistent: openings beneath the kitchen sink (tenant, 01/09) versus contractors working on the wall area (tenant, 07/09); the landlord separately recalls a Dec 2024 record saying filling external openings may not be feasible.",
+   "fact_ids": [
+    "F6",
+    "F7"
+   ],
+   "source_ids": [
+    "event-010",
+    "event-014",
+    "event-006"
+   ],
+   "resolution": "Put to the landlord as part of the 16/09 ask (contractor, scope, completion date, pest report) — ACT-1; not resolvable from the file.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Key facts rest only on recollection and untrusted tenant/landlord accounts: no pest-control report, diagnosis, entry route, contractor name or completion evidence is on file, and the landlord's Dec 2024 'may not be feasible' recollection is unverified.",
+   "source_ids": [
+    "event-006",
+    "event-010",
+    "event-014"
+   ],
+   "action_taken": "Recorded in ACT-4; documentary evidence requested from the landlord in ACT-1."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "018",
+    "title": "Kitchen maintenance report",
+    "received_at": "2025-08-14 11:05:10 UTC",
+    "track": "Property Management",
+    "case_number": "018",
+    "property": "14 Mosswold Crescent, Brindlewick, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Tara Wren (Property Manager, Northbridge Lettings)",
+    "events_visible": 19,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Kitchen maintenance report\n\n## Case details\n- source role: Tenant\n- created: 2025-08-14 11:05:10 UTC\n- property: 14 Mosswold Crescent, Brindlewick, ZZ1 1ZZ\n\n## Initial request\nThe tenant reports rat activity in the kitchen after returning from a short trip and asks for the issue to be addressed. They mention earlier pest-control visits and possible openings near the kitchen drain."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "018-get_case_details-62f2c2e609ff",
+   "receipt": "{\"id\": \"018\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:40:31.764003Z",
+   "finished_at": "2026-10-10T15:40:31.764105Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "018-get_action_ledger-eb97ac798e3a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:40:31.764234Z",
+   "finished_at": "2026-10-10T15:40:31.764281Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "approval cap contractor instruct"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "018-search_history-54e9973b546e",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:40:48.425314Z",
+   "finished_at": "2026-10-10T15:40:48.425467Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-004",
+     "timestamp": "2025-08-17 15:25:13 UTC",
+     "channel": "Email",
+     "from": "Gareth Vale (Landlord)",
+     "to": "Tara Wren (Property Manager, Northbridge Lettings)",
+     "excerpt": "[2025-08-17 15:25:13 UTC] Email · from: Gareth Vale (Landlord) · to: Tara Wren (Property Manager, Northbridge Lettings)\nAsks for an urgent call back and provides 07700 900184. Does not give written approval or specify whether he will arrange the work himself."
+    },
+    {
+     "event": "event-006",
+     "timestamp": "2025-08-18 10:49:07 UTC",
+     "channel": "Call",
+     "from": "Gareth Vale (Landlord)",
+     "to": "Tara Wren (Property Manager, Northbridge Lettings)",
+     "excerpt": "[2025-08-18 10:49:07 UTC] Call · from: Gareth Vale (Landlord) · to: Tara Wren (Property Manager, Northbridge Lettings)\nDiscusses an earlier property record that he recalls from December 2024: traps had been placed inside and outside, a kitchen kickboard was replaced during investigation, and the record reportedly said filling the external openings might not be feasible. He is unsure why. He also recalls a separate pest contractor having been used previously. No current written pest report, diagn"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "018-search_history-66be932ff86f",
+   "receipt": "[{\"event\": \"event-004\", \"timestamp\": \"2025-08-17 15:25:13 UTC\", \"channel\": \"Email\", \"from\": \"Gareth Vale (Landlord)\", \"to\": \"Tara Wren (Property Manager, Northbridge Lettings)\", \"excerpt\": \"[2025-08-…",
+   "started_at": "2026-10-10T15:40:48.425540Z",
+   "finished_at": "2026-10-10T15:40:48.425633Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 14 Mosswold Crescent, Brindlewick — rat activity in the kitchen (reported 14/08/2025, event-001).\n\nOn 18/08/2025 we recorded that you would arrange the pest treatment and proofing directly and asked for an expected completion date (event-007). No completion date or confirmation has reached us since.\n\nWhat the tenant has reported since:\n- 01/09/2025: pest-control visits ongoing; openings beneath the kitchen sink still not blocked (event-010).\n- 07/09/2025: pest control attended and removed its equipment; separate contractors expected the next day for the wall/openings (event-014).\n- 08/09/2025: nobody attended to fill the openings (event-017).\n\nWe hold no written pest report, no diagnosis of the entry route and no evidence that any opening has been sealed. The repairing obligation clock (s.11 Landlord and Tenant Act 1985) has been running for four weeks with rodents reported inside the kitchen.\n\nPlease reply by 5pm on Tuesday 16 September 2025 with either:\n(a) the contractor, the agreed scope and the date your proofing work will be completed, and a copy of the pest-control report; or\n(b) your written authority for Northbridge Lettings to instruct a pest-control contractor to inspect, identify the entry route and quote for proofing — we would send you the quote for approval before any work starts.\n\nIf we have no reply by that time we will refer the case to the property manager for a decision; we will not instruct any contractor or incur any cost without your written approval."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-notify_landlord-d0a9841894ac",
+   "action_id": "018-notify_landlord-d0a9841894ac",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:41:12.796835Z",
+   "finished_at": "2026-10-10T15:41:12.797043Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 14 Mosswold Crescent — rats in the kitchen.\n\nThank you for the updates on 1, 7 and 8 September. We have recorded that pest control removed its equipment on 7 September and that nobody attended on 8 September to fill the openings.\n\nThe landlord elected on 18 August to arrange this work directly. We have today written to him asking either for the contractor and completion date for the proofing work, or for his written authority for us to instruct our own pest-control contractor. We have asked him to reply by 5pm on Tuesday 16 September. If he does not, we will refer the case to our property manager. We cannot book a visit until one of those two things happens, so we are not giving you a date we cannot back.\n\nIn the meantime, to limit the problem:\n- keep food (including pet food) in sealed containers and clear spillages and waste promptly;\n- keep the area under the sink clear so any opening and any droppings stay visible;\n- do not handle bait or traps left in place; wear gloves and wash hands after cleaning droppings;\n- tell us straight away if you see gnawed cables or pipework, or smell burning or gas, if any rodent gets into a cupboard with electrics, or if anyone in the household is bitten or unwell — we will treat that as an emergency.\n\nWe note you prefer a phone call (event-017) and we will call you with the next update. Please let us know of any further sightings."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-notify_tenant-fff760e968ee",
+   "action_id": "018-notify_tenant-fff760e968ee",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:41:12.797132Z",
+   "finished_at": "2026-10-10T15:41:12.797228Z"
+  },
+  {
+   "seq": 7,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — landlord elected to arrange the pest treatment and proofing himself (event-007); chased for completion date or written authority for Northbridge to instruct, reply-by 5pm Tue 16/09/2025. No spend authority on file (default cap £0), so no contractor can be instructed without his written approval.",
+    "until": "2025-09-16 17:00 UTC"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-put_on_hold-b22b62315f85",
+   "action_id": "018-put_on_hold-b22b62315f85",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:41:12.797298Z",
+   "finished_at": "2026-10-10T15:41:12.797414Z"
+  },
+  {
+   "seq": 8,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case state 11/09/2025: landlord-arranged works, no Northbridge contractor instructed. No landlord spend cap or standing instruction on file (searched history: no result) — default cap £0, so APR-SPEND-OVER-CAP applies to any instruction. Scope is unestablished: tenant described openings beneath the kitchen sink (event-010) while the 07/09 call described contractors working on the wall area (event-014); landlord recalled a Dec 2024 record saying filling external openings \"might not be feasible\" (event-006), which is unverified recollection, not a document. No pest-control report, diagnosis, entry route, quote or completion evidence on file. Three waiting periods have expired without a landlord update (event-012, event-015, event-018). Chased landlord with a 16/09/2025 reply-by and a two-option ask (ACT-1); tenant updated with that time plus hygiene/safety advice (ACT-2); case on hold Waiting for Landlord (ACT-3). Safety pass: no gas/electrical hazard reported — tenant asked to report gnawed cables or burning smell immediately; no vulnerability disclosed (household includes a small dog, no access restrictions, event-001)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-add_note-2ef07666bd97",
+   "action_id": "018-add_note-2ef07666bd97",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:41:20.883534Z",
+   "finished_at": "2026-10-10T15:41:20.883865Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "If no reply by 5pm Tue 16/09/2025, the case will be referred to the property manager; no contractor instructed and no cost incurred without his written approval.",
+   "due": "2025-09-16 17:00",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "We will call the tenant with the next update after the landlord's 16/09/2025 reply-by time.",
+   "due": "2025-09-16 17:00",
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 14/08/2025 (event-001)",
+   "deadline": null,
+   "note": "Four weeks elapsed with rodents reported inside the kitchen and no proofing evidence; cited to the landlord in ACT-1."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 14/08 11:05, acknowledged 14/08 11:20 (event-002)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Please confirm by 5pm on Tue 16/09/2025 either (a) the contractor, scope and completion date for the kitchen proofing work you are arranging, with a copy of the pest-control report, or (b) your written authority for Northbridge Lettings to instruct a pest-control contractor to inspect, identify the entry route and quote for proofing (quote to you for approval before work starts).",
+   "why": "Landlord elected to arrange the works himself (event-007); no completion evidence after three expired waits (event-012, event-015, event-018) and no spend authority on file, so Northbridge cannot instruct anyone.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Please call us with any further rat sightings, and immediately if you see gnawed cables or pipework, smell burning, or anyone is bitten or unwell.",
+   "why": "Keeps the urgency assessment current and would trigger the emergency route (electrical/safety) if the position changes; tenant prefers phone contact (event-017).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "CLK-S11",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: 'reply by 5pm Tue 16/09/2025' is three business days from the 11/09/2025 waiting-period expiry (event-018); no environment SLA for a landlord chase is on file.",
+  "Assumption: the landlord's works are at his own cost, since he elected to instruct his own contractor (event-007); no cost figure is stated anywhere on file and none has been invented."
+ ],
+ "uncertainty": [
+  "Whether any proofing has in fact been carried out since 08/09/2025 — no party has confirmed.",
+  "Whether the outstanding work is under the sink, the external drain openings, or the wall area.",
+  "Whether the landlord's own pest contractor is still engaged."
+ ],
+ "safety_actions": [
+  "Safety pass: no gas, electrical, water or structural hazard reported or observed; rodent-related electrical risk named as a check — tenant asked to report gnawed cables, burning smell or any bite/illness immediately, which would switch the case to emergency-hazard (ACT-2).",
+  "No occupant vulnerability disclosed (household includes a small dog; no access restrictions) — ESC-VULNERABLE not triggered (event-001).",
+  "No tenant health or household detail shared outside the case record (PRO-PII)."
+ ],
+ "withheld_actions": [
+  "Did not instruct a pest-control contractor: no landlord spend cap on file (default £0) and no written landlord approval in the history (APR-SPEND-OVER-CAP, CAP-DISPATCH-APPROVED).",
+  "Did not book an access window: no provider and no date exist to offer (CAP-NOTIFY).",
+  "Did not state or imply who pays for the treatment or proofing (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:40:28.457491Z",
+ "finished_at": "2026-10-10T15:42:07.484743Z",
+ "input_tokens": 48579,
+ "output_tokens": 8124,
+ "cache_read_tokens": 70935
+}

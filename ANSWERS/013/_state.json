@@ -1,0 +1,530 @@
+{
+ "case_id": "013",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Did not close the request. Despite an invoice being uploaded (event-023), the record contains no confirmed appointment and no work result: the contractor never selected a slot from the tenant's offered dates (event-014, event-015, event-017) and on 02/09 reported the glass had still not arrived (event-021). The invoice copy (glazing-invoice.pdf, event-023) states no amount, so it cannot be checked against the landlord-approved £180 incl. VAT (event-010) or forwarded for payment. Landlord authority is sound and already on file, so no new approval was sought. I chased the instructed contractor with a 2-working-day reply-by for attendance confirmation, a fitting slot and a priced invoice; asked the tenant to confirm whether anyone attended, whether the unit is still misted and whether damp or mould has appeared (the damp/cold concern was never assessed on site — event-005); updated the landlord that the invoice is not being processed; and placed the case on hold. Not an escalation: the open questions are owned by the contractor and the tenant, and the routine next steps are all reversible.",
+ "recap": "Misted kitchen glazing: invoice arrived with no amount and no evidence of fitting, so I chased the contractor and tenant for proof of attendance and held the case.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — Clearfirth Glazing to confirm whether the glazing was fitted and when, offer a slot if not, and reissue invoice NBL-013-INV-09 with the amount; reply due within 2 working days, then to the property manager (ACT-5).",
+ "next_step": "Clearfirth Glazing (Sella Vane) to confirm attendance date or offer a fitting slot and reissue the invoice showing the amount, within 2 working days (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "Categorised as routine glazing repair and acknowledged same working day (event-002); moisture-limiting steps and a mould-reporting instruction given to the tenant (ACT-3). Site assessment of the damp/cold element remains unperformed (event-005) and is queried at ACT-2/ACT-3.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-010 — landlord's own message approving the contractor at £180 total, matching the £150 + VAT quoted (event-009, event-011).",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "Clearfirth Glazing instructed and briefed (event-006, event-015, event-017); tenant told who is attending and what happens next (event-013, event-019, ACT-3).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "Tenant offered 24/25/26 Aug (event-014); contractor never selected a slot and none was agreed (event-015, event-017, event-021). Chased at ACT-2; no schedule_access booked because no provider-confirmed window exists.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-010 (landlord approval of £180 total) against the quote at event-009/event-011; VAT stated.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No visit report or provider confirmation of completion anywhere in the record (event-022); glass undelivered as at 02/09 (event-021). Requested at ACT-2 and cross-checked with the tenant at ACT-3.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "Only document is invoice NBL-013-INV-09 with no amount (event-023, glazing-invoice); no photos. Reissue requested at ACT-2.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "Deliberately withheld — an invoice with no amount cannot be checked against the approved £180; landlord told it is on hold (ACT-4).",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Cannot be sought until the work result and priced invoice exist (ACT-4).",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; the tenant asked to be present for access (event-014).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Case placed on hold pending the contractor (ACT-5); closure would be unsupported while work_result, visit_confirmed, documents and invoice_to_landlord are open.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported misting between the kitchen glazing panes, water gathering around the frame, a cold kitchen and concern about damp; the sash opens, closes and locks; pets at the property.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "No emergency definition is met: the window is secure and operable, no heating loss, no water near electrics, no gas or electrical fault; report made 31/07 (outside cold months).",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Quote stated to the landlord as £150 plus VAT, £180 total.",
+   "source_ids": [
+    "event-009",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Landlord Orren Vale replied in his own message that he was happy to use the contractor if £180 was the total value of the quote — approval on file for £180 incl. VAT, matching the quoted figure.",
+   "source_ids": [
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Tenant offered any time on 24, 25 or 26 August and asked to be present; the contractor never selected a slot and no appointment was ever confirmed.",
+   "source_ids": [
+    "event-014",
+    "event-015",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "On 24/08 the contractor said the glass had been ordered with no delivery estimate; on 02/09 she said it had still not arrived and she could not estimate delivery.",
+   "source_ids": [
+    "event-018",
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "On 09/09 the case was moved to 'awaiting post-visit documents' with no messages sent, no appointment confirmation and no visit report on file.",
+   "source_ids": [
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "An invoice dated 10/09/2025, ref NBL-013-INV-09, for 'Supply and fit 1 pane of glass to the kitchen glazing' was uploaded; the copy held states 'Amount: —', i.e. no figure.",
+   "source_ids": [
+    "event-023",
+    "event-024",
+    "glazing-invoice"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No site assessment or diagnosis of the wider damp or cold concern is recorded; the 04/08 authorisation covered obtaining a glazing price only.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "Tenant report acknowledged the same working day (31/07 08:30), satisfying the acknowledgement SOP.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The case status and the uploaded invoice assert the work was supplied and fitted, while the messaging record shows no confirmed appointment and the glass still undelivered on 02/09 — eight days before the invoice date.",
+   "fact_ids": [
+    "F5",
+    "F6",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-021",
+    "event-022",
+    "event-023",
+    "glazing-invoice"
+   ],
+   "resolution": "Not resolved from the file. Asked the contractor for the attendance date and a priced invoice, and the tenant whether anyone attended (ACT-2, ACT-3). Invoice withheld from the landlord for payment pending the answer (ACT-4).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Invoice NBL-013-INV-09 bills for 'supply and fit' with no amount stated, dated eight days after the contractor said the glass had not arrived, and with no confirmed attendance anywhere in the record. Recorded as unverified work and an unprocessable invoice, not as an allegation against the contractor.",
+   "source_ids": [
+    "event-021",
+    "event-023",
+    "glazing-invoice"
+   ],
+   "action_taken": "Invoice not forwarded for payment; contractor asked to confirm the attendance date and reissue with the amount; tenant asked to confirm whether anyone attended; landlord informed the invoice is on hold (ACT-1, ACT-2, ACT-3, ACT-4)."
+  },
+  {
+   "kind": "other",
+   "description": "Tenant's damp and cold concern, reported 31/07, has never been assessed on site; safety-pass keyword 'damp' present in the report. No damp or mould has been observed or reported as present, so this is recorded as an outstanding check rather than a hazard.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-005"
+   ],
+   "action_taken": "Asked the tenant whether damp, mould or staining has appeared and requested a photo; gave moisture-limiting steps; asked the contractor to note the frame condition on attendance; told the landlord a recommendation will follow if anything is reported (ACT-2, ACT-3, ACT-4)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "013",
+    "title": "Kitchen glazing maintenance request",
+    "received_at": "2025-07-31 08:02:00 UTC",
+    "track": "Property Management",
+    "case_number": "013",
+    "property": "8 Brackenmere Walk, Vellumbrook, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Tamsin Rook (Property Manager, Northbridge Lettings)",
+    "events_visible": 24,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Kitchen glazing maintenance request\n\n## Case details\n- source role: Tenant\n- created: 2025-07-31 08:02:00 UTC\n- property: 8 Brackenmere Walk, Vellumbrook, ZZ1 1ZZ\n\n## Initial request\nThe kitchen glazing has been misted between the panes for some time. Water gathers around the frame, the kitchen feels very cold, and I am concerned about damp, particularly in winter. The sash opens, closes and locks. There are pets in the home.\n\n## Attachments\n- glazing-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "013-get_case_details-bbb08b2950ad",
+   "receipt": "{\"id\": \"013\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:38:16.545880Z",
+   "finished_at": "2026-10-10T15:38:16.545996Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "013-get_action_ledger-def070be7495",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:38:16.546127Z",
+   "finished_at": "2026-10-10T15:38:16.546175Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review before any closure. Established from the visible record: (1) Landlord's own approval is on file — event-010 (Orren Vale: happy to use the contractor if £180 is the total), consistent with the £150 + VAT = £180 quoted at event-009/event-011. (2) NO appointment was ever confirmed: tenant offered 24/25/26 Aug (event-014), contractor never selected a slot (event-015, event-017); on 02 Sep the glass had still not arrived and no date could be given (event-021). (3) event-022 moved the case to \"awaiting post-visit documents\" with no appointment confirmation and no visit report in the record. (4) The invoice uploaded at event-023 / attachment glazing-invoice.pdf (\"Supply and fit 1 pane of glass to the kitchen glazing\", ref NBL-013-INV-09, 10 Sep 2025) shows \"Amount: —\" — no figure, so it cannot be checked against the approved £180 or forwarded to the landlord. Billing dated 8 days after the contractor said the glass had not arrived, with no evidence of attendance: recorded as a data-quality / unverified-work flag, not an allegation. (5) The tenant's damp and cold concern (index, event-001) was never assessed on site — event-005 records authorisation to price only, no diagnosis. Safety pass keyword \"damp\": check outstanding, raised with the tenant. Case is NOT closable: work_result, visit_confirmed, documents and invoice_to_landlord all pending. Request held pending the contractor's answer."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-add_note-e39757e3aef6",
+   "action_id": "013-add_note-e39757e3aef6",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:38:59.234495Z",
+   "finished_at": "2026-10-10T15:38:59.234755Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 8 Brackenmere Walk, Vellumbrook, ZZ1 1ZZ — kitchen glazing, invoice ref NBL-013-INV-09.\n\nOur record shows no confirmed attendance for this job. On 02/09 you advised the ordered glass had not arrived and no date could be given, and no slot was ever selected from the tenant's offered dates of 24, 25 or 26 August. An invoice dated 10/09 for \"supply and fit 1 pane of glass to the kitchen glazing\" has since reached us, and the copy we hold shows no amount.\n\nBefore we can report completion or send anything to the landlord, please confirm in writing:\n1. Has the glass been fitted? If so, on what date and time did you attend, and who gave access?\n2. If it has not been fitted, what is the current delivery position and the first date you can offer? The tenant has asked to be present, so we will need a slot to put to her.\n3. Please reissue the invoice showing the amount. The approved figure is £150 plus VAT (£180 total); we cannot process an invoice without a stated amount or above that figure without fresh landlord approval.\n4. While you are at the property, please note the condition around the frame — the tenant reported water gathering there and a cold kitchen — and tell us whether anything beyond the misted unit needs attention.\n\nPlease reply within 2 working days. If we have no reply by then the case goes to our property manager to review the instruction and the invoice."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-notify_contractor-ae67e352dede",
+   "action_id": "013-notify_contractor-ae67e352dede",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:38:59.234911Z",
+   "finished_at": "2026-10-10T15:38:59.235108Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Marr,\n\nAn update on the kitchen glazing at 8 Brackenmere Walk, and an apology for the time this has taken.\n\nThe replacement glass was ordered and the landlord has approved the work, but the contractor has not yet confirmed an attendance date with us, and our file has no record of a visit taking place. We have asked them today to confirm whether anyone has attended and, if not, to give us their first available date, and to reply within 2 working days. We will come back to you with a slot as soon as they do — we will not book anything without agreeing it with you first, and we have kept your note that you wish to be present and that there are pets at the property.\n\nSo that the record is accurate, could you let us know:\n1. Has anyone attended to fit new glass in the kitchen window? If so, roughly when?\n2. Is the kitchen glazing still misted between the panes?\n3. Has any damp, black mould or staining appeared around the frame, the reveals or the nearby wall since you reported this in July? A photograph would help.\n\nIn the meantime, to limit moisture build-up: wipe standing water from the frame and sill when it gathers, use the extractor fan or open the window briefly when cooking, and keep furniture a little off the external wall. Please tell us straight away if mould appears or spreads — we will treat that as a separate priority rather than waiting for the glazing.\n\nKind regards,\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-notify_tenant-74e2ae8333f9",
+   "action_id": "013-notify_tenant-74e2ae8333f9",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:38:59.235245Z",
+   "finished_at": "2026-10-10T15:38:59.235419Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Vale,\n\nKitchen glazing, 8 Brackenmere Walk — status, no action needed from you at this stage.\n\nWe are working to your approval of 11 August for the glazing at £180 total (£150 plus VAT) and have not authorised any spend beyond it.\n\nThe position: the contractor ordered the glass but has never confirmed an attendance date, and on 2 September reported the glass had still not arrived. An invoice dated 10 September for \"supply and fit 1 pane of glass\" has since been uploaded, but the copy we hold states no amount and our file holds no evidence that the fitting took place. We have therefore not passed it for payment. We have asked the contractor to confirm whether they attended and on what date, and to reissue the invoice with the amount stated, with a reply due within 2 working days.\n\nWe have also asked the tenant whether any damp or mould has developed around the frame since her July report, which was never assessed on site. If she reports anything, we will come back to you with a recommendation before any further cost is incurred.\n\nWe will update you once the contractor replies.\n\nKind regards,\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-notify_landlord-6ed4b20f329e",
+   "action_id": "013-notify_landlord-6ed4b20f329e",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:38:59.235551Z",
+   "finished_at": "2026-10-10T15:38:59.235715Z"
+  },
+  {
+   "seq": 7,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — Clearfirth Glazing to confirm whether the glazing was fitted and on what date, to offer a fitting slot if not, and to reissue invoice NBL-013-INV-09 showing the amount (approved ceiling £180 incl. VAT). Tenant also asked to confirm attendance and whether damp/mould has appeared.",
+    "until": "2 working days from today, then to the property manager"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-put_on_hold-1c7e3eac8322",
+   "action_id": "013-put_on_hold-1c7e3eac8322",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:38:59.235837Z",
+   "finished_at": "2026-10-10T15:38:59.235983Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "If no reply within 2 working days, the case goes to the property manager to review the instruction and the invoice.",
+   "due": "2 working days from today",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back with a fitting slot as soon as the contractor replies, agreeing it with her before booking; contractor has a 2-working-day reply-by.",
+   "due": "2 working days from today",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Update once the contractor replies; no spend beyond the approved £180 incl. VAT and the unpriced invoice not passed for payment.",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Earlier promise (event-019) to be in touch when the glass arrived to arrange a date — unkept since 24/08; superseded by today's chase and update.",
+   "due": null,
+   "source_id": "event-019",
+   "status": "superseded"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 31/07/2025 (index, event-001); still unremedied and unverified after six weeks",
+   "deadline": null,
+   "note": "Cold months begin in October; the tenant reported a cold kitchen, so the glazing should be resolved before then."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 31/07 08:02, acknowledged 31/07 08:30 (event-002)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Has the kitchen pane at 8 Brackenmere Walk been fitted? If so, on what date and time did you attend and who gave access? If not, what is the delivery position and your first available date? Please also reissue invoice NBL-013-INV-09 showing the amount.",
+   "why": "Invoice NBL-013-INV-09 (event-023) shows no amount and the file holds no confirmed appointment or work result; on 02/09 the glass had not arrived (event-021). Scope, attendance and the priced invoice are the contractor's to answer (RTE-CONTRACTOR).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Has anyone attended to fit new glass in the kitchen? Is the glazing still misted between the panes, and has any damp, mould or staining appeared around the frame or nearby wall since July (photo if possible)?",
+   "why": "The tenant can independently confirm whether the billed work happened, and the damp/cold concern reported on 31/07 (index, event-001) was never assessed on site (event-005). Facts about the fault and access are tenant-owned (RTE-TENANT).",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-DISPATCH-APPROVED",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "RTE-LANDLORD",
+  "CAP-SCHEDULE-ACCESS",
+  "CAP-CLOSE",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the landlord's conditional approval at event-010 ('happy if £180 is the total') is satisfied by the quote of £150 plus VAT = £180 total (event-009, event-011), so no fresh approval is needed for the original scope. Any invoice above £180 incl. VAT, or any additional work arising from the damp/frame check, would need a new landlord approval under RTE-LANDLORD / APR-SPEND-OVER-CAP.",
+  "Assumption: no management key was issued, as the tenant asked to be present for access (event-014)."
+ ],
+ "uncertainty": [
+  "Whether the glazing has in fact been fitted is unknown: the invoice says supplied and fitted, the messaging record shows no attendance and undelivered glass on 02/09.",
+  "The invoice amount is unknown — the copy on file shows 'Amount: —', so it cannot be reconciled with the approved £180.",
+  "Whether damp or mould has actually developed at the frame is unknown; no site assessment has ever been carried out (event-005)."
+ ],
+ "safety_actions": [],
+ "withheld_actions": [
+  "Did not close the request: work result, confirmed visit, priced invoice and landlord confirmation are all outstanding (CAP-CLOSE).",
+  "Did not forward invoice NBL-013-INV-09 to the landlord for payment or approve any payment — no amount stated and the work is unverified (PRO-PAYMENTS).",
+  "Did not re-dispatch or raise a second work order: Clearfirth Glazing remains instructed and has ordered the glass; duplicating the order would duplicate the cost (playbook, duplicate rule).",
+  "Did not book an access window: no provider-confirmed date exists, and promising the tenant a date no booking backs is prohibited (CAP-NOTIFY).",
+  "Did not state or imply who pays for anything, including the unverified invoice (PRO-TENANT-LIABILITY).",
+  "Did not pass the tenant's pet or absence details to the contractor beyond the access need (PRO-PII)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:38:13.116501Z",
+ "finished_at": "2026-10-10T15:39:58.557181Z",
+ "input_tokens": 29055,
+ "output_tokens": 8758,
+ "cache_read_tokens": 42561
+}

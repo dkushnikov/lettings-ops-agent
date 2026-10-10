@@ -1,0 +1,723 @@
+{
+ "case_id": "001",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "needs_info",
+ "decision": "Did not seek or give approval for the £2,844.00 quotation and did not instruct any work. The landlord's only approval on file covers an inspection and a quote (event-005); no spend cap is on file, so the default £0 cap applies and the works need the landlord's own approval of a stated amount (APR-SPEND-OVER-CAP, RTE-LANDLORD). Two blockers prevent that approval request being sound: the quotation document names a different property from the case record (bathroom-works-quotation.pdf vs index/event-001), and the contractor's itemisation does not reconcile with the quoted total (event-021 vs event-016). I recorded the property conflict and referred it to the office rather than deciding it in a message to any party (ACT-1, ACT-2), chased the contractor for a corrected itemised quotation, inspection findings and the office keys (ACT-3), answered the landlord's \"which quote do you mean\" with the reference and figures on file while telling him approval is not yet being sought (ACT-5), gave the tenant damage-limiting advice and escalation triggers (ACT-4), and placed the ticket on hold for the provider (ACT-6). Urgency set to urgent, not emergency: the leak is confined to the bathroom with no flooding, no water near electrics and no mould reported; the tenant has been told that any of those makes it an emergency.",
+ "recap": "Bathroom leak: quote unreconciled and names a different property, so no approval sought; contractor chased, office asked to resolve the address, ticket on hold.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — corrected itemised quotation, inspection findings and key-return confirmation from Hearthline Plumbing & Bath, requested at ACT-3 with a reply-by of 5pm on the second working day; office task ACT-2 running in parallel on the property-address conflict.",
+ "next_step": "Hearthline Plumbing & Bath (Ewan Rook) to send a corrected quotation stating the correct property address and a reconciled net/commission/VAT/gross total plus deposit basis (reply-by 5pm on the second working day, ACT-3); then the landlord is asked to approve a single stated amount.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "Fault categorised as a recurring shower-pipe leak with damp to the wall covering and urgency set to urgent (event-001, event-002, event-011); damage-limiting advice and emergency triggers given to the tenant at ACT-4.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "Landlord approved inspection and quote only (event-005); he has not approved any repair amount (event-018, event-023). No spend cap on file, so default £0 (APR-SPEND-OVER-CAP). Approval deliberately not requested until the figures and the property address reconcile (ACT-5).",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "Hearthline Plumbing & Bath instructed to inspect and quote and briefed on the fault (event-006, event-012); tenant told who was attending and on what basis (event-014).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "Inspection visit took place — contractor offered Thursday late morning (event-013), tenant notified and key access authorised (event-011, event-014), quotation followed the inspection (event-016). A visit slot for the works themselves is not yet due; no booking promised to the tenant (ACT-4).",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "Quote of £2,370.00 + £474.00 VAT = £2,844.00 sent to the landlord (event-017, event-019) but not approved; itemisation requested (event-018) does not reconcile (event-021) and the document names another property (bathroom-works-quotation.pdf). Corrected quotation chased at ACT-3; landlord told approval is not yet being sought at ACT-5.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No works authorised, so no works result. No inspection report on file either (event-015); findings requested at ACT-3.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "Only the quotation document is on file (bathroom-works-quotation.pdf) and it carries the wrong property address; no photos or invoice. Corrected documentation requested at ACT-3.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "No work carried out and no invoice raised; nothing to forward.",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord has confirmed nothing beyond the inspection authority (event-005); his last message is a question (event-023), answered at ACT-5.",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "pending",
+   "evidence": "Office keys issued for the 18 Sep unaccompanied visit (event-011, event-012, event-014); no return recorded. Contractor asked to confirm at ACT-3.",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Ticket placed on hold awaiting the provider and the office (ACT-6); repair unresolved, so closure would be premature.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Case property is 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ; tenant Nessa Quill, landlord Orin Vale.",
+   "source_ids": [
+    "index",
+    "get_case_details",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Tenant reported on 04 Sep 2025 a recurring leak behind the shower after an earlier pipe tightening failed, with water through the grout and worsening damage to the wall covering.",
+   "source_ids": [
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord's approval on 07 Sep covered arranging a plumbing inspection and obtaining a quote only; it did not authorise repair work.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "No landlord standing spend cap is on file in this case, so the default cap of £0 applies and any spend requires the landlord's own approval.",
+   "source_ids": [
+    "get_case_details",
+    "MANDATE CAP-DISPATCH-ROUTINE"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F5",
+   "statement": "Tenant authorised office-key access on 15 Sep while away and asked for the visit as soon as possible; the contractor offered Thursday late morning and the inspection took place, as a quotation followed on 18 Sep.",
+   "source_ids": [
+    "event-011",
+    "event-013",
+    "event-014",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Quotation NBL-001-Q1 dated 18 Sep 2025: scope is removal of screen, bath taps and shower valve; wall-and-riser cladding with chrome trims; new bath taps and shower valve; refit existing screen. Net £2,370.00, VAT £474.00, total £2,844.00, with no line items.",
+   "source_ids": [
+    "bathroom-works-quotation.pdf",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "That quotation states the property as 8 Wrenfold Mews, Brindlewick, ZZ1 1ZZ, which is not the case property.",
+   "source_ids": [
+    "bathroom-works-quotation.pdf",
+    "get_attachment",
+    "index"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Contractor's breakdown of 18 Sep gives materials £1,270 and labour £1,170 (two operatives, half a day each) = £2,440 net, plus VAT at 20% and a 'Northbridge commission at 10%', with no revised subtotal or total and no deposit basis; this does not reconcile with the £2,370 net on the quotation.",
+   "source_ids": [
+    "event-021",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "Landlord twice declined to approve pending itemisation (18 Sep) and on 23 Sep asked which quote was meant, saying there were a couple; no approval of any amount exists in the history.",
+   "source_ids": [
+    "event-018",
+    "event-022",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No visit report or invoice is recorded on the file; the agency itself noted this on 18 Sep.",
+   "source_ids": [
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "Safety check: the reported water is confined to the bathroom (grout and wall covering). No flooding, no water near electrics, no mould and no vulnerability are reported anywhere in the artefacts, so the emergency definitions are not met; the damp risk from a leak running since 04 Sep is live and the tenant has been given mould and escalation advice.",
+   "source_ids": [
+    "event-001",
+    "event-002",
+    "event-011",
+    "ACT-4"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F12",
+   "statement": "Office keys were released to the contractor for unaccompanied access; no record of their return exists.",
+   "source_ids": [
+    "event-012",
+    "event-014",
+    "event-015"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The quotation the landlord is being asked to approve names 8 Wrenfold Mews, Brindlewick, while the case record, the tenant's report and the contractor's instruction all concern 4 Thistlewick Rise, Larkcombe.",
+   "fact_ids": [
+    "F1",
+    "F7"
+   ],
+   "source_ids": [
+    "index",
+    "event-001",
+    "bathroom-works-quotation.pdf",
+    "event-016"
+   ],
+   "resolution": "Not decided by me and not asserted to any party. Referred to the office by create_human_task ACT-2 and raised with the contractor as a question about which property the priced scope covers (ACT-3). Reversible steps continued meanwhile.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "The contractor's itemisation (£2,440 net plus 10% commission) does not reconcile with the quoted £2,370 net / £2,844 gross, and the commission treatment and deposit basis are unstated.",
+   "fact_ids": [
+    "F6",
+    "F8"
+   ],
+   "source_ids": [
+    "event-016",
+    "event-021"
+   ],
+   "resolution": "Corrected single reconciled quotation requested from the contractor (ACT-3); landlord told approval is not being sought until one clear figure exists (ACT-5).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Landlord believes more than one quote is in play ('There are a couple'), but only one priced quotation is on this file.",
+   "fact_ids": [
+    "F6",
+    "F9"
+   ],
+   "source_ids": [
+    "event-023",
+    "event-016"
+   ],
+   "resolution": "Landlord told the reference, date, scope and figures of the only quotation on this file (ACT-5); office asked to confirm whether a second quote exists elsewhere (ACT-2).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Priced quotation NBL-001-Q1 states a property address (8 Wrenfold Mews, Brindlewick) different from the instructed property (4 Thistlewick Rise, Larkcombe); the same document supplied the £2,844.00 figure already sent to the landlord for approval.",
+   "source_ids": [
+    "bathroom-works-quotation.pdf",
+    "event-016",
+    "event-017"
+   ],
+   "action_taken": "Conflict recorded (ACT-1), referred to the office (ACT-2), contractor asked which property the priced scope covers (ACT-3); no approval requested and no work instructed."
+  },
+  {
+   "kind": "other",
+   "description": "Contractor's figures do not reconcile (£2,440 net itemised vs £2,370 net quoted), an undefined 'Northbridge commission at 10%' is introduced at breakdown stage, and a 50% deposit is sought on an unstated basis before any approval exists.",
+   "source_ids": [
+    "event-021"
+   ],
+   "action_taken": "Corrected reconciled quotation and deposit basis requested (ACT-3); contractor told no payment can be arranged before written landlord approval; no money moved (PRO-PAYMENTS)."
+  },
+  {
+   "kind": "other",
+   "description": "Scope creep check: the quoted scope is largely replacement and cladding (new taps, new valve, wall-and-riser cladding) for what was reported as a leaking pipe joint behind the shower; no inspection report explains why the leak needs that scope.",
+   "source_ids": [
+    "event-001",
+    "event-016",
+    "event-015"
+   ],
+   "action_taken": "Inspection findings and the remedial-versus-upgrade split requested from the contractor before the landlord is asked to approve (ACT-3)."
+  },
+  {
+   "kind": "safety_hazard",
+   "description": "Safety-pass keyword check on 'damp': a leak running since 04 Sep behind a wall covering carries a damp/mould risk, though no mould, no flooding and no water near electrics is reported in any artefact and no occupant vulnerability is recorded.",
+   "source_ids": [
+    "event-001",
+    "event-002",
+    "event-011"
+   ],
+   "action_taken": "Urgency set to urgent, not emergency; tenant given damage-limiting advice and explicit triggers (spread beyond the bathroom, water near electrics, increase in the leak, black mould) that would make it an emergency (ACT-4); contractor asked whether interim make-safe is needed (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "PII check: the tenant's mobile number was passed to the contractor for visit coordination (event-012). Within PRO-PII as access-necessary; no health or household details have been shared and none appear in my messages.",
+   "source_ids": [
+    "event-012"
+   ],
+   "action_taken": "Noted; no further personal data released."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "001",
+    "title": "Bathroom leak and wall repair",
+    "received_at": "2025-09-04 08:10:00 UTC",
+    "track": "Property Management",
+    "case_number": "001",
+    "property": "4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Mira Sallow (Property Manager, Northbridge Lettings)",
+    "events_visible": 23,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Bathroom leak and wall repair\n\n## Case details\n- source role: Tenant\n- created: 2025-09-04 08:10:00 UTC\n- property: 4 Thistlewick Rise, Larkcombe, ZZ1 1ZZ\n\n## Initial request\nThe tenant reports a continuing leak behind the shower and moisture coming through the bathroom wall covering. A previous tightening of the pipe did not hold, and the visible wall deterioration has worsened.\n\n## Attachments\n- bathroom-works-quotation.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-get_case_details-6d47c1f860f9",
+   "receipt": "{\"id\": \"001\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:34:59.636758Z",
+   "finished_at": "2026-10-10T15:34:59.636845Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-get_action_ledger-1d84851d1cef",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:34:59.636972Z",
+   "finished_at": "2026-10-10T15:34:59.637018Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "key access Wrenfold property address"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-search_history-4d724dc00504",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:35:33.005317Z",
+   "finished_at": "2026-10-10T15:35:33.005459Z"
+  },
+  {
+   "seq": 4,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "bathroom-works-quotation.pdf"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "name": "bathroom-works-quotation.pdf",
+    "text": "C O N T R A C T O R  Q U O TAT I O N Hearthline Plumbing & Bath — Bathroom\nWorks Quotation\nHearthline Plumbing & Bath\nQuotation reference: NBL-001-Q1\nDate: 18 September 2025\nProperty: 8 Wrenfold Mews, Brindlewick, ZZ1 1ZZ\nProposed scope\nRemove the existing shower screen, bath taps and shower valve.\nInstall a wall-and-riser cladding system with chrome trims.\nFit new bath taps and a new shower valve.\nRefit the existing shower screen.\nDescription Amount\nBathroom plumbing and cladding works £2,370.00\nVAT (20%) £474.00\nTotal £2,844.00"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-get_attachment-69d87bd1e3ab",
+   "receipt": "{\"name\": \"bathroom-works-quotation.pdf\", \"text\": \"C O N T R A C T O R  Q U O TAT I O N Hearthline Plumbing & Bath — Bathroom\\nWorks Quotation\\nHearthline Plumbing & Bath\\nQuotation reference: NBL-001…",
+   "started_at": "2026-10-10T15:35:33.005531Z",
+   "finished_at": "2026-10-10T15:35:33.005597Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Conflicts recorded before any approval is sought. (1) Property mismatch: case record and tenant report are 4 Thistlewick Rise, Larkcombe ZZ1 1ZZ (index, event-001), but quotation NBL-001-Q1 dated 18 Sep 2025 (bathroom-works-quotation.pdf, event-016) states \"Property: 8 Wrenfold Mews, Brindlewick, ZZ1 1ZZ\". Not resolved in a message to any party; referred to the office. (2) Figures do not reconcile: quote subtotal £2,370.00 + VAT £474.00 = £2,844.00 (event-016/017), but the contractor's breakdown of materials £1,270 + labour £1,170 = £2,440 before VAT and before a stated \"Northbridge commission at 10%\", with no revised subtotal/total and no deposit basis (event-021). (3) Landlord has not approved the works: event-005 authorised inspection and quote only; event-018 and event-023 ask for itemisation and ask which quote is meant. No landlord spend cap on file, so default cap £0 applies (APR-SPEND-OVER-CAP). (4) Safety check, not a reported hazard: water through grout and worsening wall covering since 04 Sep (event-001, event-011) — leak contained in the bathroom, no flooding, no water near electrics and no mould reported by the tenant; damp/mould watch advice issued to the tenant and the tenant asked to report any spread immediately. (5) Office keys were issued to the contractor for the 18 Sep inspection (event-011, event-012, event-014); return not recorded — chased with the contractor."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-add_note-30a6a59593f7",
+   "action_id": "001-add_note-30a6a59593f7",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:36:09.984668Z",
+   "finished_at": "2026-10-10T15:36:09.984995Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Records conflict: quote NBL-001-Q1 names 8 Wrenfold Mews, case property is 4 Thistlewick Rise",
+    "summary": "Case 001, bathroom leak. The case record and the tenant's report are 4 Thistlewick Rise, Larkcombe ZZ1 1ZZ (index, event-001). The quotation the landlord is being asked to approve, Hearthline ref NBL-001-Q1 dated 18 Sep 2025 (bathroom-works-quotation.pdf / event-016), states the property as 8 Wrenfold Mews, Brindlewick ZZ1 1ZZ. The same document carries the £2,370 + £474 VAT = £2,844 figures that were sent to the landlord for approval (event-017, event-019), and the landlord has since asked \"Which quote do you mean? There are a couple.\" (event-023) — so there may be a second quote or a second property in play. Office to confirm which property NBL-001-Q1 covers and whether a separate quote exists for the other address, before any approval is requested or work instructed. I have not told the landlord, tenant or contractor which address is correct. Meanwhile: contractor chased for a corrected, itemised quotation and for return of the office keys issued for the 18 Sep inspection; tenant updated with damage-limiting advice; no spend instructed (no cap on file, default £0, APR-SPEND-OVER-CAP)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-create_human_task-fe859bbfae86",
+   "action_id": "001-create_human_task-fe859bbfae86",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:36:09.985184Z",
+   "finished_at": "2026-10-10T15:36:09.985399Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Ref our request of 18 September for an itemised breakdown (and your reply the same afternoon). Before we can put this to the landlord we need a corrected written quotation that includes all of the following:\n1. The property address the quotation covers. The document we hold, ref NBL-001-Q1 dated 18 September 2025, states a different address from the property you were instructed to inspect. Please confirm the address the priced scope relates to and reissue with it corrected.\n2. A single reconciled set of figures. The quotation totals £2,370.00 + £474.00 VAT = £2,844.00, but your breakdown gives materials £1,270 and labour £1,170 (two operatives, half a day each), which is £2,440 before VAT and before any commission. Please state the materials total, the labour total, the net subtotal, how the 10% commission is applied (whether it is inside or on top of the subtotal), the VAT amount and the gross total.\n3. The basis of the 50% deposit you mention — 50% of which figure, and when it would fall due. Note no deposit or payment can be arranged until the landlord has approved the work in writing.\n4. Your inspection findings from the 18 September visit: the source of the leak behind the shower, the extent of moisture behind the wall covering, and whether any part of the quoted scope is remedial to the leak as opposed to replacement/upgrade.\n5. Whether any interim make-safe is needed (for example isolating the shower feed) while approval is pending, and your charge for that if so.\n6. Confirmation of what happened to the office keys issued for the 18 September visit — returned to the office or still held.\nPlease reply by 5pm on the second working day from this message. The works are not instructed and must not start: please proceed only after you receive our written approval."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-notify_contractor-3c801c396aac",
+   "action_id": "001-notify_contractor-3c801c396aac",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:36:09.985550Z",
+   "finished_at": "2026-10-10T15:36:09.985779Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Quill, an update on the leak behind the shower at your property. The plumber inspected on 18 September and has sent a quotation for the bathroom work. The figures on it do not add up against the breakdown he later gave us, so we have gone back to him for a corrected, itemised quotation; the landlord decides whether the work goes ahead and we will put the corrected figures to him as soon as we have them. We cannot give you a work date yet and we will not promise one until a booking is actually confirmed with you.\nIn the meantime, to limit damage: if you can, avoid using the shower and use the bath tap instead; keep the bathroom ventilated and wipe standing water from the floor and the wall covering; and do not try to seal or cut into the wall covering yourself.\nPlease contact us straight away if any of the following happens — water spreads outside the bathroom or through a ceiling below, water appears near a light fitting, socket or extractor fan, the leak increases, or black mould starts to appear. Any of those we will treat as an emergency.\nTwo things it would help to know: are you back at the property now, and may the contractor still use the office keys for the next visit, or would you prefer to be there? Nothing in this message decides who bears the cost of the work; that is not a matter we determine."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-notify_tenant-cbfcf6724c13",
+   "action_id": "001-notify_tenant-cbfcf6724c13",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:36:09.986037Z",
+   "finished_at": "2026-10-10T15:36:09.986213Z"
+  },
+  {
+   "seq": 9,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Vale, answering your question of 23 September about which quote was meant. The quotation in question is the only priced quotation on this file for the bathroom leak: Hearthline Plumbing & Bath, reference NBL-001-Q1, dated 18 September 2025, following their inspection. Scope: remove the existing shower screen, bath taps and shower valve; install a wall-and-riser cladding system with chrome trims; fit new bath taps and a new shower valve; refit the existing screen. The figures on that document are £2,370.00 net, VAT £474.00, total £2,844.00 — that is the £2,844.00 total sent to you on 18 September.\nI am not asking you to approve it yet, for two reasons. First, the itemisation you asked for does not reconcile with the quoted total: the contractor's breakdown gives materials £1,270 and labour £1,170 (two operatives, half a day each), which is £2,440 before VAT, plus a stated 10% commission, with no revised subtotal or total given and no basis stated for the 50% deposit he mentions. Second, there is a discrepancy in the paperwork itself that our office is checking before the amount goes to you. I have asked the contractor for a corrected, fully itemised quotation and expect it within two working days, after which I will put a single clear figure to you for approval.\nNo work is instructed and no money is committed. The tenant has been told the same and has been given interim advice to limit damage. If anything changes the urgency — water spreading beyond the bathroom or reaching electrics — I will contact you immediately."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-notify_landlord-ceda27ec83d1",
+   "action_id": "001-notify_landlord-ceda27ec83d1",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:36:09.986316Z",
+   "finished_at": "2026-10-10T15:36:09.986440Z"
+  },
+  {
+   "seq": 10,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — Hearthline Plumbing & Bath to supply a corrected, itemised quotation (correct property address, reconciled subtotal/commission/VAT/total, deposit basis, inspection findings, key return), requested at ACT-3 with a reply-by of 5pm on the second working day. Also waiting on the office task at ACT-2 (quote NBL-001-Q1 names 8 Wrenfold Mews; case property is 4 Thistlewick Rise). Landlord approval cannot be sought until the figures reconcile.",
+    "until": "second working day after 2025-09-23 (contractor reply-by); office task ACT-2 same day"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-6",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-put_on_hold-2c0e35569666",
+   "action_id": "001-put_on_hold-2c0e35569666",
+   "receipt": "{\"id\": \"ACT-6\"}",
+   "started_at": "2026-10-10T15:36:15.375555Z",
+   "finished_at": "2026-10-10T15:36:15.375740Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agent",
+   "to": "landlord",
+   "what": "Put a single clear, reconciled figure to him for approval once the corrected quotation arrives; contact him immediately if the urgency changes.",
+   "due": "On receipt of the corrected quotation",
+   "source_id": "ACT-5",
+   "status": "open"
+  },
+  {
+   "by": "agent",
+   "to": "tenant",
+   "what": "No work date promised; the tenant will be given a date only when a booking is confirmed with her.",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "agent",
+   "to": "tenant",
+   "what": "Water spreading outside the bathroom, reaching electrics, an increased leak or black mould will be treated as an emergency.",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agent",
+   "what": "Corrected itemised quotation with correct address, reconciled totals, deposit basis, inspection findings and key-return confirmation.",
+   "due": "5pm on the second working day after ACT-3",
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant reported 2025-09-04 (event-001); leak still unrepaired at 2025-09-23 (event-023) — 19 days with no repair authorised.",
+   "deadline": null,
+   "note": "Running and already long for a recurring water leak; the delay is approval and paperwork, not access."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Reported 08:10 on 04 Sep, agency called the tenant at 08:31 the same morning (event-002).",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "RTE-CONTRACTOR",
+   "name": "Contractor reply-by on the corrected quotation",
+   "status": "sop",
+   "basis": "ACT-3 sets 5pm on the second working day.",
+   "deadline": "5pm, second working day after the chase (ACT-3)",
+   "note": "If it passes with no reply, this is the manual-mode trigger for a reminder cycle and, after three reminders, an alternative contractor decision by the office."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Which property does quotation NBL-001-Q1 cover, and please reissue it with the correct address and a reconciled set of figures: materials total, labour total, net subtotal, how the 10% commission is applied, VAT and gross total, plus the basis of the 50% deposit.",
+   "why": "The document states 8 Wrenfold Mews while the instructed property is 4 Thistlewick Rise, and materials £1,270 + labour £1,170 = £2,440 net does not match the quoted £2,370 net (event-016, event-021). The landlord cannot be asked to approve an amount that does not reconcile.",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "What did the 18 September inspection find — source of the leak, extent of moisture behind the wall covering, which parts of the quoted scope are remedial to the leak — and is any interim make-safe needed while approval is pending?",
+   "why": "No visit report is on file (event-015); the scope is largely replacement and the landlord is entitled to see what the leak itself requires.",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Were the office keys issued for the 18 September visit returned to the office, or are they still held?",
+   "why": "Office keys were released for unaccompanied access (event-011, event-012, event-014) and no return is recorded.",
+   "blocking": false
+  },
+  {
+   "to": "property_manager",
+   "question": "Confirm which property quotation NBL-001-Q1 relates to and whether a second quote exists for another address, as the landlord's reply suggests.",
+   "why": "Authoritative case record and the quotation document disagree on the property; the landlord asked 'Which quote do you mean? There are a couple.' (event-023). Referred by create_human_task ACT-2 rather than resolved in a message to a party.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Are you back at the property, and may the contractor continue to use the office keys for the next visit or would you prefer to be present?",
+   "why": "Access consent given on 15 September was for the period she was away (event-011); a fresh window will be needed for the works.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "APR-SPEND-OVER-CAP",
+  "CAP-DISPATCH-APPROVED",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "ESC-CONFLICT",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the Thursday late-morning inspection went ahead, inferred from the quotation arriving on 18 Sep described as following the bathroom inspection (event-016); no visit report confirms it (event-015).",
+  "Assumption: 'no landlord standing cap on file' is taken from the absence of any landlord instruction record in this case; the mandate's default cap of £0 is applied."
+ ],
+ "uncertainty": [
+  "Whether a second quotation exists for another property, as the landlord's 23 Sep reply implies.",
+  "Whether the inspection covered 4 Thistlewick Rise or a different address, and therefore whether the priced scope relates to this leak at all.",
+  "The true gross price: commission treatment and the reconciled subtotal are unstated.",
+  "Whether the office keys issued for the inspection are still held by the contractor.",
+  "The extent of moisture behind the wall covering, and whether mould has developed since 04 Sep."
+ ],
+ "safety_actions": [
+  "Tenant given damage-limiting advice: avoid using the shower, ventilate, wipe standing water, do not cut into or seal the wall covering (ACT-4).",
+  "Tenant given explicit emergency triggers to report immediately: water outside the bathroom or through a ceiling, water near a light fitting, socket or extractor, an increased leak, or black mould (ACT-4).",
+  "Contractor asked whether interim make-safe (e.g. isolating the shower feed) is needed while approval is pending, and at what charge (ACT-3).",
+  "Landlord told he will be contacted immediately if the urgency changes (ACT-5)."
+ ],
+ "withheld_actions": [
+  "Did not request landlord approval of £2,844.00 — the amount does not reconcile and the supporting document names another property (RTE-LANDLORD, APR-SPEND-OVER-CAP).",
+  "Did not instruct the works: no standing cap on file and no landlord approval event exists to cite as landlord_approval_ref (CAP-DISPATCH-APPROVED not available; event-005 approves inspection and quote only).",
+  "Did not arrange or authorise the 50% deposit or any payment (PRO-PAYMENTS).",
+  "Did not tell any party which property the quotation 'really' means; referred the conflict to the office instead (ESC-CONFLICT handling, ACT-2).",
+  "Did not treat the case as an emergency dispatch: no artefact reports flooding, water near electrics or a vulnerable occupant.",
+  "Did not comment on who bears the cost of the works (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R2: safety_hazard flag(s) recorded for the reader; not an escalation on their own (urgency urgent)"
+ ],
+ "started_at": "2026-10-10T15:34:54.794591Z",
+ "finished_at": "2026-10-10T15:37:40.941974Z",
+ "input_tokens": 60084,
+ "output_tokens": 13329,
+ "cache_read_tokens": 56748
+}

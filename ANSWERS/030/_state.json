@@ -1,0 +1,506 @@
+{
+ "case_id": "030",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "escalated",
+ "decision": "Did not close. The landlord did the work himself and reports completion (event-012), but the only evidence that a life-safety device is back in service is his own untrusted email: no test result, no photo, no tenant confirmation, and no confirmation the ceiling opening was made good. Alongside it, two unaddressed safety signals sit in the same thread (event-014): repeat loose sockets, including one said to have come away after February 2025 boiler work, never seen by a qualified electrician, and a portable dehumidifier supplied for the bathroom, which points to a damp/condensation issue never logged or investigated. I asked the tenant to test the alarm and report any damp or socket defects (ACT-1), asked the landlord for the alarm make/model, the fitting test result and a decision on an electrician (ACT-2), logged the gaps (ACT-3), and escalated to the property manager for the electrical and damp decisions. No contractor instructed and no spend committed: no standing cap is on file and the landlord has declined agency works (event-007, event-010), so neither CAP-DISPATCH-ROUTINE nor CAP-DISPATCH-APPROVED is available.",
+ "recap": "Landlord self-completed the smoke-alarm job; alarm test unverified and loose sockets plus a bathroom dehumidifier unaddressed — asked both parties, escalated for safety review.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Tenant — alarm test result and damp/socket observations requested (ACT-1); also Waiting for Landlord on alarm details and electrician decision (ACT-2), 3-day clock.",
+ "next_step": "Property manager to decide whether to instruct an electrician for the repeat loose sockets (and confirm the EICR date) and a damp inspection of the bathroom; the tenant's alarm test result (ACT-1) triggers an immediate re-fit if the alarm does not sound.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 (urgent triage), event-003 (acknowledged same day); damage-limiting advice to the tenant given at ACT-1.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-007 and event-010: landlord elected to use his own arrangement; no agency spend authorised or needed.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "not_applicable",
+   "evidence": "Landlord declined an agency provider and did the work himself (event-007, event-010); tenant informed at event-009.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "Landlord handled his own access for the work he reports completing on 31 Aug (event-012).",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote: no agency works instructed, no cost to the agency or landlord via us (action ledger).",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Only the landlord's unverified statement (event-012, event-014); no test result, photo or tenant confirmation. Tenant asked to press-test at ACT-1.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photo, product details or alarm test record; requested from the landlord at ACT-2.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "Landlord's own cost; no agency invoice arises (event-007, event-010).",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-012: landlord confirmed completion on 31 August (his own account).",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; no agency visit took place.",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Cannot close: safety pass unsatisfied - smoke alarm untested, loose sockets uninspected, damp signal uninvestigated (event-001, event-014).",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property is 8 Brindlefern Walk, Oakhollow, ZZ1 1ZZ; reporter is the tenant, Nessa Quill.",
+   "source_ids": [
+    "index",
+    "get_case_details",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The upstairs landing smoke alarm beeped persistently and the tenant removed it herself on 20 Aug 2025, leaving an opening in the ceiling; she said she knew of no immediate safety risk.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The agency acknowledged the report to the tenant the same day and triaged the smoke-alarm fault as urgent.",
+   "source_ids": [
+    "event-002",
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The landlord was asked on 24 Aug whether the agency could instruct its provider, including for reported loose plug sockets.",
+   "source_ids": [
+    "event-004",
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The landlord declined agency instruction twice, stating he would complete the work himself and that no external action was required.",
+   "source_ids": [
+    "event-007",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The landlord reported on 6 Sep that the job was completed on 31 Aug and that the smoke alarm has a ten-year life; he gave no test result, make/model, photo, or confirmation the ceiling opening was made good.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "The landlord also stated he tightened screws on a back-bedroom socket and on 5 Aug secured a kitchen socket he says came away after boiler work in February 2025; no qualified electrician is recorded as having inspected, and no EICR date appears on the case file.",
+   "source_ids": [
+    "event-014"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "The landlord states he provided the tenant with a portable dehumidifier for the bathroom on 6 Aug; no damp report, inspection or cause investigation exists on this case.",
+   "source_ids": [
+    "event-014"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "No landlord spend cap or standing instruction is on file and no contractor has been instructed; the agency has committed no spend on this job.",
+   "source_ids": [
+    "get_action_ledger",
+    "event-007",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No independent confirmation exists that any smoke alarm at the property has been tested and sounds; the tenant has not been asked to test one before now.",
+   "source_ids": [
+    "get_case_details",
+    "event-013",
+    "event-015"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The landlord states the work is complete (event-012, event-014), but no independent evidence confirms a working alarm is fitted on the landing; the tenant has never confirmed. Untrusted self-report against an open life-safety item.",
+   "fact_ids": [
+    "F2",
+    "F6",
+    "F10"
+   ],
+   "source_ids": [
+    "event-001",
+    "event-012"
+   ],
+   "resolution": "Tenant asked to press-test and report (ACT-1); landlord asked for make/model, fitting date, test result and photo (ACT-2). Not closing until confirmed.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Life-safety gap: the upstairs landing smoke alarm was removed by the tenant on 20 Aug (event-001) and the only evidence of replacement is the landlord's own statement (event-012), untested and unverified. Smoke and Carbon Monoxide Alarm (Amendment) Regulations require a working alarm on each storey.",
+   "source_ids": [
+    "event-001",
+    "event-012"
+   ],
+   "action_taken": "Asked the tenant to press-test and report the result either way, and to report any CO alarm status (ACT-1); asked the landlord for make/model, fitting date and test result (ACT-2); escalated to the property manager."
+  },
+  {
+   "kind": "safety_hazard",
+   "description": "Repeat loose electrical sockets (back bedroom; kitchen socket said to have come away after February 2025 boiler work) re-secured by the landlord himself rather than a qualified electrician; current EICR date not on the case file.",
+   "source_ids": [
+    "event-005",
+    "event-014"
+   ],
+   "action_taken": "Asked the tenant about scorching, buzzing, sparking or burning smell (ACT-1); asked the landlord to confirm electrician involvement/EICR or authorise an inspection (ACT-2); referred the decision to the property manager."
+  },
+  {
+   "kind": "data_quality",
+   "description": "A portable dehumidifier supplied for the bathroom (event-014) implies a damp or condensation problem that was never raised as a repair, inspected, or recorded; a dehumidifier treats the symptom, not the cause.",
+   "source_ids": [
+    "event-014"
+   ],
+   "action_taken": "Asked the tenant whether damp, condensation or mould is present and where (ACT-1); flagged to the landlord and the property manager that the cause should be investigated."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "030",
+    "title": "Maintenance report at 8 Brindlefern Walk",
+    "received_at": "2025-08-20 18:02:21 UTC",
+    "track": "Property Management",
+    "case_number": "030",
+    "property": "8 Brindlefern Walk, Oakhollow, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Ivo Merrick (Property Manager, Northbridge Lettings)",
+    "events_visible": 15,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Maintenance report at 8 Brindlefern Walk\n\n## Case details\n- source role: Tenant\n- created: 2025-08-20 18:02:21 UTC\n- property: 8 Brindlefern Walk, Oakhollow, ZZ1 1ZZ\n\n## Initial request\nThe smoke alarm on the upstairs landing kept beeping despite attempts to stop it. The tenant removed it, and a small opening remains in the ceiling where it was fitted."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "030-get_case_details-4970c6f95bd4",
+   "receipt": "{\"id\": \"030\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:45:08.645587Z",
+   "finished_at": "2026-10-10T15:45:08.645633Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "030-get_action_ledger-6fc00fa5b746",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:45:08.645690Z",
+   "finished_at": "2026-10-10T15:45:08.645715Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello Nessa, an update on your report of 20 August about the upstairs landing smoke alarm (8 Brindlefern Walk).\n\nThe landlord has told us he carried out the work himself and that it was completed on 31 August. Before we close the job we need you to confirm what is actually in place, as this is a life-safety item:\n\n1. Is a smoke alarm now fitted on the upstairs landing, and is the ceiling opening made good?\n2. Please press and hold the test button: does the alarm sound? Please tell us the result either way.\n3. Are there working smoke alarms elsewhere in the property, and is there a carbon monoxide alarm near any fuel-burning appliance? Do they sound when tested?\n4. The sockets you reported coming away from the wall: are they now secure, and have you noticed any scorching, buzzing, sparking or burning smell at any socket?\n5. We are told a portable dehumidifier was provided for the bathroom. Are you seeing damp, condensation or mould anywhere? If so, where?\n\nIf at any point you smell burning, see sparks, or an alarm will not sound, contact us straight away and treat it as an emergency. If a smoke alarm is missing or not sounding, please tell us today and we will arrange for it to be put right.\n\nPlease do not refit or work on a mains-wired alarm yourself."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "030-notify_tenant-041fb73986c5",
+   "action_id": "030-notify_tenant-041fb73986c5",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:45:48.127480Z",
+   "finished_at": "2026-10-10T15:45:48.127790Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Rusk,\n\nThank you for confirming on 6 September that you completed the work on 31 August and for the detail about the sockets and the dehumidifier. So that we can update the property record and close the job, we need three things:\n\n1. Smoke alarm (upstairs landing): the make/model and the date it was fitted, and confirmation that it was tested and sounded after fitting. A photo of the fitted alarm would be ideal for the record. A ten-year sealed unit still needs a recorded test at installation.\n2. Alarms generally: please confirm the property's smoke alarms (and any carbon monoxide alarm required near a fuel-burning appliance) are in place and in working order, as required under the Smoke and Carbon Monoxide Alarm regulations.\n3. Sockets: you mention tightening a back-bedroom socket and re-securing a kitchen socket that came away after boiler work in February 2025. Sockets coming loose at more than one point is something we would normally have checked by a qualified electrician, with the current EICR date confirmed. Please confirm whether you would like us to instruct an electrician to inspect, or whether an electrician has already done so.\n\nWe have also asked the tenant to confirm the alarm sounds on test and to report any damp or condensation in the bathroom, since a dehumidifier was supplied. If there is an underlying damp issue we should look at the cause rather than rely on the dehumidifier.\n\nNo cost has been incurred by us on this job and nothing has been instructed on your behalf."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "030-notify_landlord-ec0d3b55e757",
+   "action_id": "030-notify_landlord-ec0d3b55e757",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:45:48.127944Z",
+   "finished_at": "2026-10-10T15:45:48.128097Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case 030, 8 Brindlefern Walk. Landlord elected to do the work himself (event-007, event-010) and reports completion on 31 August with a ten-year smoke alarm (event-012), plus socket tightening and a dehumidifier supplied for the bathroom (event-014). No agency spend, no contractor instructed, no cap or standing instruction on file. Outstanding before closure: (a) independent confirmation the landing smoke alarm is refitted and sounds on test — asked of tenant and landlord; (b) repeat loose sockets (back bedroom; kitchen socket said to have come away after Feb 2025 boiler work) not inspected by a qualified electrician, EICR status unknown; (c) a dehumidifier supplied for the bathroom indicates a possible damp/condensation issue never logged as a repair or investigated. Items (b) and (c) referred to the property manager. Ceiling opening left by the tenant's removal of the alarm also needs confirming as made good."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "030-add_note-b67fa59b5bde",
+   "action_id": "030-add_note-b67fa59b5bde",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:45:48.128328Z",
+   "finished_at": "2026-10-10T15:45:48.128448Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Northbridge Lettings will check back about completion of the landlord's work",
+   "due": null,
+   "source_id": "event-009",
+   "status": "kept"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "If a smoke alarm is missing or will not sound, we will arrange for it to be put right",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency",
+   "what": "Complete the smoke-alarm and socket work himself",
+   "due": null,
+   "source_id": "event-012",
+   "status": "kept"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 20 Aug 2025 (event-001)",
+   "deadline": null,
+   "note": "Running since 20 Aug 2025; the landing alarm remains unverified after the landlord's claimed 31 Aug completion."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 20 Aug 2025 (event-003)",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "CLK-EICR",
+   "name": "EICR every 5 years; remedials within 28 days",
+   "status": "in_force",
+   "basis": "Repeat loose sockets (event-014)",
+   "deadline": null,
+   "note": "Current EICR date is not on the case file; asked the landlord (ACT-2)."
+  },
+  {
+   "rule_id": "CLK-GAS-CP12",
+   "name": "Gas safety record renewed every 12 months",
+   "status": "in_force",
+   "basis": "Boiler work referenced February 2025 (event-014)",
+   "deadline": null,
+   "note": "Not evidenced on this case; flagged for the office to check the property record."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "The landlord self-completed this job: do we accept his word that the landing smoke alarm is fitted and working, and do we instruct an electrician for the repeat loose sockets and an inspection for damp in the bathroom?",
+  "summary": [
+   "Tenant removed the beeping landing smoke alarm herself on 20 Aug, leaving an opening in the ceiling; no alarm on that landing since (index, event-001).",
+   "Landlord declined agency works twice, saying he would do it himself (event-007, event-010), then reported completion on 31 Aug with a 'ten-year' alarm (event-012) - no test result, photo, make/model, or confirmation the ceiling was made good.",
+   "Same thread reports he tightened a back-bedroom socket and re-secured a kitchen socket that came away after boiler work in February 2025 (event-014): repeat loose sockets, no qualified electrician involved, EICR status not on the case file.",
+   "He also says he gave the tenant a portable dehumidifier for the bathroom on 6 Aug (event-014) - a damp/condensation signal never reported as a repair or investigated; cause unaddressed.",
+   "No landlord spend cap or standing instruction is on file and no contractor has been instructed; the agency has incurred no cost (action ledger)."
+  ],
+  "gap": "Whether a working smoke alarm is physically in place on the upstairs landing (tested), whether the ceiling opening was made good, the property's current EICR date, and whether there is active damp or mould behind the dehumidifier.",
+  "options": [
+   "Accept the landlord's completion statement and close once the tenant confirms the alarm sounds on test (ACT-1) - cheapest, but leaves the sockets and the damp cause uninvestigated.",
+   "Put a priced electrician inspection (all sockets + EICR date) and a bathroom damp inspection to the landlord for approval - defensible against the Smoke and CO Alarm regulations and s.11; needs landlord approval as no cap is on file.",
+   "Send an agency contractor to verify and test the alarms only (short visit) and put the sockets and damp to the landlord separately - partial assurance, still needs landlord approval."
+  ],
+  "recommended": "Option 2. And if the tenant's test (ACT-1) shows no working landing alarm, re-fit immediately under CAP-DISPATCH-EMERGENCY rather than waiting for approval.",
+  "default_if_timeout": "If neither party replies within 3 days the manual-mode expiry trigger fires: chase once and do not close - the alarm remains unverified.",
+  "deadline": "3 days from ACT-1/ACT-2 for replies; CLK-S11 reasonable-time clock running since 20 Aug 2025.",
+  "undo": "Nothing to reverse: only two messages and a note were recorded (ACT-1 to ACT-3). No contractor instructed, no spend committed, no date promised to any party.",
+  "context_refs": [
+   "index",
+   "event-001",
+   "event-007",
+   "event-010",
+   "event-012",
+   "event-014",
+   "ACT-1",
+   "ACT-2",
+   "ACT-3"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "ESC-SAFETY",
+  "RTE-STAFF",
+  "RTE-TENANT",
+  "RTE-LANDLORD",
+  "APR-SPEND-OVER-CAP",
+  "CLK-S11",
+  "CLK-EICR",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: the property is a house with an upstairs landing, so a storey is currently without smoke detection if the alarm was not replaced; this follows from the report's wording (event-001) and is not separately evidenced.",
+  "Assumption: 'ten-year life' (event-012) means a sealed long-life battery unit; the landlord has not stated whether it is mains-wired or interlinked."
+ ],
+ "uncertainty": [
+  "Whether an alarm is physically fitted on the landing and sounds on test.",
+  "Whether the ceiling opening left by the removal was made good.",
+  "The property's current EICR and gas safety record dates - not visible on this case file.",
+  "Whether there is active damp or mould in the bathroom, or the dehumidifier was precautionary.",
+  "Whether the tenant accepted the dehumidifier and uses it as the landlord describes (his account only, event-014)."
+ ],
+ "safety_actions": [
+  "Asked the tenant to press-test the landing smoke alarm and report the result either way, and to confirm alarms elsewhere and any CO alarm (ACT-1).",
+  "Told the tenant to treat burning smells, sparks or a non-sounding alarm as an emergency and contact us immediately (ACT-1).",
+  "Told the tenant not to refit or work on a mains-wired alarm herself (ACT-1).",
+  "Put the loose-socket history and the EICR question to the landlord with an offer to instruct an electrician (ACT-2).",
+  "Escalated the electrical and damp questions to the property manager rather than closing on the landlord's word."
+ ],
+ "withheld_actions": [
+  "Did not instruct any contractor: no standing cap is on file and the landlord has declined agency works (event-007, event-010) - APR-SPEND-OVER-CAP.",
+  "Did not close the request: the smoke-alarm test, documents, and the electrical and damp questions are outstanding (CAP-CLOSE).",
+  "Did not record the property as compliant or update the alarm record as the landlord asked (event-012): no test evidence supports it.",
+  "Did not express any view on who pays for the sockets or the February 2025 boiler work (PRO-TENANT-LIABILITY).",
+  "Did not pass the tenant's pet or household details to any third party (PRO-PII)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:45:04.497295Z",
+ "finished_at": "2026-10-10T15:48:04.964336Z",
+ "input_tokens": 34502,
+ "output_tokens": 15095,
+ "cache_read_tokens": 56748
+}

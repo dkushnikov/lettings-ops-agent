@@ -1,0 +1,563 @@
+{
+ "case_id": "007",
+ "case_type": "access_scheduling",
+ "playbook": "access-scheduling",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Booked the electrical visit for Mon 29 Sep 2025 after 15:00 — the one window both the tenant (event-016) and the electrician (event-019) had already named, so no fresh consent was needed (rule 2, CAP-SCHEDULE-ACCESS). Confirmed it to tenant and contractor with the access arrangement (tenant present, dog out, call on arrival), briefed the contractor as diagnosis-only with a written quote before any chargeable work, and gave the tenant damage-limiting advice (TV stays unplugged, keep using the lamp, isolate and call if burning smell/sparks/shock). Did not treat this as an emergency: the reported symptoms are a fuse-tripping appliance that is unplugged and a light the tenant has stopped using, with no burning smell, sparks or shock reported (event-001, event-015). Did not dispatch any new or additional work and did not commit spend: no standing cap is on file (event-004) and the landlord's \"Please sort it\" (event-003) answered a TV-only request (event-002), so it is not approval for the downstairs light or for any priced repair. Did not decide who owns or pays for the television (PRO-TENANT-LIABILITY) — put to the landlord. Did not open a work order for the rear-door handle, which exists only as a call remark with no report (event-015, event-018); asked the tenant the one question that decides its urgency (does the rear door still lock). Case now waits on three named parties, so request_info rather than escalation.",
+ "recap": "Electrical visit booked 29 Sep after 15:00 on the window tenant and electrician both named; awaiting arrival time, landlord scope/TV answer, door-lock check.",
+ "stage": "visit_scheduling",
+ "hold_reason": "Waiting for Provider — exact arrival time for the booked 29 Sep slot; also Waiting for Landlord on scope of the downstairs light and TV ownership/disposal (landlord auto-reply 7 Sep said he was away, event-007).",
+ "next_step": "Contractor (Rian Sol, Bracken Spark Services) to confirm an approximate arrival time for Mon 29 Sep after 15:00; Oren Pike to relay it to the tenant and send a reminder on the day.",
+ "definition_of_done": [
+  {
+   "item": "job_known",
+   "status": "done",
+   "evidence": "event-001 (TV fault + downstairs light), event-005 (light added to record), event-017 (combined electrical visit instructed to Bracken Spark Services); urgency set routine — no burning smell/sparks/shock, TV unplugged, lamp in use (event-015)",
+   "text": "Purpose and urgency of the visit confirmed"
+  },
+  {
+   "item": "windows_offered",
+   "status": "done",
+   "evidence": "Tenant offered six windows (event-016); contractor confirmed one of them, 29 Sep after 15:00 (event-019). Only one contractor-confirmed window exists rather than two, but it matches the tenant's own offer, so no further offer was needed.",
+   "text": "Two contractor-confirmed windows offered to the tenant with the required notice"
+  },
+  {
+   "item": "tenant_agreed",
+   "status": "done",
+   "evidence": "event-016 — tenant herself listed 29 September after 15:00 as available; dog to be taken out, contractor to call on arrival",
+   "text": "Tenant agreed a window, or consented to entry with the management key"
+  },
+  {
+   "item": "booked",
+   "status": "done",
+   "evidence": "ACT-1 schedule_access; confirmed to tenant ACT-3 and contractor ACT-4 with slot, access arrangement and pet note",
+   "text": "Visit booked and confirmed to both the tenant and the contractor (slot, access arrangement, pets noted)"
+  },
+  {
+   "item": "reminders",
+   "status": "pending",
+   "evidence": "Day-of reminder due 29 Sep; arrival time to be relayed to tenant once the contractor answers (ACT-4)",
+   "text": "Reminder sent on the day; any reschedule confirmed to both sides"
+  },
+  {
+   "item": "keys",
+   "status": "not_applicable",
+   "evidence": "No key issued; tenant will be present at the property (event-016)",
+   "text": "Key handover recorded and key return confirmed after the visit, where a key was issued"
+  },
+  {
+   "item": "logged",
+   "status": "done",
+   "evidence": "ACT-2 — window, consent basis, access arrangement and open gaps recorded",
+   "text": "Window, agreement and access arrangement logged"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported a Samsung TV in an upstairs bedroom that trips a fuse when plugged in (now unplugged) and a downstairs bedroom light that flickers and pops when switched on; access must be pre-arranged because of a dog.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The landlord's approval request of 4 Sep covered the TV only; it did not include the downstairs light.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord replied on 5 Sep 'Please sort it. I don't remember leaving a TV.' — no mention of the light, and no statement on TV ownership, replacement or disposal.",
+   "source_ids": [
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "No spending limit and no disposal instruction are recorded for this landlord.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The downstairs light was added to the maintenance record on 5 Sep, after the landlord's TV-only approval request.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "A landlord auto-reply on 7 Sep said he was away and gave no further instructions.",
+   "source_ids": [
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The first electrical contractor was stood down on 11 Sep and scheduling restarted with Bracken Spark Services.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Tenant gave availability on 16 Sep: 23, 24, 29 and 30 Sep after 15:00; 25 Sep and 2 Oct after 12:30. Dog will be taken out; contractor to call on arrival rather than knock.",
+   "source_ids": [
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "Electrician Rian Sol (Bracken Spark Services) proposed attending 29 September after 15:00, with no exact arrival time and no appointment confirmation yet sent.",
+   "source_ids": [
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "Tenant's belief that the TV's main board is 'fried' is her own view after changing fuses, not a technician's diagnosis; she is open to the TV being removed.",
+   "source_ids": [
+    "event-015"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F11",
+   "statement": "Tenant is using a lamp instead of the downstairs bedroom light and can manage without it for now.",
+   "source_ids": [
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F12",
+   "statement": "The rear-door handle has come off; raised on the 16 Sep call only, no separate report received and no handyman assigned. Whether the door still locks is unknown.",
+   "source_ids": [
+    "event-015",
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F13",
+   "statement": "No priced quote exists for any of the reported work.",
+   "source_ids": [
+    "get_action_ledger",
+    "event-019"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Scope mismatch: the landlord approved works on a request that covered the television only (event-002, event-003), but the instructed visit covers both the television and the downstairs bedroom light (event-005, event-017).",
+   "fact_ids": [
+    "F2",
+    "F3",
+    "F5"
+   ],
+   "source_ids": [
+    "event-002",
+    "event-003",
+    "event-005",
+    "event-017"
+   ],
+   "resolution": "Attendance on the already-instructed visit left in place (reversible, no extra call-out); landlord asked to confirm the light is within scope and told any repair comes back as a priced quote before work starts (ACT-5, RTE-LANDLORD).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Television ownership unclear: the landlord does not remember leaving a TV (event-003), the tenant treats it as the property's and is content for it to be removed (event-015). This decides who pays for repair, replacement or disposal.",
+   "fact_ids": [
+    "F3",
+    "F10"
+   ],
+   "source_ids": [
+    "event-003",
+    "event-015"
+   ],
+   "resolution": "Not decided by the agent (PRO-TENANT-LIABILITY). Put to the landlord as a direct question (ACT-5); the electrician will establish whether the fault is in the appliance or the circuit (ACT-4).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "The landlord's 'Please sort it' is being carried as authority for a scope it never covered: it answered a TV-only approval request, while the instructed visit now also covers the downstairs light. No spend cap is on file either, so no quote can be approved on it.",
+   "source_ids": [
+    "event-002",
+    "event-003",
+    "event-004",
+    "event-005",
+    "event-017"
+   ],
+   "action_taken": "Scope put back to the landlord and the diagnosis-only limit stated to the contractor; no spend committed (ACT-4, ACT-5)."
+  },
+  {
+   "kind": "other",
+   "description": "The rear-door handle exists only as a remark in a call transcript with no work order; without a check on whether the door still locks, a potential security defect could be lost between tickets.",
+   "source_ids": [
+    "event-015",
+    "event-018"
+   ],
+   "action_taken": "Direct question to the tenant with a same-day route to urgent handling if the door does not lock (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "007",
+    "title": "Television, bedroom light and door handle",
+    "received_at": "2025-09-04 13:05:32 UTC",
+    "track": "Property Management",
+    "case_number": "007",
+    "property": "8 Vellum Court, Brindlewick, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Oren Pike (Maintenance Coordinator, Northbridge Lettings)",
+    "events_visible": 19,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Television, bedroom light and door handle\n\n## Case details\n- source role: Tenant\n- created: 2025-09-04 13:05:32 UTC\n- property: 8 Vellum Court, Brindlewick, ZZ1 1ZZ\n\n## Initial request\nThe tenant reports that a Samsung television in an upstairs bedroom has an electrical fault and trips a fuse when plugged in; it is currently unplugged. They also report a downstairs bedroom light that flickers and makes a popping sound when switched on. Please arrange any property access in advance because a dog is at the property."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "007-get_case_details-c7ed87a4a3d7",
+   "receipt": "{\"id\": \"007\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:36:18.530096Z",
+   "finished_at": "2026-10-10T15:36:18.530174Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "007-get_action_ledger-e1d92a4a309a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:36:18.530293Z",
+   "finished_at": "2026-10-10T15:36:18.530333Z"
+  },
+  {
+   "seq": 3,
+   "tool": "schedule_access",
+   "tool_class": "write",
+   "input": {
+    "window": "Monday 29 September 2025, after 15:00 — electrician Bracken Spark Services; tenant present, dog taken out, contractor to call on arrival rather than knock",
+    "tenant_consent": true
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-SCHEDULE-ACCESS"
+    ],
+    "reason": "Access needs the tenant's agreement; 24 hours' notice unless emergency.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "schedule_access",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-schedule_access-cfd787780d39",
+   "action_id": "007-schedule_access-cfd787780d39",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:37:08.847475Z",
+   "finished_at": "2026-10-10T15:37:08.847658Z"
+  },
+  {
+   "seq": 4,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Access booked for 29 Sep 2025 after 15:00. Consent basis: tenant offered 29 Sep after 15:00 among her availability (event-016); electrician Rian Sol, Bracken Spark Services proposed the same date/window (event-019) — both sides already named it, so no re-confirmation sought. Access arrangement per event-016: tenant present, dog taken out, contractor to phone on arrival. Open gaps recorded: (1) contractor gave no exact arrival time (event-019) — asked; (2) landlord's \"Please sort it\" (event-003) answered a TV-only approval request (event-002); the downstairs bedroom light was added to the record afterwards (event-005) and has never been put to the landlord — no priced quote exists yet, quote approval to follow (RTE-LANDLORD); (3) no spending limit on file (event-004); (4) landlord said \"I don't remember leaving a TV\" (event-003) — ownership/disposal of the Samsung TV unresolved, not an agent decision; (5) rear-door handle raised on the call only (event-015, event-018), no work order exists — asked tenant whether the rear door still locks and secures. Safety check: tenant-reported electrical symptoms (fuse trip, flickering/popping light); no burning smell, sparks or shock reported, TV unplugged and lamp in use instead of the light (event-001, event-015) — not treated as emergency; damage-limiting advice issued to tenant."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-add_note-4c8258cedc7b",
+   "action_id": "007-add_note-4c8258cedc7b",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:37:08.847749Z",
+   "finished_at": "2026-10-10T15:37:08.847844Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Ada Pell — 8 Vellum Court, Brindlewick. Electrical visit now booked: Monday 29 September, after 15:00, with the electrician from Bracken Spark Services. This is the date you offered in your email of 16 September, and the electrician has proposed the same window, so it is confirmed. I have passed on that the dog will be out and that the engineer should call you on arrival rather than knock. I am asking the electrician for a more precise arrival time and will send it to you as soon as I have it.\n\nUntil the visit, please keep the Samsung television unplugged, and please avoid using the downstairs bedroom light — carry on with the lamp as you are doing. If at any point you notice a burning smell, scorch marks, sparks or any shock, switch that circuit off at the consumer unit if it is safe to do so and call us straight away; out of hours, treat it as an emergency.\n\nOne more thing, on the rear-door handle you mentioned on the call of 16 September: can you tell me whether the rear door still closes and locks securely? If it does not lock, tell me today and I will treat it as an urgent security job rather than waiting for a separate report."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-notify_tenant-0f0530b7eb72",
+   "action_id": "007-notify_tenant-0f0530b7eb72",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:37:08.847913Z",
+   "finished_at": "2026-10-10T15:37:08.848002Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Rian Sol, Bracken Spark Services — job confirmed: 8 Vellum Court, Brindlewick, ZZ1 1ZZ, Monday 29 September 2025, after 15:00, as you proposed on 17 September. The tenant offered that same window, so the slot is booked.\n\nTwo requests: (1) please confirm an approximate arrival time so I can give the tenant a window; (2) please phone the tenant on arrival rather than knocking — a dog is at the property and will be taken out for the visit.\n\nScope: (a) upstairs bedroom — Samsung television reported to trip a fuse when plugged in, currently unplugged; please establish whether the fault is in the appliance only or whether the circuit or socket is implicated; (b) downstairs bedroom light — reported flickering with a popping noise when switched on; the tenant is using a lamp instead.\n\nPlease note: attendance and diagnosis only at this stage. Send me a written quote for any repair, with VAT shown, and do not carry out chargeable repair work until I confirm the landlord's approval. If you find anything unsafe on site, make it safe, tell me immediately, and report what you isolated."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-notify_contractor-2cf5e067afb0",
+   "action_id": "007-notify_contractor-2cf5e067afb0",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:37:08.848066Z",
+   "finished_at": "2026-10-10T15:37:08.848141Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Mr Corin Wex — 8 Vellum Court, Brindlewick. Update and two questions.\n\nAn electrician from Bracken Spark Services is booked to attend on Monday 29 September, after 15:00, to diagnose the reported electrical faults. This visit is attendance and diagnosis only; any repair will come to you as a priced quote before work starts.\n\n1. Scope. Your instruction of 5 September (\"Please sort it\") answered our approval request of 4 September, which covered the television fault only. The tenant's original report of 4 September also included a downstairs bedroom light that flickers and makes a popping noise when switched on; that was added to our record on 5 September but has not previously been put to you. The electrician will inspect it on the same visit at no separate call-out. Please confirm you are content for the light to be investigated and quoted alongside the television.\n\n2. The television. You noted you did not remember leaving a television at the property. The tenant reports it trips a fuse when plugged in and is willing for it to be removed. Ownership, and therefore who pays for any repair, replacement or disposal, is not something we can determine for you. Please tell us whether the Samsung television was left by you as part of the let, and whether you want it repaired, replaced, disposed of, or left for the tenant to deal with.\n\nWe also have no standing spending limit recorded for this property. If you would like to set one, we can instruct routine repairs up to that figure without troubling you each time; otherwise every quote will come to you for approval."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-notify_landlord-5497a5a9c39d",
+   "action_id": "007-notify_landlord-5497a5a9c39d",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:37:08.848206Z",
+   "finished_at": "2026-10-10T15:37:08.848296Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Electrician will attend Monday 29 September 2025 after 15:00; engineer to phone on arrival rather than knock",
+   "due": "2025-09-29T15:00:00Z",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Send the electrician's approximate arrival time once received",
+   "due": "2025-09-29",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Attend 8 Vellum Court on 29 September after 15:00 and confirm an approximate arrival time",
+   "due": "2025-09-29",
+   "source_id": "event-019",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Any repair will be sent as a priced quote for approval before work starts; this visit is diagnosis only",
+   "due": null,
+   "source_id": "ACT-5",
+   "status": "open"
+  },
+  {
+   "by": "tenant",
+   "to": "agency",
+   "what": "Submit the rear-door handle as a separate report",
+   "due": null,
+   "source_id": "event-015",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant reported 4 Sep 2025 (event-001); first attendance now booked 29 Sep 2025 — 25 days, extended by unanswered availability requests (event-010) and a contractor change (event-011)",
+   "deadline": "2025-09-29",
+   "note": "Section 11, Landlord and Tenant Act 1985"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 4 Sep 13:05 (event-001); landlord approval sought same day 14:55 (event-002), tenant contacted 7 Sep (event-006)",
+   "deadline": null,
+   "note": "Met as to internal action; first direct reply to the tenant was on 7 Sep"
+  },
+  {
+   "rule_id": "CAP-SCHEDULE-ACCESS",
+   "name": "24 hours' notice of access",
+   "status": "sop",
+   "basis": "Booking made now for 29 Sep on a window the tenant herself offered (event-016)",
+   "deadline": "2025-09-28",
+   "note": "Notice requirement satisfied with margin"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please confirm an approximate arrival time for the booked visit on Monday 29 September 2025 after 15:00 at 8 Vellum Court, and confirm you will phone the tenant on arrival rather than knock.",
+   "why": "Contractor proposed the date but gave no arrival time (event-019); the tenant needs a window and the dog must be taken out (RTE-CONTRACTOR).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Do you approve the downstairs bedroom light being investigated and quoted alongside the television on the same visit; and was the Samsung television left by you as part of the let — do you want it repaired, replaced, disposed of or left to the tenant? Also, would you like to set a standing spending limit for this property?",
+   "why": "The 5 Sep approval (event-003) answered a TV-only request (event-002); the light was added later (event-005). Ownership/payment for the TV is the landlord's to settle, not the agent's (RTE-LANDLORD, PRO-TENANT-LIABILITY). No spend cap is on file (event-004).",
+   "blocking": false
+  },
+  {
+   "to": "tenant",
+   "question": "Does the rear door still close and lock securely now that the handle has come off?",
+   "why": "Raised on the call only, no report logged (event-015, event-018). If the door cannot be secured it becomes an emergency security job; if it locks, it is a routine handyman item.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-SCHEDULE-ACCESS",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "RTE-CONTRACTOR",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "APR-SPEND-OVER-CAP",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: 'after 15:00' on 29 September denotes the same window in both the tenant's and the contractor's messages (event-016, event-019); the exact arrival time has been requested rather than invented.",
+  "Assumption: the electrician's attendance/diagnosis is covered by the existing instruction of 16 September (event-017) and carries no new spend commitment; no attendance fee is stated in any artefact."
+ ],
+ "uncertainty": [
+  "Whether the fault lies in the television alone or in the socket/circuit serving it — only the electrician's attendance can settle this.",
+  "Whether the television was left by the landlord as part of the let; the landlord's recollection and the tenant's assumption differ.",
+  "Whether the rear door can still be secured.",
+  "Whether the landlord, who reported being away on 7 September (event-007), will reply before the 29 September visit."
+ ],
+ "safety_actions": [
+  "Assessed the electrical reports against the emergency definitions: fuse-tripping appliance is unplugged (event-001) and the flickering/popping light is out of use with a lamp in its place (event-015); no burning smell, sparks or shock risk reported, so not handled as an emergency.",
+  "Gave the tenant damage-limiting advice: keep the TV unplugged, do not use the downstairs light, and if a burning smell, scorch marks, sparks or a shock occur, isolate that circuit at the consumer unit if safe and call immediately, treating it as an emergency out of hours (ACT-3).",
+  "Briefed the electrician to establish whether the fault is confined to the appliance or involves the socket/circuit, and to make safe and report immediately if anything unsafe is found (ACT-4).",
+  "Asked the tenant whether the rear door still locks, so a possible property-security defect is not left sitting as an unlogged call remark (ACT-3).",
+  "Withheld the tenant's household details from the contractor; passed only the address, slot, dog and call-on-arrival instruction (PRO-PII)."
+ ],
+ "withheld_actions": [
+  "Did not dispatch any contractor or commit spend: no standing cap on file (event-004) and no landlord approval covering a priced job (APR-SPEND-OVER-CAP).",
+  "Did not instruct repair, replacement or disposal of the television — ownership and liability are unresolved (PRO-TENANT-LIABILITY).",
+  "Did not raise a work order for the rear-door handle before knowing whether the door still secures.",
+  "Did not re-ask the tenant to confirm 29 September: she offered that window herself (event-016).",
+  "Did not close the request: no work has been carried out."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:36:14.344601Z",
+ "finished_at": "2026-10-10T15:38:13.113562Z",
+ "input_tokens": 24956,
+ "output_tokens": 9916,
+ "cache_read_tokens": 42561
+}

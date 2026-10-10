@@ -1,0 +1,623 @@
+{
+ "case_id": "025",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Tap work appears done and was landlord-approved (event-003), but the corrected invoice (event-022) states no amount, no attendance date is confirmed, and the office spare key issued for access (event-018) is not recorded as returned — so the request cannot be closed. Chased the contractor for the priced invoice, attendance date and key (ACT-1); told the tenant what the invoice records and asked whether the drip and cloudy water are resolved (ACT-2); put the priced invoice, the completion confirmation and the newly reported kitchen drawer to the landlord for instruction (ACT-3); logged the open items (ACT-4) and placed the ticket on hold (ACT-5). No new spend instructed: no standing cap is on file and the drawer is a separate job.",
+ "recap": "Kitchen tap replaced and invoiced, but the invoice is unpriced, attendance and key return unconfirmed; contractor and landlord chased, ticket on hold.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — contractor to supply invoice total with VAT, attendance date and key return (ACT-1, 2 working days); in parallel Waiting for Landlord for completion confirmation and drawer instruction (ACT-3, 3 days).",
+ "next_step": "Bracken & Vale Plumbing to send the priced corrected invoice (total + VAT), the attendance date and confirmation the office spare key is returned, by close of the second working day (ACT-1).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-002: dripping tap categorised as routine plumbing, no emergency criteria met; cloudy water recorded as tenant suspicion, advice on aerated water given to tenant at ACT-2",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-003 — landlord approved the maintenance works (tap). Drawer repair has no authority yet: asked at ACT-3",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-004 — Bracken & Vale Plumbing instructed to quote/attend; tenant kept informed at event-006, event-009, ACT-2",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "event-016 confirmed 10 September with the tenant's key authorisation (event-015), but event-017 left timing open and no attendance confirmation exists; chased at ACT-1",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "skipped",
+   "evidence": "No priced quote was ever returned by the contractor (event-004, event-005); landlord gave a general approval at event-003 and work proceeded without a priced quote — flagged to the landlord at ACT-3",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Only the invoice description evidences the work (event-022); no job report, photos or attendance date; asked contractor (ACT-1) and tenant (ACT-2)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "Corrected invoice on file (corrected-plumbing-invoice.pdf) but unpriced; no photos; priced copy requested at ACT-1",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "Cannot forward a priced invoice: no amount stated (F6). Landlord told it is coming (ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Requested at ACT-3; 3-day reply window",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "pending",
+   "evidence": "Office spare key issued for the visit (event-018); return not recorded; requested at ACT-1",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Open items above; closure would name who paid, which is not yet established",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported a constantly dripping kitchen mixer tap and cloudy-looking water, asking whether a replacement tap could be considered, on 4 August 2025.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The landlord, Orin Bell, approved proceeding with the maintenance works on 5 August 2025 and said email is the best contact.",
+   "source_ids": [
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "No landlord standing spend cap is on file in this case record; default authority is therefore £0 for non-emergency spend.",
+   "source_ids": [
+    "get_case_details",
+    "mandate CAP-DISPATCH-ROUTINE"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "A visit was arranged for 10 September 2025 with the contractor collecting the agency spare key; the contractor said the late confirmation was difficult but would try to accommodate. No attendance confirmation is recorded.",
+   "source_ids": [
+    "event-015",
+    "event-016",
+    "event-017",
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The first invoice (15 September) carried a postcode differing from the property record and was returned for correction; the corrected invoice records 'Supply and install one new mono kitchen sink tap' at 18 Thistlewick Row, ZZ1 1ZZ.",
+   "source_ids": [
+    "event-019",
+    "event-020",
+    "event-021",
+    "event-022",
+    "corrected-plumbing-invoice"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The corrected invoice (ref NBL-025-INV-15) states no amount, no VAT and no labour/parts breakdown.",
+   "source_ids": [
+    "corrected-plumbing-invoice",
+    "get_attachment"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "On 5 September the tenant reported a separate fault: the top kitchen drawer is loose with its metal front brackets apparently snapped, and asked if it could be repaired at the same visit. No response to that item is recorded before now.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The cloudy-water element of the report was passed to the landlord and the contractor as a tenant suspicion of limescale, with no water sample or test result available; no investigation result is recorded.",
+   "source_ids": [
+    "event-002",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "A boiler matter was mentioned in passing during a 15 September call; no boiler work is documented as part of this tap job.",
+   "source_ids": [
+    "event-021"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Invoice postcode differed from the property's recorded postcode on the first invoice; call transcript also records address confusion by the contractor.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-013",
+    "event-019",
+    "event-020",
+    "event-022"
+   ],
+   "resolution": "Corrected invoice and the attachment text both show 18 Thistlewick Row, Fenmere, ZZ1 1ZZ, matching the case record (get_case_details); no residual conflict about the property.",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Corrected invoice NBL-025-INV-15 carries a work description but no amount, VAT or breakdown; it cannot be passed to the landlord or used to establish who paid.",
+   "source_ids": [
+    "corrected-plumbing-invoice",
+    "event-022"
+   ],
+   "action_taken": "Priced copy requested from the contractor (ACT-1); landlord told the invoice is pending (ACT-3)"
+  },
+  {
+   "kind": "data_quality",
+   "description": "Work appears to have been carried out and invoiced with no attendance confirmation on file and no priced quote ever returned, after repeated contractor non-response (event-005, event-009, event-013).",
+   "source_ids": [
+    "event-005",
+    "event-013",
+    "event-017",
+    "event-022"
+   ],
+   "action_taken": "Attendance date requested (ACT-1); pattern logged (ACT-4) for office review if the contractor does not reply"
+  },
+  {
+   "kind": "other",
+   "description": "An office spare key was issued to the contractor for access and no return is recorded — a property security housekeeping item, not a reported hazard.",
+   "source_ids": [
+    "event-015",
+    "event-018"
+   ],
+   "action_taken": "Key return requested from the contractor (ACT-1); listed as an open closure item (ACT-4)"
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "025",
+    "title": "Kitchen tap maintenance request",
+    "received_at": "2025-08-04 18:10:50 UTC",
+    "track": "Property Management",
+    "case_number": "025",
+    "property": "18 Thistlewick Row, Fenmere, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Tessa Wren (Property Manager, Northbridge Lettings)",
+    "events_visible": 22,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Kitchen tap maintenance request\n\n## Case details\n- source role: Tenant\n- created: 2025-08-04 18:10:50 UTC\n- property: 18 Thistlewick Row, Fenmere, ZZ1 1ZZ\n\n## Initial request\nThe kitchen mixer tap is constantly dripping and wasting water. The water looks cloudy when I fill a glass. I suspect limescale may be involved and would like to know whether a new tap could be considered.\n\n## Attachments\n- corrected-plumbing-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-get_case_details-a1797e34daf8",
+   "receipt": "{\"id\": \"025\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:43:23.247037Z",
+   "finished_at": "2026-10-10T15:43:23.247295Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-get_action_ledger-50bdd80055d8",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:43:23.247571Z",
+   "finished_at": "2026-10-10T15:43:23.247674Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "corrected-plumbing-invoice.pdf"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "name": "corrected-plumbing-invoice.pdf",
+    "text": "B I L L I N G  D O C U M E N T Bracken & Vale Plumbing — Corrected Invoice\nBracken & Vale Plumbing\nInvoice reference: NBL-025-INV-15\nCorrected: 15 September 2025\nProperty: 18 Thistlewick Row, Fenmere, ZZ1 1ZZ\nWork invoiced\nSupply and install one new mono kitchen sink tap.\nCorrection note: Property postcode amended."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-get_attachment-2693f68841ce",
+   "receipt": "{\"name\": \"corrected-plumbing-invoice.pdf\", \"text\": \"B I L L I N G  D O C U M E N T Bracken & Vale Plumbing — Corrected Invoice\\nBracken & Vale Plumbing\\nInvoice reference: NBL-025-INV-15\\nCorrected:…",
+   "started_at": "2026-10-10T15:43:23.247775Z",
+   "finished_at": "2026-10-10T15:43:23.247897Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "key collection office spare key return"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-search_history-999aa4775db2",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:43:28.763200Z",
+   "finished_at": "2026-10-10T15:43:28.763396Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "drawer brackets cloudy water"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-search_history-e7a550b85f1e",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:43:28.763513Z",
+   "finished_at": "2026-10-10T15:43:28.763657Z"
+  },
+  {
+   "seq": 6,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor",
+    "query": "invoice amount total work completed"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-search_history-ed108779c047",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:43:28.763752Z",
+   "finished_at": "2026-10-10T15:43:28.763882Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 18 Thistlewick Row, Fenmere, ZZ1 1ZZ — kitchen mixer tap (invoice ref NBL-025-INV-15).\n\nThank you for the corrected invoice received 15 September (event-022); the postcode now matches our record. Before we can pass it to the landlord for settlement we need three things from you:\n\n1. The invoice total, showing labour, parts and VAT separately. The corrected copy on file shows the work description only, with no amount.\n2. The date the engineer actually attended and carried out the installation, so we can close the visit record (the slot discussed was 10 September, event-016/event-017, but we have no attendance confirmation).\n3. Confirmation that the spare key collected from our office (event-018) has been returned, or when it will be returned.\n\nAlso, please confirm whether the tenant's cloudy-water report was looked at during the visit, and whether anything was found.\n\nPlease reply by close of business on the second working day after this message. If we have had no reply by then we will refer the invoice and the outstanding key to our office for review."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-notify_contractor-9bd61b00a4a6",
+   "action_id": "025-notify_contractor-9bd61b00a4a6",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:44:04.612580Z",
+   "finished_at": "2026-10-10T15:44:04.612952Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Calder,\n\nAn update on your kitchen tap report (18 Thistlewick Row).\n\nOur plumber's invoice, received 15 September, records that a new mono kitchen sink tap has been supplied and installed at the property. Could you confirm:\n- that the dripping has stopped; and\n- whether the water still looks cloudy when you fill a glass now that the new tap is fitted.\n\nCloudy water that clears from the bottom of the glass upwards after a few seconds is usually air from the aerator and harmless; if it does not clear, or there is any change in taste or smell, please tell us straight away and we will take it up with the plumber and, if needed, your water supplier.\n\nOn the loose top kitchen drawer with the snapped metal brackets that you reported on 5 September: thank you for flagging it, it is logged on this ticket. It is a separate repair, so we are putting it to the landlord for instruction and will come back to you with next steps. We will not book an appointment for it until that is agreed.\n\nWe are sorry about the delays in getting the tap visit arranged.\n\nKind regards,\nTessa Wren\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-notify_tenant-b82757525259",
+   "action_id": "025-notify_tenant-b82757525259",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:44:04.613149Z",
+   "finished_at": "2026-10-10T15:44:04.613351Z"
+  },
+  {
+   "seq": 9,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Bell,\n\nUpdate on 18 Thistlewick Row, Fenmere — kitchen tap works you approved on 5 August (event-003).\n\n1. Work done: Bracken & Vale Plumbing have invoiced for supplying and installing a new mono kitchen sink tap (corrected invoice ref NBL-025-INV-15, received 15 September). The first copy carried the wrong postcode and was returned for correction; the corrected copy matches the property. The invoice as received does not state an amount, so we have asked the contractor for the total with VAT before we pass it to you for settlement. We will forward it as soon as we have it, and we have asked them to confirm the attendance date and the return of the office spare key used for access.\n\n2. Please confirm you are content that the tap work is complete once the priced invoice reaches you.\n\n3. New item for your instruction: on 5 September the tenant reported the top kitchen drawer is loose with its metal front brackets apparently snapped, and asked whether it could be repaired at the same visit. No quote exists and we hold no standing spend limit for you, so we need your instruction before any cost is incurred. Would you like us to obtain a quote for the drawer repair (handyman/joiner), use your own contractor, or leave it for now?\n\n4. For the record, the tenant's original cloudy-water concern has not been separately investigated; we have asked both the contractor and the tenant whether it persists now the new tap is fitted, and will report back.\n\nPlease reply by email within 3 days. If we have no reply, the drawer repair will stay on hold and the tenant will be told it is awaiting your instruction.\n\nKind regards,\nTessa Wren\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-notify_landlord-7164d75a0684",
+   "action_id": "025-notify_landlord-7164d75a0684",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:44:04.613500Z",
+   "finished_at": "2026-10-10T15:44:04.613677Z"
+  },
+  {
+   "seq": 10,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Tap job: landlord approval on file (event-003); work invoiced as a new mono kitchen sink tap (event-022 / corrected-plumbing-invoice.pdf). Open items blocking closure: (a) invoice carries no amount or VAT — chased contractor (ACT-1); (b) no attendance confirmation for the 10 Sept slot (event-016/017); (c) office spare key issued for access (event-018) not recorded as returned; (d) landlord confirmation of completion pending (ACT-3); (e) tenant's cloudy-water report never investigated — asked tenant and contractor (ACT-1, ACT-2); (f) new fault: loose top kitchen drawer, snapped brackets (event-012) — separate job, no spend authority on file, put to landlord for instruction (ACT-3). Not closing: work result, priced invoice and key return unverified. Boiler mentioned in event-021 is not part of this job."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-add_note-41d6f40382ba",
+   "action_id": "025-add_note-41d6f40382ba",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:44:11.254321Z",
+   "finished_at": "2026-10-10T15:44:11.254720Z"
+  },
+  {
+   "seq": 11,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — Bracken & Vale Plumbing to supply the invoice total (with VAT), the attendance date and confirmation that the office spare key has been returned; landlord also asked to confirm completion and to instruct on the kitchen drawer repair.",
+    "until": "2 working days for the contractor; 3 days for the landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-put_on_hold-14fa97544c5e",
+   "action_id": "025-put_on_hold-14fa97544c5e",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:44:11.254894Z",
+   "finished_at": "2026-10-10T15:44:11.255081Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back with next steps on the kitchen drawer once the landlord instructs",
+   "due": "after landlord reply (3 days from ACT-3)",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Forward the priced invoice once the contractor supplies the total with VAT",
+   "due": "on receipt from contractor",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Refer invoice and outstanding key to the office if no reply by close of the second working day",
+   "due": "2 working days from ACT-1",
+   "source_id": "ACT-1",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 4 August 2025 (event-001); tap replaced on or about 10-15 September 2025 (event-022) — roughly six weeks, largely contractor scheduling delay",
+   "deadline": null,
+   "note": "Drawer repair reported 5 September (event-012) is still unactioned and runs its own S11 clock"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant reported 4 Aug 18:10; agency acted 5 Aug 07:33 (event-002)",
+   "deadline": null,
+   "note": "Met for the tap; not met for the drawer report of 5 September until ACT-2"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send the corrected invoice NBL-025-INV-15 showing the total with labour, parts and VAT; confirm the date the engineer attended and installed the tap; and confirm the office spare key has been returned.",
+   "why": "The invoice on file carries no amount, attendance was never confirmed after the 10 September slot, and a management key was issued for access (event-016, event-017, event-018, event-022).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Do you confirm the tap work as complete once the priced invoice reaches you, and how would you like us to handle the separately reported loose kitchen drawer (obtain a quote, use your own contractor, or leave it)?",
+   "why": "No standing spend cap is on file, so any new work needs the landlord's instruction; completion confirmation is a closure item (event-003, event-012).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Has the dripping stopped since the new tap was fitted, and does the water still look cloudy when you fill a glass?",
+   "why": "The cloudy-water element of the original report (event-001) was never investigated and the work result is otherwise unverified.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-REQUEST-APPROVAL",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "APR-SPEND-OVER-CAP",
+  "CAP-CLOSE",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PAYMENTS"
+ ],
+ "assumptions": [
+  "Assumption: the tap was in fact installed on or shortly before 15 September; the only evidence is the invoice description (event-022) — no attendance report exists, which is why confirmation was requested rather than asserted.",
+  "Assumption: no landlord standing spend cap exists for Mr Bell, as none appears in the case record; treated as £0 standing authority per CAP-DISPATCH-ROUTINE."
+ ],
+ "uncertainty": [
+  "Whether the dripping has actually stopped and whether the cloudy water persists — awaiting the tenant (ACT-2).",
+  "The cost of the tap job and who bears it; no amount is on any document.",
+  "Whether the agency spare key has been returned to the office."
+ ],
+ "safety_actions": [
+  "Safety-pass check — cloudy water: no hazard reported or observed; the tenant described appearance only and no sample or test exists (event-002, event-004). Tenant asked whether it persists after the tap change and told to report immediately any failure to clear or any change in taste or smell, with escalation to the plumber and water supplier (ACT-2).",
+  "Safety-pass check — boiler/gas: a boiler matter is mentioned only in passing in a call (event-021) and forms no part of this job; no gas symptom is reported. Recorded, no gas action triggered on this ticket.",
+  "No emergency criteria met: no loss of water, heating or hot water, no leak onto electrics, no insecurity (event-001)."
+ ],
+ "withheld_actions": [
+  "Did not close the request: work result, priced invoice, landlord confirmation and key return all outstanding (CAP-CLOSE).",
+  "Did not instruct any contractor for the kitchen drawer repair: no standing cap on file and the landlord's 5 August approval (event-003) covered the tap works only (APR-SPEND-OVER-CAP).",
+  "Did not state or approve any invoice amount, and did not suggest who pays for any element (PRO-PAYMENTS, PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:43:19.725129Z",
+ "finished_at": "2026-10-10T15:45:04.490886Z",
+ "input_tokens": 52458,
+ "output_tokens": 8868,
+ "cache_read_tokens": 70935
+}

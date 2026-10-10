@@ -1,0 +1,558 @@
+{
+ "case_id": "015",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Held the work, corrected the instruction to the contractor (hold in force, no key collection, provisional dates and scope/VAT clarification requested), put the conditional-approval and ambiguous-approval questions to the landlord, and escalated to the property manager. I did not instruct the £665 work: the only landlord approval on file is conditional on recovering the cost from the tenants' bond (event-008, event-010), the deposit held (£650) is already exceeded by claimed costs (event-011), and deciding tenant liability or deposit deductions is prohibited to me (PRO-TENANT-LIABILITY, PRO-LEGAL). The 17 September \"approved quote\" message (event-016) does not name a quote and cannot be used as landlord_approval_ref. A property-readiness check is also outstanding: no artefact records smoke or carbon monoxide alarm testing, and a move-in was proposed for 28 September (event-015).",
+ "recap": "Post-tenancy clean/clearance at a vacant property: £665 quote approved only on condition of bond recovery, so I held the job and escalated the liability decision.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — unconditional approval of quotation NBL-015-Q1 (£665.00) and confirmation of which quote event-016 approved; reply requested within 3 working days (ACT-3). Also Waiting for Provider on provisional dates, disturbed-soil scope and VAT (ACT-2).",
+ "next_step": "Property manager to decide whether the £665.00 is instructed at the landlord's cost with deposit recovery pursued separately (landlord asked, 3-working-day clock, ACT-3), and to confirm the separate major maintenance completion date before any booking.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 and move-out-inspection-report: items categorised (degreasing, limescale, waste removal, garden clearance, disturbed soil); routine, vacant property, no tenant advice needed",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "Only conditional approval on file (event-008, event-010); event-016 'approved quote' unidentified; unconditional approval requested ACT-3",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "Brindlewick Turnover Services quoted and instructed to stand by (event-002, event-006, event-009); hold re-confirmed ACT-2. No tenant in occupation to brief.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No slot ever confirmed (event-013, event-017, event-019, event-020); hold in force pending separate maintenance (event-021)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "Quotation NBL-015-Q1 £665.00, VAT not stated (property-preparation-quotation); approval conditional only (event-008, event-010)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Work not started — on hold (event-012, event-015)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos or invoice; work not started",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice raised; work not started",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "No completion to confirm",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "Keys held at the office; none issued to the contractor (event-002, event-017), and collection withheld at ACT-2",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Escalated on hold; payer not yet determined (bond vs landlord) — PRO-TENANT-LIABILITY",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property is 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ and is vacant; post-tenancy items are kitchen/oven/extractor degreasing, bathroom and en-suite limescale, waste removal from the kitchen, rear garden clearance including bagged dog waste, and soil disturbed by digging.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "move-out-inspection-report",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Brindlewick Turnover Services quoted £665.00 (ref NBL-015-Q1, 8 September 2025) covering oven/hob/extractor degreasing, carpet shampooing to Bedroom 1, stairs and landings, rubbish removal, kitchen grease and bathroom limescale, general sanitation and garden weeding/cutting/tidying; no VAT line and no making good of the disturbed soil.",
+   "source_ids": [
+    "event-006",
+    "property-preparation-quotation"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord's approval was conditional: 'Happy to approve if they are recovered from the bond' (8 Sept), reiterated 8 Sept later that day.",
+   "source_ids": [
+    "event-008",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The agency told the contractor the quote was approved and asked for the earliest date, without relaying the bond-recovery condition.",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Deposit held is £650; post-tenancy costs plus tenant-attributed damage were reported to exceed it, and a claim for the full deposit was being prepared; itemised figures were still awaited.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Work was put on hold on 10 September and the hold was reconfirmed on 16 September because separate major maintenance was outstanding; a prospective tenant wanted to move in on 28 September.",
+   "source_ids": [
+    "event-012",
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The landlord's 17 September message said only 'approved quote' without identifying which quote; at that time a separate maintenance quote was also awaiting approval.",
+   "source_ids": [
+    "event-016",
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No visit date has ever been confirmed; the contractor said next availability was the following week (10 Sept) and agreed to wait, and later asked whether the hold still applied.",
+   "source_ids": [
+    "event-013",
+    "event-014",
+    "event-017",
+    "event-019",
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "As of 25 September the instruction was to wait three more working days for the separate major maintenance to be completed; no maintenance completion date is recorded anywhere in the file.",
+   "source_ids": [
+    "event-018",
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No artefact in the case records testing of smoke or carbon monoxide alarms at the property; the move-out report lists preparation items only.",
+   "source_ids": [
+    "move-out-inspection-report",
+    "index"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Landlord's approval is conditional on bond recovery (event-008, event-010) but the agency relayed it to the contractor as unconditional (event-009), and the deposit held (£650) is already exceeded by claimed costs (event-011) so the condition cannot be satisfied in full.",
+   "fact_ids": [
+    "F3",
+    "F4",
+    "F5"
+   ],
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-010",
+    "event-011"
+   ],
+   "resolution": "Treated the approval as not usable as landlord_approval_ref; asked the landlord to confirm approval at their cost with deposit recovery pursued separately (ACT-3) and escalated the liability element to the property manager.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "The landlord's 17 September 'approved quote' message (event-016) could refer either to the £665 post-tenancy quote or to the separate major maintenance quote outstanding at that date (event-015).",
+   "fact_ids": [
+    "F7"
+   ],
+   "source_ids": [
+    "event-015",
+    "event-016"
+   ],
+   "resolution": "Asked the landlord to identify the quote (ACT-3); not relied on as approval.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Inspection records soil disturbed by digging and the approval request described the work generally, while the quote adds carpet shampooing and omits the soil — quoted scope does not match the approved description.",
+   "fact_ids": [
+    "F1",
+    "F2"
+   ],
+   "source_ids": [
+    "event-006",
+    "event-007",
+    "move-out-inspection-report"
+   ],
+   "resolution": "Asked the contractor to confirm whether making good the soil is included and at what cost, and flagged the carpet item to the landlord (ACT-2, ACT-3).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "legal_threat",
+   "description": "Approval is tied to recovering costs from the former tenants' bond and a full-deposit claim is being prepared; this is a disputed-liability/deposit matter reserved to a human (PRO-TENANT-LIABILITY, PRO-LEGAL, ESC-LEGAL).",
+   "source_ids": [
+    "event-008",
+    "event-010",
+    "event-011"
+   ],
+   "action_taken": "Did not act on the condition, made no statement to any party about deposit deductions or tenant liability; escalated to the property manager."
+  },
+  {
+   "kind": "data_quality",
+   "description": "An inspection report describing the property as it was about ten years earlier was sent to the contractor before being corrected (event-004, event-005); and the 17 September approval message identifies no quote (event-016).",
+   "source_ids": [
+    "event-004",
+    "event-005",
+    "event-016"
+   ],
+   "action_taken": "Priced scope re-checked against the current move-out report; clarification requested from landlord and contractor."
+  },
+  {
+   "kind": "other",
+   "description": "Pre-move-in readiness check outstanding: no record of smoke or carbon monoxide alarm testing although a 28 September move-in was proposed. Keyword check, not an observed hazard.",
+   "source_ids": [
+    "event-015",
+    "move-out-inspection-report"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1) and in the handover gap for the property manager to confirm before the property is let."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "015",
+    "title": "Vacant Property Preparation",
+    "received_at": "2025-09-03 18:04:18 UTC",
+    "track": "Property Management",
+    "case_number": "015",
+    "property": "18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ",
+    "source_role": "Agency",
+    "agency": "Mira Venn (Property Manager, Northbridge Lettings)",
+    "events_visible": 21,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Vacant Property Preparation\n\n## Case details\n- source role: Agency\n- created: 2025-09-03 18:04:18 UTC\n- property: 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ\n\n## Initial request\nPlease arrange post-tenancy sanitation, removal of waste left inside the property, and clearance of the rear garden.\n\n## Attachments\n- move-out-inspection-report.pdf\n- property-preparation-quotation.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-get_case_details-1e9b3eb02de7",
+   "receipt": "{\"id\": \"015\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:39:20.770251Z",
+   "finished_at": "2026-10-10T15:39:20.770392Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-get_action_ledger-611ab1682405",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:39:20.770564Z",
+   "finished_at": "2026-10-10T15:39:20.770649Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review (sources cited). 1) Approval status is NOT clean: landlord's approval of the £665 quote (quotation NBL-015-Q1; event-006, property-preparation-quotation) was conditional — \"Happy to approve if they are recovered from the bond\" (event-008), reiterated at event-010. The contractor was told the quote was approved without that condition (event-009). 2) Deposit held is £650 and post-tenancy plus damage costs are stated to exceed it (event-011), so the condition cannot be met in full; whether the tenants are liable / deposit deductions is not an agent decision (PRO-TENANT-LIABILITY, PRO-LEGAL). 3) event-016 \"approved quote\" does not identify which quote; a separate major maintenance quote was also outstanding at that time (event-015), so it cannot be read as unconditional approval of NBL-015-Q1. 4) Scope gap: inspection records soil in the rear garden disturbed by digging (move-out-inspection-report, event-001); quote NBL-015-Q1 lists weeding, grass cutting and tidying only, no making good of disturbed soil (event-006). 5) Quote includes carpet shampooing (Bedroom 1, stairs, landings) which was not in the inspection item list and was not described in the approval request to the landlord (event-007). 6) Work remains on hold pending separate major maintenance, with no completion date recorded (event-012, event-015, event-018, event-020, event-021); no visit has ever been booked (event-017, event-019). 7) Safety pass: a prospective tenant was proposed for 28 September (event-015); no artefact records smoke or carbon monoxide alarm testing at this property — the move-out report lists preparation items only. Alarm testing must be confirmed before the property is called ready for move-in. No hazard is reported or observed; recorded as an outstanding check, not a red flag. 8) VAT is not stated on quotation NBL-015-Q1 — amount shown as £665.00 with no VAT line."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-add_note-387b27f6530d",
+   "action_id": "015-add_note-387b27f6530d",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:40:06.486014Z",
+   "finished_at": "2026-10-10T15:40:06.486119Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ — post-tenancy preparation, your quotation NBL-015-Q1 (£665.00).\n\n1. The hold confirmed on 16 September remains in force. Please do not attend or collect keys from the office until we confirm in writing.\n2. Please do not treat the booking as live: no date has been agreed on this job.\n3. Two things we need from you so we are ready to move when the hold lifts:\n   a) Provisional dates you could offer at short notice next week and the week after (provisional only, we will confirm or release them).\n   b) Confirmation of scope: the move-out inspection records soil in the rear garden disturbed by digging. Your quotation covers weeding, grass cutting and tidying. Please confirm whether making good the disturbed soil is included in the £665.00, and if not, what it would add.\n   c) Please confirm whether the £665.00 is inclusive or exclusive of VAT.\n\nPlease reply within 3 working days. Any change to the quoted amount must be approved by the landlord before work starts."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-notify_contractor-6381e18ad515",
+   "action_id": "015-notify_contractor-6381e18ad515",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:40:06.486167Z",
+   "finished_at": "2026-10-10T15:40:06.486217Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 18 Thistlevaunt Lane, Orvelune, ZZ1 1ZZ — post-tenancy preparation, contractor quotation NBL-015-Q1, £665.00 (VAT not stated on the quotation).\n\nWe need two points confirmed in writing before this work can be instructed.\n\n1. Your approval of 8 September was given on the basis that the cost is recovered from the bond. As we reported on 10 September, the deposit held is £650 and the post-tenancy and damage costs together exceed it, so full recovery from the bond cannot be guaranteed. Please confirm whether you approve the £665.00 to proceed at your cost in the meantime, with any deposit recovery pursued separately through the deposit scheme. We cannot decide what is recoverable from the tenants' deposit — that is handled by our property manager through the deposit process.\n\n2. Your message of 17 September said \"approved quote\" without naming a quote. A separate major maintenance quote was also outstanding at that date. Please confirm which quote that message approved.\n\nTwo scope points for your decision, so the instruction is accurate:\n- The move-out inspection records soil in the rear garden disturbed by digging. The quotation covers weeding, grass cutting and tidying and does not expressly include making good the disturbed soil. We have asked the contractor to price it; it may be an addition.\n- The quotation includes carpet shampooing to Bedroom 1, stairs and landings, which was not in the inspection preparation list and was not itemised in our 8 September approval request.\n\nPlease reply within 3 working days. The work is on hold meanwhile and no visit is booked."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-notify_landlord-8732c0cd1cef",
+   "action_id": "015-notify_landlord-8732c0cd1cef",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:40:06.486262Z",
+   "finished_at": "2026-10-10T15:40:06.486306Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — approval of quotation NBL-015-Q1 (£665.00) is conditional on bond recovery (event-008, event-010) which cannot be assured (event-011); and the 17 September \"approved quote\" message does not identify the quote (event-016). Work also remains dependent on separate major maintenance with no completion date recorded (event-021). No visit booked."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-put_on_hold-7c43a82b7c72",
+   "action_id": "015-put_on_hold-7c43a82b7c72",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:40:06.486336Z",
+   "finished_at": "2026-10-10T15:40:06.486372Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Hold remains in force; we will confirm in writing before any attendance or key collection; provisional dates requested, reply within 3 working days",
+   "due": "3 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Confirmation requested on unconditional approval of £665.00 and on which quote event-016 approved; work held meanwhile",
+   "due": "3 working days from ACT-3",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Earlier promise that the quote was approved and dates could be set (event-009, event-017) — superseded by the hold",
+   "due": null,
+   "source_id": "event-012",
+   "status": "superseded"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 3 September 2025 (event-001); property vacant, no occupant affected",
+   "deadline": null,
+   "note": "No tenant in occupation, so no live s.11 detriment, but the turnaround has run over three weeks with no booking."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Landlord reply window",
+   "status": "prior",
+   "basis": "Approval question sent ACT-3",
+   "deadline": "3 working days from ACT-3",
+   "note": "Mandate wait: 3 days for a landlord; manual-mode trigger if it expires."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Provider reply window",
+   "status": "prior",
+   "basis": "Dates and scope question sent ACT-2",
+   "deadline": "3 working days from ACT-2",
+   "note": "Contractor has already chased twice (event-014, event-019)."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Do we instruct Brindlewick's £665.00 post-tenancy quote at the landlord's cost now, with any deposit recovery pursued separately through the scheme, or keep the job on hold until the landlord confirms unconditional approval?",
+  "summary": [
+   "Landlord approved the £665.00 quote only 'if they are recovered from the bond' (event-008), reiterated at event-010; the contractor was told it was approved without that condition (event-009).",
+   "Deposit held is £650 and post-tenancy plus damage costs exceed it (event-011) — the condition cannot be met in full; tenant liability / deposit deduction is not an agent decision (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+   "The landlord's 17 September 'approved quote' message names no quote (event-016) and a separate major maintenance quote was outstanding at that date (event-015), so it is not usable as approval for NBL-015-Q1.",
+   "No visit has ever been booked; work is held pending separate major maintenance with no completion date recorded (event-012, event-015, event-018, event-020, event-021).",
+   "Gaps: quote omits making good the soil disturbed by digging (move-out-inspection-report vs event-006), includes carpet shampooing not itemised to the landlord (event-007), states no VAT; no record of smoke/CO alarm testing although a 28 September move-in was proposed (event-015)."
+  ],
+  "gap": "Whether the landlord will fund the work independently of bond recovery; which quote event-016 approved; the completion date of the separate major maintenance; whether smoke/CO alarms have been tested since move-out.",
+  "options": [
+   "Instruct the £665.00 now at the landlord's cost, deposit claim pursued separately — property ready sooner, but spends against a conditional approval the landlord may contest.",
+   "Hold until the landlord confirms unconditional approval in writing (asked, ACT-3, 3 working days) — safe on authority, but the 28 September re-let date slips further.",
+   "Re-price to the inspection items only (degreasing, limescale, waste removal, garden clearance incl. disturbed soil) and put a clean figure to the landlord — removes the un-itemised carpet work, but needs a revised contractor quote first."
+  ],
+  "recommended": "Hold until the landlord confirms unconditional approval (option 2); chase at the 3-working-day mark and, if no reply, bring the re-let date decision back to the branch.",
+  "default_if_timeout": "If the landlord does not reply within 3 working days of ACT-3, the job stays on hold, the contractor's provisional dates are released, and the re-let date is reviewed by the branch.",
+  "deadline": "3 working days from the landlord request (ACT-3); re-let target 28 September 2025 (event-015) already at risk",
+  "undo": "Nothing irreversible done: no contractor instructed, no keys released, no booking made. ACT-2 can be followed by a release-of-hold email; ACT-3 is a question only.",
+  "context_refs": [
+   "event-006",
+   "event-008",
+   "event-009",
+   "event-010",
+   "event-011",
+   "event-015",
+   "event-016",
+   "event-021",
+   "move-out-inspection-report",
+   "property-preparation-quotation"
+  ]
+ },
+ "authority_citations": [
+  "APR-SPEND-OVER-CAP",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "PRO-TENANT-LIABILITY",
+  "PRO-LEGAL",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "ESC-LEGAL",
+  "ESC-CONFLICT",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "RTE-STAFF",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the £665.00 on quotation NBL-015-Q1 excludes VAT is NOT assumed — VAT is simply not stated on the document, and I have asked the contractor to confirm (ACT-2).",
+  "Assumption: 'the bond' in the landlord's messages means the tenants' deposit of £650 referred to at event-011."
+ ],
+ "uncertainty": [
+  "Whether the separate major maintenance has been completed — no completion date is recorded (event-021).",
+  "Whether the 28 September move-in date is still live.",
+  "Whether the deposit scheme claim has been submitted or determined."
+ ],
+ "safety_actions": [
+  "Checked every artefact against the safety pass: no gas, electrical, water, damp/mould, asbestos or occupant-vulnerability report anywhere in the file; property is vacant.",
+  "Recorded that smoke and carbon monoxide alarm testing is not evidenced and must be confirmed before any move-in (ACT-1, handover gap)."
+ ],
+ "withheld_actions": [
+  "Did not dispatch the £665.00 work: no valid landlord_approval_ref (event-008/event-010 conditional, event-016 unidentified) and no standing spend cap on file — APR-SPEND-OVER-CAP.",
+  "Did not state or decide that the former tenants are liable for any part of the cost — PRO-TENANT-LIABILITY, PRO-LEGAL.",
+  "Did not book a visit or release office keys: no confirmed slot and the separate maintenance is incomplete.",
+  "Did not close the request: work not done, no invoice, no landlord confirmation."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:39:16.981570Z",
+ "finished_at": "2026-10-10T15:42:20.237892Z",
+ "input_tokens": 45085,
+ "output_tokens": 16252,
+ "cache_read_tokens": 56748
+}

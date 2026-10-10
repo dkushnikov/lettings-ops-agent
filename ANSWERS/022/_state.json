@@ -1,0 +1,573 @@
+{
+ "case_id": "022",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The washer-dryer (E13) is being handled by the landlord through her own insurer/manufacturer route and now a replacement she purchased herself, so no agency spend or dispatch arises and no contractor of ours is instructed (event-010, event-027, event-029). The case cannot be closed: the landlord says delivery, installation and disposal were arranged (event-029) while the tenant says nothing has arrived (event-030), and no date exists in any artefact. I chased the landlord for the delivery/installation date, installer details and the 9 September visit outcome with a reply-by of 29 September (ACT-2), answered the tenant's question that the replacement is still planned without promising a date and asked them to clarify their ambiguous \"the job is completed\" (ACT-3), recorded the conflict and the mm/cm data error (ACT-1), and placed the ticket on hold (ACT-4). I did not treat event-031 as completion and did not close the request.",
+ "recap": "Washer-dryer E13 unresolved since 20 Aug; landlord's self-arranged replacement has no delivery date and the tenant says nothing arrived — landlord chased, tenant updated, case on hold.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — delivery/installation date, installer details and outcome of the 9 September engineer visit requested 2025-09-25, reply-by 2025-09-29 (ACT-2, ACT-4); secondary wait on the tenant to clarify event-031.",
+ "next_step": "Landlord (Nessa Orin) to supply the delivery/installation date and installer details by 29 September 2025; if none, put a quote recommendation for supply, install and disposal to her for approval.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "index + event-007: E13, appliance unusable, categorised routine (no emergency definition engaged); acknowledged event-001.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-010, event-027, event-029: landlord is using her own insurer/retailer route; no agency spend engaged.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "Provider is the landlord's own retailer/installer; name and contact not supplied — requested in ACT-2.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "9 September window was passed to the tenant (event-019, event-020) but the replacement delivery/installation has no date (event-029, event-030); chased in ACT-2.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No agency quote raised; landlord purchased the replacement directly (event-027, event-029). Landlord's quote request of 21 September (event-028) was superseded by event-029.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No outcome recorded for the 9 September visit (event-022 unanswered); event-031 'job is completed' is ambiguous and contradicted by event-030.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No service report, order confirmation or invoice on file; requested from the landlord in ACT-2.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "Costs sit with the landlord's insurer/direct purchase; no agency invoice to forward (event-010, event-029).",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord has not confirmed delivery or installation completion; asked in ACT-2.",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant is home for access (event-009, event-013).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Case on hold (ACT-4); work result and delivery unconfirmed.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported washer-dryer error E13 at 8 Brackenmere Walk on 2025-08-20; draining the water did not fix it.",
+   "source_ids": [
+    "index",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Tenant confirmed by phone on 2025-08-26 that the machine was unusable and laundry was waiting.",
+   "source_ids": [
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord chose to handle the fault through her insurer and the manufacturer's service arrangement rather than an agency contractor.",
+   "source_ids": [
+    "event-004",
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "An engineer visit was reported for 2025-09-09, 12:00-17:00; the tenant acknowledged the window on 2025-09-07. No booking confirmation document was supplied and no visit outcome was ever reported.",
+   "source_ids": [
+    "event-018",
+    "event-019",
+    "event-020",
+    "event-021",
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 2025-09-14 the landlord said a replacement washing machine was needed, implying the repair route failed.",
+   "source_ids": [
+    "event-023"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "On 2025-09-19 and 2025-09-21 the landlord said a new machine had been ordered and that delivery, setup and disposal of the old unit were arranged; no date was given.",
+   "source_ids": [
+    "event-027",
+    "event-029"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "On 2025-09-24 the tenant said no replacement had arrived and there was no packaging at the property.",
+   "source_ids": [
+    "event-030"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The existing appliance is integrated and fixed to the cabinet door; rear connections were not inspected; tenant's clearance estimate is ~835 mm against a proposed 825 mm unit.",
+   "source_ids": [
+    "event-025",
+    "event-026"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "No landlord standing spend cap or standing instruction is on file in this case record; no agency contractor has been instructed and no agency spend arises.",
+   "source_ids": [
+    "get_case_details",
+    "get_action_ledger"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F10",
+   "statement": "The tenant requires at least three hours' notice of attendance and is generally home.",
+   "source_ids": [
+    "event-013"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Landlord states delivery, setup and disposal were arranged on 21 September; tenant states on 24 September that nothing had been delivered and no packaging was present. No delivery date exists in any artefact.",
+   "fact_ids": [
+    "F6",
+    "F7"
+   ],
+   "source_ids": [
+    "event-029",
+    "event-030"
+   ],
+   "resolution": "Landlord asked for the delivery/installation date and installer details with a 29 September reply-by (ACT-2); tenant kept informed without a promised date (ACT-3).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Tenant's 2025-09-25 reply 'Yes, the job is completed' contradicts their 2025-09-24 statement that no replacement had arrived, and the same message asks whether the washing-machine change is still happening.",
+   "fact_ids": [
+    "F7"
+   ],
+   "source_ids": [
+    "event-030",
+    "event-031"
+   ],
+   "resolution": "Not treated as completion; tenant asked to clarify which job it refers to (ACT-3). Request left open.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Landlord described appliance heights as 825 cm and 820 cm; the agency corrected this to millimetres when asking the tenant to measure.",
+   "fact_ids": [
+    "F8"
+   ],
+   "source_ids": [
+    "event-023",
+    "event-024"
+   ],
+   "resolution": "Read as millimetres; recorded as a data-quality issue in ACT-1. Fit remains unverified because rear connections were not inspected.",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Landlord quoted appliance dimensions in cm ('825 cm high', previous '820 cm') where mm was meant; tenant's 835 mm clearance is an estimate and the integrated unit's rear connections were never inspected, so fit and disconnection requirements are unverified.",
+   "source_ids": [
+    "event-023",
+    "event-025"
+   ],
+   "action_taken": "Recorded in case note ACT-1; installer scope (disconnection, door refit, removal) put to the landlord in ACT-2."
+  },
+  {
+   "kind": "other",
+   "description": "Repeated third-party claims with no supporting document: insurer approval, engineer booking for 9 September and 'sorted it' delivery arrangement were all reported by the landlord with no confirmation attached.",
+   "source_ids": [
+    "event-010",
+    "event-018",
+    "event-029"
+   ],
+   "action_taken": "Treated as untrusted evidence only; no date promised to the tenant and order/installer reference requested from the landlord (ACT-2, ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "022",
+    "title": "Washer-dryer maintenance and replacement update",
+    "received_at": "2025-08-20 16:32:01 UTC",
+    "track": "Property Management",
+    "case_number": "022",
+    "property": "8 Brackenmere Walk, Vellumford, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Mara Venn (Property Manager, Northbridge Lettings)",
+    "events_visible": 31,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Washer-dryer maintenance and replacement update\n\n## Case details\n- source role: Tenant\n- created: 2025-08-20 16:32:01 UTC\n- property: 8 Brackenmere Walk, Vellumford, ZZ1 1ZZ\n\n## Initial request\nThe washer-dryer displays error E13. The tenant has tried draining the water, but the appliance still does not work."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-get_case_details-4bc6bddd3c07",
+   "receipt": "{\"id\": \"022\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:42:10.583602Z",
+   "finished_at": "2026-10-10T15:42:10.583766Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-get_action_ledger-deb97151dace",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:42:10.583993Z",
+   "finished_at": "2026-10-10T15:42:10.584077Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "engineer attended repair outcome completed"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-search_history-276373c07931",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:42:25.279830Z",
+   "finished_at": "2026-10-10T15:42:25.279989Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "delivery installation date replacement"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-search_history-b80f5c7793f6",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:42:25.280119Z",
+   "finished_at": "2026-10-10T15:42:25.280274Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Status review 2025-09-25. Fault: washer-dryer error E13, reported 2025-08-20 (index); tenant confirmed appliance unusable on call 2025-08-26 (event-007). No agency contractor instructed: the landlord has handled this through their insurer/manufacturer service and then a direct replacement purchase (event-010, event-018, event-027, event-029), so no agency spend and no landlord spend cap is engaged. Repair visit reported for 2025-09-09 (event-018, event-021); no outcome was ever reported by the provider or tenant (event-022 unanswered); landlord then said a replacement was needed (event-023), indicating the repair did not resolve it. Open conflict: landlord says on 2025-09-21 they had \"sorted it\" with delivery, setup and disposal arranged (event-029), but the tenant on 2025-09-24 said nothing had been delivered and there was no packaging at the property (event-030); no delivery or installation date exists in any artefact. Tenant's 2025-09-25 reply \"Yes, the job is completed\" (event-031) is ambiguous — in the same message they ask whether the planned washing-machine change is still happening, so it is not treated as confirmation that this appliance is fixed. Data quality: landlord's \"825 cm / 820 cm\" (event-023) are millimetres; tenant's ~835 mm clearance is an estimate and rear connections were not inspected because the unit is integrated (event-025). Actions now: chase landlord for delivery/installation date and installer details; ask tenant to clarify event-031. Case kept open; not closed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-add_note-07696bc31edd",
+   "action_id": "022-add_note-07696bc31edd",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:42:49.035179Z",
+   "finished_at": "2026-10-10T15:42:49.035288Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Orin,\n\nRe: 8 Brackenmere Walk, Vellumford — washer-dryer (error E13), reported 20 August.\n\nOn 21 September you confirmed you had arranged delivery, setup and disposal of the old machine. When we spoke to the tenant on 24 September they said no replacement had arrived and there was no packaging at the property, and we have no delivery or installation date on file.\n\nTo move this on we need from you:\n1. The delivery and installation date (and time window), plus the retailer/installer name and a contact or order reference.\n2. Confirmation that the installers will take the old integrated unit away, and whether they will disconnect/refit it to the cabinet door.\n3. Confirmation of the outcome of the 9 September engineer visit, if any report was issued.\n\nPlease note the tenant needs at least three hours' notice of any attendance, and has been without a working machine since 20 August. Could you reply by 29 September? If we have no date by then we will put a recommendation to you for the agency to obtain a quote for supply, installation and disposal for your approval.\n\nKind regards,\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-notify_landlord-cf5a38dab7a0",
+   "action_id": "022-notify_landlord-cf5a38dab7a0",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:42:49.035346Z",
+   "finished_at": "2026-10-10T15:42:49.035413Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Dalen,\n\nRe: 8 Brackenmere Walk — washer-dryer (error E13).\n\nTo answer your question: yes, the replacement is still planned. The landlord told us on 19 and 21 September that a new machine had been ordered and that delivery, installation and removal of the old unit were arranged. No delivery or installation date has been given to us yet, so we cannot confirm a date — we have today asked the landlord for the date, the installer's details and confirmation that the old integrated unit will be taken away, and asked for a reply by 29 September. We will pass the window to you as soon as we have it, and we have told the landlord you need at least three hours' notice.\n\nOne thing to clarify, please: your message said \"the job is completed\". Could you confirm whether that refers to a different job, or whether something has in fact been done to the washer-dryer? Also, did an engineer attend on 9 September, and what was the result?\n\nWe are sorry for how long this has taken.\n\nKind regards,\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-notify_tenant-470b3cfaf063",
+   "action_id": "022-notify_tenant-470b3cfaf063",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:42:49.035458Z",
+   "finished_at": "2026-10-10T15:42:49.035513Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — delivery/installation date, installer details and 9 September visit outcome requested (chased 2025-09-25); also awaiting tenant clarification of event-031.",
+    "until": "2025-09-29"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-put_on_hold-8a661e472c3b",
+   "action_id": "022-put_on_hold-8a661e472c3b",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:42:49.035570Z",
+   "finished_at": "2026-10-10T15:42:49.035621Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Pass on the delivery/installation window as soon as the landlord provides it; no date promised.",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "If no date by 29 September, put a recommendation for an agency quote (supply, install, disposal) to the landlord for approval.",
+   "due": "2025-09-29",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency",
+   "what": "Delivery, setup of the new machine and disposal of the old unit arranged.",
+   "due": null,
+   "source_id": "event-029",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2025-08-20 (index); appliance still not replaced as at 2025-09-25 — 36 days.",
+   "deadline": null,
+   "note": "Appliance repair, not an essential service, but the elapsed time is material and was put to the landlord."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged same day on 2025-08-20 (event-001).",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "APR-SPEND-OVER-CAP",
+   "name": "Landlord reply window",
+   "status": "sop",
+   "basis": "Landlord chased 2025-09-25 (ACT-2); 3-day wait.",
+   "deadline": "2025-09-29",
+   "note": "If no reply, recommend an agency quote for supply, install and disposal for landlord approval."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "What is the confirmed delivery and installation date/time window for the replacement washing machine, who is the retailer/installer (name plus contact or order reference), and will they disconnect the old integrated unit, refit the cabinet door and take the old machine away?",
+   "why": "You confirmed on 21 September that delivery, setup and disposal were arranged (event-029), but the tenant reported on 24 September that nothing had arrived (event-030) and no date is on file; without it no access can be booked.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Did the engineer attend on 9 September and what was the outcome — is there a service report or insurer/manufacturer reference?",
+   "why": "The visit was only reported as expected (event-021); no outcome was ever recorded, and the work result is needed before the case can be closed.",
+   "blocking": false
+  },
+  {
+   "to": "tenant",
+   "question": "Your message said 'Yes, the job is completed' — does that refer to a different job, or has something been done to the washer-dryer? Did an engineer attend on 9 September, and is the appliance working now?",
+   "why": "Event-031 is ambiguous and contradicts event-030; the agency's 10 September question (event-022) was never answered.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-REQUEST-APPROVAL",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "APR-SPEND-OVER-CAP",
+  "CLK-S11",
+  "CLK-SOP-ACK",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: the landlord's '825 cm' and '820 cm' (event-023) are millimetres, consistent with the agency's own correction in event-024.",
+  "Assumption: the replacement route (event-023) means the 9 September repair did not resolve the fault; no report confirms this.",
+  "Assumption: the case date of record is on or about 2025-09-25, the latest event (event-031); the 29 September reply-by is derived from the standard 3-day landlord wait."
+ ],
+ "uncertainty": [
+  "Whether an engineer attended on 9 September and what was found — no provider report in any artefact.",
+  "Whether a replacement machine has in fact been ordered and dispatched; the landlord gave no order reference, retailer or date.",
+  "Whether an 825 mm unit fits: clearance is a tenant estimate and the integrated unit's rear connections were never inspected (event-025).",
+  "What the tenant's 'job is completed' (event-031) refers to."
+ ],
+ "safety_actions": [
+  "Safety pass: no hazard keyword condition arises on the facts — the fault is an appliance error code with water already drained by the tenant (index); no water ingress, electrical fault, burning smell or hazard is reported anywhere in the artefacts, and no vulnerable-occupant detail is recorded. No emergency definition engaged, so no make-safe step was required.",
+  "Tenant advised of status without a promised date; no occupant health or family data shared with any third party (PRO-PII)."
+ ],
+ "withheld_actions": [
+  "Did not close the request on the strength of event-031 ('Yes, the job is completed') — ambiguous and contradicted by event-030.",
+  "Did not instruct a contractor: no agency spend authority on file and the landlord is using her own supplier (APR-SPEND-OVER-CAP, F9).",
+  "Did not book an access window: no delivery or installation date exists to book against (CAP-NOTIFY).",
+  "Did not comment on who bears the cost of the appliance or the delay (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:42:07.488354Z",
+ "finished_at": "2026-10-10T15:43:45.704661Z",
+ "input_tokens": 42081,
+ "output_tokens": 8298,
+ "cache_read_tokens": 56748
+}

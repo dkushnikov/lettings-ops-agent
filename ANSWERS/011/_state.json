@@ -1,0 +1,525 @@
+{
+ "case_id": "011",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "escalated",
+ "decision": "Escalate to the property manager. The authorised plumbing repair is blocked by an unidentified, possibly asbestos-containing ceiling lining (event-017) with no survey on file (event-006, event-013, event-022); the instructed plumber cannot specify or price the required assessment (event-023), so the landlord's request for likely cost and timing (event-022) cannot be answered without the office sourcing and pricing an accredited asbestos surveyor. No standing spend cap is on file (default £0) and the landlord's approval covers the quoted plumbing scope only (event-013), so I have no authority to instruct a surveyor (APR-SPEND-OVER-CAP). In-authority reversible steps were completed first: damage-limiting advice and status to the tenant (ACT-1), a factual \"no figure yet\" update and own-surveyor option to the landlord (ACT-2), safety check recorded (ACT-3), case put on hold (ACT-4).",
+ "recap": "Leak repair halted by an unidentified ceiling lining; no surveyor sourced or priced and no spend authority, so escalated for an asbestos survey decision.",
+ "stage": "on_hold",
+ "hold_reason": "Other — asbestos-suspect ceiling lining: office to source and price an accredited asbestos survey; landlord decision on further scope and cost pending (asked event-024, chased ACT-2).",
+ "next_step": "Property manager to source and price an accredited asbestos survey of the kitchen ceiling lining and put the quoted amount to Ossa Fenlow (landlord) for approval; tenant and contractor remain on hold meanwhile.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "Urgency set urgent (use_playbook); issue categorised and damage-limiting advice given to tenant at event-019 and again in ACT-1",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-013 - landlord authorised the quoted plumbing scope; further scope expressly not authorised (event-022)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-008 / event-014 - Mossbarrow Pipe Services instructed and briefed; tenant told who was coming (event-007, event-016)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-015 proposed and event-016 tenant-confirmed 13 June 10:30-12:30; contractor attended (event-017)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-013 approved the plumbing estimate before work started; no approved quote exists for any asbestos assessment (event-022, event-023)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-023 - contractor left without opening the ceiling; the pipe repair is not done",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "Photographs requested at event-008; no photos or invoice recorded in the case file",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice received; repair not carried out",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord's decision on further assessment outstanding (event-024, chased ACT-2)",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant admitted the contractor in person (event-009, event-017)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Leak unrepaired; case on hold (ACT-4) pending asbestos survey decision",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant Iven Rell reported a brown damp patch and overnight drips at the kitchen ceiling of 16 Brindlewick Mews on 10 June 2025; no sagging or fallen ceiling.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "No light below the patch, kitchen sockets dry, no water near electrics at the time of report.",
+   "source_ids": [
+    "event-003"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "A young child is present in the flat and the tenant asked for a call on arrival; detail kept in the case record and not passed to the contractor.",
+   "source_ids": [
+    "event-007",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Contractor Kellan Orve (Mossbarrow Pipe Services) inspected on 11 June and saw moisture at a compression joint above the ceiling hatch while the tap was running; the joint is not reachable through the hatch.",
+   "source_ids": [
+    "event-009",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Estimate covers isolating the pipe, opening ~30 cm of ceiling lining, replacing the joint and making good; it excludes investigation, testing, removal and disposal of suspect material. No amount is stated in the case file.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Landlord Ossa Fenlow authorised the quoted plumbing scope up to the estimate amount on 12 June, subject to safe working and prior contact before any scope or cost increase.",
+   "source_ids": [
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Return visit was agreed with the tenant for 13 June 10:30-12:30; the contractor attended at 10:40 and was admitted.",
+   "source_ids": [
+    "event-015",
+    "event-016",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "A pale, fibrous-looking lining is visible behind the painted ceiling board; the contractor could not identify it, did not touch it, and paused the work. No drilling, cutting, sampling or removal has occurred at any visit; hatch left closed.",
+   "source_ids": [
+    "event-017",
+    "event-018",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No survey, material assessment or ceiling alteration record exists: landlord has none, building manager has none and has not inspected the flat.",
+   "source_ids": [
+    "event-006",
+    "event-013",
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The leak is recurring: tenant reported a small drip on 13 June when the kitchen tap was used and has stopped using that tap; ceiling not visibly sagging.",
+   "source_ids": [
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "Landlord confirmed on 13 June that her authorisation does not extend to a specialist material assessment and asked for likely cost and timing before considering further expenditure.",
+   "source_ids": [
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F12",
+   "statement": "The contractor cannot price work involving the unidentified lining and cannot specify what assessment would be required.",
+   "source_ids": [
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F13",
+   "statement": "No landlord standing spend cap is on file in this case record; default authority is therefore £0.",
+   "source_ids": [
+    "get_case_details",
+    "MANDATE CAP-DISPATCH-ROUTINE"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Unidentified pale, fibrous-looking ceiling lining in a flat of unknown construction date, directly in the zone of the authorised 30 cm opening, with a young child resident. Possible asbestos-containing material; no survey on file (event-006, event-013, event-022).",
+   "source_ids": [
+    "event-017",
+    "event-023"
+   ],
+   "action_taken": "Contractor instructed not to drill, cut, sample or disturb (event-018, confirmed event-023); tenant instructed not to touch the hatch or ceiling (event-019, ACT-1); work held (ACT-4); escalated for an accredited survey decision"
+  },
+  {
+   "kind": "vulnerability",
+   "description": "Young child in the property while a ceiling leak recurs and the kitchen tap is out of normal use.",
+   "source_ids": [
+    "event-007",
+    "event-020"
+   ],
+   "action_taken": "Detail kept in the case record only, not shared with the contractor (PRO-PII, event-004); damage-limiting advice and emergency triggers given to the tenant (ACT-1); flagged in the handover"
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "011",
+    "title": "Kitchen ceiling leak inspection at 16 Brindlewick Mews",
+    "received_at": "2025-06-10 08:12:00 UTC",
+    "track": "Property Management",
+    "case_number": "011",
+    "property": "16 Brindlewick Mews, Fenbarrow, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Mara Voss (Property Manager, Northbridge Lettings)",
+    "events_visible": 24,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Kitchen ceiling leak inspection at 16 Brindlewick Mews\n\n## Case details\n- source role: Tenant\n- created: 2025-06-10 08:12:00 UTC\n- property: 16 Brindlewick Mews, Fenbarrow, ZZ1 1ZZ\n\n## Initial request\nPlease arrange an inspection of a damp patch and occasional dripping from the kitchen ceiling. The patch has returned after rain."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "011-get_case_details-2354adb40b92",
+   "receipt": "{\"id\": \"011\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:37:44.143304Z",
+   "finished_at": "2026-10-10T15:37:44.143433Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "011-get_action_ledger-a69da609e7b6",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:37:44.143590Z",
+   "finished_at": "2026-10-10T15:37:44.143647Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Thank you for your update (13 June, 11:27) confirming a small drip when the kitchen tap was used and that you have not touched the hatch.\n\nWhere things stand: the plumber attended on 13 June in the agreed 10:30–12:30 window and stopped before opening the ceiling because an unidentified pale lining is visible behind the ceiling board and we hold no survey confirming what it is. The pipe repair is still needed, but it cannot go ahead until that material has been identified by a specialist. We are arranging that now. I will not give you a date until an appointment is actually booked and confirmed with you.\n\nIn the meantime, please:\n- do not open or touch the ceiling hatch, and do not drill, scrape or disturb the kitchen ceiling or the stained area;\n- keep the area directly under the damp patch clear, and keep children away from it;\n- use the kitchen tap as little as possible; if you must use it, run it only briefly and place a bowl or container under the patch to catch drips, and dry any water on worktops or the floor;\n- do not place anything electrical under or near the patch.\n\nPlease contact us straight away — and treat it as an emergency out of hours — if the ceiling starts to sag or bulge, the crack widens, pieces of ceiling come away, dripping becomes continuous, or water appears near any light fitting, socket or switch.\n\nI will come back to you as soon as the next appointment is confirmed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-notify_tenant-fbdd292f1ee3",
+   "action_id": "011-notify_tenant-fbdd292f1ee3",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:38:39.016574Z",
+   "finished_at": "2026-10-10T15:38:39.016906Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Further to your email of 13 June (12:14) asking for the likely cost and timing before considering any additional expenditure, and our update of 13 June (15:26):\n\nI am not able to give you a figure yet. The plumber, Kellan Orve, has confirmed in writing (13 June, 13:48) that he cannot price work involving the unidentified lining and cannot specify what assessment would be required; he left without opening the ceiling, and no drilling, cutting, sampling or removal took place (13 June, 10:42 and 10:51). Your authorisation of 12 June (08:44) is recorded as covering the quoted plumbing scope only, and nothing beyond it has been instructed.\n\nPosition: the pipe joint above the kitchen ceiling is still leaking — the tenant reported a drip on 13 June when the kitchen tap was used and has stopped using that tap — and the authorised repair cannot be carried out without opening the ceiling lining, which no one may disturb while its composition is unknown.\n\nTo give you a cost and timing, the next step is a quotation from an accredited asbestos surveyor for identification of the ceiling lining (sample and analysis). Our office is sourcing that quotation; no surveyor has been instructed and no cost has been committed. I will send you the quoted amount, VAT position and lead time as soon as we have it, for your decision.\n\nPlease let me know if you would prefer to appoint your own surveyor instead, or if you have located any survey or ceiling alteration records since your email."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-notify_landlord-99eea1015cd5",
+   "action_id": "011-notify_landlord-99eea1015cd5",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:38:39.017068Z",
+   "finished_at": "2026-10-10T15:38:39.017224Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Safety check recorded (asbestos keyword). Unidentified pale, fibrous-looking lining seen from the ceiling access hatch by the contractor (event-017); not touched or disturbed, no drilling/cutting/sampling/removal at either visit (event-009, event-017, event-018, event-023). Hatch left closed (event-023). No survey or ceiling alteration record held by the landlord (event-013, event-022), the building manager (event-006) or on file. Work stopped and tenant instructed not to disturb the ceiling (event-019, event-020). Occupant vulnerability: a young child is present (event-007) — detail kept in the case record and not shared with the contractor (PRO-PII, event-004). Leak is live: drip when the kitchen tap runs (event-020); tenant has stopped using the tap. Landlord authority on file covers the quoted plumbing scope only (event-013, event-022); no standing spend cap on file, so default authority is £0 (CAP-DISPATCH-ROUTINE / APR-SPEND-OVER-CAP). Blocker: no accredited asbestos surveyor sourced or priced; contractor cannot specify or price the assessment (event-023), so the landlord's request for likely cost and timing (event-022) cannot be answered without office action."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-add_note-34fad987108a",
+   "action_id": "011-add_note-34fad987108a",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:38:39.017319Z",
+   "finished_at": "2026-10-10T15:38:39.017429Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Other — authorised plumbing repair cannot proceed: unidentified ceiling lining (possible asbestos-containing material) must be identified by an accredited surveyor first. Office to source and price a survey; landlord decision on further scope/cost pending (asked event-024, 13 Jun 15:26; chased ACT-2).",
+    "until": "2025-06-16"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-put_on_hold-70b7a09b00fc",
+   "action_id": "011-put_on_hold-70b7a09b00fc",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:38:42.232243Z",
+   "finished_at": "2026-10-10T15:38:42.232399Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Confirm the next appointment only once it is actually booked; no date promised",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Send the surveyor's quoted amount, VAT position and lead time for her decision once obtained",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency",
+   "what": "Decide on any further assessment or repair scope",
+   "due": "2025-06-16",
+   "source_id": "event-024",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 10 June 2025 08:12 (event-001); leak still unrepaired and recurring (event-020)",
+   "deadline": null,
+   "note": "Running; delay is caused by the unidentified ceiling lining, not by the tenant"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 10 June 08:39 (event-002)",
+   "deadline": null,
+   "note": "Met"
+  },
+  {
+   "rule_id": "CLK-AWAAB-PRS",
+   "name": "Awaab's Law timescales (reference only)",
+   "status": "proposed",
+   "basis": "Damp/water ingress with a young child present (event-001, event-007)",
+   "deadline": null,
+   "note": "Not in force for private tenancies; used as a reference for pace only"
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Who sources and pays for an accredited asbestos survey of the kitchen ceiling lining at 16 Brindlewick Mews so the already-authorised pipe repair can proceed, and what cost and timing do we give the landlord?",
+  "summary": [
+   "Plumber found moisture at a compression joint above the kitchen ceiling; unreachable through the hatch, so a ~30 cm ceiling opening was quoted (event-011).",
+   "Landlord Ossa Fenlow authorised the quoted plumbing scope only, subject to safe working, and must be asked before any scope or cost increase (event-013, event-022).",
+   "On the return visit the plumber saw a pale, fibrous-looking lining behind the ceiling board, could not identify it, paused and left; no drilling, cutting, sampling or removal occurred and the hatch is closed (event-017, event-018, event-023).",
+   "No survey or alteration record exists: landlord has none (event-013, event-022); building manager has none and has not inspected the flat (event-006).",
+   "Leak is live - tenant reported a drip when the kitchen tap was used on 13 June and has stopped using the tap; a young child lives in the flat; ceiling not sagging (event-020, event-007)."
+  ],
+  "gap": "No accredited asbestos surveyor sourced or priced - the instructed plumber states he cannot specify or price the assessment (event-023) - and no landlord spend cap is on file (default £0), so the cost and timing the landlord asked for (event-022) cannot be given and nobody can be instructed.",
+  "options": [
+   "Office sources an accredited asbestos surveyor, obtains a priced quote (sample and analysis) and puts it to the landlord for approval; repair resumes once the material is cleared or a licensed method is specified.",
+   "Ask the landlord to appoint her own surveyor (already offered in ACT-2): no agency spend, but timing leaves our control while the leak continues.",
+   "Wait for the landlord's reply to event-024 only: the leak recurs whenever the kitchen tap is used, the tenant is without normal use of the kitchen sink, and the s.11 reasonable-time clock from 10 June keeps running."
+  ],
+  "recommended": "Option 1: source and price an accredited asbestos survey now and put the quoted amount (with VAT and lead time) to the landlord; keep the plumbing instruction live but paused with Mossbarrow Pipe Services.",
+  "default_if_timeout": "If the landlord has not replied by 16 June (3-day wait from event-024, 13 June 15:26), the case returns to manual review as an expired landlord wait; the tenant stays on damage-limiting advice and the ceiling remains undisturbed.",
+  "deadline": "2025-06-16",
+  "undo": "Nothing irreversible: no surveyor instructed, no spend committed, no ceiling opened. The hold (ACT-4) can be lifted and the plumber re-booked for the already-approved scope once the lining is cleared.",
+  "context_refs": [
+   "event-011",
+   "event-013",
+   "event-017",
+   "event-022",
+   "event-023",
+   "event-024",
+   "ACT-1",
+   "ACT-2",
+   "ACT-4"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-STAFF",
+  "ESC-SAFETY",
+  "ESC-VULNERABLE",
+  "PRO-PII",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the lining is only a suspect material - nothing in the file identifies it as asbestos; it must be sampled and analysed by an accredited surveyor before any opening-up.",
+  "Assumption: no landlord standing spend cap exists for this property, as none appears in the case record; default authority of £0 applied."
+ ],
+ "uncertainty": [
+  "The estimate amount for the plumbing scope is not stated anywhere in the case file, so no figure can be quoted to any party.",
+  "The cost and lead time of an asbestos management survey are unknown; no surveyor has been contacted.",
+  "Whether the joint can be reached by any route that avoids the lining is unknown - the contractor says it cannot be reached through the hatch (event-011, event-023)."
+ ],
+ "safety_actions": [
+  "Confirmed with the contractor that no drilling, cutting, sampling or removal occurred and that the hatch is closed (event-018, event-023)",
+  "Tenant instructed not to disturb the ceiling or hatch, to keep the area and children clear, to limit use of the kitchen tap, to keep electricals away, and given explicit emergency triggers (sagging, widening crack, continuous dripping, water near electrics) - ACT-1",
+  "Case placed on hold so no one opens the ceiling until the lining is identified (ACT-4)",
+  "Asbestos check and its current result recorded in the case record (ACT-3)"
+ ],
+ "withheld_actions": [
+  "Did not instruct an asbestos surveyor or any further contractor: no spend authority on file and the landlord expressly limited her approval to the plumbing scope (APR-SPEND-OVER-CAP, event-022).",
+  "Did not quote a cost or lead time for the survey: no artefact gives one (rule 6).",
+  "Did not authorise the plumber to proceed with the opening: material unidentified (ESC-SAFETY).",
+  "Did not express any view on who pays for the survey or the ceiling condition (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:37:40.949790Z",
+ "finished_at": "2026-10-10T15:40:44.830787Z",
+ "input_tokens": 63121,
+ "output_tokens": 16317,
+ "cache_read_tokens": 70935
+}

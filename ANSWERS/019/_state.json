@@ -1,0 +1,523 @@
+{
+ "case_id": "019",
+ "case_type": "incomplete_job",
+ "playbook": "contractor-failure",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Works at 18 Brindle Row were carried out by Alder & Finch Repairs without a quotation and against an express written instruction not to start before written authority, and invoiced at £174.00 with no itemisation and no record of access or completion. I took the reversible steps within my authority — requested completion evidence, an itemised breakdown with VAT, and an account of access/authorisation from the provider (ACT-1); informed the landlord factually without passing the invoice for payment (ACT-2); recorded the control failure and scope variation (ACT-3). I am not approving or forwarding the invoice: payment for work done outside authority, and whether any part of these move-out items is recharged to the former tenant's deposit, are human decisions (PRO-TENANT-LIABILITY, PRO-PAYMENTS, RTE-STAFF).",
+ "recap": "Provider did all six move-out items with no quote and no written authority and invoiced £174; evidence chased, invoice withheld, office to decide payment and any recharge.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — completion photographs, itemised breakdown/VAT, and account of access and authorisation requested (ACT-1); office decision needed in parallel on the unauthorised spend and any tenant recharge.",
+ "next_step": "Property manager to decide whether the £174.00 invoice is paid and by whom (landlord or any recharge), once Alder & Finch return the evidence requested on this ticket.",
+ "definition_of_done": [
+  {
+   "item": "state_established",
+   "status": "done",
+   "evidence": "Action ledger empty before my actions (get_action_ledger); the agency's instruction (event-008) and the provider's own account (event-013) establish that the job was performed, not that any agency write is unconfirmed.",
+   "text": "State of the earlier action established from the action record (completed, failed, unconfirmed)"
+  },
+  {
+   "item": "cause_known",
+   "status": "done",
+   "evidence": "Provider's explanation recorded (event-013: understood the instruction as one to carry out the work); former tenant's account recorded (event-003: vacated 27/08, keys returned, no access); both noted in ACT-3.",
+   "text": "Contractor's explanation and the tenant's account recorded as evidence"
+  },
+  {
+   "item": "recovery_decided",
+   "status": "done",
+   "evidence": "ACT-1 / ACT-3: no second work order; evidence and itemised breakdown demanded, invoice withheld, payment and recharge referred to the property manager.",
+   "text": "Recovery chosen: rebook, reassign after a confirmed cancellation, or escalate an unconfirmed order"
+  },
+  {
+   "item": "recovery_booked",
+   "status": "not_applicable",
+   "evidence": "Nothing to rebook — the provider reports all six items complete (event-013); what is missing is verification, not attendance.",
+   "text": "New window or new contractor confirmed; no second order while the first is unconfirmed"
+  },
+  {
+   "item": "tenant_informed",
+   "status": "not_applicable",
+   "evidence": "Tenancy ended 27/08 and keys returned (event-003); the former tenant has no access or scheduling role, and any cost question to him is a liability matter reserved to a human (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+   "text": "Tenant told what happened and the next confirmed step"
+  },
+  {
+   "item": "pattern_recorded",
+   "status": "done",
+   "evidence": "ACT-3 records the authority breach and scope variation for the office; ACT-2 informs the landlord of the facts.",
+   "text": "Repeat failure by the same contractor recorded for the landlord and the office"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "No completion evidence, no verified or itemised invoice, no landlord confirmation of the £174.00; closure would name no payer.",
+   "text": "Original job completed and the request closed"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Move-out inspection listed six remedial items at 18 Brindle Row (flooring by fireplace, front-window blind, under-stairs cupboard handle, kitchen blind, toilet seat, front-gate hinge).",
+   "source_ids": [
+    "index",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Former tenant Tomas Venn vacated on 27 August and returned the keys; he could not provide access.",
+   "source_ids": [
+    "event-003"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord Ivo Marlow replied on 07/09 'Yes, I am happy for you to proceed with the remedial works', with no price limit or conditions; no provider or price existed at that time.",
+   "source_ids": [
+    "event-005",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Alder & Finch Repairs were instructed on 07/09 for a quotation only, expressly told not to carry out work until Northbridge Lettings reviewed the price and issued written authority.",
+   "source_ids": [
+    "event-007",
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 10/09 the provider said he had understood the instruction as one to do the work and had completed it the previous day; the call did not establish access, authorisation, scope or price.",
+   "source_ids": [
+    "event-013"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "Invoice NBL-019-INV-11 dated 11/09 charges £174.00 for the six items as a single line, with no itemisation, no VAT line and no payment terms.",
+   "source_ids": [
+    "event-014",
+    "event-016",
+    "remedial-works-invoice"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The case holds no appointment record, visit narrative or completion photographs.",
+   "source_ids": [
+    "event-011",
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The invoice records supply and installation of a new Venetian blind, where the inspection item was a repair to the existing front-window blind — an unquoted variation.",
+   "source_ids": [
+    "index",
+    "remedial-works-invoice"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Agency instruction was quotation-only with no work before written authority; the provider states he was instructed to carry out the work.",
+   "fact_ids": [
+    "F4",
+    "F5"
+   ],
+   "source_ids": [
+    "event-008",
+    "event-013"
+   ],
+   "resolution": "The written instruction (event-008) governs over the provider's recollection in a call (event-013): the works were carried out without authority. Whether the invoice is nonetheless paid is a human decision.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Landlord's unpriced 'proceed' (07/09) versus the rule that a priced quote is approved before work starts.",
+   "fact_ids": [
+    "F3",
+    "F4"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-008"
+   ],
+   "resolution": "event-005 approves the works in principle but not the £174.00 amount; invoice approval remains with the landlord (RTE-LANDLORD) once the figure is verified.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Internal note of 10/09 refers to awaiting an invoice when none had been requested or received at that point.",
+   "fact_ids": [
+    "F7"
+   ],
+   "source_ids": [
+    "event-012"
+   ],
+   "resolution": "Recorded as a data-quality defect in the case notes (ACT-3); it does not change the action.",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Work invoiced with no quotation, no itemisation, no VAT position, no appointment record and no completion evidence; the state of the job rests solely on the provider's own account.",
+   "source_ids": [
+    "event-013",
+    "event-015",
+    "event-016",
+    "remedial-works-invoice"
+   ],
+   "action_taken": "Evidence and itemised breakdown requested from the provider (ACT-1); invoice withheld from payment and the gaps recorded (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Unexplained access to a vacant property: tenancy ended 27/08 with keys returned and the agency holding a set, yet the provider attended and worked with no recorded access arrangement; security after the visit is unverified.",
+   "source_ids": [
+    "event-003",
+    "event-007",
+    "event-013"
+   ],
+   "action_taken": "Provider asked how access was obtained, whether the property was left secure and whether keys were returned (ACT-1); flagged in the handover."
+  },
+  {
+   "kind": "other",
+   "description": "Provider acted outside an express written instruction, creating spend the agency had not authorised.",
+   "source_ids": [
+    "event-008",
+    "event-013"
+   ],
+   "action_taken": "Recorded for the landlord and the office (ACT-2, ACT-3); no further work instructed to this provider."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "019",
+    "title": "Move-out maintenance at 18 Brindle Row",
+    "received_at": "2025-09-04 13:25:42 UTC",
+    "track": "Property Management",
+    "case_number": "019",
+    "property": "18 Brindle Row, Larkspur Vale, ZZ1 1ZZ",
+    "source_role": "Agency",
+    "agency": "Maya Chen (Property Manager, Northbridge Lettings)",
+    "events_visible": 16,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Move-out maintenance at 18 Brindle Row\n\n## Case details\n- source role: Agency\n- created: 2025-09-04 13:25:42 UTC\n- property: 18 Brindle Row, Larkspur Vale, ZZ1 1ZZ\n\n## Initial request\nMove-out inspection identified six maintenance items: a cracked section of chipboard flooring beside the fireplace; a living-room front-window blind needing repair; a loose under-stairs cupboard handle; a kitchen blind that does not operate correctly; a loose bathroom toilet seat; and a bottom hinge detached from the front gate's brick pillar.\n\n## Attachments\n- remedial-works-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-get_case_details-6e7631855a2e",
+   "receipt": "{\"id\": \"019\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:40:49.549068Z",
+   "finished_at": "2026-10-10T15:40:49.549163Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-get_action_ledger-108eb6ed714d",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:40:49.549291Z",
+   "finished_at": "2026-10-10T15:40:49.549332Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "remedial-works-invoice.pdf"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "name": "remedial-works-invoice.pdf",
+    "text": "B I L L I N G  D O C U M E N T Alder & Finch Repairs — Remedial Works\nInvoice\nAlder & Finch Repairs\nInvoice reference: NBL-019-INV-11\nInvoice date: 11 September 2025\nProperty: 18 Brindle Row, Larkspur Vale, ZZ1 1ZZ\nWork invoiced\nReplaced the broken lounge floorboard and reinstated carpet.\nRemoved the front lounge blind and supplied and installed a new Venetian blind.\nRefixed the cupboard handle with new fixings.\nAdjusted the kitchen blind mechanism.\nRetightened the toilet seat.\nReattached the front-gate hinge with new fixings.\nDescription Amount\nRemedial works £174.00"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-get_attachment-e1a94db180ec",
+   "receipt": "{\"name\": \"remedial-works-invoice.pdf\", \"text\": \"B I L L I N G  D O C U M E N T Alder & Finch Repairs — Remedial Works\\nInvoice\\nAlder & Finch Repairs\\nInvoice reference: NBL-019-INV-11\\nInvoice date:…",
+   "started_at": "2026-10-10T15:40:49.549377Z",
+   "finished_at": "2026-10-10T15:40:49.549432Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 18 Brindle Row, Larkspur Vale, ZZ1 1ZZ — invoice NBL-019-INV-11, £174.00 (received 11 September). Our instruction of 7 September requested a quotation only and stated that no work was to be carried out until Northbridge Lettings had reviewed the price and issued written authority. On 10 September you advised the works had already been completed. Before the invoice can be processed, please provide in writing: (1) the date and time of attendance and how access to the property was obtained, and confirmation the property was left secure and any keys returned; (2) who at Northbridge Lettings you understood had authorised the work to start, and when; (3) an itemised breakdown of the £174.00 across the six items, showing labour, materials and whether VAT is included, plus your payment terms; (4) completion photographs for each item. Please note item 2 on the invoice records supply and installation of a new Venetian blind, where the instruction described a repair to the existing front-window blind — please confirm why the blind was replaced. No payment is authorised and no further work is instructed at this property until these points are answered."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-notify_contractor-dcbc540e371a",
+   "action_id": "019-notify_contractor-dcbc540e371a",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:41:28.824378Z",
+   "finished_at": "2026-10-10T15:41:28.824698Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: 18 Brindle Row, Larkspur Vale, ZZ1 1ZZ — update on the remedial works you approved on 7 September. Alder & Finch Repairs were instructed on 7 September to provide a quotation only, with no work to start until we had reviewed the price and issued written authority (event-008). On 10 September the provider told us he had understood the instruction as one to carry out the works and had completed all six items the previous day (event-013). We have since received an invoice for £174.00 dated 11 September (reference NBL-019-INV-11), with no prior quotation and no itemised prices (event-016). We have asked the provider for completion photographs, an itemised breakdown with VAT position, and confirmation of how access was obtained and who authorised the start. We are not passing the invoice for payment until those answers are in and our office has reviewed how the works proceeded without written authority. We will come back to you with the verified position before any payment is made. No action is needed from you at this point."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-notify_landlord-9f51ebf81583",
+   "action_id": "019-notify_landlord-9f51ebf81583",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:41:28.824862Z",
+   "finished_at": "2026-10-10T15:41:28.825042Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Control failure recorded against Alder & Finch Repairs (Rowan Pike). Instruction of 07/09 was quotation only, expressly no work before written authority (event-008); provider carried out all six items on or about 09/09 without a quote or written authority (event-013) and invoiced £174.00 on 11/09 (event-016, remedial-works-invoice.pdf). Gaps: no appointment record, no record of how access was obtained to a property vacated 27/08 with keys returned (event-003) and a set held by the agency (event-007); no completion photographs or visit narrative (event-015); invoice not itemised, VAT position and payment terms absent. Scope variation: invoice records supply/installation of a new Venetian blind where the inspection item was a repair to the existing front-window blind. Landlord's approval of 07/09 (event-005) was unpriced and preceded provider selection; it did not approve this amount. Outstanding human decisions: whether to pay an invoice for works done against an express written instruction, and whether any part is recharged to the former tenant (PRO-TENANT-LIABILITY). Pattern to be considered before this provider is instructed again."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-add_note-86695f0feae9",
+   "action_id": "019-add_note-86695f0feae9",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:41:28.825178Z",
+   "finished_at": "2026-10-10T15:41:28.825333Z"
+  },
+  {
+   "seq": 7,
+   "tool": "definition_of_done",
+   "tool_class": "read",
+   "input": {
+    "facts": "[{\"id\": \"F1\", \"statement\": \"Move-out inspection listed six remedial items at 18 Brindle Row (flooring by fireplace, front-window blind, under-stairs cupboard handle, kitchen blind, toilet seat, front-gate hinge).\", \"source_ids\": [\"index\", \"get_case_details\"], \"confidence\": \"high\"}, {\"id\": \"F2\", \"statement\": \"Former tenant Tomas Venn vacated on 27 August and returned the keys; he could not provide access.\", \"source_ids\": [\"event-003\"], \"confidence\": \"medium\"}, {\"id\": \"F3\", \"statement\": \"Landlord Ivo Marlow replied on 07/09 'Yes, I am happy for you to proceed with the remedial works', with no price limit or conditions; no provider or price existed at that time.\", \"source_ids\": [\"event-005\", \"event-006\"], \"confidence\": \"high\"}, {\"id\": \"F4\", \"statement\": \"Alder & Finch Repairs were instructed on 07/09 for a quotation only, expressly told not to carry out work until Northbridge Lettings reviewed the price and issued written authority.\", \"source_ids\": [\"event-007\", \"event-008\"], \"confidence\": \"high\"}, {\"id\": \"F5\", \"statement\": \"On 10/09 the provider said he had understood the instruction as one to do the work and had completed it the previous day; the call did not establish access, authorisation, scope or price.\", \"source_ids\": [\"event-013\"], \"confidence\": \"medium\"}, {\"id\": \"F6\", \"statement\": \"Invoice NBL-019-INV-11 dated 11/09 charges £174.00 for the six items as a single line, with no itemisation, no VAT line and no payment terms.\", \"source_ids\": [\"event-014\", \"event-016\", \"remedial-works-invoice\"], \"confidence\": \"high\"}, {\"id\": \"F7\", \"statement\": \"The case holds no appointment record, visit narrative or completion photographs.\", \"source_ids\": [\"event-011\", \"event-015\"], \"confidence\": \"high\"}, {\"id\": \"F8\", \"statement\": \"The invoice records supply and installation of a new Venetian blind, where the inspection item was a repair to the existing front-window blind — an unquoted variation.\", \"source_ids\": [\"index\", \"remedial-works-invoice\"], \"confidence\": \"high\"}]",
+    "conflicts": "[{\"description\": \"Agency instruction was quotation-only with no work before written authority; the provider states he was instructed to carry out the work.\", \"fact_ids\": [\"F4\", \"F5\"], \"source_ids\": [\"event-008\", \"event-013\"], \"resolved_by\": \"source_hierarchy\", \"resolution\": \"The written instruction (event-008, agency email) governs over the provider's recollection in a call (event-013); the works were carried out without authority. Whether the invoice is nonetheless paid is a human decision.\"}, {\"description\": \"Landlord's unpriced 'proceed' (07/09) versus the agency's own rule that a priced quote is approved before work starts.\", \"fact_ids\": [\"F3\", \"F4\"], \"source_ids\": [\"event-005\", \"event-008\"], \"resolved_by\": \"source_hierarchy\", \"resolution\": \"event-005 approves the works in principle but not the £174.00 amount; invoice approval remains with the landlord (RTE-LANDLORD) once the figure is verified.\"}, {\"description\": \"Internal note of 10/09 refers to awaiting an invoice when none had been requested or received at that point.\", \"fact_ids\": [\"F7\"], \"source_ids\": [\"event-012\"], \"resolved_by\": \"tool_check\", \"resolution\": \"Recorded as a data-quality defect in the case notes; it does not change the action.\"}]",
+    "red_flags": "[{\"kind\": \"data_quality\", \"description\": \"Work invoiced with no quotation, no itemisation, no VAT position, no appointment record and no completion evidence; the state of the job rests solely on the provider's own account.\", \"source_ids\": [\"event-013\", \"event-015\", \"event-016\", \"remedial-works-invoice\"], \"action_taken\": \"Evidence and itemised breakdown requested from the provider (ACT-1); invoice withheld from payment and recorded (ACT-3).\"}, {\"kind\": \"other\", \"description\": \"Unexplained access to a vacant property: the tenancy ended 27/08 with keys returned and the agency holding a set, yet the provider attended and worked with no recorded access arrangement; the property's security after the visit is unverified.\", \"source_ids\": [\"event-003\", \"event-007\", \"event-013\"], \"action_taken\": \"Provider asked how access was obtained, whether the property was left secure and whether keys were returned (ACT-1); flagged to the property manager in the handover.\"}, {\"kind\": \"other\", \"description\": \"Provider acted outside an express written instruction, creating spend the agency had not authorised.\", \"source_ids\": [\"event-008\", \"event-013\"], \"action_taken\": \"Recorded against the provider for the landlord and the office (ACT-3); no further instruction issued to this provider pending the office decision.\"}]",
+    "safety_actions": "[\"Safety-pass check: no hazard keyword (gas, electrical, smoke/CO detector, damp or mould, injury, vulnerable occupant) appears in the inspection items, the provider's account or the invoice; the only safety-relevant point is property security after an unrecorded entry to a vacant property, which is queried with the provider (ACT-1).\", \"Noted for the office: this is a move-out property between tenancies — smoke and carbon monoxide alarm testing must be confirmed before it is let again; no alarm test record is on this ticket.\"]",
+    "withheld_actions": "[\"Did not approve, process or forward the £174.00 invoice for payment (PRO-PAYMENTS, RTE-LANDLORD).\", \"Did not decide or suggest that any item is tenant-payable or deposit-deductible (PRO-TENANT-LIABILITY, PRO-LEGAL).\", \"Did not issue a second work order or instruct any further work (contractor-failure playbook, 'Never').\", \"Did not close the request: no completion evidence and no verified invoice.\"]",
+    "assumptions": "[\"Assumption: 'completed the previous day' in the 10/09 call means the works were done on or about 9 September; no attendance date is documented.\", \"Assumption: the 5-working-day query window on the handover deadline is my own estimate — no contractual payment term for Alder & Finch is on file.\", \"Assumption: £174.00 is the full charge; the invoice does not state whether VAT is included or excluded.\"]",
+    "uncertainty": "[\"How the provider obtained access to the vacant property and whether it was left secure.\", \"Whether anyone at the agency gave a verbal start instruction that is not in the visible history.\", \"Whether the six items were completed to standard — no photographs or post-works inspection exist.\", \"Whether the blind replacement (rather than repair) was necessary and at what cost within the £174.00.\"]",
+    "authority_citations": "[\"RTE-STAFF\", \"PRO-TENANT-LIABILITY\", \"PRO-PAYMENTS\", \"PRO-LEGAL\", \"CAP-NOTIFY\", \"CAP-LOG\", \"RTE-LANDLORD\", \"RTE-CONTRACTOR\", \"CLK-S11\"]",
+    "clocks": "[{\"rule_id\": \"CLK-S11\", \"name\": \"Repairs within a reasonable time once reported\", \"status\": \"in_force\", \"basis\": \"Items reported 04/09/2025; provider reports all six complete on or about 09/09/2025 (event-013).\", \"note\": \"Property is vacant between tenancies; no occupant is affected by the remaining verification.\"}, {\"rule_id\": \"CLK-SOP-ACK\", \"name\": \"Acknowledge a tenant report within one working day\", \"status\": \"prior\", \"basis\": \"Agency replied to the former tenant the same day (event-002, event-003).\", \"note\": \"Met before my involvement.\"}]",
+    "promises": "[{\"by\": \"contractor\", \"to\": \"agency\", \"what\": \"Send the invoice with paperwork on the evening of 10/09\", \"due\": \"2025-09-10\", \"status\": \"broken\", \"source_id\": \"event-013\"}, {\"by\": \"agent\", \"to\": \"contractor\", \"what\": \"No payment and no further instruction at this property until completion evidence, itemised breakdown/VAT and the access and authorisation account are provided\", \"due\": null, \"status\": \"open\", \"source_id\": \"ACT-1\"}, {\"by\": \"agent\", \"to\": \"landlord\", \"what\": \"Return with the verified position on the £174.00 invoice before any payment is made\", \"due\": null, \"status\": \"open\", \"source_id\": \"ACT-2\"}]"
+   },
+   "status": "failed",
+   "gate": null,
+   "result": null,
+   "error": "unknown tool",
+   "attempts": 0,
+   "idempotency_key": null,
+   "action_id": "019-definition_of_done-b6f04d0b9508",
+   "receipt": null,
+   "started_at": null,
+   "finished_at": null
+  }
+ ],
+ "promises": [
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Send the invoice with paperwork on the evening of 10/09",
+   "due": "2025-09-10",
+   "source_id": "event-013",
+   "status": "broken"
+  },
+  {
+   "by": "agent",
+   "to": "contractor",
+   "what": "No payment and no further instruction at this property until completion evidence, itemised breakdown/VAT and the access and authorisation account are provided",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agent",
+   "to": "landlord",
+   "what": "Return with the verified position on the £174.00 invoice before any payment is made",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Items reported 04/09/2025; provider reports all six complete on or about 09/09/2025 (event-013).",
+   "deadline": null,
+   "note": "Property vacant between tenancies; no occupant affected by the remaining verification."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a tenant report within one working day",
+   "status": "prior",
+   "basis": "Agency replied to the former tenant the same day (event-002, event-003).",
+   "deadline": null,
+   "note": "Met before my involvement."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Alder & Finch completed all six move-out items at 18 Brindle Row without a quote and against our written 'quotation only' instruction, and invoiced £174.00. Do we pay it, and is any part recharged to the former tenant?",
+  "summary": [
+   "07/09: provider instructed for a quotation only — expressly no work until we review the price and issue written authority (event-008); landlord's approval that morning was unpriced (event-005).",
+   "10/09 call: provider said he thought he was instructed to do the work and had completed it the day before; the call did not establish access, who authorised the start, scope or price (event-013).",
+   "11/09: invoice NBL-019-INV-11 for £174.00 — single line, no itemisation, no VAT line, no payment terms, no photographs; no appointment record on file (event-015, event-016, remedial-works-invoice).",
+   "Property vacant since 27/08 with keys returned by the former tenant and a set held by the agency — how the provider gained access, and whether the property was left secure, is unrecorded (event-003, event-007).",
+   "Scope variation: invoice shows a new Venetian blind supplied and installed where the inspection item was a repair to the existing front-window blind (index, remedial-works-invoice)."
+  ],
+  "gap": "Whether anyone at the agency authorised the start, how access was obtained to a vacant property, and whether the works are landlord cost or recoverable from the former tenant.",
+  "options": [
+   "Pay £174.00 as invoiced and record the authority breach with the provider",
+   "Hold payment until the provider supplies photographs, itemised breakdown/VAT and the access/authorisation account (already requested, ACT-1), then put the verified figure to the landlord",
+   "Challenge or reject the blind-replacement element as an unapproved variation",
+   "Refer the move-out items to the deposit process for any tenant recharge (human decision, PRO-TENANT-LIABILITY)"
+  ],
+  "recommended": "Hold payment until the provider's evidence is in (ACT-1), then put a verified, itemised figure to the landlord for invoice approval and handle the recharge question separately.",
+  "default_if_timeout": "No payment made and no further instruction to this provider; invoice stays unverified on the ticket.",
+  "deadline": "Within 5 working days of the invoice date 11/09/2025 — assumption: ordinary invoice-query window, no contractual payment term on file.",
+  "undo": "Nothing irreversible by me: no payment, no approval, no new work order. The provider and landlord messages (ACT-1, ACT-2) can be superseded by the office's own reply.",
+  "context_refs": [
+   "event-003",
+   "event-005",
+   "event-007",
+   "event-008",
+   "event-013",
+   "event-015",
+   "event-016",
+   "remedial-works-invoice",
+   "ACT-1",
+   "ACT-2",
+   "ACT-3"
+  ]
+ },
+ "authority_citations": [
+  "RTE-STAFF",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PAYMENTS",
+  "PRO-LEGAL",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: 'completed the previous day' in the 10/09 call means work was done on or about 9 September; no attendance date is documented.",
+  "Assumption: the 5-working-day query window in the handover deadline is my own estimate — no contractual payment term for Alder & Finch is on file.",
+  "Assumption: £174.00 is the full charge; the invoice does not state whether VAT is included or excluded."
+ ],
+ "uncertainty": [
+  "How the provider obtained access to the vacant property and whether it was left secure.",
+  "Whether anyone at the agency gave a verbal start instruction not in the visible history.",
+  "Whether the six items were completed to standard — no photographs or post-works inspection exist.",
+  "Whether the blind replacement rather than repair was necessary, and its share of the £174.00."
+ ],
+ "safety_actions": [
+  "Safety-pass check: no hazard keyword (gas, electrical, smoke/CO detector, damp or mould, injury, vulnerable occupant) appears in the inspection items, the provider's account or the invoice; the only safety-relevant point is property security after an unrecorded entry to a vacant property, queried with the provider (ACT-1).",
+  "Noted for the office: the property is between tenancies — smoke and carbon monoxide alarm testing must be confirmed before it is re-let; no alarm test record exists on this ticket."
+ ],
+ "withheld_actions": [
+  "Did not approve, process or forward the £174.00 invoice for payment (PRO-PAYMENTS, RTE-LANDLORD).",
+  "Did not decide or imply that any item is tenant-payable or deposit-deductible (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+  "Did not issue a second work order or instruct further work (contractor-failure playbook, 'Never').",
+  "Did not close the request: no completion evidence and no verified invoice."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T15:40:44.835991Z",
+ "finished_at": "2026-10-10T15:43:19.718303Z",
+ "input_tokens": 39796,
+ "output_tokens": 13743,
+ "cache_read_tokens": 56748
+}

@@ -1,0 +1,585 @@
+{
+ "case_id": "004",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "urgent",
+ "disposition": "needs_info",
+ "decision": "Kept the landlord's own contractor in place (his instruction of 1–2 Sept overrides the earlier general approval), made no dispatch and committed no spend (no standing cap on file). Chased Dorian Wren for a firm date with a reply-by, put the contractor-choice decision to the landlord with a 3-day reply window, asked the tenant to confirm the door still locks with an emergency route if it does not, passed the three unowned side issues (blind, door glazing, over-hot water) to the office, and placed the ticket on hold.",
+ "recap": "Front-door lock outstanding since 27 Aug; landlord's own contractor has not confirmed completion, so chased contractor, tenant and landlord and held the ticket.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — decision whether Dorian Wren completes on a stated date or we may instruct our locksmith (3-day email window); also Waiting for Provider (Wren's firm date) and Waiting for Tenant (confirmation the door still locks).",
+ "next_step": "Landlord (Tomas Elde) to reply within 3 days confirming a date for his contractor or authorising Northbridge Lettings to instruct its own locksmith (quote to follow for approval).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "Urgency set to urgent (use_playbook); fault categorised at intake and acknowledged event-002; tenant given the insecure-door escalation instruction in ACT-1",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "Landlord approved repair in principle (event-006) and then elected to use his own contractor (event-011, event-016) — the job sits on the landlord's own contractor, no agency spend committed",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "Landlord's contractor Dorian Wren assigned by the landlord (event-016); agency provider stood down (event-017); tenant told who is coming (event-013, ACT-1)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No confirmed date or window from Dorian Wren (event-018, event-019, event-023); chased in ACT-2",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No priced quote exists — the landlord's own contractor is carrying out the work; if the landlord switches to our locksmith a quote will go to him (ACT-3)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Contractor left to obtain a lock and did not return with a date (event-020); no result recorded (event-023)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos or invoice; work not completed",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice; landlord's own contractor would bill him directly",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord asked to confirm the route and completion (ACT-3); no reply yet",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant provides access in person (event-013)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Repair unresolved and reportedly worse (event-020); ticket on hold (ACT-6)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 27 Aug 2025 that the front-door lock is loose and intermittent, the door sometimes catches, a newly cut spare key does not work, but the door could then be locked by hand.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Agency acknowledged the report to the tenant on 27 Aug 2025 and asked the landlord for approval the same day.",
+   "source_ids": [
+    "event-002",
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Agency note of 1 Sept records the landlord's approval to proceed with lock repair or replacement, and his agreement that the tenant may do skirting-board paint touch-ups at her own expense.",
+   "source_ids": [
+    "event-006",
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "On 1 Sept the landlord emailed instructing the agency not to instruct another contractor and to wait for his own contractor; on 2 Sept he named Dorian Wren, said Wren was away until 9 Sept and asked the agency to liaise with him directly.",
+   "source_ids": [
+    "event-011",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Agency's selected locksmith Peregrine Keyworks was stood down on 2 Sept; no agency-provider visit was ever confirmed.",
+   "source_ids": [
+    "event-012",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Tenant offered access windows 4 Sept 11:00-13:00, 8 Sept 10:00-12:00, 9 Sept 10:00-12:00 and on 2 Sept said she was flexible on those days.",
+   "source_ids": [
+    "event-009",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "On 9 Sept the tenant reported Dorian Wren attended, initially disputed the fault, then said a new lock was needed, left to obtain one and said he would return the following week without a date; she said the lock is now worse than before.",
+   "source_ids": [
+    "event-020"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "On 16 Sept the tenant said the contractor was meant to come that day after 10:00 with no narrower time; no attendance, repair or replacement is confirmed in the record.",
+   "source_ids": [
+    "event-023",
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No standing spend cap or preferred-contractor mandate for this landlord appears in the authoritative case record; the only authority in the history is the landlord's own messages.",
+   "source_ids": [
+    "get_case_details",
+    "event-006",
+    "event-011"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F10",
+   "statement": "On 9 Sept the tenant raised three further matters with no recorded owner or status: a broken bedroom blind, glazing in a door, and hot water she says is too hot.",
+   "source_ids": [
+    "event-021"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Landlord stated on 1 Sept that the front-door work 'should already have been done'; no completion record exists and the tenant reports the fault is worse.",
+   "fact_ids": [
+    "F3",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-020",
+    "event-023"
+   ],
+   "resolution": "Case record shows no work order completed and no attendance confirmation (event-018, event-019); the landlord's belief is treated as mistaken and the position restated to him factually in ACT-3.",
+   "resolved_by": "tool_check"
+  },
+  {
+   "description": "Landlord's 1 Sept general approval to proceed (event-006) versus his later instruction not to instruct another contractor and to wait for his own (event-011, event-016).",
+   "fact_ids": [
+    "F3",
+    "F4"
+   ],
+   "source_ids": [
+    "event-006",
+    "event-011",
+    "event-016"
+   ],
+   "resolution": "Both are landlord instructions; the later one governs. No agency dispatch made; the choice has been put back to the landlord with a 3-day window (ACT-3).",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Front-door lock reported as worse after a partial contractor visit, on a repair that affects security of the property; tenant has not confirmed the door still locks.",
+   "source_ids": [
+    "event-020",
+    "event-023"
+   ],
+   "action_taken": "Asked the tenant directly whether the door can still be locked and secured, with instruction to contact us immediately if not, in which case a same-day locksmith make-safe would be arranged under CAP-DISPATCH-EMERGENCY (up to £250) and the landlord told immediately (ACT-1). Landlord told the security point (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Tenant-reported hot water 'too hot' — scald-risk check with no recorded owner.",
+   "source_ids": [
+    "event-021"
+   ],
+   "action_taken": "Passed to the office queue to log and check the outlet temperature/thermostatic setting; tenant advised to avoid the hot tap at full temperature meanwhile (ACT-4, ACT-1). No occupant vulnerability is recorded on this case."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Landlord asserts the front-door work 'should already have been done' and reports a Saturday visit by his contractor to an empty property; neither is supported by any completion or attendance record.",
+   "source_ids": [
+    "event-005",
+    "event-011",
+    "event-018",
+    "event-019"
+   ],
+   "action_taken": "Recorded as a conflict and the factual position restated to the landlord (ACT-3, ACT-5)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "004",
+    "title": "Front entrance lock report",
+    "received_at": "2025-08-27 10:05:00 UTC",
+    "track": "Property Management",
+    "case_number": "004",
+    "property": "18 Larkspur Quay, Morrowfen, ZZ1 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Mira Sol (Property Manager, Northbridge Lettings)",
+    "events_visible": 23,
+    "attachments_hidden": 0,
+    "environment_note": "Case files only: write actions are recorded in this case's action ledger (ACT-n) as instructions ready to send; nothing was delivered to a real party.",
+    "images_not_reviewed": [],
+    "details": "# Front entrance lock report\n\n## Case details\n- source role: Tenant\n- created: 2025-08-27 10:05:00 UTC\n- property: 18 Larkspur Quay, Morrowfen, ZZ1 1ZZ\n\n## Initial request\nThe tenant reports that the front-door lock feels loose and works intermittently. The door sometimes catches before closing, although the tenant says it can currently be locked by hand. A newly cut spare key does not work. The tenant is concerned about the effect on the property's security."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "004-get_case_details-9924c2ad6690",
+   "receipt": "{\"id\": \"004\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T15:34:59.169564Z",
+   "finished_at": "2026-10-10T15:34:59.169645Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "004-get_action_ledger-e46b22e9dca8",
+   "receipt": "[]",
+   "started_at": "2026-10-10T15:34:59.169732Z",
+   "finished_at": "2026-10-10T15:34:59.169765Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Vale, regarding the front-door lock at 18 Larkspur Quay (reported 27 August): thank you for your update of 16 September that the landlord's contractor, Dorian Wren, was expected that day after 10:00. We have no confirmation that he attended or that the lock has been replaced, so please let us know: (1) did he attend and is a new lock fitted? (2) can the front door currently be locked and left secure when you go out and overnight? If at any point the door cannot be locked or the property cannot be secured, contact us immediately and we will treat it as an emergency and arrange a locksmith to make the door secure the same day. We are also chasing Mr Wren for a firm date and have asked the landlord to confirm how he wishes the repair to be completed; we will come back to you as soon as we have a confirmed appointment rather than an expectation. Separately, the blind, the door glazing and the hot water temperature you raised on 9 September have been passed to our office to be logged and owned as separate requests; please do not use the hot tap at full temperature until that is checked. We have not booked any visit that you have not agreed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-notify_tenant-14839f751f80",
+   "action_id": "004-notify_tenant-14839f751f80",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T15:35:48.157538Z",
+   "finished_at": "2026-10-10T15:35:48.157800Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "For the attention of Dorian Wren (contractor instructed by the landlord, Mr Elde). Property: 18 Larkspur Quay, Morrowfen, ZZ1 1ZZ — front entrance lock. Mr Elde asked us to liaise with you directly. Our record is that you attended, advised a new lock was required, and left to obtain one, saying you would return the following week without a date; the tenant reports the lock is now worse than before. Please confirm in writing by 12:00 on the second working day from today: (a) whether you attended on 16 September and what was done; (b) a firm date and two-hour arrival window for fitting the replacement lock; (c) whether the door is currently secure. The tenant has previously offered weekday 10:00–13:00 windows and is flexible; no visit is confirmed until we have booked it with her. If we have no date from you by that time we will report back to the landlord and ask him to decide whether our own locksmith should complete the work."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-notify_contractor-135a6bd47d4d",
+   "action_id": "004-notify_contractor-135a6bd47d4d",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T15:35:48.157951Z",
+   "finished_at": "2026-10-10T15:35:48.158130Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Elde, front entrance lock, 18 Larkspur Quay — status and one decision for you. Reported by the tenant on 27 August. On 1 September you instructed us not to instruct another contractor and to wait for your own contractor, and on 2 September you asked us to liaise with Dorian Wren directly; we stood our locksmith (Peregrine Keyworks) down accordingly. Since then: Mr Wren attended, advised that a new lock is needed, left to obtain one and said he would return \"the following week\" without giving a date; the tenant reports the lock is now worse than it was. On 16 September the tenant expected him after 10:00; we have no confirmation that he attended or that a lock has been fitted. The repair has now been outstanding for over three weeks, which engages the landlord's repairing obligation to complete repairs within a reasonable time (s.11 Landlord and Tenant Act 1985), and the fault affects the security of the front door. We have chased Mr Wren for a firm date. Please reply by email within 3 days with your decision: (1) confirm Mr Wren will fit the replacement lock on a stated date, or (2) authorise us to instruct our own locksmith to inspect and replace the lock, in which case we will send you the priced quote for your approval before any work starts. We will not instruct anyone without your instruction unless the door becomes insecure, in which case we would arrange a make-safe visit under our emergency duty and tell you immediately. Noted separately: your agreement that the tenant may carry out skirting-board paint touch-ups at her own expense."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-notify_landlord-ba9b41561bd1",
+   "action_id": "004-notify_landlord-ba9b41561bd1",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T15:35:48.158262Z",
+   "finished_at": "2026-10-10T15:35:48.158394Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_management",
+    "title": "18 Larkspur Quay — three unowned tenant issues raised 9 Sept (blind, door glazing, hot water too hot)",
+    "summary": "On 9 September (event-021) the tenant raised three matters outside this lock ticket and the agency could not confirm their status or owner: (1) broken bedroom blind letting in light; (2) glazing in a door that the landlord had previously said would be addressed; (3) hot water she says is too hot. No ticket, owner or outcome for any of them appears in the visible history. Action needed: log each as its own request and confirm ownership to the tenant. Safety check for (3): excessive hot water temperature is a scald risk — have the outlet temperature / thermostatic setting checked (relevant where children, elderly or disabled occupants are present; no occupant vulnerability is recorded on this case). The tenant has been told these are with the office and to avoid the hot tap at full temperature meanwhile."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-create_human_task-ac0a8617327a",
+   "action_id": "004-create_human_task-ac0a8617327a",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T15:35:48.158474Z",
+   "finished_at": "2026-10-10T15:35:48.158571Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Lock, 18 Larkspur Quay. Authority position: landlord approved lock repair/replacement in principle (event-006) but then instructed on 1 Sept not to instruct another contractor and to wait for his own contractor (event-011), reaffirmed 2 Sept with direct liaison to Dorian Wren (event-016); Peregrine Keyworks stood down (event-017). Later landlord instruction governs, so no agency dispatch is made now and no spend is committed; no standing spend cap for this landlord is on file (APR-SPEND-OVER-CAP). Current gap: no confirmed attendance or completion by Dorian Wren (event-018, event-019, event-023); tenant reports lock worse than before (event-020). Actions this round: chased Dorian Wren for a firm date with a reply-by; asked the landlord to choose between his contractor with a stated date or authorising our locksmith (3-day reply); asked the tenant to confirm whether the door still locks and secures, with instruction to report immediately if not (emergency route, CAP-DISPATCH-EMERGENCY make-safe up to £250). Event-005/event-011 landlord belief that the work \"should already have been done\" is not supported by any completion record."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-add_note-a4709b48ba5c",
+   "action_id": "004-add_note-a4709b48ba5c",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T15:35:48.158645Z",
+   "finished_at": "2026-10-10T15:35:48.158732Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — decision whether his contractor (Dorian Wren) completes on a stated date or we may instruct our own locksmith; also Waiting for Provider (Wren) for a firm date and Waiting for Tenant for confirmation the door still locks.",
+    "until": "3 days from today (landlord reply window); contractor reply-by 12:00 on the second working day"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-6",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-put_on_hold-fe78b7e160a1",
+   "action_id": "004-put_on_hold-fe78b7e160a1",
+   "receipt": "{\"id\": \"ACT-6\"}",
+   "started_at": "2026-10-10T15:35:48.158830Z",
+   "finished_at": "2026-10-10T15:35:48.158917Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back with a confirmed appointment once the contractor or landlord gives a date; treat the door as an emergency make-safe if it cannot be locked",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Send a priced quote for approval before any agency-instructed work starts",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Report back to the landlord if no firm date is given by 12:00 on the second working day",
+   "due": "12:00 on the second working day from today",
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 27 Aug 2025 (event-001); still unrepaired at 16 Sept 2025 (event-023)",
+   "deadline": null,
+   "note": "Over three weeks outstanding on a security-related repair; flagged to the landlord in ACT-3."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 27 Aug 10:24, 19 minutes after report",
+   "deadline": null,
+   "note": "Met (event-002)."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Will Dorian Wren fit the replacement front-door lock on a stated date, or do you authorise Northbridge Lettings to instruct its own locksmith (priced quote to you for approval before work starts)?",
+   "why": "RTE-LANDLORD: choosing/confirming the contractor and any spend is the landlord's decision; his 1 Sept instruction bars us from instructing another provider and no standing spend cap is on file.",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Dorian Wren: did you attend on 16 September, what was done, is the door currently secure, and what is your firm date and two-hour arrival window to fit the replacement lock?",
+   "why": "RTE-CONTRACTOR: attendance and availability are the contractor's to confirm; no visit or completion is recorded (event-018, event-019, event-023).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Did Mr Wren attend on 16 September and fit a new lock, and can the front door currently be locked and left secure when you are out and overnight?",
+   "why": "RTE-TENANT: whether the door still secures decides whether this stays urgent or becomes an emergency make-safe (lock reported worse at event-020).",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "CAP-REQUEST-APPROVAL",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "CLK-S11",
+  "CLK-SOP-ACK",
+  "PRO-TENANT-LIABILITY",
+  "CAP-DISPATCH-EMERGENCY"
+ ],
+ "assumptions": [
+  "Assumption: the case is being worked after 16 Sept 2025, so the tenant's 'he will come today' (event-023) is now an outstanding question rather than a future event.",
+  "Assumption: no management key is held for this property, since every access arrangement in the history relies on the tenant being present (event-009, event-013)."
+ ],
+ "uncertainty": [
+  "Whether Dorian Wren attended on 16 Sept and whether a lock has been fitted is unknown (event-023).",
+  "Whether the front door can still be locked and secured is unknown; the tenant's last description was 'worse than before' (event-020).",
+  "No landlord standing spend cap or preferred-contractor instruction is visible in the record, so any agency spend would need the landlord's express approval."
+ ],
+ "safety_actions": [
+  "Told the tenant that if the front door cannot be locked or the property left secure she must contact us immediately and we will treat it as an emergency and arrange a same-day locksmith make-safe (ACT-1)",
+  "Asked the contractor to confirm whether the door is currently secure (ACT-2)",
+  "Flagged the security dimension and the s.11 clock to the landlord (ACT-3)",
+  "Referred the over-hot water scald check to the office queue and advised the tenant to avoid full-temperature hot water meanwhile (ACT-4, ACT-1)"
+ ],
+ "withheld_actions": [
+  "Did not instruct Peregrine Keyworks or any locksmith: the landlord's later instruction bars another contractor and no standing spend cap is on file (event-011, event-016; APR-SPEND-OVER-CAP).",
+  "Did not book an access window: no contractor date exists to book against, and I will not promise a date no booking backs (CAP-NOTIFY).",
+  "Did not express any view on who pays for the worsened lock or the earlier wasted visit (PRO-TENANT-LIABILITY).",
+  "Did not close the request: work result, documents, invoice and landlord confirmation all pending."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R2: safety_hazard flag(s) recorded for the reader; not an escalation on their own (urgency urgent)"
+ ],
+ "started_at": "2026-10-10T15:34:54.821557Z",
+ "finished_at": "2026-10-10T15:36:43.023609Z",
+ "input_tokens": 28779,
+ "output_tokens": 9047,
+ "cache_read_tokens": 28374
+}
