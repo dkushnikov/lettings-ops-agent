@@ -1,0 +1,468 @@
+{
+ "case_id": "014",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "No contractor instructed and no spend committed. The landlord's own decision (event-010) — tenant uses the key/latch method now, contractor to look at the door next month — was relayed to the tenant (event-011) and the tenant confirmed it works (event-012), so the immediate fault is contained and the property is secure; no emergency definition is met. The agency had closed the request without payment (event-015), but the landlord's deferred joinery inspection has no date, no instructed provider and an unresolved second-hand concern about the door glass, so I reopened it on hold (ACT-4), re-advised the tenant on when to call us urgently (ACT-2), and asked the landlord to confirm whether to instruct a joiner next month or use their own contractor, with a quote to be approved before work (ACT-3). Liability and spend are landlord-owned (RTE-LANDLORD); nothing here requires a human decision.",
+ "recap": "Front door/frame wobble: landlord's key-latch workaround confirmed working by tenant; case reopened on hold pending the landlord's confirmation of next month's joiner inspection.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — confirmation of whether to instruct a joiner next month for the door/frame inspection they proposed (event-010) or to use their own contractor; asked ACT-3, reply sought within 3 working days (by 2024-06-12).",
+ "next_step": "Landlord to confirm whether we instruct a joiner next month or they use their own contractor (asked ACT-3; 3-working-day reply window to 2024-06-12).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-004 fault detail; recategorised from 'Appliances' and routine urgency set in ACT-1; damage-limiting/report-back advice to tenant in ACT-2",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "Landlord deferred to 'next month' without naming a contractor or amount (event-010); confirmation requested ACT-3",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "No provider instructed; awaiting landlord instruction (ACT-3)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No visit booked; tenant told no date is arranged (ACT-2)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote exists; no work instructed to date",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "not_applicable",
+   "evidence": "No work carried out; interim workaround only (event-012)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "not_applicable",
+   "evidence": "No contractor attendance, so no photos or invoice",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "Request marked completed without payment, no cost incurred (event-015)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "Landlord acknowledged the interim outcome (event-016) following event-013",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; no visit took place",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Earlier closure (event-015) reopened and placed on hold (ACT-4) because the landlord's own deferred joinery inspection is unscheduled",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property is Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ; report made by the tenant on 2024-06-06.",
+   "source_ids": [
+    "index",
+    "get_case_details",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Fault: front door has to be slammed to shut; the door and frame wobble when closing.",
+   "source_ids": [
+    "event-001",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The appliance fitter who delivered the fridge-freezer passed on a concern that the door issue 'will cause a shatter in glass' and said he would report it; the agency confirmed a contractor also phoned in the report.",
+   "source_ids": [
+    "event-001",
+    "event-005",
+    "event-006"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Landlord's own reply on 2024-06-07: use the key to lift the latch before closing, then 'get contractor to look at it next month'.",
+   "source_ids": [
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Workaround relayed to the tenant by phone on 2024-06-07; tenant had already tried it that morning, it worked, and she will monitor and report back.",
+   "source_ids": [
+    "event-011",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Landlord was updated and acknowledged; the request was marked completed without payment on 2024-06-07 — no contractor instructed, no cost incurred.",
+   "source_ids": [
+    "event-013",
+    "event-015",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No landlord standing spend cap or preferred-contractor instruction is on file in this case record; default cap is £0, so any instruction requires the landlord's approval.",
+   "source_ids": [
+    "get_case_details",
+    "CAP-DISPATCH-ROUTINE"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "The property remains secure and lockable with the latch method, so no emergency definition (insecure property) is met.",
+   "source_ids": [
+    "event-012",
+    "event-010"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The agency closed the request as complete (event-015) while the landlord's own instruction still contained an outstanding action — a contractor to inspect the door next month (event-010).",
+   "fact_ids": [
+    "F4",
+    "F6"
+   ],
+   "source_ids": [
+    "event-010",
+    "event-015"
+   ],
+   "resolution": "Reopened on hold (ACT-4) and asked the landlord to confirm the inspection instruction (ACT-3) rather than letting the deferred repair lapse.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "AI intake classified the report as 'Appliances' with unanswered fridge/freezer questions; the actual fault is the front door and frame (joinery). Corrected in the case note (ACT-1); priority 7 retained, not decreased.",
+   "source_ids": [
+    "event-002",
+    "event-008"
+   ],
+   "action_taken": "Recategorised in an internal note; urgency set to routine with the evidence line."
+  },
+  {
+   "kind": "other",
+   "description": "Summary email at event-009 (untrusted) paraphrases the landlord's position ('workaround... contractor can look at it next month'); the landlord's own text at event-010 is the authority relied on. No instruction aimed at the agent was present.",
+   "source_ids": [
+    "event-009",
+    "event-010"
+   ],
+   "action_taken": "Relied on the landlord's own message (event-010); paraphrase quoted only in fragments."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "014",
+    "title": "Case 014: Front Door Repair Request",
+    "received_at": "2024-06-06 11:55:37 UTC",
+    "track": "Property Management",
+    "case_number": "014",
+    "property": "Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 16,
+    "attachments_hidden": 0,
+    "details": "# Case 014: Front Door Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-06-06 11:55:37 UTC\n- property: Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ\n\n## Initial request\nFront door you have to slam to shut like the back. when fridge man arrived he even commented and said it will cause a shatter in glass- he said he was also going to report to you."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "014-get_case_details-a6f04366d1f0",
+   "receipt": "{\"id\": \"014\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:01:23.591524Z",
+   "finished_at": "2026-10-10T14:01:23.591591Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "014-get_action_ledger-cc7a0bd1414c",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:01:23.591681Z",
+   "finished_at": "2026-10-10T14:01:23.591717Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review (manual mode, triggered by free-text landlord reply event-016). Facts: tenant reported front door must be slammed, door and frame wobble (event-001, event-004); appliance fitter who attended for the fridge-freezer relayed a concern that it \"will cause a shatter in glass\" (event-001, quoted). AI intake miscategorised the issue as \"Appliances\" (event-002) — correct category is doors/joinery; severity ROUTINE retained, priority 7 unchanged (event-008, priority not decreased). Landlord replied 7 June instructing the key/latch method and a contractor \"next month\" (event-010); relayed to tenant by phone (event-011) and tenant confirmed it worked and will monitor (event-012). Landlord informed (event-013), request completed without payment (event-015), landlord acknowledged (event-016). No spend incurred; no contractor instructed. Property remains secure and lockable, so no emergency definition met. Open item: the deferred joinery inspection the landlord themselves proposed for next month, and the second-hand glass concern, have no date and no owner — asked the landlord to confirm (RTE-LANDLORD). Tenant given damage-limiting/report-back advice."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-add_note-892fcda7ce69",
+   "action_id": "014-add_note-892fcda7ce69",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:02:11.837049Z",
+   "finished_at": "2026-10-10T14:02:11.837537Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: front door, Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ.\n\nThank you for confirming on 7 June that putting the key in to lift the latch before closing the door is working. The landlord has asked that this is used for now, with a contractor to look at the door after that.\n\nPlease contact us straight away if any of the following happens: the door will not close or will not lock, the movement in the door or frame gets worse, or any glass in the door cracks or loosens. A front door that cannot be secured is treated as an emergency and we will arrange attendance.\n\nWe have asked the landlord to confirm when they want a joiner to inspect the door and frame, and we will come back to you with that before any visit is arranged. No date is booked yet."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-notify_tenant-ab93c2d187e3",
+   "action_id": "014-notify_tenant-ab93c2d187e3",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:02:11.837771Z",
+   "finished_at": "2026-10-10T14:02:11.837931Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ — front door.\n\nThank you for your reply. Your suggestion (key in to lift the latch before closing) was passed to the tenant on 7 June; she confirmed it worked and is monitoring the door, and no charge has been raised on this request.\n\nSo the remaining part of your instruction is not lost, please confirm two points:\n1. Do you want us to instruct a joiner to inspect the door and frame next month, or will you arrange your own contractor?\n2. If we instruct, we will obtain a quote and will not proceed until you have approved the amount in writing.\n\nFor your record, the reported fault is movement in both the door and the frame when closing (tenant, 6 June), and the appliance fitter who delivered the fridge-freezer passed on a concern about the glass in the door. We have asked the tenant to report immediately if the door cannot be closed or locked, if the movement worsens, or if any glass cracks.\n\nA reply within 3 working days would let us keep the inspection in next month's diary."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-notify_landlord-e1ade563358b",
+   "action_id": "014-notify_landlord-e1ade563358b",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:02:11.838001Z",
+   "finished_at": "2026-10-10T14:02:11.838080Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — confirmation of whether a joiner is to be instructed next month for the door/frame inspection the landlord proposed (event-010), or whether the landlord will use their own contractor. Workaround in place and working (event-012); no spend to date.",
+    "until": "2024-06-12"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-put_on_hold-71a01634b8c6",
+   "action_id": "014-put_on_hold-71a01634b8c6",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:02:11.838145Z",
+   "finished_at": "2026-10-10T14:02:11.838209Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back to the tenant once the landlord confirms the joiner inspection; no date booked yet.",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "tenant",
+   "to": "agency",
+   "what": "Use the key/latch method, monitor the door and report if it becomes an issue.",
+   "due": null,
+   "source_id": "event-012",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency",
+   "what": "Have a contractor look at the door next month.",
+   "due": null,
+   "source_id": "event-010",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 2024-06-06 (event-001); landlord deferred the inspection to next month with a working interim measure.",
+   "deadline": null,
+   "note": "Deferral is the landlord's decision; tracked by the hold so it does not lapse."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged same day by email (event-006) and by phone next morning (event-011).",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Do you want us to instruct a joiner to inspect the front door and frame at Flat 12, 52 Meadow Row next month, or will you arrange your own contractor? If we instruct, we will send the quote for your written approval before any work starts.",
+   "why": "The landlord proposed a contractor visit 'next month' (event-010) but gave no date or provider; no standing spend cap is on file, so any instruction needs their approval (APR-SPEND-OVER-CAP, RTE-LANDLORD).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Please tell us immediately if the door will not close or lock, the movement in the door or frame worsens, or any glass cracks or loosens.",
+   "why": "Keeps the deferred repair safe between now and the inspection; a door that cannot be secured is an emergency (ESC-SAFETY).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-REQUEST-APPROVAL",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: no landlord standing spend cap exists for this property because none appears in the case record; treated as £0 (APR-SPEND-OVER-CAP).",
+  "Assumption: the 'fridge man' comment about glass refers to glazing in or beside the front door; this was not inspected by a glazier or joiner and is second-hand."
+ ],
+ "uncertainty": [
+  "Whether any glass in the door is actually stressed or cracked — no trade has inspected it (event-001 is a second-hand comment).",
+  "Whether the landlord intends to use their own contractor; 'next month' has no date.",
+  "Whether the workaround continues to work; the tenant is monitoring (event-012)."
+ ],
+ "safety_actions": [
+  "Checked the report against the emergency definitions: property is lockable and secure with the latch method (event-012), so insecure-property emergency does not apply.",
+  "Safety-pass keywords present ('glass'/shatter, door security): recorded as a check, not an observed hazard; tenant told to report immediately if the door cannot be closed or locked, movement worsens, or glass cracks (ACT-2)."
+ ],
+ "withheld_actions": [
+  "Did not instruct a contractor: no standing cap on file and the landlord's message (event-010) defers the visit rather than approving a priced job (APR-SPEND-OVER-CAP, CAP-DISPATCH-APPROVED not satisfied).",
+  "Did not book an access window: no provider and no landlord instruction yet (CAP-SCHEDULE-ACCESS).",
+  "Did not state or imply who pays for any future repair (PRO-TENANT-LIABILITY).",
+  "Did not escalate: no liability dispute, legal threat or unmade-safe hazard; the open decision is landlord-owned (RTE-LANDLORD)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:01:20.036162Z",
+ "finished_at": "2026-10-10T14:02:58.274603Z",
+ "input_tokens": 21410,
+ "output_tokens": 7888,
+ "cache_read_tokens": 42561
+}

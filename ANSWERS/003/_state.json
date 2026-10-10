@@ -1,0 +1,425 @@
+{
+ "case_id": "003",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Case was closed by the agency (event-022) and the landlord has since paid the invoice (event-023), so the repair workflow itself is finished. But the agency's own record of the provider conflicts with the paid invoice: the covering email to the landlord names \"Cedar Solutions\" (event-020) while the invoice is branded Keystone Maintenance and names Bennett Ingram as payee (attachment-02). Money has already left the landlord against that document, so a person must verify which provider holds the job and whether the payment went to the right payee (ESC-FRAUD, ESC-CONFLICT, RTE-STAFF). I took no side in any message to a party; the conflict, the missing pre-work landlord approval, the detector check and the two outstanding checkout defects are recorded in the case note (ACT-1).",
+ "recap": "Checkout clean done and paid, but the agency email names Cedar Solutions while the paid invoice is Keystone Maintenance / payee Bennett Ingram — referred to the office.",
+ "stage": "final_checks",
+ "hold_reason": "",
+ "next_step": "Property manager to confirm with accounts/the provider record which firm holds job NBL-003-2766 and whether the landlord's £125 payment reached the correct payee.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 request logged and categorised; condition/cleanliness evidence in attachment-01-checkout-inspection-report",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "No landlord message authorising the spend before work; event-010 is a system status line and event-009 is agency-to-contractor. Landlord paid afterwards (event-023), which ratifies but does not replace prior authority.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-002 provider assigned; briefed by email/SMS event-003, event-004",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "Vacant property at checkout; no tenant access window required and none recorded in history",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No priced quote with VAT on file before the work; invoice £125 with no VAT breakdown (attachment-02-cleaning-invoice)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-017 contractor reports invoice sent; event-018 task moved to Result; event-019",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "done",
+   "evidence": "Checkout report attachment-01 and invoice attachment-02 on file",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-020 invoice emailed to landlord",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-023 landlord: 'Paid'",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued recorded; key rows blank in attachment-01",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "done",
+   "evidence": "event-022 closed, but the resolution did not name who paid and closure preceded the landlord's confirmation (event-023); payee identity now disputed",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Job NBL-003-2766 is a checkout clean at Flat 30, 30 Harbour View, Northbridge, including removal of dumped items and a carpet clean.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "A maintenance provider was assigned and briefed on 2025-07-22.",
+   "source_ids": [
+    "event-002",
+    "event-003",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The contractor reported the work done and the invoice sent on 2025-07-23.",
+   "source_ids": [
+    "event-017"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "The invoice totals £125 for EOT cleaning (heavy limescale), carpet shampoo and removal of dumped small items; no VAT or itemisation is stated.",
+   "source_ids": [
+    "attachment-02-cleaning-invoice"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The invoice carries Keystone Maintenance branding and names Bennett Ingram as payee, while the agency's covering email to the landlord describes it as an invoice from Cedar Solutions.",
+   "source_ids": [
+    "attachment-02-cleaning-invoice",
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The landlord confirmed payment with a one-word email 'Paid' on 2025-09-05, after the request had been closed on 2025-07-24.",
+   "source_ids": [
+    "event-023",
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No landlord message in the visible history approves the spend before the work; the approval entries are agency/system lines.",
+   "source_ids": [
+    "event-009",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The checkout report records smoke/CO detectors (site-wide system, tested by staff) marked Yes on both the previous and current reports; no alarm failure is recorded.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "The checkout report records two maintenance defects outside the cleaning scope: a failed bedroom door handle and a damaged bathroom toilet roll holder.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The checkout report's internal dates are inconsistent: appointment date 16 March 2026, signed 22 July 2025, previous report 29 November 2024.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider identity: agency email names Cedar Solutions; the paid invoice is branded Keystone Maintenance with payee Bennett Ingram.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-020",
+    "attachment-02-cleaning-invoice",
+    "event-007"
+   ],
+   "resolution": "Referred to the office via this handover; no side taken in any message to a party.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Authority for the £125 spend: ticket shows 'Estimate approved' as a system line only; landlord confirmation arrives only after payment.",
+   "fact_ids": [
+    "F7",
+    "F6"
+   ],
+   "source_ids": [
+    "event-010",
+    "event-023"
+   ],
+   "resolution": "Recorded; landlord's payment ratifies the spend retrospectively but no pre-work landlord approval exists.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "fraud",
+   "description": "Payee/provider name mismatch on an invoice the landlord has already paid: 'Cedar Solutions' in the agency email vs Keystone Maintenance / Bennett Ingram on the invoice.",
+   "source_ids": [
+    "event-020",
+    "attachment-02-cleaning-invoice"
+   ],
+   "action_taken": "Recorded in case note ACT-1 and escalated to the property manager; no payment action taken (PRO-PAYMENTS, PRO-PAYMENT-DETAILS)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Checkout report dates inconsistent (appointment 16 March 2026, signed 22 July 2025); invoice has no VAT breakdown or itemisation.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report",
+    "attachment-02-cleaning-invoice"
+   ],
+   "action_taken": "Recorded in case note ACT-1."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "003",
+    "title": "Case 003: Checkout Cleaning Estimate and Invoice",
+    "received_at": "2025-07-22 15:49:57 UTC",
+    "track": "Property Management",
+    "case_number": "003",
+    "property": "Flat 30, 30 Harbour View, Northbridge, ZZ9 0ZZ",
+    "source_role": "Agency manager",
+    "agency": "Northbridge Lettings",
+    "events_visible": 23,
+    "attachments_hidden": 0,
+    "details": "# Case 003: Checkout Cleaning Estimate and Invoice\n\n## Case details\n- source role: Agency manager\n- created: 2025-07-22 15:49:57 UTC\n- property: Flat 30, 30 Harbour View, Northbridge, ZZ9 0ZZ\n\n## Initial request\nPlease provide an estimate to clean property as per check out to include the removal of dumped items left in the property and a carpet clean.\n\n## Attachments\n- attachment-01-checkout-inspection-report.pdf\n- attachment-02-cleaning-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "003-get_case_details-e5433fbf8321",
+   "receipt": "{\"id\": \"003\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:58:05.025045Z",
+   "finished_at": "2026-10-10T13:58:05.025134Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "003-get_action_ledger-f158952f1625",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:05.025241Z",
+   "finished_at": "2026-10-10T13:58:05.025282Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-023",
+     "timestamp": "2025-09-05 12:34:00 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2025-09-05 12:34:00 UTC] Email · from: Landlord · to: Northbridge Lettings\nPaid"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "003-search_history-f1ffc5aab37e",
+   "receipt": "[{\"event\": \"event-023\", \"timestamp\": \"2025-09-05 12:34:00 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Northbridge Lettings\", \"excerpt\": \"[2025-09-05 12:34:00 UTC] Email · from: Landlord · to…",
+   "started_at": "2026-10-10T13:58:39.846580Z",
+   "finished_at": "2026-10-10T13:58:39.846732Z"
+  },
+  {
+   "seq": 4,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Post-closure review of NBL-003-2766 (checkout clean, Flat 30, 30 Harbour View). Findings: (1) Provider identity conflict — agency's email to the landlord says \"invoice from Cedar Solutions\" (event-020), while the invoice itself carries Keystone Maintenance branding and names Bennett Ingram as payee (attachment-02-cleaning-invoice); the contractor emails on file are signed \"Bennett\" (event-007). The landlord has already paid (event-023), so the mismatch is material; referred to the office, no side taken in any message to a party. (2) Authority trail — the only \"Estimate approved\" entry is a system status line (event-010) and the \"Received :) Please proceed\" message was agency-to-contractor (event-009); no landlord message approving £125 before the work. The landlord's \"Paid\" (event-023) is the first landlord confirmation on file. (3) Invoice states £125 total with no VAT/tax breakdown and no itemisation (attachment-02). (4) Safety pass: checkout report records smoke/CO detectors (site-wide system) tested by staff, marked Yes on both previous and current reports — no alarm failure; \"evidence of smoking\" in the bedroom is a cleanliness observation, not a hazard. (5) Out of scope of the cleaning job and still open: failed bedroom door handle and damaged bathroom toilet roll holder (attachment-01). (6) Data quality: checkout report appointment date 16 March 2026 but signed 22 July 2025, with the previous report dated 29 November 2024. (7) Cost recovery from the tenant's deposit is a human decision (PRO-TENANT-LIABILITY); not decided here."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "003-add_note-6079d1a1f050",
+   "action_id": "003-add_note-6079d1a1f050",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:58:39.846929Z",
+   "finished_at": "2026-10-10T13:58:39.847253Z"
+  }
+ ],
+ "promises": [],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Request logged 2025-07-22 (event-001); cleaning work completed and invoiced 2025-07-23 (event-017, attachment-02)",
+   "deadline": null,
+   "note": "Satisfied for the cleaning scope; the door handle and toilet roll holder defects are not yet instructed."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a report within one working day",
+   "status": "prior",
+   "basis": "Provider briefed within 11 minutes of logging (event-003, event-004)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Which provider holds job NBL-003-2766, and did the landlord's £125 payment go to the correct payee — the agency email says Cedar Solutions, the paid invoice says Keystone Maintenance / Bennett Ingram?",
+  "summary": [
+   "Job NBL-003-2766: checkout clean, carpet shampoo and removal of dumped items at Flat 30, 30 Harbour View; work reported complete and invoiced at £125, no VAT stated, not itemised (event-017, attachment-02-cleaning-invoice).",
+   "Agency's covering email to the landlord says 'invoice from Cedar Solutions' (event-020); the invoice itself is branded Keystone Maintenance with payee Bennett Ingram; contractor emails on file are signed 'Bennett' (event-007).",
+   "Landlord replied 'Paid' on 2025-09-05 (event-023) — payment already made; the ticket had been closed on 2025-07-24 (event-022) before that confirmation.",
+   "No landlord message approving the £125 before the work: 'Estimate approved' is a system status line (event-010) and 'Received :) Please proceed' was agency-to-contractor (event-009).",
+   "Checkout report also records a failed bedroom door handle and a damaged toilet roll holder, outside the cleaning scope; detectors (site-wide system) were tested and marked Yes on both reports (attachment-01-checkout-inspection-report)."
+  ],
+  "gap": "No authoritative provider record is available to me to confirm whether Cedar Solutions and Keystone Maintenance are the same business, and no payment-destination evidence (account details were omitted from the invoice copy).",
+  "options": [
+   "Verify against the provider/accounts record: if the two names are one business, note it and leave the case closed.",
+   "If they are different businesses, treat as a possible misdirected payment — contact the landlord and the provider, and refer to accounts before any further payment.",
+   "Separately ask the landlord whether to instruct repair of the bedroom door handle and toilet roll holder, and whether any cleaning cost is to be put to the deposit (human decision, PRO-TENANT-LIABILITY)."
+  ],
+  "recommended": "Verify against the provider/accounts record first; if the names are different businesses, treat as a possible misdirected payment.",
+  "default_if_timeout": "Case stays closed with the conflict recorded in the note (ACT-1); no further money or instruction issued by me.",
+  "deadline": null,
+  "undo": "Nothing to undo — my only action was an internal case note (ACT-1); no contractor was instructed, no message sent to a party, no money moved.",
+  "context_refs": [
+   "event-009",
+   "event-010",
+   "event-017",
+   "event-020",
+   "event-022",
+   "event-023",
+   "attachment-01-checkout-inspection-report",
+   "attachment-02-cleaning-invoice"
+  ]
+ },
+ "authority_citations": [
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "ESC-FRAUD",
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "APR-SPEND-OVER-CAP",
+  "PRO-PAYMENTS",
+  "PRO-PAYMENT-DETAILS",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the property was vacant at checkout, so no tenant access window was required for the clean; no tenant access event appears in the history."
+ ],
+ "uncertainty": [
+  "Whether Cedar Solutions and Keystone Maintenance are the same business cannot be established from the visible record.",
+  "Whether the landlord's £125 payment reached the intended payee is unknown; invoice account details were omitted from the copy on file.",
+  "Whether any part of the cleaning cost is to be recovered from the tenant's deposit — a human decision (PRO-TENANT-LIABILITY)."
+ ],
+ "safety_actions": [
+  "Safety pass check: smoke and CO detectors (site-wide system) recorded as tested and working on both previous and current checkout reports — no hazard; 'evidence of smoking' in the bedroom treated as a cleanliness observation, not a reported hazard."
+ ],
+ "withheld_actions": [
+  "Did not message the landlord or contractor naming either provider, to avoid picking a side in a conflict between agency records.",
+  "Did not instruct any repair of the failed door handle or damaged toilet roll holder: no landlord approval and no standing spend cap on file (APR-SPEND-OVER-CAP).",
+  "Did not decide tenant liability or deposit deduction (PRO-TENANT-LIABILITY).",
+  "Did not reopen or re-close the request or alter payment records (PRO-PAYMENTS)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T13:57:57.970358Z",
+ "finished_at": "2026-10-10T13:59:35.434401Z",
+ "input_tokens": 40420,
+ "output_tokens": 8104,
+ "cache_read_tokens": 28374
+}

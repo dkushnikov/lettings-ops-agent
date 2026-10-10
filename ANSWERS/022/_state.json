@@ -1,0 +1,645 @@
+{
+ "case_id": "022",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The ticket was closed (event-023) with final checks still open: no provider work result for this address, no invoice, document upload skipped, landlord confirmation outstanding (events 016, 021, 022), and no landlord approval or standing spend cap anywhere in the history. I did not re-close or re-dispatch. I kept the routine, reversible steps running — chased the provider for a job sheet and invoice for this address with a reply-by date (ACT-1), asked the tenant to confirm the lock now works and the new key was received (ACT-2), told the landlord the status, the missing authority and that the invoice will be forwarded for confirmation (ACT-3) — recorded the records conflict and referred it to the property manager (ACT-4, ACT-5), and put the case on hold to 27/11/2024 (ACT-6). The case now waits on named parties, so it ends as request_info.",
+ "recap": "Lock repair reported done but closed with invoice, documents, provider result for this address and landlord confirmation all outstanding; chased all three parties and flagged the conflict.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — job sheet and invoice for Flat 23, 155 Willowmere Road chased (ACT-1), reply-by 27/11/2024; also awaiting tenant confirmation of the repair and landlord confirmation of completion.",
+ "next_step": "Contractor to send the job sheet and invoice for Flat 23, 155 Willowmere Road by 27/11/2024 (ACT-1); property manager to resolve the Harbour View/Willowmere result conflict and the missing landlord authority (ACT-4).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 categorised as lock repair; urgency routine (lock still opens, property secure); tenant contacted same day event-004/event-008",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "No landlord message in the history (search_history, sender Landlord: no results); no standing cap on file; event-002 is a system status line, not an approval. Landlord informed and referred to property manager (ACT-3, ACT-4).",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-003 provider assigned; event-007 provider briefed; event-008 tenant told who is coming",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-004 tenant agreed; event-006 visit date confirmed 17/11/2024 14:30; event-011 attendance 18/11/2024",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No quote or amount exists on the ticket; work was carried out without a priced quote or landlord approval (RTE-LANDLORD) — flagged in ACT-3, ACT-4",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-012 no work results; event-013 result call relates to a different property; agency notes event-016/event-020 are second-hand. Provider chased ACT-1, tenant asked ACT-2.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-021 upload skipped with reason \"job complete\" — reason recorded but no job sheet or invoice for this address; requested in ACT-1",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "event-016 invoice still to be sent by provider; nothing received, so nothing forwarded (ACT-1, ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-022 \"Need confirmation from landlord\"; no landlord reply exists; asked in ACT-3",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key was issued for the visit; a new key was delivered into the agency key set on 21/11/2024 (event-020)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-023 closed the request while items above were open; closure not valid, reopening referred to property manager (ACT-4)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 17/11/2024 that the front door lock at Flat 23, 155 Willowmere Road is very hard to turn to unlock, taking a couple of minutes to open; the door still opens and the property is not insecure.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "A maintenance provider was assigned the same day and an appointment was confirmed with the tenant for 17/11/2024; confirmation emails went to provider (named Oliver Sawyer) and tenant Amelia Oakley.",
+   "source_ids": [
+    "event-003",
+    "event-004",
+    "event-006",
+    "event-007",
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The provider called the tenant on 18/11/2024 saying they were en route with two locks in the van; the tenant confirmed they would be in.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "On 19/11/2024 the agency recorded that no work results had been received.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The 20/11/2024 status call with the provider discusses completed work including a lock change at Flat 22, 42 Harbour View, Alderwick, ZZ3 3ZZ, and keys for Flat 18, 68 Harbour View, Eastmere — not this property; the ticket was moved to Result and marked completed immediately after that call.",
+   "source_ids": [
+    "event-013",
+    "event-014",
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Agency notes record the repair as done by \"Maya\", with a new key brought to the office on 21/11/2024 and copied; the invoice was still to come.",
+   "source_ids": [
+    "event-016",
+    "event-020"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "Document upload was skipped with the reason \"job complete\"; the system then recorded \"Need confirmation from landlord\" and one minute later closed the request as all checks completed.",
+   "source_ids": [
+    "event-021",
+    "event-022",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No message from the landlord appears anywhere in the visible history (history search by sender Landlord returned no results), so there is no landlord approval and no standing spend cap on file; the job's cost is unknown.",
+   "source_ids": [
+    "search_history",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No key issued to the agency for access is recorded; instead a new key was delivered into the agency's key set on 21/11/2024.",
+   "source_ids": [
+    "event-020"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The work result for this ticket was recorded from a provider call about a different property (Flat 22, 42 Harbour View, ZZ3 3ZZ), while the ticket is for Flat 23, 155 Willowmere Road; no provider result exists for this address.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-013",
+    "event-014",
+    "event-016",
+    "event-018"
+   ],
+   "resolution": "Not resolved by me: conflict recorded and referred to the property manager (ACT-4); provider asked for a job sheet for this address (ACT-1); tenant asked to confirm the repair (ACT-2). No party was told which version is correct.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Provider identity inconsistent across agency records: instructed provider is named Oliver Sawyer in the appointment emails, but internal notes refer to \"Maya\".",
+   "fact_ids": [
+    "F2",
+    "F6"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-007",
+    "event-016",
+    "event-020"
+   ],
+   "resolution": "Referred to the property manager (ACT-4); no name copied into another party's letter.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "The system closed the request as \"all checks completed\" one minute after recording that landlord confirmation was still needed, with no invoice received and documents skipped.",
+   "fact_ids": [
+    "F7"
+   ],
+   "source_ids": [
+    "event-021",
+    "event-022",
+    "event-023"
+   ],
+   "resolution": "Premature closure flagged to the property manager to decide on reopening (ACT-4); final checks restarted with the three parties.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Work result and closure for this ticket rest on a provider call about a different property (Flat 22, 42 Harbour View) and on notes naming a provider (\"Maya\") different from the instructed provider (Oliver Sawyer).",
+   "source_ids": [
+    "event-013",
+    "event-005",
+    "event-007",
+    "event-016"
+   ],
+   "action_taken": "Conflict recorded and referred to property_manager (ACT-4); provider asked for a job sheet for this address (ACT-1); no party told which version is correct."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Spend incurred with no landlord approval and no standing cap on file; closure recorded as \"all checks completed\" with invoice, documents and landlord confirmation outstanding.",
+   "source_ids": [
+    "event-002",
+    "event-021",
+    "event-022",
+    "event-023"
+   ],
+   "action_taken": "Landlord informed (ACT-3); referred to property_manager (ACT-4); no payment actioned (PRO-PAYMENTS)."
+  },
+  {
+   "kind": "other",
+   "description": "Two events show the agency's automation stopping: a provider reply needing a human response (event-017/event-018) and an untranscribable message (event-019).",
+   "source_ids": [
+    "event-017",
+    "event-018",
+    "event-019"
+   ],
+   "action_taken": "Handled in manual mode: provider chased with a specific request and reply-by date (ACT-1)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "022",
+    "title": "Case 022: Front Door Lock Repair Request",
+    "received_at": "2024-11-17 13:57:17 UTC",
+    "track": "Property Management",
+    "case_number": "022",
+    "property": "Flat 23, 155 Willowmere Road, Alderwick, ZZ5 2ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 23,
+    "attachments_hidden": 0,
+    "details": "# Case 022: Front Door Lock Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-11-17 13:57:17 UTC\n- property: Flat 23, 155 Willowmere Road, Alderwick, ZZ5 2ZZ\n\n## Initial request\nFront door lock, the keys gets very hard to turn to unlock, thos sometimes leads to me standing at the door fiddling with the keys for a couple of minutes just so I can go outside."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-get_case_details-4bc6bddd3c07",
+   "receipt": "{\"id\": \"022\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:03:46.861815Z",
+   "finished_at": "2026-10-10T14:03:46.861888Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-get_action_ledger-deb97151dace",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:46.861980Z",
+   "finished_at": "2026-10-10T14:03:46.862018Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-search_history-70f609c4d69e",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:46.862058Z",
+   "finished_at": "2026-10-10T14:03:46.862108Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-016",
+     "timestamp": "2024-11-20 16:33:31 UTC",
+     "channel": "Hold",
+     "from": "Northbridge Lettings",
+     "to": "Not specified",
+     "excerpt": "[2024-11-20 16:33:31 UTC] Hold · from: Northbridge Lettings · to: Not specified\nMaya done repair - he will drop new key off and send invoice"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "022-search_history-f718a82e8fdd",
+   "receipt": "[{\"event\": \"event-016\", \"timestamp\": \"2024-11-20 16:33:31 UTC\", \"channel\": \"Hold\", \"from\": \"Northbridge Lettings\", \"to\": \"Not specified\", \"excerpt\": \"[2024-11-20 16:33:31 UTC] Hold · from: Northbridg…",
+   "started_at": "2026-10-10T14:03:46.862145Z",
+   "finished_at": "2026-10-10T14:03:46.862222Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Lock Repair Request – Flat 23, 155 Willowmere Road, Alderwick, ZZ5 2ZZ (appointment confirmed in our email of 17/11/2024, event-007; your confirmation email event-018).\n\nTwo things outstanding on this job, please:\n1. A work result / job sheet for THIS address confirming exactly what was carried out on the front door lock and on what date. Our only status call (20/11/2024) covered work at a different address, so we have nothing on file from you for Willowmere Road.\n2. Your invoice for this job, quoting the job reference for Flat 23, 155 Willowmere Road.\n\nPlease reply by 27/11/2024. If we have had no reply by then we will chase again and the job will be referred to our property manager. Please do not attend again or carry out further work at this address without a new written instruction from us."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-notify_contractor-5a7b1b55f877",
+   "action_id": "022-notify_contractor-5a7b1b55f877",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:04:31.681348Z",
+   "finished_at": "2026-10-10T14:04:31.681734Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Amelia Oakley,\n\nAbout your front door lock at Flat 23, 155 Willowmere Road (reported 17/11/2024): our records show the contractor attended and that a new key was brought to our office on 21/11/2024 (added to our key set).\n\nSo we can close this off correctly, could you confirm two things: (1) is the front door lock now opening and locking normally, and (2) did you receive your new key(s)? If the lock is still stiff, or if at any point you cannot lock or secure the front door, tell us straight away and we will treat it as urgent.\n\nWe are also chasing the contractor for their job sheet and invoice. We will not ask you for any payment; costs between the landlord and the contractor are handled by us."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-notify_tenant-cdd8127174d3",
+   "action_id": "022-notify_tenant-cdd8127174d3",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:04:31.681921Z",
+   "finished_at": "2026-10-10T14:04:31.682133Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Flat 23, 155 Willowmere Road, Alderwick, ZZ5 2ZZ – front door lock.\n\nThe tenant reported on 17/11/2024 that the front door lock was very stiff to unlock (event-001). A maintenance provider was assigned and attended on 17–18/11/2024 (events 003, 007, 011). Our internal notes record the repair as done with a new key delivered to our office on 21/11/2024 (events 016, 020).\n\nTwo points for your attention:\n- We do not hold a written approval from you for this job, and no standing spend limit for this property is on file with us, so the cost was incurred without a recorded authority. We are sorry for that; the amount is not yet known.\n- The contractor has not yet sent an invoice or a job sheet for this address. We have chased them with a reply-by date of 27/11/2024 and will forward the invoice to you as soon as it arrives, for your confirmation before anything is settled.\n\nNo action is needed from you today. Please let us know if you would like the job reviewed before the invoice is approved."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-notify_landlord-b049ed5c697e",
+   "action_id": "022-notify_landlord-b049ed5c697e",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:04:31.682298Z",
+   "finished_at": "2026-10-10T14:04:31.682545Z"
+  },
+  {
+   "seq": 8,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 022 closed with final checks outstanding + work result traced to a different property",
+    "summary": "Flat 23, 155 Willowmere Road, Alderwick, ZZ5 2ZZ – front door lock (tenant report 17/11/2024, event-001).\n\nIssues for a person to decide:\n1. Records conflict (ESC-CONFLICT): the only provider status call on this ticket (event-013, 20/11/2024) discusses completed work, including a lock change, at Flat 22, 42 Harbour View, Alderwick, ZZ3 3ZZ, plus keys for Flat 18, 68 Harbour View, Eastmere. The ticket was moved to Result (event-014) and marked completed (event-015) immediately after that call. There is no provider work result on file for Willowmere Road. Supporting but separate evidence for this address: events 016 and 020 (repair done, new key brought in 21/11/2024) and the provider's confirmation email event-018.\n2. Provider identity inconsistent across agency records: instructed provider named as Oliver Sawyer (event-007), internal notes refer to \"Maya\" (events 005, 016, 020). Needs resolving on the CRM before any invoice is paid.\n3. The request was closed (event-023) while \"Need confirmation from landlord\" was still open (event-022), no invoice had been received (event-016 says the invoice was still to come) and document upload was skipped with reason \"job complete\" (event-021). Decide whether to reopen.\n4. No landlord approval exists anywhere in the visible history and no standing spend cap is on file, so the spend was incurred with no recorded authority (APR-SPEND-OVER-CAP). Do not treat the system status lines as approval.\n\nDone by me meanwhile (routine, reversible): provider chased for job sheet and invoice for this address, reply-by 27/11/2024; tenant asked to confirm the lock now works and that the new key was received; landlord informed of status, the missing authority and the awaited invoice. No payment actioned, no liability decided."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-create_human_task-22064ff1192c",
+   "action_id": "022-create_human_task-22064ff1192c",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:04:31.682722Z",
+   "finished_at": "2026-10-10T14:04:31.682951Z"
+  },
+  {
+   "seq": 9,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case 022 reviewed after closure (event-023). Final checks were not complete at closure: no provider work result for this address, invoice not received (event-016), documents skipped with reason \"job complete\" (event-021), landlord confirmation still outstanding (event-022). No landlord message exists anywhere in the visible history (history search for Landlord returned nothing), so no approval and no standing cap on file — spend incurred without recorded authority (APR-SPEND-OVER-CAP). Conflict recorded: the status call that triggered \"Result\" (event-013) concerns Flat 22, 42 Harbour View, ZZ3 3ZZ, not this property; provider named Oliver Sawyer in event-007 but \"Maya\" in events 005/016/020. Referred to property_manager (ACT-4). Routine steps kept running: provider chased (ACT-1), tenant asked to confirm the lock works and the key was received (ACT-2), landlord informed (ACT-3). No liability decided, no payment actioned (PRO-TENANT-LIABILITY, PRO-PAYMENTS)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-add_note-795d5d2d4e81",
+   "action_id": "022-add_note-795d5d2d4e81",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:04:46.165496Z",
+   "finished_at": "2026-10-10T14:04:46.165789Z"
+  },
+  {
+   "seq": 10,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — job sheet/work result and invoice for Flat 23, 155 Willowmere Road requested (ACT-1); also awaiting tenant confirmation that the lock works and landlord confirmation of completion once the invoice is forwarded.",
+    "until": "2024-11-27"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-6",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "022-put_on_hold-1fafde750df4",
+   "action_id": "022-put_on_hold-1fafde750df4",
+   "receipt": "{\"id\": \"ACT-6\"}",
+   "started_at": "2026-10-10T14:04:46.165960Z",
+   "finished_at": "2026-10-10T14:04:46.166162Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Chase again and refer to the property manager if no job sheet/invoice by 27/11/2024",
+   "due": "2024-11-27",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Forward the contractor's invoice as soon as it arrives, for confirmation before anything is settled",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Treat it as urgent if the lock is still stiff or the door cannot be secured",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 17/11/2024 (event-001); attendance same day",
+   "deadline": null,
+   "note": "Attendance was same-day; completion for this address still unevidenced by the provider."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant contacted by phone and email on 17/11/2024 (event-004, event-008)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send the job sheet/work result and your invoice for the front door lock job at Flat 23, 155 Willowmere Road, Alderwick, ZZ5 2ZZ, stating what was carried out and on what date. Reply by 27/11/2024.",
+   "why": "No provider work result or invoice exists for this address; the only status call on file (event-013) concerns a different property.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Is the front door lock now opening and locking normally, and did you receive the new key(s)?",
+   "why": "Tenant-owned fact; the repair result for this address is not evidenced by the provider.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm completion of the lock repair once we forward the contractor's invoice, and tell us whether you want the job reviewed before the invoice is approved.",
+   "why": "Landlord confirmation was still outstanding at closure (event-022) and no approval or spend cap is on file (RTE-LANDLORD).",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "ESC-CONFLICT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PAYMENTS",
+  "CAP-CLOSE",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the \"new key\" logged on 21/11/2024 (event-020) relates to a lock change at this property; this is not confirmed by any provider document and is one of the points put to the provider and the tenant."
+ ],
+ "uncertainty": [
+  "Whether the front door lock at Flat 23 was actually repaired or replaced, and on what date — no provider work result exists for this address.",
+  "The cost of the job: no quote, estimate or invoice appears anywhere in the history.",
+  "Whether the landlord was ever asked for or gave approval outside the visible record."
+ ],
+ "safety_actions": [
+  "Checked the report against the emergency definitions: the lock is stiff but the door opens and locks and the property is not insecure (event-001), so not an insecure-property emergency; tenant told to report immediately if the door cannot be locked or secured (ACT-2).",
+  "Safety-pass keyword check: no gas, electrical, damp/mould, detector, injury or vulnerability content appears in the artefacts of this case; no hazard reported or observed."
+ ],
+ "withheld_actions": [
+  "Did not re-close the request: final checks (work result, documents, invoice, landlord confirmation) are still open (CAP-CLOSE).",
+  "Did not instruct any further contractor work: no landlord approval and no standing cap on file (APR-SPEND-OVER-CAP).",
+  "Did not state or approve any cost, and did not decide who pays (PRO-PAYMENTS, PRO-TENANT-LIABILITY).",
+  "Did not tell any party which of the conflicting agency records is correct (rule 2)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:03:39.161661Z",
+ "finished_at": "2026-10-10T14:05:48.547333Z",
+ "input_tokens": 44116,
+ "output_tokens": 9833,
+ "cache_read_tokens": 70935
+}

@@ -1,0 +1,441 @@
+{
+ "case_id": "005",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Reopen for final checks. The clean was approved by the landlord (event-016), carried out and the keys returned for a 30/11/2024 move-in (event-024, event-025), but the system closed the job (event-037) with three checks still open: no invoice on file, nothing forwarded to the landlord, no landlord completion confirmation. Separately, the check-out report records the smoke/CO detectors as \"Tested? No\" (attachment-01) and there is no record of an alarm test before the property was released for move-in — a safety check at a now-occupied property that a person must own. I chased the provider for the itemised invoice with a 3-working-day reply-by (ACT-2) and recorded the findings (ACT-1); I did not re-close the request, decide the unquoted bedroom 1 carpet charge, or instruct any further spend (no standing cap on file for this landlord).",
+ "recap": "Check-out clean done and approved, but ticket was closed with no invoice, no landlord confirmation, and detectors recorded \"Tested? No\" before the 30/11 move-in.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — itemised invoice for Job NBL-005-0163 chased with a 3-working-day reply-by (ACT-2); alarm-test question with the property manager.",
+ "next_step": "Property manager to arrange/confirm a smoke and CO alarm test at Flat 10 (now occupied) and decide the billing route; provider to send the itemised invoice within 3 working days (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 request logged; check-out report sent to provider at event-007; routine, vacant property (event-002)",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-016 — landlord Palmer: 'Yes please go ahead. Let them do the carpets too.' after the quote was sent at event-015",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-003 provider assigned; briefed at event-004 and instructed at event-017",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-024 — 'Ava cleaning on Saturday AM'; property vacant, no tenant access needed",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-015 quote to landlord, event-016 landlord approval; £205 calculated from attachment-02/03, VAT status not stated by the provider",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-025 — 'Check clean completed and keys returned ready for move in on 30/11/2024'",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No invoice on file; requested event-026, chased event-030, provider replies event-029/032/033 unresolved; chased again ACT-2",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "Cannot forward — no invoice received (event-033 claims an attachment was sent; not on file)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-034 'Need confirmation from landlord'; no landlord reply after event-016",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "done",
+   "evidence": "event-025 and event-036 'Keys return confirmed'",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-037 closed the request, but documents, invoice_to_landlord and landlord_confirmation were open and the pre-move-in alarm test is unverified (attachment-01 'Tested? No')",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Job NBL-005-0163 is end-of-tenancy cleaning at Flat 10, 160 Alder Lane, Westmarsh, ZZ8 9ZZ, raised after the tenant vacated.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The provider's quote lists £135 general EOT/deep clean, £45 bedroom 2 carpet shampoo and £25 freezer defrost; £205 is a calculated sum, no total and no VAT status stated.",
+   "source_ids": [
+    "attachment-02-cleaning-quote",
+    "attachment-03-cleaning-quote"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord approved the quote and the carpets in his own message.",
+   "source_ids": [
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The agency instructed the provider to clean both bedroom carpets, whereas the quote prices bedroom 2 only.",
+   "source_ids": [
+    "event-017",
+    "attachment-02-cleaning-quote"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The clean was completed and keys returned ready for a move-in on 30/11/2024.",
+   "source_ids": [
+    "event-024",
+    "event-025",
+    "event-036"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The check-out report's detector section records 'Tested? No' and the detector photo caption repeats that detectors were not tested, contradicting the report's boilerplate that alarms were checked and working.",
+   "source_ids": [
+    "attachment-01-check-out-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No invoice has been received despite a request and a chase; the provider's replies suggest an attachment was sent but none is on the case file.",
+   "source_ids": [
+    "event-026",
+    "event-030",
+    "event-033"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "The system closed the request as 'All checks have been completed' while invoice, invoice-to-landlord and landlord confirmation were outstanding.",
+   "source_ids": [
+    "event-034",
+    "event-037"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Check-out report boilerplate says smoke and CO alarms were checked and working; the same report's detector section records 'Tested? No'.",
+   "fact_ids": [
+    "F6"
+   ],
+   "source_ids": [
+    "attachment-01-check-out-inspection-report"
+   ],
+   "resolution": "The specific detector line beats the general statement: detectors treated as not tested; verification raised with the property manager.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "event-011 refers to a quote for 'Flat 27, 117 Lantern Quay, Kingshaven' on this Flat 10 job, while both quote documents name Flat 10.",
+   "fact_ids": [
+    "F1",
+    "F2"
+   ],
+   "source_ids": [
+    "event-011",
+    "attachment-02-cleaning-quote",
+    "attachment-03-cleaning-quote"
+   ],
+   "resolution": "Treated as an agency typing error in an outbound email; both quotes and job id NBL-005-0163 are for Flat 10. Recorded, not acted on in any message to a party.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Landlord-addressed quote wording ('Hi Palmer... do you wish to proceed?') was sent to the provider at event-013 before the landlord received it at event-015.",
+   "fact_ids": [
+    "F3"
+   ],
+   "source_ids": [
+    "event-013",
+    "event-015"
+   ],
+   "resolution": "Authority relied on is the landlord's own reply at event-016 to the correctly addressed email event-015.",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "safety_hazard",
+   "description": "Smoke/CO detectors recorded as not tested at check-out and no test recorded before the property was released for a move-in on 30/11/2024 (now occupied).",
+   "source_ids": [
+    "attachment-01-check-out-inspection-report",
+    "event-025"
+   ],
+   "action_taken": "Lead question of the handover to the property manager; recorded in case note ACT-1."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Outbound agency email on this job cites a different property's quote ('Flat 27, 117 Lantern Quay'); several hold notes have no retrievable text; the job was auto-closed with checks open.",
+   "source_ids": [
+    "event-011",
+    "event-005",
+    "event-012",
+    "event-037"
+   ],
+   "action_taken": "Recorded in ACT-1 and the handover; no party was told which address is 'right'."
+  },
+  {
+   "kind": "other",
+   "description": "Provider's unconfirmed claim that an invoice attachment was sent; nothing on file, outcome unknown.",
+   "source_ids": [
+    "event-033"
+   ],
+   "action_taken": "Single chase with a 3-working-day reply-by (ACT-2); no assumption of receipt."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "005",
+    "title": "Case 005: Check-Out Cleaning",
+    "received_at": "2024-11-02 13:58:25 UTC",
+    "track": "Property Management",
+    "case_number": "005",
+    "property": "Flat 10, 160 Alder Lane, Westmarsh, ZZ8 9ZZ",
+    "source_role": "Agency manager",
+    "agency": "",
+    "events_visible": 37,
+    "attachments_hidden": 0,
+    "details": "# Case 005: Check-Out Cleaning\n\n## Case details\n- source role: Agency manager\n- created: 2024-11-02 13:58:25 UTC\n- property: Flat 10, 160 Alder Lane, Westmarsh, ZZ8 9ZZ\n\n## Initial request\nFollowing the tenant vacating please provide an estimate to; \n1) Clean property through out as per check out to include all appliances, freezer defrost  and a carpet clean in bedroom two.\n\n## Attachments\n- attachment-01-check-out-inspection-report.pdf\n- attachment-02-cleaning-quote.pdf\n- attachment-03-cleaning-quote.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "005-get_case_details-be16ef3cf666",
+   "receipt": "{\"id\": \"005\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:58:02.695348Z",
+   "finished_at": "2026-10-10T13:58:02.695414Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "005-get_action_ledger-742737cf35fc",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:02.695506Z",
+   "finished_at": "2026-10-10T13:58:02.695539Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review (check-out clean, Job NBL-005-0163, Flat 10, 160 Alder Lane).\n1) Work and approvals: landlord Palmer approved the quote and the carpets in his own message (event-016) after the quote was sent to him (event-015); provider instructed (event-017); clean completed, keys returned ready for move-in 30/11/2024 (event-024, event-025).\n2) Quote value: attachment-02 / attachment-03 price £135 general EOT + deep clean, £45 bedroom 2 carpet shampoo, £25 freezer defrost = £205 calculated; no total and no VAT status stated in either document.\n3) Scope vs quote: event-017 instructed the provider to clean BOTH bedroom carpets; the quote prices bedroom 2 only (£45). Any bedroom 1 carpet charge is unquoted and must be checked against the invoice before it goes to the landlord.\n4) Invoice outstanding: requested event-026 and chased event-030; provider replies (event-029, event-032, event-033) suggest an attachment was sent but no invoice is on the case. Outcome unknown — do not assume received.\n5) SAFETY CHECK: check-out report (attachment-01) detector section records \"Tested? No\" and the detector photograph caption repeats that detectors were not tested; this specific line beats the report's boilerplate that alarms \"were stated to have been checked and working\". The property was released for a move-in on 30/11/2024 (event-025) with no record of a smoke/CO alarm test. Not a reported hazard, but an unverified pre-move-in safety check at a now-occupied property.\n6) Data quality: event-011 refers to a quote for \"Flat 27, 117 Lantern Quay, Kingshaven\" on this Flat 10 job; both attached quotes name Flat 10. event-013 (landlord-addressed wording \"Hi Palmer... do you wish to proceed\") was sent to the provider; resent correctly to the landlord at event-015.\n7) The system closed the request at event-037 (\"All checks have been completed\") while the invoice, the invoice-to-landlord step and the landlord completion confirmation were still outstanding."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "005-add_note-86c48edf11d5",
+   "action_id": "005-add_note-86c48edf11d5",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:58:46.658201Z",
+   "finished_at": "2026-10-10T13:58:46.658496Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Job Id: NBL-005-0163 — Flat 10, 160 Alder Lane, Westmarsh, ZZ8 9ZZ.\n\nHi Ava, thank you for the completed clean. We still have no invoice on this job: nothing has reached the case file from your earlier send. Please reply to this message with the invoice attached (PDF), quoting Job Id NBL-005-0163, within 3 working days.\n\nPlease also itemise it against the approved quote (general EOT/deep clean £135, bedroom 2 carpet shampoo £45, freezer defrost £25) and show separately any charge for the bedroom 1 carpet, together with your VAT status. If the invoice is not received within 3 working days we will refer the job to the property manager to settle the billing with you directly."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "005-notify_contractor-9999f673337b",
+   "action_id": "005-notify_contractor-9999f673337b",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:58:46.658667Z",
+   "finished_at": "2026-10-10T13:58:46.658875Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agent",
+   "to": "contractor",
+   "what": "If the itemised invoice is not received within 3 working days, billing is referred to the property manager.",
+   "due": "3 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Act on a provider reply within one working day",
+   "status": "prior",
+   "basis": "Provider's last message event-033 (2024-12-12)",
+   "deadline": null,
+   "note": "Chased at ACT-2 with a 3-working-day reply-by."
+  },
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Maintenance defects in attachment-01 (hallway door closer, stuck balcony doors, en-suite extractor fan) are outside this cleaning job",
+   "deadline": null,
+   "note": "Flagged to the office; no repair instructed on this ticket."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Flat 10, 160 Alder Lane: the check-out report records smoke/CO detectors as 'Tested? No' and the flat was released for a move-in on 30/11/2024 — do you want an alarm test arranged now, and how should the missing cleaning invoice be settled?",
+  "summary": [
+   "Check-out report attachment-01 detector section: 'Tested? No', no detector comments; the report's boilerplate claim that alarms were checked and working is contradicted by that specific line.",
+   "Property was recorded as cleaned, keys returned and ready for move-in on 30/11/2024 (event-025); no alarm test is recorded anywhere on the ticket.",
+   "Landlord Palmer approved the clean and the carpets in his own message (event-016); quote items £135 + £45 + £25 = £205 calculated, no total and no VAT status stated (attachment-02, attachment-03).",
+   "event-017 instructed the provider to clean BOTH bedroom carpets; the quote prices bedroom 2 only (£45), so any bedroom 1 charge is unquoted.",
+   "Invoice requested (event-026) and chased (event-030); provider replies (event-029, event-032, event-033) imply an attachment was sent but none is on file, yet the system closed the job as 'All checks completed' (event-037)."
+  ],
+  "gap": "Whether smoke/CO alarms were in fact tested at or before the 30/11/2024 move-in (no move-in/inventory record visible to me); whether the provider's invoice exists and what it totals; whether a bedroom 1 carpet charge was added. Safety items not addressed in the record: carbon monoxide (attachment-01-check-out-inspection-report).",
+  "options": [
+   "Arrange a smoke/CO alarm test at the occupied flat now (landlord approval needed for the spend — no standing cap on file) and keep the invoice chase running.",
+   "Confirm from the move-in/inventory record that alarms were tested on or before 30/11/2024 and record that evidence; chase the invoice only.",
+   "Leave the job closed as the system did — leaves the alarm test unverified and the £205-plus invoice unreconciled."
+  ],
+  "recommended": "Verify or arrange the alarm test first (option 2 if the move-in record shows a test, otherwise option 1), then reconcile the invoice against the approved quote before it goes to the landlord.",
+  "default_if_timeout": "If the provider does not invoice within 3 working days of ACT-2, billing is referred to the property manager; the alarm question stays open until a person answers it.",
+  "deadline": "Alarm verification: immediate (property occupied since 30/11/2024). Invoice: 3 working days from ACT-2.",
+  "undo": "Nothing irreversible done: one provider chase (ACT-2) and an internal note (ACT-1). No spend instructed, no closure re-issued.",
+  "context_refs": [
+   "attachment-01-check-out-inspection-report",
+   "attachment-02-cleaning-quote",
+   "event-016",
+   "event-017",
+   "event-025",
+   "event-030",
+   "event-033",
+   "event-037"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE",
+  "APR-SPEND-OVER-CAP",
+  "PRO-TENANT-LIABILITY",
+  "ESC-SAFETY",
+  "RTE-STAFF",
+  "RTE-CONTRACTOR",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the £205 figure is my sum of the three quoted lines; neither quote states a total or a VAT position, so the payable amount may differ."
+ ],
+ "uncertainty": [
+  "Whether alarms were tested at the 30/11/2024 move-in by a process not visible on this ticket.",
+  "Whether the provider's invoice exists, its total, and whether it includes an unquoted bedroom 1 carpet charge.",
+  "No landlord standing spend cap is on file, so no further spend could be instructed without the landlord."
+ ],
+ "safety_actions": [
+  "Named the smoke/CO alarm check and its result ('Tested? No', attachment-01) in the case note and made it the lead question of the handover, because the flat was released for a move-in on 30/11/2024 with no alarm test on record."
+ ],
+ "withheld_actions": [
+  "Did not re-close the request (CAP-CLOSE: documents, invoice_to_landlord and landlord_confirmation still pending).",
+  "Did not instruct any further work or alarm test (no standing cap on file; APR-SPEND-OVER-CAP).",
+  "Did not decide whether any cleaning cost is tenant-payable from the deposit (PRO-TENANT-LIABILITY).",
+  "Did not state an invoice total or VAT position to the landlord, as no invoice is on file."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R11: safety pass — unaddressed item(s) noted: carbon monoxide (attachment-01-check-out-inspection-report)"
+ ],
+ "started_at": "2026-10-10T13:57:57.987289Z",
+ "finished_at": "2026-10-10T14:00:26.606752Z",
+ "input_tokens": 67931,
+ "output_tokens": 14082,
+ "cache_read_tokens": 42561
+}

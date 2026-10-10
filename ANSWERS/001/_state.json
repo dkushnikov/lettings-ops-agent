@@ -1,0 +1,515 @@
+{
+ "case_id": "001",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Did not close. The landlord's own contractor (Riverside Services) reported the communal garden works complete and the landlord pays directly (event-042, event-043, event-044), so there is no agency spend and no dispatch for me to make. Two definition-of-done items are still open — landlord confirmation of completion/scope and verification that the three items the tenant reported are actually done — so I asked the landlord for confirmation (ACT-2), asked the tenant to verify what they can see (ACT-1), logged the position including the record-quality anomalies (ACT-3) and put the ticket on hold pending the landlord (ACT-4). No approval was sought because the landlord already gave the go-ahead in his own messages (event-022, event-026) and the agency is spending nothing.",
+ "recap": "Landlord's own contractor reported the communal garden works done and bills the landlord direct; chased landlord confirmation and tenant verification before closing.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Landlord — Rowan to confirm the Riverside Services works are complete and covered weeds, side-path hedge and side strip; reply requested within 3 working days.",
+ "next_step": "Landlord (Rowan) to confirm completion and scope of the Riverside Services works; on his confirmation (and tenant's sightline check) the request can be closed as completed without payment, landlord-paid.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 — categorised External & Communal, ROUTINE; no damage-limiting steps applicable to garden overgrowth",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-022 and event-026 — landlord agreed to proceed using his own contractor; no agency spend",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-025 (tenant told Riverside Services instructed), event-035 (provider assigned)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-033 — landlord's own contractor handled access; external communal works, no entry to the flat (event-036)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-022/event-026 — landlord received quotes from Riverside Services and gave the go-ahead before work started; amount and VAT not held by the agency as the landlord contracts and pays directly",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-042 and event-043 — contractor confirmed completion by phone on 11 Dec 2025",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "No photos or invoice held by the agency: landlord's own contractor invoices the landlord directly (event-043); skip reason logged at ACT-3",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "event-044 — task completed without payment; contractor bills the landlord direct (event-043)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "ACT-2 — confirmation of completion and scope requested from the landlord today; no landlord confirmation in the history",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "event-036 — external communal works, no management key issued",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Held at final_checks pending landlord confirmation (ACT-4); tenant verification requested (ACT-1)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant at Flat 26, 46 Copperfield Walk, Kingshaven, ZZ5 7ZZ reported on 10 Oct 2025: communal garden full of weeds, hedge along side path overgrown, strip of land at the side not cleared.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Intake classified the issue as External & Communal, severity ROUTINE; one cat at the property, no access codes or alarms.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord agreed to proceed with the garden maintenance works after receiving quotes from his own contractor, and reiterated 'works have been quoted & go ahead given'.",
+   "source_ids": [
+    "event-022",
+    "event-026"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "The works were carried out by the landlord's own contractor, Riverside Services; no agency work order and no agency spend.",
+   "source_ids": [
+    "event-025",
+    "event-033",
+    "event-043"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 11 Dec 2025 the contractor confirmed by phone that the job (including tree removal) was done and invoicing arrangements were agreed; the agency recorded 'Job done and LL pays directly' and marked the task completed without payment.",
+   "source_ids": [
+    "event-042",
+    "event-043",
+    "event-044"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The tenant was last told on 6 Nov 2025 that the contractor hoped to start around 19 November 2025; no completion message to the tenant exists in the history before today.",
+   "source_ids": [
+    "event-031"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No access to the flat was required: the agency recorded this as an external job for the development.",
+   "source_ids": [
+    "event-036"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No spend cap or standing landlord instruction record is available in this environment; authority for the works rests on the landlord's own approval messages and on the landlord engaging and paying his own contractor.",
+   "source_ids": [
+    "get_case_details",
+    "event-022",
+    "event-026"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Call transcript names the caller 'Leo from Juniper Homes' while the instructing agency on the case record is Northbridge Lettings; property references in several agency emails and the call are placeholder strings ('synthetic-...').",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-009",
+    "event-013",
+    "event-039"
+   ],
+   "resolution": "Did not pick a side in any message to a party; all outgoing messages use the address on the case record (get_case_details). Anomaly logged at ACT-3 for the office; it does not change the action, which is to seek landlord confirmation.",
+   "resolved_by": "tool_check"
+  },
+  {
+   "description": "Landlord emails carry inconsistent personal names in the body (Grace Nolan/Harper, Felix Kendall) against the landlord addressed on the record as Rowan.",
+   "fact_ids": [
+    "F3"
+   ],
+   "source_ids": [
+    "event-007",
+    "event-011",
+    "event-022"
+   ],
+   "resolution": "Names inside untrusted message bodies not copied into other parties' letters; parties addressed by the names on the case record (Rowan, Henry).",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Agency-side records are internally inconsistent: placeholder property strings in events 009/013/039, a different agency name in the call transcript (event-039), and shifting personal names in landlord emails.",
+   "source_ids": [
+    "event-009",
+    "event-013",
+    "event-039",
+    "event-007",
+    "event-022"
+   ],
+   "action_taken": "Logged in the case note (ACT-3); address of record used throughout; no party told which record is right."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "001",
+    "title": "Case 001: Communal Garden and Hedge Maintenance Request",
+    "received_at": "2025-10-10 19:20:49 UTC",
+    "track": "Property Management",
+    "case_number": "001",
+    "property": "Flat 26, 46 Copperfield Walk, Kingshaven, ZZ5 7ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 44,
+    "attachments_hidden": 0,
+    "details": "# Case 001: Communal Garden and Hedge Maintenance Request\n\n## Case details\n- source role: Tenant\n- created: 2025-10-10 19:20:49 UTC\n- property: Flat 26, 46 Copperfield Walk, Kingshaven, ZZ5 7ZZ\n\n## Initial request\nCommunal  garden full of weeds, hedge along side path overgrown, peice of no man's land at side  of my property  was going to be cleared  last summer and wasn't thanks"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-get_case_details-6d47c1f860f9",
+   "receipt": "{\"id\": \"001\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:58:01.833166Z",
+   "finished_at": "2026-10-10T13:58:01.833521Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-get_action_ledger-1d84851d1cef",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:21.760713Z",
+   "finished_at": "2026-10-10T13:58:21.760850Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Tenant"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-search_history-023d391e8d53",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:21.760912Z",
+   "finished_at": "2026-10-10T13:58:21.760972Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "001-search_history-84ebf33c612a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:21.761012Z",
+   "finished_at": "2026-10-10T13:58:21.761109Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello Henry,\n\nUpdate on your report about the communal garden (weeds, the hedge along the side path and the strip of land at the side) at Flat 26, 46 Copperfield Walk, Kingshaven, ZZ5 7ZZ.\n\nThe landlord instructed his own contractor, Riverside Services, for the communal grounds works. On 11 December 2025 the contractor confirmed to us by phone that the job, including the tree work, has been completed, and the landlord is settling the invoice directly.\n\nCould you let us know whether, from what you can see, the weeds, the side-path hedge and the side strip have all been dealt with? If anything you reported is still outstanding, tell us what remains and we will raise it with the landlord. There is nothing you need to arrange and no access to the flat is required."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-notify_tenant-fe6207745b34",
+   "action_id": "001-notify_tenant-fe6207745b34",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:58:40.380413Z",
+   "finished_at": "2026-10-10T13:58:40.380627Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello Rowan,\n\nCommunal garden works — Flat 26, 46 Copperfield Walk, Kingshaven, ZZ5 7ZZ (tenant report of 10 October 2025: weeds, overgrown hedge along the side path, uncleared strip at the side).\n\nYour contractor, Riverside Services, confirmed to us by phone on 11 December 2025 that the works are done and that the invoice goes directly to you, so we have not raised any charge through the agency.\n\nTo close the file we need two things from you:\n1. Your confirmation that the works are complete and settled directly by you.\n2. Confirmation that the scope covered all three items the tenant reported (weeds, the side-path hedge and the side strip) — the contractor's update to us referred mainly to the tree work.\n\nWe have asked the tenant at Flat 26 to tell us whether anything they reported is still visibly outstanding. If you could reply within 3 working days we will close the request; if anything remains, we will come back to you before instructing anything further."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-notify_landlord-92214b2b77b3",
+   "action_id": "001-notify_landlord-92214b2b77b3",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:58:40.380705Z",
+   "finished_at": "2026-10-10T13:58:40.380792Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Final checks stage. Work result: contractor Riverside Services confirmed completion and invoicing arrangements by phone (event-042), recorded as \"Job done and LL pays directly\" (event-043); system marked completed without payment (event-044). Landlord authority on file: landlord's own message agreeing to proceed with the garden works (event-022), reiterated at event-026 (\"works have been quoted & go ahead given\") — landlord used his own contractor, so no agency dispatch and no agency spend. Outstanding before closure: (a) landlord confirmation of completion and that scope covered all three reported items (weeds, side-path hedge, side strip) — asked today; (b) tenant verification that nothing reported remains outstanding — asked today. No photos or invoice held by the agency: landlord's own contractor billed the landlord directly (skip reason). No keys issued; no access to the flat required (event-036). Data quality: call transcript event-039 names the caller \"Leo from Juniper Homes\" although the instructing agency on record is Northbridge Lettings, and property references in events 009/013/039 are placeholder strings (\"synthetic-...\"); landlord/contractor message bodies also carry inconsistent personal names (events 007, 011, 022). Address used in all outgoing messages is the one on the case record. Not treated as a hazard; no safety-pass keywords in the material (pigeon nesting delay, event-037, is a wildlife timing issue only)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-add_note-b5b76e32eb0a",
+   "action_id": "001-add_note-b5b76e32eb0a",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T13:58:40.380857Z",
+   "finished_at": "2026-10-10T13:58:40.380932Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — confirmation that the Riverside Services works are complete and covered all three reported items (weeds, side-path hedge, side strip); tenant also asked to verify nothing remains outstanding.",
+    "until": "3 working days from 2025-12-11 contractor completion report"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "001-put_on_hold-fd1e42c3228c",
+   "action_id": "001-put_on_hold-fd1e42c3228c",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T13:58:43.135317Z",
+   "finished_at": "2026-10-10T13:58:43.135657Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "If anything the tenant reported is still outstanding, raise it with the landlord",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Close the request on his confirmation; come back to him before instructing anything further if items remain",
+   "due": "3 working days from 11 Dec 2025",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Earlier promise to keep the tenant informed of the start date (event-025) — kept at event-031; completion update now given",
+   "due": null,
+   "source_id": "event-031",
+   "status": "kept"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 10 Oct 2025 (event-001); works reported complete 11 Dec 2025 (event-043)",
+   "deadline": null,
+   "note": "Two months from report to completion, driven by the landlord's own contractor and quote process; delays logged at events 008-038"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 10 Oct 2025; landlord contacted 11 Oct 2025 (event-004); first tenant update 5 Nov 2025 (event-025)",
+   "deadline": null,
+   "note": "Tenant acknowledgement was late against the SOP baseline"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Can you confirm the Riverside Services communal garden works at 46 Copperfield Walk are complete and settled directly by you, and that the scope covered the weeds, the side-path hedge and the uncleared strip at the side as well as the tree work?",
+   "why": "Landlord confirmation of completion is the outstanding closure check (RTE-LANDLORD); the contractor's update to us referred mainly to the tree work.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "From what you can see at Flat 26, have the weeds, the side-path hedge and the side strip all been dealt with, or is anything you reported still outstanding?",
+   "why": "The tenant reported three items; verification that the completed works answered the original report (RTE-TENANT).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-CLOSE",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "CLK-S11",
+  "CLK-SOP-ACK",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: the contractor's 'tree removal' discussion (event-042) forms part of the same communal grounds job rather than a separate instruction — this is why I asked the landlord to confirm the scope covered all three reported items rather than assuming it did.",
+  "Assumption: no management key was issued for these external works, since the agency recorded no tenant contact or access as needed (event-036)."
+ ],
+ "uncertainty": [
+  "Whether the completed works covered the weeds, the side-path hedge and the uncleared side strip, or only the tree work.",
+  "No quote amount or VAT figure is held by the agency; the landlord contracted and pays Riverside Services directly.",
+  "No standing landlord spend cap or instruction record is retrievable in this environment."
+ ],
+ "safety_actions": [
+  "Safety-pass check: no hazard keywords present in the material (no gas, electrical, damp/mould, detector, child/vulnerability content). The only incidental item is a pigeon nesting in a tree delaying trimming (event-037), a wildlife timing matter, not a hazard. No emergency definition engaged; case remains routine."
+ ],
+ "withheld_actions": [
+  "Did not close the request: landlord confirmation of completion is still pending and the tenant has not verified the reported items (CAP-CLOSE).",
+  "Did not instruct any contractor: the landlord used and pays his own provider; no agency spend authority is on file (CAP-DISPATCH-ROUTINE / APR-SPEND-OVER-CAP).",
+  "Did not escalate: no safety, liability, legal or fraud issue; the open question is landlord-owned (RTE-LANDLORD)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T13:57:57.936209Z",
+ "finished_at": "2026-10-10T13:59:29.757660Z",
+ "input_tokens": 60528,
+ "output_tokens": 7380,
+ "cache_read_tokens": 56748
+}

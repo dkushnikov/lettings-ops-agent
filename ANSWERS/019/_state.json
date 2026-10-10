@@ -1,0 +1,554 @@
+{
+ "case_id": "019",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Ticket was closed (event-044) with the playbook's final checks incomplete: the landlord never confirmed completion (event-043 flagged this one minute before closure), no invoice amount is on file, and the levelling and gravel parts of the tenant's request (event-001) were never quoted or authorised — the landlord's own approval covers the removal only (event-025). I did not instruct any contractor or authorise any spend: there is no standing cap on file and no landlord approval naming an amount (APR-SPEND-OVER-CAP). In-authority steps taken: internal note of the findings; tenant updated with the status and the fact that levelling/gravel await the landlord; landlord asked to confirm completion, check the invoice against their approval, and decide whether to quote the remaining scope; human task raised with the office for the provider/price conflict between agency records and for the rent-deduction stated in event-038 (PRO-PAYMENTS is outside my authority). Case reopened and held pending the landlord's reply.",
+ "recap": "Garden clearance done and invoiced, but the ticket closed with landlord confirmation and the levelling/gravel scope outstanding; landlord asked, case held.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — confirmation of completion and of the invoiced amount (event-038), plus a decision on quoting the levelling and gravel; 3-day wait from today's email (ACT-4).",
+ "next_step": "Landlord (Jenkins) to confirm the clearance is complete and the invoice matches their approval, and to say whether to quote the levelling/gravel (emailed ACT-4; 3-day clock). In parallel the property manager resolves the provider/price conflict and the rent deduction (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 logged and acknowledged to tenant event-004; routine garden works, no emergency definition met",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-025 landlord's own message: 'Please go ahead with the removal' — covers the clearance only",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-034 maintenance provider assigned; event-033 new provider invoicing by email (identity conflicts with event-009)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-029 slots offered to tenant; event-031 records the work as carried out",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No landlord message names an amount; event-009 (£500+VAT) and event-019 (~£600) conflict and event-036 is an agency note, not a landlord approval; invoice amount not on file (event-038 attachment unavailable)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-031 'This was done, awaiting the invoice from contractor'; event-037 task moved to Result",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-042 skip reason 'not applicable'; no photos or invoice copy on file",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-038 invoice emailed to landlord",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-043 'Need confirmation from landlord'; no landlord reply in history; chased ACT-4",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant was at the property for access (event-016, event-029)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-044 closed the request, but quote approval, landlord confirmation and the levelling/gravel scope remain open; case reopened and held (ACT-5)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant requested four items at Flat 25, 185 Copperfield Walk: removal of rubbish/construction waste, levelling, gravel covering, making the garden usable.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The landlord's only own-message approval reads 'Please go ahead with the removal' and names no amount.",
+   "source_ids": [
+    "event-025"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Agency records give conflicting provider and price: £500+VAT with Harbour Compliance 'approved' (event-009), ~£600 via Oakley's contractor (event-019), and a new provider invoicing by email with no portal job (event-033).",
+   "source_ids": [
+    "event-009",
+    "event-019",
+    "event-033"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The clearance was carried out and the invoice was emailed to the landlord; the invoice attachment is unavailable, so no final amount is on file.",
+   "source_ids": [
+    "event-031",
+    "event-038"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Landlord confirmation was recorded as outstanding and the request was closed one minute later with no landlord reply in the history.",
+   "source_ids": [
+    "event-043",
+    "event-044"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The agency told the landlord it would process the invoice and deduct it from the rental amount.",
+   "source_ids": [
+    "event-038"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No gas, electrical, water, damp/mould, asbestos or occupant-vulnerability content appears in any artefact; the tenant's 'safe' refers to the unusable garden surface.",
+   "source_ids": [
+    "event-001",
+    "search_history"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "No landlord standing spend cap is on file in this case record.",
+   "source_ids": [
+    "get_case_details",
+    "get_action_ledger"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Who carried out the job and at what price: Harbour Compliance at £500+VAT (event-009) vs Oakley's contractor at ~£600 (event-019) vs an unnamed new provider invoicing by email (event-033).",
+   "fact_ids": [
+    "F3"
+   ],
+   "source_ids": [
+    "event-009",
+    "event-019",
+    "event-033"
+   ],
+   "resolution": "Not resolved in a message to any party; conflict recorded and referred to the property manager (ACT-2), while routine steps (tenant update, landlord confirmation chase) continued.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Closure status: event-044 states all checks completed, but event-043 records landlord confirmation still needed and no quote approval naming an amount exists.",
+   "fact_ids": [
+    "F5",
+    "F2"
+   ],
+   "source_ids": [
+    "event-043",
+    "event-044",
+    "event-025"
+   ],
+   "resolution": "The specific line (event-043, confirmation needed) beats the general closure line; ticket treated as open and placed on hold.",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Request closed with final checks incomplete (no landlord confirmation, no invoice copy, no amount, documents skipped as 'not applicable').",
+   "source_ids": [
+    "event-042",
+    "event-043",
+    "event-044"
+   ],
+   "action_taken": "Recorded in note ACT-1 and human task ACT-2; ticket reopened and held."
+  },
+  {
+   "kind": "other",
+   "description": "Agency stated it would deduct the contractor invoice from the rental amount — a money movement outside agent authority (PRO-PAYMENTS), made without a verified invoice amount.",
+   "source_ids": [
+    "event-038"
+   ],
+   "action_taken": "Referred to the property manager for verification (ACT-2); no payment action taken by me."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "019",
+    "title": "Case 019: Garden Maintenance Request",
+    "received_at": "2025-01-17 12:57:22 UTC",
+    "track": "Property Management",
+    "case_number": "019",
+    "property": "Flat 25, 185 Copperfield Walk, Alderwick, ZZ4 0ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 44,
+    "attachments_hidden": 0,
+    "details": "# Case 019: Garden Maintenance Request\n\n## Case details\n- source role: Tenant\n- created: 2025-01-17 12:57:22 UTC\n- property: Flat 25, 185 Copperfield Walk, Alderwick, ZZ4 0ZZ\n\n## Initial request\nHi dear Maintenance team,\nAs this garden is part of the house included in our tenancy, we would like it to be cleaned and finished properly. The ground also needs to be levelled and covered with stones (gravel) so that we can use the space safely. We would like to sit there in the afternoon, but at the moment it is not possible due to the condition.\n\nI have attached pictures for your reference. Could you please arrange:\n• Removal of all rubbish and construction waste\n• Levelling of the ground\n• Proper gravel/stone covering\n• Making the garden safe and usable"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-get_case_details-6e7631855a2e",
+   "receipt": "{\"id\": \"019\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:03:01.664037Z",
+   "finished_at": "2026-10-10T14:03:01.664115Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-get_action_ledger-108eb6ed714d",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:01.664239Z",
+   "finished_at": "2026-10-10T14:03:01.664279Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice amount VAT paid"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-search_history-f256ee30620d",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:24.545932Z",
+   "finished_at": "2026-10-10T14:03:24.546085Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Tenant"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "019-search_history-8bf6ae7aca99",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:24.546137Z",
+   "finished_at": "2026-10-10T14:03:24.546201Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Review of closed ticket (event-044 \"All checks have been completed; the request is now closed\"). Findings: (1) Scope: tenant asked for four items — waste removal, levelling, gravel, making usable (event-001). Landlord's own approval covers removal only: \"Please go ahead with the removal\" (event-025). Levelling and gravel were never quoted or authorised and are not evidenced as done. (2) Work result: clearance recorded done, invoice awaited (event-031); invoice emailed to landlord (event-038, attachment unavailable — no amount on file). (3) Landlord confirmation of completion was flagged outstanding (event-043) and the ticket was closed one minute later (event-044) without a recorded landlord reply. (4) Documents skipped, reason \"not applicable\" (event-042). (5) Record conflict on provider and price: £500+VAT with Harbour Compliance stated approved (event-009) vs ~£600 via Oakley's contractor (event-019) vs \"new provider ... no access to the portal\" invoicing by email (event-033). (6) Payment: event-038 states the invoice will be deducted from the rental amount — money movement is outside agent authority (PRO-PAYMENTS); office to verify. Safety check: no gas, electrical, water, asbestos or occupant-vulnerability content anywhere in the artefacts; tenant's \"safe\" wording refers to usability of the garden surface (event-001), so routine, not an emergency."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-add_note-03339b7e2571",
+   "action_id": "019-add_note-03339b7e2571",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:03:52.103083Z",
+   "finished_at": "2026-10-10T14:03:52.103238Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 019 closed with items outstanding — provider/price conflict and rent-deduction to verify",
+    "summary": "Flat 25, 185 Copperfield Walk. Ticket closed at event-044 while event-043 still said \"Need confirmation from landlord\"; no landlord reply confirming completion is in the history. Three agency records disagree on who did the job and for how much: event-009 (£500+VAT, Harbour Compliance, \"landlord has approved\"), event-019 (~£600, Oakley's contractor, specialised builders' material disposal), event-033 (new provider, invoiced by email, no portal job raised). The invoice itself is unavailable, so no amount is on file. Landlord's only own-message approval is event-025, \"Please go ahead with the removal\" — it names no amount and does not cover the levelling and gravel the tenant also asked for (event-001); those remain unquoted and unauthorised. Event-038 states the invoice will be deducted from the rental amount — agent cannot move money or sign off a rent deduction (PRO-PAYMENTS); please verify the deduction against the actual invoice and the approval. Agent actions taken: tenant updated on status, landlord asked to confirm completion and to decide on levelling/gravel. No contractor instructed, no spend authorised."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-create_human_task-b35b205597a3",
+   "action_id": "019-create_human_task-b35b205597a3",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:03:52.103313Z",
+   "finished_at": "2026-10-10T14:03:52.103401Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello, an update on your garden request for Flat 25, 185 Copperfield Walk. Our record shows the garden clearance — removal of the rubbish and builders' waste — was carried out and the contractor's invoice has been passed to the landlord. The other parts of your request, levelling the ground and laying gravel, were not included in that work: they need the landlord's decision and a separate quote, and we have written to them about it today. We will come back to you as soon as the landlord replies. If anything was left behind in the garden, or if the surface is still not usable, please let us know what you can see so we can put it to the landlord with the rest. Northbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-notify_tenant-d21e5a66aa4c",
+   "action_id": "019-notify_tenant-d21e5a66aa4c",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:03:52.103463Z",
+   "finished_at": "2026-10-10T14:03:52.103532Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 25, 185 Copperfield Walk, Alderwick, ZZ4 0ZZ. Two points to close off the garden job. 1) Completion: the garden clearance was carried out and the contractor's invoice was emailed to you on 16 April. Please confirm you are happy the job is complete and that the invoiced amount matches what you approved — our file records two different figures for this job (£500 plus VAT at one stage, around £600 at another) and we do not hold a copy of the final invoice, so we would rather you check it against your copy before anything is settled. 2) Remaining scope: your approval was for the removal only. The tenant's original request also asked for the ground to be levelled and covered with gravel, and that part has not been quoted or instructed. Please let us know whether you want us to obtain a quote for the levelling and gravel, or whether you would prefer the request closed at the clearance. We will hold the file until we hear from you."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-notify_landlord-3a94c649ae75",
+   "action_id": "019-notify_landlord-3a94c649ae75",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:03:52.103596Z",
+   "finished_at": "2026-10-10T14:03:52.103661Z"
+  },
+  {
+   "seq": 9,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — confirmation that the clearance is complete and the invoice matches their approval (event-038), and a decision on quoting the levelling/gravel not covered by event-025.",
+    "until": "3 days from today's contact"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "019-put_on_hold-240db8097adb",
+   "action_id": "019-put_on_hold-240db8097adb",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:03:58.604807Z",
+   "finished_at": "2026-10-10T14:03:58.605194Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back to the tenant once the landlord replies on levelling and gravel",
+   "due": "On landlord reply",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Hold the file until the landlord responds on completion, invoice check and remaining scope",
+   "due": "3 days from ACT-4",
+   "source_id": "ACT-4",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2025-01-17 (event-001); clearance done 2025-04-12 (event-031); remaining scope still undecided",
+   "deadline": null,
+   "note": "Nearly three months from report to clearance, driven by an unreachable landlord (event-012, event-017, event-022)."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged same day at event-004",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Do you confirm the garden clearance is complete and that the invoice emailed to you on 16 April matches the amount you approved? Our file shows two different figures (£500 + VAT at event-009, around £600 at event-019) and we hold no copy of the invoice.",
+   "why": "Landlord confirmation and invoice sign-off are landlord-owned decisions (RTE-LANDLORD); event-043 flagged confirmation outstanding and it is not in the history.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Your approval (event-025) covered the removal only. Do you want us to obtain a quote for levelling the ground and laying gravel, or should the request be closed at the clearance?",
+   "why": "The remaining scope is spend at the landlord's cost with no standing cap on file (APR-SPEND-OVER-CAP).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Is anything still left in the garden after the clearance, and is the ground surface still unusable?",
+   "why": "Confirms the work result on the ground before the landlord decides on the remaining scope (RTE-TENANT).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the clearance referred to in event-031 is the removal approved in event-025, since no other work is described in the history.",
+  "Assumption: no landlord standing spend cap exists for this property, as none appears in the case record; therefore any spend needs the landlord's own approval."
+ ],
+ "uncertainty": [
+  "The final invoiced amount is unknown — the invoice attachment at event-038 is unavailable.",
+  "Whether the tenant ever confirmed an access slot is not recorded; event-031 only states the work was done.",
+  "Whether anything was physically left in the garden after the clearance is unverified (no photos; documents skipped at event-042)."
+ ],
+ "safety_actions": [
+  "Safety pass run over all artefacts: no gas, CO, electrical, water-ingress, damp/mould, asbestos, injury or vulnerable-occupant content found; 'specialised builders material' (event-019) refers to disposal cost, with no hazard reported or observed. No emergency route triggered."
+ ],
+ "withheld_actions": [
+  "Did not close the request: quote approval and landlord confirmation are still pending (event-043).",
+  "Did not instruct a contractor for the levelling/gravel: no standing cap on file and no landlord approval naming an amount (APR-SPEND-OVER-CAP).",
+  "Did not act on or endorse the rent deduction stated in event-038 (PRO-PAYMENTS).",
+  "Did not tell any party which provider or price is correct; the conflict went to the office instead (ACT-2)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:02:58.279410Z",
+ "finished_at": "2026-10-10T14:05:45.827109Z",
+ "input_tokens": 62197,
+ "output_tokens": 8572,
+ "cache_read_tokens": 70935
+}

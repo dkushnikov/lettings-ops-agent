@@ -1,0 +1,576 @@
+{
+ "case_id": "045",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Did not close and did not instruct anyone. The landlord confirmed completion on 4 April (event-034) and the request was marked completed without payment (event-036, event-037), but 52 minutes later the landlord asked whether a new appointment date had been arranged with tenants (event-038) — so completion is no longer established and the playbook's final checks cannot be signed off. The work was carried out by the landlord's own contractor at his own cost (event-011, event-017), so no agency spend authority was engaged and no dispatch is mine to make. I asked the landlord to confirm whether the work is finished or a further visit is outstanding and which property event-038 refers to (ACT-1), asked the tenant whether a contractor has attended and whether anything remains outstanding (ACT-2), referred the seven conflicting addresses on this one job id to the office rather than picking a side in a message to a party (ACT-3, per ESC-CONFLICT routing to RTE-STAFF via a human task), recorded the chronology and the safety check (ACT-4) and placed the case on hold (ACT-5).",
+ "recap": "Window job closed as landlord-completed was re-opened by his later query about a new appointment; landlord and tenant asked to confirm, address conflict sent to the office.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — Theo Palmer to confirm whether the window work is complete or a further contractor visit is outstanding, and which property his 4 April query (event-038) relates to; reply chased by 3 working days. Tenant asked in parallel whether a contractor attended.",
+ "next_step": "Landlord to confirm whether the window work is finished or a further visit is outstanding, and at which property (asked ACT-1; 3-working-day clock); office to settle the address conflict (ACT-3).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 logged the report; event-009 categorised it as blown sealed units; urgency set routine in use_playbook; no damage-limiting steps apply to failed glazing (ACT-4).",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-011 — landlord elected to use and fund his own contractor; event-017 — landlord accepted the quote and instructed the contractor to proceed. No agency spend engaged.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-012 — landlord's surveyor (Lantern Surveying) contacted the agency and tenant details were passed with the tenant's authorisation; provider is the landlord's own.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "event-031 records a visit date and event-032/event-034 suggest it happened, but event-038 asks whether a new appointment has been arranged — unresolved; landlord and tenant asked (ACT-1, ACT-2).",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-017 — landlord had the quote and instructed the contractor himself; amount and VAT never came to the agency as the landlord bears the cost.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No provider report on file; the only completion evidence is the landlord's 'all done' (event-034), contradicted by event-038.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos or invoice from the landlord's contractor; three tenant window photos referenced at event-007 are unavailable. Skip reason cannot yet be recorded while completion is in doubt.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "event-036, event-037 — landlord's own contractor, paid directly by the landlord; request was marked completed without payment.",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-034 confirmed completion but event-038 contradicts it; re-confirmation requested (ACT-1).",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; access was arranged directly between the tenant and the landlord's contractor (event-012).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Closure withheld — see withheld_actions; case placed on hold (ACT-5) pending the landlord's confirmation.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported the kitchen window and patio door windows on 14 Jan 2025; property on the authoritative case record is Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Agency understood the fault as blown/failed sealed units; no further detail was given by the tenant.",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "Tenant confirmed the repair was not requested by the landlord.",
+   "source_ids": [
+    "event-006"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Landlord instructed his own contractor and limited budget to replacing the windows only; the blown patio door glass was to be quoted 'for the future'.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F5",
+   "statement": "Tenant gave verbal authorisation on 30 Jan for her contact details to be passed to the landlord's surveyor (Lantern Surveying).",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "Landlord confirmed on 15 Feb that he had a quote and asked the contractor to proceed; the agency committed no spend at any point and no landlord standing spend cap is on file.",
+   "source_ids": [
+    "event-017",
+    "event-018"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "Landlord confirmed completion on 4 Apr ('Good, all done!'); the agency marked the request completed without payment, noting 'LL completed by himself'.",
+   "source_ids": [
+    "event-034",
+    "event-036",
+    "event-037"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "At 12:05 on 4 Apr the landlord asked whether a new appointment date had been arranged with tenants, naming Flat 5, 25 Harbour View, Cedarford — contradicting the completion confirmation 57 minutes earlier.",
+   "source_ids": [
+    "event-038"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No hazard keyword from the safety pass appears in the artefacts: the fault is failed glazing, with no gas, electrical, water ingress, heating loss, security failure or occupant vulnerability reported. Check made and recorded; no safety red flag raised.",
+   "source_ids": [
+    "event-001",
+    "event-009",
+    "ACT-4"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "Outgoing agency correspondence under job id NBL-045-9445 carries at least five different property addresses in headers and bodies.",
+   "source_ids": [
+    "event-003",
+    "event-011",
+    "event-020",
+    "event-023",
+    "event-032",
+    "event-038"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Landlord states the work is complete (event-034) but then asks about arranging a new appointment with tenants (event-038).",
+   "fact_ids": [
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-034",
+    "event-038"
+   ],
+   "resolution": "Landlord asked to confirm status before the request is closed (ACT-1); case put back on hold (ACT-5). Closure withheld.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "The property on the authoritative case record (Flat 26, 116 Copperfield Walk, Alderwick) differs from the address printed on the agency's own job emails (Flat 12, 182 Meadow Row, Kingshaven) and from four further addresses quoted in message bodies.",
+   "fact_ids": [
+    "F1",
+    "F10"
+   ],
+   "source_ids": [
+    "index",
+    "event-003",
+    "event-011",
+    "event-020",
+    "event-023",
+    "event-038"
+   ],
+   "resolution": "Not decided by me; referred to the office as a human task (ACT-3) and the landlord asked which property his new-appointment query concerns (ACT-1). No address asserted to any party.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Scope: the landlord's January instruction funds the windows only, with patio door glass deferred (event-011), while the tenant's report and the ticket title cover both.",
+   "fact_ids": [
+    "F4"
+   ],
+   "source_ids": [
+    "event-001",
+    "event-011"
+   ],
+   "resolution": "Flagged for the office; patio door glass may remain outstanding even if the window replacement is complete.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "One job id (NBL-045-9445) carries seven different property addresses across agency emails and quoted correspondence; the authoritative record says Flat 26, 116 Copperfield Walk, Alderwick. Acting on any of them could send a contractor to the wrong occupied flat.",
+   "source_ids": [
+    "index",
+    "event-003",
+    "event-011",
+    "event-020",
+    "event-023",
+    "event-032",
+    "event-038"
+   ],
+   "action_taken": "Referred to the office via human task (ACT-3); landlord asked to identify the property in his latest query (ACT-1); no address asserted to tenant or contractor."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Quoted correspondence names inconsistent people for the same parties (contractor addressed as both 'Ruben Mercer' and 'Oakley'; landlord addressed as 'Theo' and 'Oakley'; a third-party 'Eliza Ingram' referring the survey), and a hold comment records a visit 'Tuesday 6th June' while the follow-up asks about a visit 'on Monday' in early April.",
+   "source_ids": [
+    "event-011",
+    "event-012",
+    "event-031",
+    "event-032"
+   ],
+   "action_taken": "Names from message bodies not copied into any outgoing letter; parties addressed only by the case-record roles. Date discrepancy noted for the office."
+  },
+  {
+   "kind": "other",
+   "description": "Tenant contact details (email and mobile) were released to a third-party surveyor on 30 Jan. The file records the tenant's verbal authorisation, so the disclosure is covered, but the authorisation exists only as a staff note.",
+   "source_ids": [
+    "event-012"
+   ],
+   "action_taken": "Recorded in the case note (ACT-4); no further personal data shared by me."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "045",
+    "title": "Case 045: Kitchen Window and Patio Door Window Repair",
+    "received_at": "2025-01-14 10:23:51 UTC",
+    "track": "Property Management",
+    "case_number": "045",
+    "property": "Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 38,
+    "attachments_hidden": 0,
+    "details": "# Case 045: Kitchen Window and Patio Door Window Repair\n\n## Case details\n- source role: Tenant\n- created: 2025-01-14 10:23:51 UTC\n- property: Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ\n\n## Initial request\nKitchen window + patio door windows"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "045-get_case_details-766bee13265b",
+   "receipt": "{\"id\": \"045\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:12:08.307718Z",
+   "finished_at": "2026-10-10T14:12:08.307807Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "045-get_action_ledger-3a3430666c89",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:12:08.307909Z",
+   "finished_at": "2026-10-10T14:12:08.307949Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Job NBL-045-9445 — kitchen window and patio door glass, Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ (the property on our case record).\n\nOn 4 April you confirmed \"Good, all done!\" and we marked the job completed without payment, as your own window contractor carried out the work. Later the same day we received a message asking whether a new appointment date has been arranged with the tenants, naming a different address.\n\nBefore we either re-open or leave this closed, please confirm two things:\n1. Is the window work at the above property finished, or is a further visit from your contractor still outstanding?\n2. If a further visit is outstanding, which property and which job does it relate to — several different addresses have been quoted on this thread, so we do not want to arrange access at the wrong flat.\n\nWe have asked the tenant separately whether anyone has attended. No access will be booked until you confirm. If we have no reply within 3 working days we will leave the request closed without payment and open a fresh request when the contractor makes contact."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "045-notify_landlord-0567866e1c84",
+   "action_id": "045-notify_landlord-0567866e1c84",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:12:47.345069Z",
+   "finished_at": "2026-10-10T14:12:47.345389Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Job NBL-045-9445 — kitchen window and patio door glass, Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ.\n\nUpdate: your landlord instructed his own window contractor for this work and told us on 4 April that it was completed. We have since had a query about a possible further appointment, so we want to check with you directly before we close our file.\n\nPlease let us know:\n1. Has a window contractor attended your flat, and is the kitchen window and/or the patio door glass now repaired or replaced?\n2. If work is still outstanding, has anyone given you a date for a further visit?\n\nIf a visit still needs arranging, we will not book anything without agreeing a window with you first and giving at least 24 hours' notice. Please reply when you can and we will pick it up from there."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "045-notify_tenant-2cedabd67803",
+   "action_id": "045-notify_tenant-2cedabd67803",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:12:47.345481Z",
+   "finished_at": "2026-10-10T14:12:47.345572Z"
+  },
+  {
+   "seq": 5,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 045 NBL-045-9445: address conflict across agency records + job re-opened after \"completed without payment\"",
+    "summary": "Conflict for the office to settle; no party has been told which address is correct.\n\n1) Property identity. The case record and event-032 give Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ. The agency's own outgoing emails on the same job id (NBL-045-9445) carry Flat 12, 182 Meadow Row, Kingshaven, ZZ5 7ZZ (event-003, 007, 009, 015, 018, 021, 023) and the body text names further addresses: Flat 29, 39 Beacon Close (event-011), Flat 12, 32 Juniper Mews (event-020), Flat 15, 135 Copperfield Walk (event-023), Flat 5, 25 Harbour View (event-038). The landlord's 21 Jan instruction (event-011) also limits budget to the lead-crossed windows only, with the blown patio door glass quoted \"for the future\" — scope may be partial.\n\n2) Status conflict. Landlord confirmed completion 4 Apr (event-034); request marked completed without payment, \"LL completed by himself\" (event-036, 037). 52 minutes later the landlord asks whether a new appointment date has been arranged with tenants (event-038). Either the closure was premature or event-038 belongs to a different job.\n\n3) Third-party contact. Tenant contact details were released to Lantern Surveying on 30 Jan with the tenant's recorded verbal authorisation (event-012).\n\nActions taken by me: landlord asked to confirm whether work is finished and, if not, which property/job the new appointment relates to; tenant asked whether a contractor attended and whether work is outstanding; case put on hold. No contractor instructed, no access booked, no spend committed.\n\nOffice decision needed: which property record this job id belongs to, and whether the duplicated/incorrect addresses on outgoing correspondence need correcting or reporting."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "045-create_human_task-6d286be055ff",
+   "action_id": "045-create_human_task-6d286be055ff",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:12:47.345651Z",
+   "finished_at": "2026-10-10T14:12:47.345745Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case re-opened from \"completed without payment\" pending clarification. Chronology relied on: tenant reported kitchen window + patio door windows 14 Jan (event-001); landlord approval step flagged by system (event-002); tenant confirmed the report was not landlord-requested (event-006); landlord elected to use his own contractor and limited budget to the windows, patio door glass to be quoted later (event-011); tenant details released to Lantern Surveying with the tenant's verbal authorisation (event-012); landlord confirmed a quote accepted and work instructed (event-017); landlord confirmed completion 4 Apr (event-034) and the request was marked completed without payment (event-036, event-037); landlord then asked about a new appointment date with tenants, naming another address (event-038).\n\nSafety pass: no hazard keyword present in the artefacts — fault is failed/blown sealed units to a kitchen window and patio door glass; no gas, electrical, water ingress, heating loss, security failure or vulnerability reported. No safety red flag raised. Urgency remains routine (CLK-S11 reasonable-time duty applies from 14 Jan).\n\nNo spend committed by the agency at any point: the landlord used and paid his own contractor (event-011, event-017), so CAP-DISPATCH-ROUTINE / APR-SPEND-OVER-CAP were not engaged. No landlord standing spend cap is on file.\n\nAddress data quality: seven different addresses appear across this single job id; the authoritative case record gives Flat 26, 116 Copperfield Walk, Alderwick, ZZ7 8ZZ. Not resolved in any message to a party; referred to the office (ACT-3)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "045-add_note-f78dc7befddb",
+   "action_id": "045-add_note-f78dc7befddb",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:12:57.767085Z",
+   "finished_at": "2026-10-10T14:12:57.767531Z"
+  },
+  {
+   "seq": 7,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — confirmation of whether the window work is finished or a further contractor visit is outstanding, and which property event-038 refers to. Tenant also asked in parallel whether a contractor attended.",
+    "until": "3 working days from 2025-04-04"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "045-put_on_hold-9dd1cf15ea4d",
+   "action_id": "045-put_on_hold-9dd1cf15ea4d",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:12:57.767676Z",
+   "finished_at": "2026-10-10T14:12:57.767796Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "No access will be booked until the landlord confirms status and property; if no reply in 3 working days the request stays closed without payment and a fresh request is opened when the contractor makes contact.",
+   "due": "3 working days from 2025-04-04",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Any further visit will be agreed with the tenant first, with at least 24 hours' notice.",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "'I'll keep this job open until its finished' — agency undertaking of 15 Feb; honoured by re-opening rather than closing on the contradicted completion.",
+   "due": null,
+   "source_id": "event-018",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 14 Jan 2025 (event-001); still unconfirmed as complete on 4 Apr 2025",
+   "deadline": null,
+   "note": "Nearly 12 weeks elapsed; repair was in the landlord's own contractor's hands throughout."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge a tenant report within one working day",
+   "status": "prior",
+   "basis": "Reported 14 Jan 10:23, acknowledged 15 Jan 07:50 (event-003)",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "RTE-LANDLORD",
+   "name": "Landlord reply window",
+   "status": "sop",
+   "basis": "Manual-mode trigger: 3 days for a landlord or tenant wait",
+   "deadline": "3 working days from 2025-04-04",
+   "note": "If no reply, office to decide whether to leave the request closed without payment."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Is the kitchen window / patio door glass work at Flat 26, 116 Copperfield Walk, Alderwick finished, or is a further visit from your window contractor still outstanding?",
+   "why": "Landlord said 'all done' (event-034) then asked about a new appointment (event-038); only the landlord can settle the status of his own contractor's work (RTE-LANDLORD).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "If a further appointment is outstanding, which property and which job does it relate to? Your message names Flat 5, 25 Harbour View, Cedarford, while this job's record is Flat 26, 116 Copperfield Walk, Alderwick.",
+   "why": "Seven different addresses appear on this one job id; access must not be arranged at the wrong flat.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Has a window contractor attended your flat and is the kitchen window and/or patio door glass now repaired? If not, has anyone given you a date for a further visit?",
+   "why": "The tenant owns the facts about what has actually happened at the property and about any access window (RTE-TENANT).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "ESC-CONFLICT",
+  "CAP-CLOSE",
+  "CLK-S11",
+  "CLK-SOP-ACK",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII"
+ ],
+ "assumptions": [
+  "Assumption: the landlord's 4 April query (event-038) relates to this job rather than a different ticket, because it arrived as a reply on this thread the same day; the landlord has been asked to confirm, and no action depends on the assumption."
+ ],
+ "uncertainty": [
+  "Whether the window replacement was actually carried out at the tenant's flat, and whether the patio door glass was included or deferred (event-011 funds windows only).",
+  "Which property this job id belongs to; the agency's own emails and the case record disagree.",
+  "Whether any invoice exists — the landlord paid his contractor directly, so no agency invoice is expected, but no completion paperwork or photos are on file."
+ ],
+ "safety_actions": [
+  "Safety pass run against the artefacts: no gas, electrical, water, heating, security or vulnerability indicator present — fault is failed glazing only; result recorded in the case note (ACT-4).",
+  "Withheld closure of a request whose completion is contradicted by the landlord's own later message, so any outstanding glazing defect stays on the agency's books."
+ ],
+ "withheld_actions": [
+  "close_request — completion contradicted by event-038; playbook final checks (work result, documents, landlord confirmation) cannot be signed off.",
+  "assign_contractor — the landlord is using and paying his own contractor (event-011, event-017); no agency spend authority and no need for a dispatch.",
+  "schedule_access — no confirmed need for a visit, no property identified with confidence and no tenant consent yet (CAP-SCHEDULE-ACCESS).",
+  "Asserting a corrected property address to the landlord, tenant or contractor — conflict referred to the office instead."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:12:04.063901Z",
+ "finished_at": "2026-10-10T14:14:00.085295Z",
+ "input_tokens": 45060,
+ "output_tokens": 9355,
+ "cache_read_tokens": 56748
+}

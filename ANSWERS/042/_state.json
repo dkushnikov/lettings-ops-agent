@@ -1,0 +1,572 @@
+{
+ "case_id": "042",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The ticket was closed at event-031 with final-check items unresolved: no landlord confirmation of completion on file (event-030 flagged \"Need confirmation from landlord\"), the provider invoice figure is unreconciled (GBP 75.11 with a 22 July 2026 due date at event-024 vs \"£75 + VAT\" reported at event-025), and event-022 shows the contractor still seeking to schedule a visit on 27/02, which conflicts with the completion report of 28/02. Within my mandate I recorded the inconsistencies (ACT-1) and asked the three owning parties for the facts that settle them: contractor for attendance date, work done and invoice total (RTE-CONTRACTOR); landlord for confirmation that the job is complete at that cost (RTE-LANDLORD); tenant for confirmation the machine now heats on 60°C+ (RTE-TENANT). No new dispatch, no spend and no payment were made; liability was not decided. The repair itself (appliance wiring to the heating element) carries no reported hazard — no burning smell, sparks or shock risk in any artefact, and the property's own hot water was unaffected (event-002) — so no emergency switch and no safety red flag, only the recorded check.",
+ "recap": "Closed washing-machine repair reopened at final checks: invoice amount, attendance date and landlord confirmation unreconciled; asked contractor, landlord and tenant.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Lantern Services to confirm attendance date, work done and invoice total (3 working days, from ACT-2); then Waiting for Landlord for confirmation of completion (ACT-3).",
+ "next_step": "Lantern Services to confirm attendance date, work carried out and the final invoice total incl. VAT within 3 working days; then landlord (Mercer) to confirm completion at that cost before the ticket can stand as closed.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 (categorised Heating & Hot Water, ROUTINE); tenant acknowledged event-005",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-008 landlord's own email approving an engineer",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-010, event-012, event-013",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-017/018/019 slot confirmed to tenant and provider, though the recorded time conflicts with event-016",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "event-029 — job completed on the call-out, no quote produced",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-025 reports the repair, but event-022 shows the contractor still scheduling on 27/02; confirmation requested from contractor (ACT-2) and tenant (ACT-4)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "done",
+   "evidence": "event-029 skip reason recorded",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "event-025 states the cost but the invoice (event-024, GBP 75.11, due 22/07/2026) is unreconciled; landlord told it follows (ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-030 flagged it as needed; no landlord reply in the history; requested at ACT-3",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant gave access (event-002 — no access considerations)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-031 closed the request, but the resolution does not name who paid and items above remain open",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported the washing machine does not heat water on cycles of 60°C or above; property hot water supply unaffected and no pets or access constraints.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Intake classified the issue as Heating & Hot Water, severity ROUTINE, medium confidence.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord replied 'Yes please arrange an engineer, thank you' on 23/02 20:22 UTC — approval to instruct, with no amount named.",
+   "source_ids": [
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Lantern Services was assigned and briefed; tenant was told who was attending.",
+   "source_ids": [
+    "event-010",
+    "event-012",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "A visit was recorded as 23/02/2024 15:25 and confirmed to both tenant and provider, though the call transcripts record a slot agreed for 'Tuesday at 1pm'.",
+   "source_ids": [
+    "event-015",
+    "event-016",
+    "event-017",
+    "event-018",
+    "event-019"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "On 27/02 the contractor called the tenant asking for a callback to schedule his visit.",
+   "source_ids": [
+    "event-022"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "Contractor invoice email states GBP 75.11 due by 22 July 2026.",
+   "source_ids": [
+    "event-024"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "Agency told the landlord on 28/02 that the engineer repaired the fault by replacing the wiring to the heating element for £75 + VAT.",
+   "source_ids": [
+    "event-025"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "Document upload was skipped with the reason 'Job completed on call out, no photos or quote'.",
+   "source_ids": [
+    "event-029"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The ticket recorded that landlord confirmation was still needed and was then closed 53 seconds later with no landlord reply in the visible history.",
+   "source_ids": [
+    "event-030",
+    "event-031"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "No landlord standing spend cap or standing instruction is on file in this case record; the only authority to spend is the landlord's own approval at event-008.",
+   "source_ids": [
+    "get_case_details"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Completion report (28/02) versus the contractor still trying to schedule a visit on 27/02.",
+   "fact_ids": [
+    "F6",
+    "F8"
+   ],
+   "source_ids": [
+    "event-022",
+    "event-025"
+   ],
+   "resolution": "Asked Lantern Services to confirm the actual attendance date and work carried out (ACT-2); asked the tenant to confirm the machine now heats (ACT-4).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Invoice amount/date mismatch: GBP 75.11 due 22 July 2026 versus £75 + VAT reported to the landlord.",
+   "fact_ids": [
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-024",
+    "event-025"
+   ],
+   "resolution": "Asked the contractor for the final total and VAT position before the invoice is forwarded (ACT-2); landlord told the figure is being reconciled (ACT-3).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Recorded visit slot 23/02 15:25 versus the transcripts' 'Tuesday at 1pm'; the confirmation was also sent at 23:21 UTC on 23/02, after the slot it confirms.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-016",
+    "event-017",
+    "event-019"
+   ],
+   "resolution": "Recorded in the case note (ACT-1); attendance date put to the contractor.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Provider confirmation email passed 'Pets: multiple tenants in this property' to the contractor although the tenant answered 'No' to pets; occupancy detail shared without need (PRO-PII).",
+   "source_ids": [
+    "event-002",
+    "event-018"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1); no further occupant detail shared with the provider."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Invoice email carries an implausible due date (22 July 2026) for a February 2024 job and a total that does not match the £75 + VAT reported to the landlord.",
+   "source_ids": [
+    "event-024",
+    "event-025"
+   ],
+   "action_taken": "Asked the contractor to confirm the total and VAT; no payment made or authorised (PRO-PAYMENTS)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Intake captured the appliance make as 'Harbour Surveying', which is not a plausible appliance brand and was then repeated in letters to landlord and tenant.",
+   "source_ids": [
+    "event-002",
+    "event-004",
+    "event-005"
+   ],
+   "action_taken": "Not repeated in my messages to any party."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "042",
+    "title": "Case 042: Washing Machine Repair Request",
+    "received_at": "2024-02-23 18:22:17 UTC",
+    "track": "Property Management",
+    "case_number": "042",
+    "property": "Flat 20, 120 Alder Lane, Cedarford, ZZ9 0ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 31,
+    "attachments_hidden": 0,
+    "details": "# Case 042: Washing Machine Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-02-23 18:22:17 UTC\n- property: Flat 20, 120 Alder Lane, Cedarford, ZZ9 0ZZ\n\n## Initial request\nThe washing machine is not heating the water during wash cycles set to 60°C or higher. As a result, it is unable to properly wash clothing that requires hot water according to the care instructions.\n\nCould someone please arrange for an engineer or maintenance person to inspect the machine and carry out any necessary repairs"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "042-get_case_details-f869954c1a02",
+   "receipt": "{\"id\": \"042\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:10:57.207120Z",
+   "finished_at": "2026-10-10T14:10:57.207312Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "042-get_action_ledger-f11453aae08a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:10:57.207666Z",
+   "finished_at": "2026-10-10T14:10:57.207815Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-015",
+     "timestamp": "2024-02-23 22:49:31 UTC",
+     "channel": "Call",
+     "from": "Contractor",
+     "to": "Tenant",
+     "excerpt": "[2024-02-23 22:49:31 UTC] Call · from: Contractor · to: Tenant\nThe caller is inquiring about arranging a time to check a broken washing machine. They discuss possible times for a visit, deciding on a tentative timeframe in the afternoon."
+    },
+    {
+     "event": "event-022",
+     "timestamp": "2024-02-27 20:19:56 UTC",
+     "channel": "Call",
+     "from": "Contractor",
+     "to": "Tenant",
+     "excerpt": "[2024-02-27 20:19:56 UTC] Call · from: Contractor · to: Tenant\nHarper inquired about a washing machine repair and requested a callback to schedule his visit."
+    },
+    {
+     "event": "event-024",
+     "timestamp": "2024-02-28 00:10:19 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2024-02-28 00:10:19 UTC] Email · from: Contractor · to: Agency / system\nThe email provides details about an invoice from Lantern Services for GBP 75.11, due by July 22, 2026, and offers options for viewing the invoice online."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "042-search_history-6066fe62693b",
+   "receipt": "[{\"event\": \"event-015\", \"timestamp\": \"2024-02-23 22:49:31 UTC\", \"channel\": \"Call\", \"from\": \"Contractor\", \"to\": \"Tenant\", \"excerpt\": \"[2024-02-23 22:49:31 UTC] Call · from: Contractor · to: Tenant\\nTh…",
+   "started_at": "2026-10-10T14:10:57.207961Z",
+   "finished_at": "2026-10-10T14:10:57.208233Z"
+  },
+  {
+   "seq": 4,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Final-checks review of closed ticket NBL-042. Record inconsistencies: (1) event-017 logs visit 23/02/2024 15:25 and event-018/019 confirm \"3.25, 3.30 (23/02/2024)\", but the call transcripts event-015/016 record a slot agreed for \"Tuesday at 1pm\"; (2) event-022 (27/02) records the contractor still asking the tenant for a callback \"to schedule his visit\", which sits oddly with event-025 (28/02) reporting the repair as completed; (3) contractor invoice event-024 states GBP 75.11 due 22 July 2026, while event-025 tells the landlord £75 + VAT — amount and due date unreconciled; (4) event-018 passed \"Pets: multiple tenants in this property\" to the provider although the tenant answered \"No\" to pets (event-002) — data-quality and PRO-PII point. (5) event-030 flags \"Need confirmation from landlord\"; no landlord reply confirming completion appears in the history before closure at event-031. Safety check: work reported as replacing wiring to the appliance heating element; no burning smell, sparks or shock risk reported anywhere in the artefacts, property hot water unaffected (event-002) — no hazard recorded, no emergency switch required. No spend instructed by me; no payment moved (PRO-PAYMENTS)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "042-add_note-88deeec03e2d",
+   "action_id": "042-add_note-88deeec03e2d",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:11:39.529675Z",
+   "finished_at": "2026-10-10T14:11:39.529985Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Lantern Services — job NBL-042, Flat 20, 120 Alder Lane, Cedarford, ZZ9 0ZZ (washing machine not heating on 60°C+ cycles). Before we finalise our records, please confirm in writing: (1) the date and time your engineer actually attended; (2) the work carried out and that the appliance was tested heating correctly on a 60°C cycle; (3) the invoice total and whether VAT is included — your invoice email quotes GBP 75.11 with a due date of 22 July 2026, while our file records £75 + VAT. Please reply within 3 working days. No further attendance is instructed by this message."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "042-notify_contractor-db81171a9677",
+   "action_id": "042-notify_contractor-db81171a9677",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:11:39.530130Z",
+   "finished_at": "2026-10-10T14:11:39.530226Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: job NBL-042, Flat 20, 120 Alder Lane, Cedarford, ZZ9 0ZZ — washing machine not heating on 60°C+ cycles. You approved instructing an engineer on 23 February (your email, event-008) and Lantern Services attended. Our update of 28 February reported the fault repaired by replacing the wiring to the heating element at £75 + VAT. The provider's invoice email states GBP 75.11; we have asked them to confirm the final figure and whether VAT is included, and we will forward the invoice once reconciled. No photos or quote were produced (job completed on the call-out). Please confirm you are content for the job to be treated as complete at that cost. We have not made any payment."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "042-notify_landlord-84ba123e234c",
+   "action_id": "042-notify_landlord-84ba123e234c",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:11:39.530286Z",
+   "finished_at": "2026-10-10T14:11:39.530355Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Noah, regarding job NBL-042 at Flat 20, 120 Alder Lane: our provider Lantern Services has reported that the washing machine fault was repaired by replacing the wiring to the heating element. Before we complete our records, could you confirm two things: (1) that the engineer attended, and roughly when; and (2) that the machine is now heating properly on a 60°C or higher cycle. If it is still not heating, or if you notice any burning smell, sparks or tripping of the electrics, tell us straight away and do not use the appliance. Nothing is being charged to you by this message."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "042-notify_tenant-dc715ce609cf",
+   "action_id": "042-notify_tenant-dc715ce609cf",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:11:39.530408Z",
+   "finished_at": "2026-10-10T14:11:39.530481Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Reply requested within 3 working days on attendance date, work done and invoice total",
+   "due": "3 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Invoice will be forwarded once the provider's final figure and VAT position are reconciled",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time from report",
+   "status": "in_force",
+   "basis": "Tenant report 2024-02-23 (event-001); repair reported complete 2024-02-28 (event-025)",
+   "deadline": null,
+   "note": "Satisfied on the face of the record, subject to the contractor confirming attendance."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant acknowledged 2024-02-23 19:14 UTC (event-005)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "On job NBL-042 (Flat 20, 120 Alder Lane): what date and time did your engineer attend, what work was carried out, was the machine tested heating on a 60°C cycle, and what is the final invoice total — is GBP 75.11 inclusive or exclusive of VAT?",
+   "why": "Invoice email (event-024) states GBP 75.11 due 22 July 2026 while the completion report (event-025) says £75 + VAT; event-022 shows the contractor still scheduling on 27/02 after the recorded visit date (event-017).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Do you confirm job NBL-042 at Flat 20, 120 Alder Lane is complete and are you content with the appliance engineer's charge (to be confirmed as £75 + VAT or GBP 75.11 incl.) before we forward the invoice?",
+   "why": "event-030 recorded that landlord confirmation was still needed, and the ticket was closed at event-031 without a landlord reply in the history.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Did the engineer attend, and is the washing machine now heating properly on 60°C or higher cycles?",
+   "why": "Confirms the work result independently given the conflicting scheduling/completion records (event-022 vs event-025).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "RTE-CONTRACTOR",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: '£75 + VAT' (event-025) and 'GBP 75.11' (event-024) refer to the same charge for this job; the discrepancy is being checked rather than treated as two charges.",
+  "Assumption: the landlord addressed as 'Mercer' and the tenant 'Noah Jenkins' in the case correspondence are the parties on this tenancy; no tenancy record tool is available in this environment."
+ ],
+ "uncertainty": [
+  "Whether the engineer attended on 23/02 as recorded or later, given the 27/02 scheduling call (event-022).",
+  "Whether the appliance is now working — no tenant or provider confirmation of a successful 60°C test.",
+  "No landlord spend cap or standing instruction is visible in this environment, so authority rests solely on event-008."
+ ],
+ "safety_actions": [
+  "Safety-pass check: reported work was replacement of wiring to the appliance heating element; no burning smell, sparks, shock risk, gas or water hazard reported in any artefact and the property's own hot water was unaffected (event-002) — no emergency criteria met, routine retained.",
+  "Told the tenant to stop using the appliance and report immediately if a burning smell, sparks or tripping electrics appear (ACT-4)."
+ ],
+ "withheld_actions": [
+  "Did not re-close the request or re-affirm closure while work result, invoice and landlord confirmation remain unconfirmed (CAP-CLOSE).",
+  "Did not instruct any further contractor attendance or spend — no landlord approval naming an amount (APR-SPEND-OVER-CAP).",
+  "Did not approve, pay or dispute the invoice (PRO-PAYMENTS).",
+  "Did not share occupancy or tenant personal detail with the provider beyond the job need (PRO-PII)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:10:40.182695Z",
+ "finished_at": "2026-10-10T14:12:34.464052Z",
+ "input_tokens": 41429,
+ "output_tokens": 8739,
+ "cache_read_tokens": 56748
+}

@@ -1,0 +1,553 @@
+{
+ "case_id": "007",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Closed ticket re-opened at final checks: the invoice on file (£240.00 incl. VAT, supplier \"Willow Homes\") does not match the quote the landlord approved (£198.37 + VAT from the instructed contractor, Clarke), and the request was closed without landlord confirmation, without key return and without a detector test before re-let. I asked the contractor to confirm entity, amount, scope, photos and keys, asked the landlord to hold payment, and hand the payment/identity decision to a human.",
+ "recap": "Check-out works invoiced at £240 by a differently-named supplier against a £198.37+VAT approval; payment put on hold and file handed to the office.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Clarke/Willow Homes to confirm trading entity, invoice amount, scope, photos and key return (asked ACT-2, reply due 3 working days)",
+ "next_step": "Property manager to decide whether the £240.00 \"Willow Homes\" invoice is payable against the approved £198.37 + VAT (contractor reply requested, 3 working days).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 and attachment-01: two lounge spotlights out, ceiling tile water damage; routine, property untenanted (event-015) so no tenant advice applicable",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-011 landlord 'Pls go ahead' to the £198.37 + VAT quote (event-009)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-003/event-005 provider instructed (Clarke); no tenant to brief (event-015)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-027 contractor confirmed attendance that week; access via caretaker keys (event-025)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-009/event-011 — £198.37 plus VAT approved before works; invoice now exceeds it (attachment-02)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-031 contractor states works done and photos sent, but no photos or job report are on file (event-035); unverified",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-035 skip reason 'No before and after photos' — conflicts with event-031; resend requested (ACT-2)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-033 invoice emailed to landlord 8 Oct 2025; payment now placed on hold pending verification (ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-036 flagged as needed; no landlord message after event-011",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "pending",
+   "evidence": "event-025 keys left with caretaker; no return recorded; confirmation requested (ACT-2)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-037 closed the request but no resolution naming who paid; invoice unverified and unpaid",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Works requested from the check-out report: two lounge spotlights not working and water damage to a lounge ceiling tile at Flat 8, 168 Alder Lane, Kingshaven, ZZ4 3ZZ.",
+   "source_ids": [
+    "event-001",
+    "attachment-01-check-out-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Contractor quoted £198.37 plus VAT to replace two spotlights and one ceiling board.",
+   "source_ids": [
+    "event-008"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "Agency put that quote to the landlord; the landlord replied 'Pls go ahead' on 28 Sep 2025 — the only landlord message on file.",
+   "source_ids": [
+    "event-009",
+    "event-011",
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Invoice on file is from supplier 'Willow Homes' for £200.00 + £40.00 VAT = £240.00, line description 'Change spot light bulbs, replace ceiling tile'.",
+   "source_ids": [
+    "attachment-02-tax-invoice"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The instructed provider is addressed as 'Clarke' in the agency's own emails; a reply at event-023 is attributed to 'Harriet'.",
+   "source_ids": [
+    "event-005",
+    "event-020",
+    "event-023"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "Property is not tenanted; keys for the visit were held by the caretaker and no key return is recorded.",
+   "source_ids": [
+    "event-015",
+    "event-025"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Check-out report records the general detector entry as 'Tested? No', despite boilerplate stating alarms will have been checked.",
+   "source_ids": [
+    "attachment-01-check-out-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Contractor reported invoice and photos sent on 8 Oct 2025; the agency nonetheless recorded documents skipped for 'No before and after photos'.",
+   "source_ids": [
+    "event-031",
+    "event-035"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "Invoice was emailed to the landlord for payment on 8 Oct 2025 and the request was closed the same day, with landlord confirmation still flagged as needed.",
+   "source_ids": [
+    "event-033",
+    "event-036",
+    "event-037"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Approved amount (£198.37 + VAT = £238.04) vs invoiced amount (£240.00 incl. VAT).",
+   "fact_ids": [
+    "F2",
+    "F3",
+    "F4"
+   ],
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-011",
+    "attachment-02-tax-invoice"
+   ],
+   "resolution": "Payment put on hold with the landlord; contractor asked to explain; decision referred to the property manager.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Payee identity: invoice supplier 'Willow Homes' vs instructed contractor 'Clarke' (and 'Harriet' at event-023).",
+   "fact_ids": [
+    "F4",
+    "F5"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-023",
+    "attachment-02-tax-invoice"
+   ],
+   "resolution": "Contractor asked to confirm trading entity; no payment until verified.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Scope: approval covered replacing two spotlights and one ceiling board; invoice describes changing spotlight bulbs and replacing a ceiling tile.",
+   "fact_ids": [
+    "F2",
+    "F4"
+   ],
+   "source_ids": [
+    "event-008",
+    "attachment-02-tax-invoice"
+   ],
+   "resolution": "Clarification requested from the contractor (ACT-2).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Photos: contractor says photos were sent; agency recorded them as skipped/not held.",
+   "fact_ids": [
+    "F8"
+   ],
+   "source_ids": [
+    "event-031",
+    "event-035"
+   ],
+   "resolution": "Contractor asked to resend photographs.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Check-out report inspection/appointment date 25 August 2026 vs assessor signature 27 September 2025.",
+   "fact_ids": [
+    "F1"
+   ],
+   "source_ids": [
+    "attachment-01-check-out-inspection-report"
+   ],
+   "resolution": "Recorded as a data-quality issue for the office.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "fraud",
+   "description": "Invoice payee ('Willow Homes') differs from the instructed contractor and the total exceeds the approved quote; invoice already sent to the landlord for payment.",
+   "source_ids": [
+    "attachment-02-tax-invoice",
+    "event-033"
+   ],
+   "action_taken": "Landlord asked to hold payment (ACT-3); contractor asked to confirm entity and amount (ACT-2); referred to property manager. No money moved (PRO-PAYMENTS)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Provider named inconsistently across the file (Clarke / Harriet); property described as a 'studio' in agency emails while the record says Flat 8; check-out report dated 2026 but signed 2025.",
+   "source_ids": [
+    "event-005",
+    "event-023",
+    "event-025",
+    "attachment-01-check-out-inspection-report"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1) and the handover card."
+  },
+  {
+   "kind": "other",
+   "description": "Check-out report detector line 'Tested? No' — smoke/CO alarm test not evidenced before re-let of an untenanted flat.",
+   "source_ids": [
+    "attachment-01-check-out-inspection-report",
+    "event-015"
+   ],
+   "action_taken": "Flagged to the landlord (ACT-3) and in the handover; test to be arranged before re-let. No hazard reported or observed."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "007",
+    "title": "Case 007: Check-Out Works: Lounge Lighting and Ceiling Repair",
+    "received_at": "2025-09-27 14:10:08 UTC",
+    "track": "Property Management",
+    "case_number": "007",
+    "property": "Flat 8, 168 Alder Lane, Kingshaven, ZZ4 3ZZ",
+    "source_role": "Agency manager",
+    "agency": "Northbridge Lettings",
+    "events_visible": 37,
+    "attachments_hidden": 0,
+    "details": "# Case 007: Check-Out Works: Lounge Lighting and Ceiling Repair\n\n## Case details\n- source role: Agency manager\n- created: 2025-09-27 14:10:08 UTC\n- property: Flat 8, 168 Alder Lane, Kingshaven, ZZ4 3ZZ\n\n## Initial request\nPlease quote for the following works based on the check out report:\n\n Lounge:\n1. Two spotlights not working\n2. Fix water damage to ceiling tile\n\n## Attachments\n- attachment-01-check-out-inspection-report.pdf\n- attachment-02-tax-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "007-get_case_details-c7ed87a4a3d7",
+   "receipt": "{\"id\": \"007\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:59:56.915847Z",
+   "finished_at": "2026-10-10T13:59:56.916108Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "007-get_action_ledger-e1d92a4a309a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:59:56.916237Z",
+   "finished_at": "2026-10-10T13:59:56.916288Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-011",
+     "timestamp": "2025-09-28 16:27:19 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Agency / system",
+     "excerpt": "[2025-09-28 16:27:19 UTC] Email · from: Landlord · to: Agency / system\nPls go ahead"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "007-search_history-725e298c6e67",
+   "receipt": "[{\"event\": \"event-011\", \"timestamp\": \"2025-09-28 16:27:19 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Agency / system\", \"excerpt\": \"[2025-09-28 16:27:19 UTC] Email · from: Landlord · to: Age…",
+   "started_at": "2026-10-10T13:59:56.916331Z",
+   "finished_at": "2026-10-10T13:59:56.916422Z"
+  },
+  {
+   "seq": 4,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Final-checks review of closed ticket NBL-007-0235. Discrepancies found: (1) Landlord approved £198.37 + VAT (= £238.04) per event-009/event-011; invoice attachment-02-tax-invoice shows £200.00 + £40.00 VAT = £240.00 — above the approved figure. (2) Invoice supplier is \"Willow Homes\"; the instructed provider on the agency record is Clarke (event-005); a third name, \"Harriet\", appears at event-023 — provider identity unresolved. (3) Scope differs: approval covered \"replacing two spotlights and one ceiling board\" (event-008/event-009); invoice line reads \"Change spot light bulbs, replace ceiling tile\". (4) event-031 states photos were sent, yet event-035 records documents skipped for \"No before and after photos\". (5) Keys were left with the caretaker for the visit (event-025); no key return is recorded. (6) No landlord confirmation of completion exists — event-036 flagged it as needed, event-037 closed the request anyway. (7) Check-out report detector line records \"Tested? No\"; smoke/CO alarms must be tested and recorded before re-let (property untenanted, event-015). (8) Data quality: check-out report inspection date 25 August 2026 vs signature 27 September 2025."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-add_note-151e41933c9e",
+   "action_id": "007-add_note-151e41933c9e",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:00:21.733324Z",
+   "finished_at": "2026-10-10T14:00:21.733697Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Job Id: NBL-007-0235 — Flat 8, 168 Alder Lane, Kingshaven, ZZ4 3ZZ. Before we settle the account we need three things confirmed in writing: (1) the invoice we hold is issued by \"Willow Homes\" for £240.00 incl. VAT, while the approved quote for this job was £198.37 plus VAT — please confirm the trading entity and explain the difference in amount; (2) the invoice line reads \"Change spot light bulbs, replace ceiling tile\" — please confirm what was actually carried out against the approved scope (two spotlights and one ceiling board); (3) please confirm the keys collected from the caretaker have been returned, and resend the job photographs, as they are not on our file. Please reply within 3 working days."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-notify_contractor-2a88c98f13c9",
+   "action_id": "007-notify_contractor-2a88c98f13c9",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:00:21.733796Z",
+   "finished_at": "2026-10-10T14:00:21.733884Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Job Id: NBL-007-0235 — Flat 8, 168 Alder Lane, Kingshaven, ZZ4 3ZZ. Further to the invoice sent to you on 8 October: please hold payment for now. The invoice is for £240.00 including VAT and is issued in the name of \"Willow Homes\", whereas the quote you approved was £198.37 plus VAT (£238.04) from the contractor we instructed. We have asked the contractor to confirm the trading name, the amount and the work carried out, and a colleague is reviewing the file. We will come back to you with the position before anything is paid. Separately, the check-out report records the smoke/CO detector as not tested; we will arrange a test and confirm before the flat is re-let."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "007-notify_landlord-b3dea9dfd9c3",
+   "action_id": "007-notify_landlord-b3dea9dfd9c3",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:00:21.733945Z",
+   "finished_at": "2026-10-10T14:00:21.734016Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agent",
+   "to": "landlord",
+   "what": "Come back with the position on the invoice before anything is paid, and confirm a smoke/CO detector test before re-let",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Confirm trading entity, invoice amount, scope, resend photos and confirm key return",
+   "due": "3 working days from 2025-10-08 request",
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 27 Sep 2025 (event-001); works reported complete 8 Oct 2025 (event-031)",
+   "deadline": null,
+   "note": "Met on the provider's own report; unverified by photos."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge within one working day",
+   "status": "prior",
+   "basis": "Agency acknowledged and instructed the provider the same day (event-005)",
+   "deadline": null,
+   "note": ""
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Is the £240.00 invoice from \"Willow Homes\" payable for job NBL-007-0235, when the landlord approved £198.37 + VAT (£238.04) from the instructed contractor Clarke?",
+  "summary": [
+   "Landlord approval is a single line, 'Pls go ahead' (event-011), replying to the £198.37 + VAT quote (event-009).",
+   "Invoice on file: supplier Willow Homes, £200.00 + £40.00 VAT = £240.00, line 'Change spot light bulbs, replace ceiling tile' (attachment-02-tax-invoice) — entity, amount and scope all differ from the approval (event-008).",
+   "Invoice was already emailed to the landlord for payment on 8 Oct (event-033); I have asked the landlord to hold payment (ACT-3).",
+   "Final checks were not met before closure (event-037): no landlord confirmation (event-036 flagged it), no key return recorded although keys were left with the caretaker (event-025), photos skipped (event-035) despite event-031 saying photos were sent.",
+   "Check-out report detector line reads 'Tested? No' (attachment-01); flat is untenanted (event-015), so smoke/CO alarms must be tested and recorded before re-let."
+  ],
+  "gap": "Whether 'Willow Homes' is the instructed contractor's trading entity (a third name, Harriet, appears at event-023) and why the invoice exceeds the approved figure; whether the work done was bulbs or spotlight fittings. No authoritative provider or landlord record is available to me. Safety items not addressed in the record: carbon monoxide (attachment-01-check-out-inspection-report).",
+  "options": [
+   "Hold payment until the contractor confirms entity, amount and scope in writing (requested, ACT-2), then release at the approved £238.04 or seek fresh landlord approval for £240.00.",
+   "Release the £240.00 invoice as a £1.96 variance and treat the supplier name as a trading name — fast, but pays an unverified payee above approval.",
+   "Treat the supplier mismatch as a possible mis-billing/fraud indicator: verify the payee against the contractor record and the agency's supplier list before any payment."
+  ],
+  "recommended": "Hold payment until the contractor confirms entity, amount and scope in writing, then release at the approved figure or seek fresh landlord approval for the £240.00.",
+  "default_if_timeout": "Invoice stays unpaid and the ticket stays at final checks; chase the contractor again after 3 working days.",
+  "deadline": "3 working days from today for the contractor reply (ACT-2)",
+  "undo": "Nothing irreversible has been done by me: no money moved, no new work order. The landlord has been asked to hold payment (ACT-3) and can be released at any time.",
+  "context_refs": [
+   "event-008",
+   "event-009",
+   "event-011",
+   "event-025",
+   "event-031",
+   "event-033",
+   "event-035",
+   "event-036",
+   "event-037",
+   "attachment-01-check-out-inspection-report",
+   "attachment-02-tax-invoice"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-STAFF",
+  "ESC-FRAUD",
+  "ESC-CONFLICT",
+  "PRO-PAYMENTS",
+  "PRO-PAYMENT-DETAILS",
+  "PRO-TENANT-LIABILITY",
+  "CAP-CLOSE"
+ ],
+ "assumptions": [
+  "Assumption: £198.37 plus VAT at 20% equals £238.04, i.e. the invoice is £1.96 above the approved total — arithmetic from event-008/event-009, not from any artefact."
+ ],
+ "uncertainty": [
+  "Whether 'Willow Homes' is the instructed contractor's trading entity or a different supplier.",
+  "Whether spotlight fittings or only bulbs were replaced.",
+  "Whether the keys held by the caretaker have been returned.",
+  "Whether the check-out report's 2026 inspection date is a typographical error."
+ ],
+ "safety_actions": [
+  "Recorded that the check-out report's detector line reads 'Tested? No' and told the landlord a smoke/CO alarm test will be arranged and confirmed before re-let (ACT-1, ACT-3)."
+ ],
+ "withheld_actions": [
+  "Did not approve, pay or authorise payment of the £240.00 invoice (PRO-PAYMENTS).",
+  "Did not re-close the request as resolved: work result, landlord confirmation and key return remain pending (CAP-CLOSE).",
+  "Did not state or decide whether any cost is deductible from the tenant's deposit (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+  "Did not instruct any further contractor spend (including the detector test) without landlord authority (APR-SPEND-OVER-CAP)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R11: safety pass — unaddressed item(s) noted: carbon monoxide (attachment-01-check-out-inspection-report)"
+ ],
+ "started_at": "2026-10-10T13:59:29.763768Z",
+ "finished_at": "2026-10-10T14:01:25.192669Z",
+ "input_tokens": 58312,
+ "output_tokens": 9602,
+ "cache_read_tokens": 56748
+}

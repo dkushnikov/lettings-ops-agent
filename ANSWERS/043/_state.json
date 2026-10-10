@@ -1,0 +1,472 @@
+{
+ "case_id": "043",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "The ticket was closed as completed on the strength of an untrusted provider email whose completion date (\"November 4th\", event-016) cannot belong to this job (reported 6 April 2026, instructed 13 April 2026), with no photos, no invoice, no tenant confirmation and the landlord-confirmation check still open (event-022). The same ticket also carries two different occupant identities (Isaac Quinn / 07700 900844 at event-009 and event-010 vs \"Grace Ashford\" / 07700 900641 at event-011), so it is not established which flat was attended — an authoritative-record conflict that changes the action (ESC-CONFLICT, RTE-STAFF). I did not re-open or re-dispatch (no duplicate work order) and did not decide liability or payment. In-authority reversible steps taken: tenant asked to confirm attendance and that the machine now drains (ACT-1); provider asked for the real attendance date, works done, photos and invoice (ACT-2); conflict recorded (ACT-3). A human must decide whether the closure stands.",
+ "recap": "Closed washing-machine ticket rests on an unverifiable provider completion claim and conflicting tenant identities; verification sent, escalated to decide if closure stands.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Oakfield Homes to confirm actual attendance date, works done, photos and invoice; tenant confirmation also outstanding.",
+ "next_step": "Property manager to decide whether to reverse the closure, pending the tenant's confirmation that the machine drains and Oakfield Homes' attendance date/invoice (both requested today).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 — fault categorised as routine appliance repair; tenant had already cleared the filter, so no further damage-limiting step applied",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-013 — landlord Ava Rowan's own reply approving a contractor (CAP-DISPATCH-APPROVED)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-008/event-010 Oakfield Homes instructed; tenant told at event-009 — but the brief at event-011 carries a conflicting tenant name and number",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No booked slot anywhere in the history; no reply from the provider confirming an appointment with the tenant (chased at event-014 and by me, ACT-2)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote was ever submitted (event-016 reports completion only); landlord's instruction at event-011/event-014 was to quote if parts or complexity arose",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Only untrusted claim event-016 with an impossible date (\"November 4th\"); no photos or engineer detail — verification requested ACT-2",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-021 — \"Skipped uploading one or more documents. Reason provided: not needed at this time\"; photos/invoice now requested (ACT-2)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice or no-charge confirmation on file; event-017 told the landlord work was complete but passed no cost",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-022 \"Need confirmation from landlord\" was never answered before closure at event-025",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued in the history; event-024 keys-return update is a system artefact carrying a validation error",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "done",
+   "evidence": "event-025 — closed by the agency, but the resolution names no payer and rests on unverified evidence; validity referred to the property manager",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 6 April 2026 that the washing machine will not drain; filter removed and cleaned without effect.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Property is Flat 8, 118 Meadow Row, Alderwick, ZZ3 6ZZ.",
+   "source_ids": [
+    "index",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord Ava Rowan replied on 13 April 2026 approving dispatch of a contractor; no amount was named and no standing spend cap is on file.",
+   "source_ids": [
+    "event-003",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Oakfield Homes was assigned and instructed on 13 April 2026; the tenant was told they would be contacted to arrange a time.",
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The agency's provider brief of 13 April 2026 gives the tenant as \"Grace Ashford\", 07700 900641, while the system records give Isaac Quinn, 07700 900844 on the same ticket.",
+   "source_ids": [
+    "event-009",
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The only evidence of completion is a provider email of 15 April 2026 stating the repair was completed \"on November 4th\" — a date outside this job's timeline; no photos, invoice or engineer name.",
+   "source_ids": [
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The landlord completion update of 15 April 2026 is addressed to \"Miles Kendall\" although the landlord on this case is Ava Rowan.",
+   "source_ids": [
+    "event-003",
+    "event-013",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The request was closed on 15 April 2026 with documents skipped, landlord confirmation still flagged as needed and a keys-return validation error.",
+   "source_ids": [
+    "event-021",
+    "event-022",
+    "event-024",
+    "event-025"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No visit window was ever booked or confirmed with the tenant anywhere in the visible history.",
+   "source_ids": [
+    "event-009",
+    "event-014",
+    "event-015"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Two different occupant identities and phone numbers on the same ticket: Isaac Quinn / 07700 900844 (system records) vs \"Grace Ashford\" / 07700 900641 (provider brief). It is therefore unverified which occupant, and which flat, the provider attended.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-009",
+    "event-010",
+    "event-011"
+   ],
+   "resolution": "Recorded, not decided in a message to any party; put to the property manager and the provider asked which contact was used (ACT-2).",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Provider's claimed completion date (\"November 4th\") is incompatible with the report date (6 April 2026) and instruction date (13 April 2026).",
+   "fact_ids": [
+    "F1",
+    "F4",
+    "F6"
+   ],
+   "source_ids": [
+    "event-001",
+    "event-010",
+    "event-016"
+   ],
+   "resolution": "Provider asked to confirm the actual attendance date, works done, photos and invoice (ACT-2); tenant asked to confirm attendance and that the machine drains (ACT-1).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Ticket closed as all-checks-complete while the system itself still recorded landlord confirmation as outstanding.",
+   "fact_ids": [
+    "F8"
+   ],
+   "source_ids": [
+    "event-022",
+    "event-025"
+   ],
+   "resolution": "Validity of the closure referred to the property manager.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion claim carries a date (\"November 4th\") that cannot belong to this job, with no photos, invoice or engineer name; closure was based on it.",
+   "source_ids": [
+    "event-016",
+    "event-018",
+    "event-025"
+   ],
+   "action_taken": "Provider asked for the actual attendance date and evidence (ACT-2); closure validity escalated."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Conflicting occupant name/phone on the same ticket, and a landlord update addressed to a name that is not this landlord.",
+   "source_ids": [
+    "event-011",
+    "event-017"
+   ],
+   "action_taken": "Conflict recorded (ACT-3) and put to the property manager; no party was told which record is correct."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "043",
+    "title": "Case 043: Washing Machine Repair Request",
+    "received_at": "2026-04-06 07:31:34 UTC",
+    "track": "Property Management",
+    "case_number": "043",
+    "property": "Flat 8, 118 Meadow Row, Alderwick, ZZ3 6ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 25,
+    "attachments_hidden": 0,
+    "details": "# Case 043: Washing Machine Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2026-04-06 07:31:34 UTC\n- property: Flat 8, 118 Meadow Row, Alderwick, ZZ3 6ZZ\n\n## Initial request\nWashing machine not draining any water \n\nHave manually drained by removing filter. Have also cleaned the filter. Still the drum is not draining."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "043-get_case_details-e4a26bde6b43",
+   "receipt": "{\"id\": \"043\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:11:18.535501Z",
+   "finished_at": "2026-10-10T14:11:18.535813Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "043-get_action_ledger-dd89152a7980",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:11:18.536634Z",
+   "finished_at": "2026-10-10T14:11:18.536781Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Isaac Quinn, re: Flat 8, 118 Meadow Row, Alderwick, ZZ3 6ZZ — washing machine not draining (reported 6 April 2026). Our provider Oakfield Homes was instructed (13 April 2026) and has reported the repair as completed, and the request was marked closed on 15 April 2026. Before we leave it closed, please confirm: (1) has an engineer attended the flat, and on what date; (2) is the washing machine now draining normally? If no one has attended, or the fault is still present, reply to this message and we will re-open the job straight away. There is nothing for you to pay or arrange in the meantime."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "043-notify_tenant-b0ee8bb56aa8",
+   "action_id": "043-notify_tenant-b0ee8bb56aa8",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:11:53.037603Z",
+   "finished_at": "2026-10-10T14:11:53.037778Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Oakfield Homes — ref: Washing Machine Repair Request, Flat 8, 118 Meadow Row, Alderwick, ZZ3 6ZZ (instructed 13 April 2026). Your email of 15 April 2026 states the repair was completed \"on November 4th\", which does not match this job's timeline (reported 6 April 2026, instructed 13 April 2026). Please confirm in writing by return: (1) the actual date of attendance and the engineer's name; (2) what was done and whether any parts were fitted; (3) photos and your invoice (or confirmation of no charge). Please also confirm which tenant contact you used to arrange access — our instruction email of 13 April 2026 gave two different tenant names and numbers, and we need to know the flat we hold on file was the one attended. We cannot complete our final checks or pass an invoice to the landlord until this is confirmed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "043-notify_contractor-8b172e047f3f",
+   "action_id": "043-notify_contractor-8b172e047f3f",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:11:53.037854Z",
+   "finished_at": "2026-10-10T14:11:53.037937Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Review of closed ticket. (1) Landlord authority is on file: landlord's own reply event-013 (\"that is fine to send out a contractor\") — valid approval under CAP-DISPATCH-APPROVED; no standing spend cap is on file, so no priced quote was ever approved. (2) Completion rests solely on untrusted contractor email event-016 claiming completion \"on November 4th\" — impossible against report date 6 April 2026 (event-001) and instruction 13 April 2026 (event-010); no photos, no invoice, no tenant confirmation. (3) Record conflict: event-009/event-010 give tenant Isaac Quinn, 07700 900844; event-011 briefs the provider with \"Grace Ashford\", 07700 900641 — same ticket, two occupant identities; which flat was attended is unverified. (4) Landlord update event-017 is addressed to \"Miles Kendall\" while the landlord on this case is Ava Rowan (event-003, event-013). (5) Final checks were nominal: documents skipped (event-021), landlord confirmation still flagged as needed (event-022), keys-return update carried a validation error (event-024), yet closed at event-025. Actions taken now: tenant asked to confirm attendance and that the machine drains; provider asked for attendance date, works done, photos and invoice. No new work order raised (no duplicate). Escalated to property manager for the record conflict and the validity of the closure."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "043-add_note-ff08770aaa78",
+   "action_id": "043-add_note-ff08770aaa78",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:11:53.038008Z",
+   "finished_at": "2026-10-10T14:11:53.038081Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "If no one attended or the fault persists, the job will be re-opened straight away on the tenant's reply",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Final checks and any invoice to the landlord stay on hold until attendance date, works done, photos and invoice are confirmed",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Does the closure of this washing-machine repair stand, or do we re-open it — given completion is evidenced only by a provider email dated \"November 4th\" and the ticket holds two different tenant identities?",
+  "summary": [
+   "Tenant reported washing machine not draining on 6 Apr 2026; filter already cleared by tenant (event-001).",
+   "Landlord Ava Rowan approved sending a contractor in her own reply (event-013); no standing spend cap on file, so no priced quote was ever approved.",
+   "Oakfield Homes instructed 13 Apr 2026 (event-010); only completion evidence is untrusted email event-016: repair done \"on November 4th\" — impossible for this job.",
+   "Provider brief event-011 names tenant \"Grace Ashford\" / 07700 900641, while event-009 and event-010 name Isaac Quinn / 07700 900844 — same ticket, two occupants; which flat was attended is unverified.",
+   "Final checks were nominal: documents skipped (event-021), landlord confirmation still flagged as needed (event-022), keys update carried a validation error (event-024), closed at event-025; landlord update event-017 was addressed to \"Miles Kendall\", not Ava Rowan."
+  ],
+  "gap": "No photos, no invoice, no visit booking, no tenant confirmation that the machine drains, and no reliable attendance date; the correct occupant record for this flat is unresolved.",
+  "options": [
+   "Hold the closure for 3 working days pending the tenant's and provider's replies already sent, then re-open if either fails to confirm.",
+   "Re-open now and re-instruct Oakfield Homes for a confirmed, booked visit with the tenant on the agency's own record (Isaac Quinn, 07700 900844), landlord authority already on file at event-013.",
+   "Leave closed as-is and accept event-016 — risk: a live s.11 repair left unfixed and an unverified job possibly attended at the wrong flat."
+  ],
+  "recommended": "Hold the closure for 3 working days pending the replies already sent, then re-open if unconfirmed; correct the occupant record on the CRM either way.",
+  "default_if_timeout": "If neither the tenant nor Oakfield Homes replies within 3 working days, re-open the ticket and re-instruct for a booked visit under the landlord's existing approval (event-013).",
+  "deadline": "3 working days from 15 Apr 2026 replies (CLK-S11: repair within a reasonable time from the 6 Apr 2026 report)",
+  "undo": "Nothing irreversible was done by me: only two verification messages (ACT-1, ACT-2) and an internal note (ACT-3). No work order was raised and no money committed.",
+  "context_refs": [
+   "event-001",
+   "event-009",
+   "event-010",
+   "event-011",
+   "event-013",
+   "event-016",
+   "event-017",
+   "event-021",
+   "event-022",
+   "event-024",
+   "event-025"
+  ]
+ },
+ "authority_citations": [
+  "CAP-DISPATCH-APPROVED",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: \"maintenance provider\" in event-016 is Oakfield Homes, the provider instructed at event-010; the email does not name the firm."
+ ],
+ "uncertainty": [
+  "Whether any engineer in fact attended Flat 8, and on what date.",
+  "Whether the washing machine now drains.",
+  "Whether any charge arises and who the invoice should go to — no cost figure exists anywhere in the record."
+ ],
+ "safety_actions": [
+  "Safety-keyword pass: no gas, electrical, water-ingress, damp/mould, alarm or vulnerability content appears in this ticket; the fault is a non-draining washing machine with no water escape reported (event-001). No hazard red flag raised. Tenant asked to report immediately if water overflows (standing advice implicit in ACT-1 re-opening offer)."
+ ],
+ "withheld_actions": [
+  "Did not raise a second work order or re-dispatch Oakfield Homes (would duplicate the 13 April instruction, event-010).",
+  "Did not tell the landlord the job is complete or confirm the earlier completion email (event-017), as completion is unverified.",
+  "Did not decide who pays or whether the fault is tenant-caused (PRO-TENANT-LIABILITY).",
+  "Did not tell any party which occupant record is correct; recorded the conflict instead (rule 2)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:11:15.537936Z",
+ "finished_at": "2026-10-10T14:12:48.860160Z",
+ "input_tokens": 24441,
+ "output_tokens": 7788,
+ "cache_read_tokens": 42561
+}

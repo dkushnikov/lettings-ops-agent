@@ -1,0 +1,526 @@
+{
+ "case_id": "011",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The repair was authorised and carried out, but the ticket was closed by the system (event-032) with three definition-of-done items unmet: no invoice on file (event-030), no invoice forwarded to the landlord, and landlord confirmation still outstanding (event-031). I did not re-close the request. I chased the instructed provider (Oakfield Homes) for the invoice and a completion report, asked the landlord to confirm completion, and asked the tenant to confirm the appliance now runs a full cycle. Case left at final checks, waiting on those three named parties. No liability decision taken (PRO-TENANT-LIABILITY); contractor-name inconsistencies recorded as data quality, not acted on.",
+ "recap": "Dishwasher repair authorised at £95 inc VAT and done; closed prematurely with invoice and landlord confirmation missing, so I chased provider, landlord and tenant.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Oakfield Homes to supply the invoice and confirm the dial replacement (3 working days); also Waiting for Landlord for completion confirmation.",
+ "next_step": "Oakfield Homes to send the invoice and confirm the dial was fitted (requested ACT-1, 3 working days); then forward the invoice to the landlord and close naming the landlord as payer.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 — categorised Appliances/dishwasher, ROUTINE, containment step given to tenant",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-004 request; event-009 landlord 'Yes please go ahead'",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-011, event-013 (provider briefed), event-012 (tenant told)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-018 tenant agreed slot; attendance evidenced by event-019",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-020 quote £95 incl. VAT to landlord; event-022 landlord 'Please go ahead'; event-023 contractor instructed",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-019 is the triage report only; event-026/027 are system lines; completion of the dial replacement chased at ACT-1 and ACT-2",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-030 — skip reason self-contradictory, invoice unavailable; requested from provider at ACT-1",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No artefact shows an invoice forwarded; landlord told it will follow (ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-031 'Need confirmation from landlord'; no landlord reply after it; requested at ACT-3",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant gave access in person (event-018, event-025)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-032 closed the request while four items above were unmet; not re-closed by me (CAP-CLOSE)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant Amelia Nolan reported the dishwasher at Flat 12, 78 Copperfield Walk, Kingshaven, ZZ3 1ZZ fills and washes but never ends its cycle; started recently; two guinea pigs at the property.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Intake classified the issue as Appliances / dishwasher not completing cycle, severity ROUTINE, with a containment step (photograph the appliance and any error lights) shown to the tenant.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord was asked on 29/11/2026 whether to instruct a contractor and replied 'Yes please go ahead' on 03/12/2026.",
+   "source_ids": [
+    "event-004",
+    "event-009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Provider Oakfield Homes was assigned and briefed on 06/12/2026; the tenant was told who was attending.",
+   "source_ids": [
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "A visit was agreed with the tenant for the following morning (call of 06/12/2026) and the contractor attended on 07/12/2026.",
+   "source_ids": [
+    "event-018",
+    "event-019"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "Provider report 07/12/2026: water in the base removed, loose connection on the flow-through heater tightened and retested, appliance running as it should; a replacement dial is required (missing). Quote £95 including parts, labour and VAT, variable if extra parts are needed.",
+   "source_ids": [
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The quote was sent to the landlord on 07/12/2026 and the landlord replied 'Please go ahead' the same day; the contractor was instructed to proceed.",
+   "source_ids": [
+    "event-020",
+    "event-022",
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "A further appointment was arranged with the tenant for the next day between 12 and 5 to fit the replacement knob (untrusted call transcript, 09/12/2026).",
+   "source_ids": [
+    "event-025"
+   ],
+   "confidence": "low"
+  },
+  {
+   "id": "F9",
+   "statement": "On 13/12/2026 the system moved the task to Result and marked it completed; no provider completion report or photographs appear after the repair visit.",
+   "source_ids": [
+    "event-026",
+    "event-027",
+    "event-028",
+    "event-029"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "Document upload was skipped with the reason 'Invoice uploaded. The invoice is unavailable' — no invoice is on file and none is evidenced as forwarded to the landlord.",
+   "source_ids": [
+    "event-030"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "The system recorded 'Need confirmation from landlord' at 05:44 on 13/12/2026 and then 'All checks have been completed; the request is now closed' one minute later, with no landlord reply in between.",
+   "source_ids": [
+    "event-031",
+    "event-032"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F12",
+   "statement": "No landlord spend cap or standing instruction record is available in this case; authority for the spend rests on the landlord's own messages.",
+   "source_ids": [
+    "get_case_details",
+    "event-009",
+    "event-022"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider identity is inconsistent across records: the agency assigned and briefed Oakfield Homes, while untrusted call transcripts name 'Cedar Maintenance' and 'Alder Maintenance', the intake summary refers to a 'Riverside Services dishwasher', and the provider report is addressed to 'Juniper Surveying'.",
+   "fact_ids": [
+    "F4",
+    "F6"
+   ],
+   "source_ids": [
+    "event-001",
+    "event-013",
+    "event-014",
+    "event-015",
+    "event-019"
+   ],
+   "resolution": "The agency's own assignment record (event-011/event-013) governs: all chases sent to Oakfield Homes at the address on the agency record. The other names come from untrusted transcripts/summaries and are recorded as data quality, not as a change of provider.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "The system closed the request as 'all checks completed' while its own preceding line said landlord confirmation was still needed and the invoice was unavailable.",
+   "fact_ids": [
+    "F10",
+    "F11"
+   ],
+   "source_ids": [
+    "event-030",
+    "event-031",
+    "event-032"
+   ],
+   "resolution": "Treated the closure as premature: ticket kept at final_checks, outstanding items chased with the provider and landlord. No re-closure attempted.",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Four different provider/company names across the artefacts for one job (Oakfield Homes, Cedar Maintenance, Alder Maintenance, Juniper Surveying; plus 'Riverside Services' in the intake summary), and two notes whose text is absent from the record.",
+   "source_ids": [
+    "event-001",
+    "event-013",
+    "event-014",
+    "event-015",
+    "event-019",
+    "event-028",
+    "event-029"
+   ],
+   "action_taken": "Recorded in the case note (ACT-4); acted only on the agency's own assignment record (Oakfield Homes)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Document skip reason is self-contradictory: 'Invoice uploaded. The invoice is unavailable' — no invoice exists on file.",
+   "source_ids": [
+    "event-030"
+   ],
+   "action_taken": "Invoice requested from the provider (ACT-1); landlord told it will follow (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "011",
+    "title": "Case 011: Dishwasher Repair Request",
+    "received_at": "2026-11-29 05:07:59 UTC",
+    "track": "Property Management",
+    "case_number": "011",
+    "property": "Flat 12, 78 Copperfield Walk, Kingshaven, ZZ3 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 32,
+    "attachments_hidden": 0,
+    "details": "# Case 011: Dishwasher Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2026-11-29 05:07:59 UTC\n- property: Flat 12, 78 Copperfield Walk, Kingshaven, ZZ3 1ZZ\n\n## Initial request\nRequest summary with context: The Riverside Services dishwasher runs perpetually and does not complete its cycle, suggesting a malfunction.\n\nTenant's original query: Dish washer repair, the dish washer turns on, fills up and seems to wash but never ever stops it’s cycle\n\nAdditional details provided:\n- Has this issue been persistent, or did it start recently? Started recently\n- Are there any pets at the property? Yes two guinea pigs"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "011-get_case_details-2354adb40b92",
+   "receipt": "{\"id\": \"011\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:00:29.423205Z",
+   "finished_at": "2026-10-10T14:00:29.423263Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "011-get_action_ledger-a69da609e7b6",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:00:29.423368Z",
+   "finished_at": "2026-10-10T14:00:29.423403Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Flat 12, 78 Copperfield Walk, Kingshaven, ZZ3 1ZZ — dishwasher repair (quote £95 incl. parts, labour and VAT, your report of 07/12/2026). Authorisation to proceed was sent to you on 07/12/2026. Please confirm by return: (1) that the replacement dial has been fitted and the appliance left working, (2) the date the work was completed, and (3) send your invoice and any completion photos — our copy of the invoice is not on file. Please reply within 3 working days so we can complete our final checks."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-notify_contractor-65975d7589cb",
+   "action_id": "011-notify_contractor-65975d7589cb",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:01:09.684329Z",
+   "finished_at": "2026-10-10T14:01:09.684501Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Amelia Nolan, re: the dishwasher at Flat 12, 78 Copperfield Walk. Our contractor reported attending, removing water from the base, tightening a loose connection on the flow-through heater and retesting the appliance, with a replacement dial to be fitted. Before we close the job, could you confirm the dial has been fitted and the dishwasher is now completing its cycle normally? If it is still faulty, or if you notice any water leaking around or under the appliance, please tell us straight away and we will reopen the job."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-notify_tenant-85e5f76b2a29",
+   "action_id": "011-notify_tenant-85e5f76b2a29",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:01:09.684570Z",
+   "finished_at": "2026-10-10T14:01:09.684643Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 12, 78 Copperfield Walk, Kingshaven, ZZ3 1ZZ — dishwasher repair. Update for your records: you authorised the £95 repair (incl. parts, labour and VAT) on 07/12/2026 and the contractor was instructed the same day. The job has been marked complete on our system. Two items remain outstanding before we can close it: the contractor's invoice is not yet on our file (we have requested it), and we need your confirmation that you are happy the works are complete. Please reply to confirm completion; we will forward the invoice to you as soon as the contractor supplies it."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-notify_landlord-38e350b0c3a9",
+   "action_id": "011-notify_landlord-38e350b0c3a9",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:01:09.684699Z",
+   "finished_at": "2026-10-10T14:01:09.684782Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Final-checks review. Work authorised by landlord at event-022 (£95 incl. VAT, quote at event-019); contractor instructed to proceed at event-023. Gaps found against the definition of done at the time of the system closure (event-032): (a) documents — event-030 records uploading skipped, \"Invoice uploaded. The invoice is unavailable\"; no invoice on file; (b) invoice_to_landlord — no forwarding evidenced; (c) landlord_confirmation — event-031 says \"Need confirmation from landlord\", with no landlord reply after it; (d) work_result — event-026/027 are system status lines only; the last provider report (event-019) predates the dial replacement, and event-025 (untrusted transcript) is ambiguous about who fits the knob. Actions taken: invoice and completion confirmation requested from the provider, completion confirmation requested from the landlord, working-order check requested from the tenant. Data quality: the assigned provider on the agency record is Oakfield Homes (event-011, event-013), but untrusted call transcripts name \"Cedar Maintenance\" (event-014) and \"Alder Maintenance\" (event-015), the intake summary names \"Riverside Services\" (event-001) and the provider report at event-019 is addressed to \"Juniper Surveying\". Treated as transcription/record noise, not as a change of provider; all chases sent to the instructed provider. No safety hazard reported; water found in the appliance base was removed by the contractor (event-019) and no water-near-electrics or leak to the property was reported. Tenant has two guinea pigs (event-001) — access note only. No liability question raised; cost is landlord-borne per event-022."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "011-add_note-cff78a8d0e56",
+   "action_id": "011-add_note-cff78a8d0e56",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:01:09.684848Z",
+   "finished_at": "2026-10-10T14:01:09.684920Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Reply requested within 3 working days with invoice, completion date and confirmation the dial was fitted",
+   "due": "3 working days from ACT-1",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Forward the contractor's invoice once supplied",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Reopen the job if the dishwasher is still faulty or water is leaking",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 29/11/2026 (event-001); repair carried out after approval on 07/12/2026 (event-022, event-023)",
+   "deadline": null,
+   "note": "Substantially met; only administrative final checks outstanding."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 29/11/2026; landlord enquiry raised same day (event-004); tenant told who was attending on 06/12/2026 (event-012)",
+   "deadline": null,
+   "note": "Tenant-facing acknowledgement of the provider assignment came 7 days after the report, delayed by the landlord's 3-day non-response (event-006)."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please confirm the replacement dial has been fitted and the dishwasher left working, give the completion date, and send your invoice (£95 incl. VAT) and any completion photos — our copy is not on file.",
+   "why": "Work result and invoice are required before the job can be closed; event-030 records the invoice as unavailable.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm you are happy the dishwasher works at Flat 12, 78 Copperfield Walk are complete; the invoice will follow once the contractor supplies it.",
+   "why": "event-031 flagged landlord confirmation as needed and no landlord reply follows it.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Is the dial fitted and is the dishwasher now completing its cycle normally, with no water leaking around the appliance?",
+   "why": "Independent check of the work result; the last provider report (event-019) predates the dial replacement.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "CAP-CLOSE",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: the £95 approved at event-022 is the final cost; the quote states it may vary if extra parts were needed on site, which the invoice will settle.",
+  "Assumption: 'they will install themselves' in the untrusted transcript at event-025 refers to the contractor fitting the knob, not the tenant; the completion question to the provider and tenant is framed so either answer resolves it."
+ ],
+ "uncertainty": [
+  "No post-repair provider report exists, so completion of the dial replacement is not verified by any artefact (event-026/027 are system status lines).",
+  "Whether the invoice was ever issued or paid is unknown; no payment action is within my authority (PRO-PAYMENTS)."
+ ],
+ "safety_actions": [
+  "Checked the safety-pass keywords: the only hazard-adjacent item is water found in the dishwasher base, which the contractor removed before retesting (event-019); no water near electrics, leak into the property, burning smell or alarm issue is reported anywhere in the artefacts. No vulnerability disclosed (pets only, event-001); no essential service lost.",
+  "Asked the tenant to report immediately any water leaking around or under the appliance (ACT-2)."
+ ],
+ "withheld_actions": [
+  "Did not call close_request: documents, invoice_to_landlord and landlord_confirmation are unmet (CAP-CLOSE).",
+  "Did not raise a fresh work order or a second contractor instruction — the existing instruction at event-023 stands; chasing only.",
+  "Did not state who pays beyond the landlord's own authorisation, and took no view on tenant liability (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:00:26.610916Z",
+ "finished_at": "2026-10-10T14:02:01.817878Z",
+ "input_tokens": 30472,
+ "output_tokens": 8341,
+ "cache_read_tokens": 42561
+}

@@ -1,0 +1,668 @@
+{
+ "case_id": "015",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Did not close the ticket despite the \"completed by supervisor\" flag (event-018): no work result exists for this property, the completion email to the landlord names a different address (event-016), four different provider names appear for one job (event-007, event-010, event-014, event-015), and a £68.97 invoice sits unapproved and not forwarded. Logged the conflict (ACT-1), raised an office task for the property/provider conflict and the invoice (ACT-2), chased the provider on the agency's own record for attendance/booking (ACT-3), updated the tenant and asked for the current state of the door including security (ACT-4), and placed the ticket on hold (ACT-5). Withheld any message telling a party which record is correct, any closure, and any step towards paying or approving the invoice.",
+ "recap": "Door-sticking repair at Flat 16 was flagged complete, but records conflict on provider and property; kept open, chased provider, asked tenant, raised office task.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — confirmation whether anyone attended Flat 16 and whether the door still sticks/locks (2 working days); Waiting for Provider in parallel on attendance and the invoice; office task open on the records conflict.",
+ "next_step": "Tenant (Freya Bennett) to confirm whether a contractor attended and whether the front door still sticks or fails to lock (asked ACT-4, 2 working days); in parallel the provider to confirm attendance/booking (ACT-3) and the office to resolve the provider/property conflict and the £68.97 invoice (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 (report), event-004 (acknowledged to tenant with escalate-if-worse advice); urgency set routine via use_playbook",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-007 — landlord's own email approving instruction of a contractor (no amount named)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "Provider assigned and tenant briefed (event-008, event-009, event-010), but provider identity is contradicted by event-014 and event-015; conflict raised at ACT-2",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No confirmed slot anywhere in the history; provider chased at ACT-3, tenant asked at ACT-4",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No quote was put to the landlord; the £68.97 invoice (event-015) was never approved and no standing cap is on file (RTE-LANDLORD, APR-SPEND-OVER-CAP)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No work result for this property; the only completion statement names a different address (event-016)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "attachment-60-document recorded twice (event-017, event-019) but contents unavailable and not retrievable via get_attachment; no photos",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No record of the £68.97 invoice being forwarded to the landlord; held pending the office decision at ACT-2",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-016 was sent to the landlord about a different address; no landlord confirmation for Flat 16",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key was issued; access was to be arranged direct with the tenant (event-010)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Closure withheld despite event-018; ticket placed on hold at ACT-5",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 03/01/2025 that the front door of Flat 16, 76 Alder Lane, Kingshaven ZZ8 8ZZ sticks at the base and is difficult to open and close, with no obstruction found.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "No loss of security, no hazard and no vulnerability is reported anywhere in the history; the agency told the tenant to report any security concern immediately (event-004).",
+   "source_ids": [
+    "event-001",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The agency asked the landlord on 05/01/2025 whether to instruct a contractor; the landlord replied the same day \"get Imogen to have a look at it\" — approval to instruct, with no amount named.",
+   "source_ids": [
+    "event-003",
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The agency assigned maintenance provider Alder Homes on 06/01/2025 and briefed both tenant and provider; a later agency email to the contractor says \"Job for Noah please\".",
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-010",
+    "event-014"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 08/01/2025 a contractor email reports an invoice from Keystone Homes for £68.97 due 06/02/2025; the PDF contents are unavailable and no attachment named attachment-60-document can be retrieved.",
+   "source_ids": [
+    "event-015",
+    "event-017",
+    "get_attachment"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The 12/01/2025 completion email to the landlord is headed Flat 16, 76 Alder Lane but states the door \"got sorted\" for Flat 10, 110 Meadow Row, Cedarford ZZ3 6ZZ, and relays that the door is rotting/swelling with a replacement recommended.",
+   "source_ids": [
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The ticket was marked \"Task has been completed by supervisor\" on 12/01/2025 with no work result, no tenant confirmation, no landlord approval of the £68.97 and no invoice forwarded to the landlord.",
+   "source_ids": [
+    "event-018",
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No landlord standing spend cap is on file for this landlord; the mandate default is £0, so the £68.97 is not covered by the event-007 approval, which named no amount.",
+   "source_ids": [
+    "get_action_ledger",
+    "event-007"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "One contractor reply (06/01/2025) has no retrievable text — the expected content could not be extracted.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Four provider identities for one job: landlord named \"Imogen\" (event-007), agency assigned Alder Homes (event-010), agency asked for \"Noah\" (event-014), invoice from Keystone Homes (event-015).",
+   "fact_ids": [
+    "F3",
+    "F4",
+    "F5"
+   ],
+   "source_ids": [
+    "event-007",
+    "event-010",
+    "event-014",
+    "event-015"
+   ],
+   "resolution": "Not decided by me. Office task raised (ACT-2); provider on the agency's own record (Alder Homes) chased for attendance (ACT-3). No party told which name is correct.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Property mismatch: the completion email headed Flat 16, 76 Alder Lane reports the door sorted at Flat 10, 110 Meadow Row, Cedarford ZZ3 6ZZ. It is not established that work was done at Flat 16.",
+   "fact_ids": [
+    "F6"
+   ],
+   "source_ids": [
+    "event-016"
+   ],
+   "resolution": "Office task raised (ACT-2); tenant asked whether anyone attended her flat (ACT-4). Ticket kept open.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Ticket flagged complete by supervisor while the definition of done is unmet (no work result, no landlord confirmation, invoice unapproved and not forwarded).",
+   "fact_ids": [
+    "F5",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-018"
+   ],
+   "resolution": "Closure withheld; case placed on hold pending tenant and provider replies and the office decision.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "The 05/01/2025 landlord email opens \"I hope you had a great Valentines weekend\" — the date/context of the correspondence is unreliable and may be a template or mis-dated record.",
+   "source_ids": [
+    "event-003"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1); not relied on for any date."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Invoice evidence is second-hand: the PDF contents are unavailable and attachment-60-document cannot be retrieved, yet the amount £68.97 and trading name Keystone Homes were recorded against the job.",
+   "source_ids": [
+    "event-015",
+    "event-017",
+    "get_attachment"
+   ],
+   "action_taken": "No payment, approval or forwarding of the invoice; provider asked to confirm whether it relates to this job (ACT-3); office task raised (ACT-2)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "A contractor reply of 06/01/2025 has no extractable text, so the provider's own position on scope/attendance is unknown.",
+   "source_ids": [
+    "event-011"
+   ],
+   "action_taken": "Provider asked directly to confirm attendance and booking (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Landlord email signed \"Harper\" but sent from \"Meadow Homes\" and addressed to \"Mercer\", while the misdirected completion email concerns a property on Meadow Row — names in message bodies are inconsistent across this case.",
+   "source_ids": [
+    "event-007",
+    "event-016"
+   ],
+   "action_taken": "Addressed parties only by the names on the case record; no body-text names copied into other parties' letters. Flagged to the office (ACT-2)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "015",
+    "title": "Case 015: Front Door Repair Request",
+    "received_at": "2025-01-03 12:51:31 UTC",
+    "track": "Property Management",
+    "case_number": "015",
+    "property": "Flat 16, 76 Alder Lane, Kingshaven, ZZ8 8ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 19,
+    "attachments_hidden": 0,
+    "details": "# Case 015: Front Door Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2025-01-03 12:51:31 UTC\n- property: Flat 16, 76 Alder Lane, Kingshaven, ZZ8 8ZZ\n\n## Initial request\nThe front door feels stuck making it difficult to open and close. It stucks at the base but there's no item beneath preventing it from closing or opening which i have checked."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-get_case_details-1e9b3eb02de7",
+   "receipt": "{\"id\": \"015\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:01:28.677148Z",
+   "finished_at": "2026-10-10T14:01:28.677244Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-get_action_ledger-611ab1682405",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:01:28.677343Z",
+   "finished_at": "2026-10-10T14:01:28.677387Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-60-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-60-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-get_attachment-1949e39dfc24",
+   "receipt": "{\"error\": \"no attachment named attachment-60-document\"}",
+   "started_at": "2026-10-10T14:01:51.442806Z",
+   "finished_at": "2026-10-10T14:01:51.442984Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "Imogen"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-007",
+     "timestamp": "2025-01-05 12:22:12 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2025-01-05 12:22:12 UTC] Email · from: Landlord · to: Northbridge Lettings\nHi Mercer,\n\nPlease get Imogen to have a look at it.\n\nThanks\n\nHarper\n\nSent from Meadow Homes"
+    },
+    {
+     "event": "event-016",
+     "timestamp": "2025-01-12 09:22:27 UTC",
+     "channel": "Email",
+     "from": "Agency / system",
+     "to": "Landlord",
+     "excerpt": "[2025-01-12 09:22:27 UTC] Email · from: Agency / system · to: Landlord\nAddress: Flat 16, 76 Alder Lane, Kingshaven, ZZ8 8ZZ\n\nHello, the door got sorted for Flat 10, 110 Meadow Row, Cedarford, ZZ3 6ZZ. Just giving you the heads up that the door is starting to rot and swell so issue may reoccur. Imogen recommends modern replacement. Something to look forward to, right. Thanks,"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-search_history-7fb6d7db2ea0",
+   "receipt": "[{\"event\": \"event-007\", \"timestamp\": \"2025-01-05 12:22:12 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Northbridge Lettings\", \"excerpt\": \"[2025-01-05 12:22:12 UTC] Email · from: Landlord · to…",
+   "started_at": "2026-10-10T14:01:51.443050Z",
+   "finished_at": "2026-10-10T14:01:51.443196Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-011",
+     "timestamp": "2025-01-06 08:20:11 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2025-01-06 08:20:11 UTC] Email · from: Contractor · to: Agency / system\n[Text/transcription not present in maintenance_actions.comment]"
+    },
+    {
+     "event": "event-015",
+     "timestamp": "2025-01-08 09:39:16 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2025-01-08 09:39:16 UTC] Email · from: Contractor · to: Agency / system\nThe email is an attachment-60-document from Keystone Homes for £68.97, due on 06/02/2025, and includes a PDF attachment with full details and payment terms."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "015-search_history-9def56608680",
+   "receipt": "[{\"event\": \"event-011\", \"timestamp\": \"2025-01-06 08:20:11 UTC\", \"channel\": \"Email\", \"from\": \"Contractor\", \"to\": \"Agency / system\", \"excerpt\": \"[2025-01-06 08:20:11 UTC] Email · from: Contractor · to:…",
+   "started_at": "2026-10-10T14:01:51.443315Z",
+   "finished_at": "2026-10-10T14:01:51.443371Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Conflicts on this ticket (Flat 16, 76 Alder Lane, Kingshaven ZZ8 8ZZ):\n1) Provider identity unresolved: landlord's own email names \"Imogen\" (event-007); agency assigned \"Alder Homes\" (event-008, event-010); a later agency email asks for \"Noah\" (event-014); the invoice received is from \"Keystone Homes\" for £68.97 due 06/02/2025 (event-015). Four different names, one job.\n2) Property mismatch: event-016 is addressed to Flat 16, 76 Alder Lane but states the door \"got sorted\" for Flat 10, 110 Meadow Row, Cedarford ZZ3 6ZZ. No work result for Flat 16 is recorded anywhere.\n3) Ticket marked \"completed by supervisor\" (event-018) with no work result, no tenant confirmation, no landlord approval of the £68.97, and the invoice not forwarded to the landlord.\n4) Spend authority: landlord approved instructing a contractor (event-007) but no amount was named and no standing cap is on file (default £0), so the £68.97 invoice is not covered by that approval (APR-SPEND-OVER-CAP, RTE-LANDLORD).\n5) Data quality: event-003 (5 Jan 2025) refers to a \"Valentines weekend\"; date/context unreliable.\nNot picking a side with any party; office task raised. Routine reversible steps continued: provider chased at the address on the agency's own record; tenant updated and asked for the current state of the door."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-add_note-f4c637f351c8",
+   "action_id": "015-add_note-f4c637f351c8",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:02:31.047543Z",
+   "finished_at": "2026-10-10T14:02:31.047724Z"
+  },
+  {
+   "seq": 7,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 015 Flat 16, 76 Alder Lane — provider/property records conflict + unapproved £68.97 invoice on a supervisor-closed job",
+    "summary": "Tenant reported the front door sticking at the base on 03/01/2025 (event-001). Landlord replied \"get Imogen to have a look at it\" (event-007). Agency then assigned Alder Homes (event-008, event-010), later emailed the contractor \"Job for Noah please\" (event-014), and received an invoice from Keystone Homes for £68.97 due 06/02/2025 (event-015). Four provider names for one job; no booking and no attendance confirmation for Flat 16 anywhere in the history.\nProperty mismatch: event-016, headed Flat 16, 76 Alder Lane, tells the landlord the door \"got sorted\" for Flat 10, 110 Meadow Row, Cedarford ZZ3 6ZZ, and relays an \"Imogen recommends modern replacement\" rot/swelling comment. It is not established that any work was done at Flat 16.\nThe ticket was marked \"completed by supervisor\" (event-018) with no work result, no tenant confirmation, no landlord approval of the £68.97 (no standing cap on file; event-007 named no amount), and the invoice not forwarded to the landlord.\nDecisions needed from a person: (a) which provider actually holds/held this job and whether the Keystone Homes invoice belongs to this property at all; (b) whether event-016 was sent to the landlord in error and needs correcting; (c) whether the £68.97 goes to the landlord for approval. I have not told any party which record is right (PRO-PAYMENTS, RTE-LANDLORD, ESC-CONFLICT).\nDone meanwhile: internal note logged, Alder Homes chased for attendance/booking confirmation at Flat 16, tenant updated and asked whether anyone has attended and whether the door still sticks or is insecure. Ticket left open and on hold — do not close."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-create_human_task-41d90cc73ca3",
+   "action_id": "015-create_human_task-41d90cc73ca3",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:02:31.047806Z",
+   "finished_at": "2026-10-10T14:02:31.048184Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Door Repair Request — Flat 16, 76 Alder Lane, Kingshaven, ZZ8 8ZZ (tenant Freya Bennett), instructed 06/01/2025.\n\nOur record does not show a confirmed appointment or a completion report for this address. Please confirm by return:\n1. Has an operative attended Flat 16, 76 Alder Lane? If so, on what date, and what was done?\n2. If not, please contact the tenant and confirm an access window back to us.\n3. We have received an invoice referencing a different trading name for £68.97 — please confirm whether that relates to this job at this address.\n\nPlease reply within 2 working days so we can update the tenant and the landlord. No further work is to be carried out without our written approval."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-notify_contractor-207aecc3ac92",
+   "action_id": "015-notify_contractor-207aecc3ac92",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:02:31.048271Z",
+   "finished_at": "2026-10-10T14:02:31.048358Z"
+  },
+  {
+   "seq": 9,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Freya,\n\nRe: front door sticking — Flat 16, 76 Alder Lane, Kingshaven, ZZ8 8ZZ.\n\nThank you for your patience. We are checking the position on your repair with our maintenance provider, as our records do not clearly show a completed visit at your flat.\n\nSo that we can put this right, could you please confirm:\n1. Has anyone attended your flat about the front door? If so, roughly when?\n2. Is the door still sticking at the base, or has it improved?\n3. Does the door close and lock properly? Please tell us straight away if it does not, or if you have any security concern, and we will treat it as urgent.\n\nWe have asked the provider to come back to us within 2 working days and will update you as soon as we hear. The job remains open — it has not been closed.\n\nKind regards,\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-notify_tenant-c2cd40c52978",
+   "action_id": "015-notify_tenant-c2cd40c52978",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:02:31.048423Z",
+   "finished_at": "2026-10-10T14:02:31.048497Z"
+  },
+  {
+   "seq": 10,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant — confirmation whether a contractor attended Flat 16 and whether the door still sticks/locks; provider chased in parallel; office task raised on the provider-identity and property conflicts and the unapproved £68.97 invoice.",
+    "until": "2 working days from 2025-01-12"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "015-put_on_hold-c0e2262ce57f",
+   "action_id": "015-put_on_hold-c0e2262ce57f",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:02:31.048553Z",
+   "finished_at": "2026-10-10T14:02:31.048615Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Update as soon as the provider responds; provider asked to reply within 2 working days; job confirmed still open",
+   "due": "2 working days from the chase (ACT-3/ACT-4)",
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "No further work to be carried out without written agency approval",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Earlier agency promise to update the tenant once next steps were confirmed (event-004) — not kept before now; renewed at ACT-4",
+   "due": null,
+   "source_id": "event-004",
+   "status": "broken"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 03/01/2025 (event-001); no verified completion at this property",
+   "deadline": null,
+   "note": "Running for over a week with no confirmed attendance at Flat 16"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Reported 03/01/2025 (event-001), acknowledged to tenant 05/01/2025 (event-004)",
+   "deadline": null,
+   "note": "Acknowledgement was late against the SOP baseline"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Has anyone attended Flat 16, 76 Alder Lane about the front door, and on roughly what date? Is the door still sticking at the base, and does it close and lock properly?",
+   "why": "No work result exists for this property; the only completion message names a different address (event-016). Whether the repair is done, and whether the door is secure (which would raise urgency), is a tenant-owned fact (RTE-TENANT).",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Confirm whether an operative attended Flat 16, 76 Alder Lane, Kingshaven ZZ8 8ZZ, on what date and what was done; if not attended, confirm an access window with the tenant. Also confirm whether the £68.97 invoice from Keystone Homes relates to this job at this address.",
+   "why": "Attendance, scope and invoice scope are contractor-owned (RTE-CONTRACTOR); four provider names appear for one job (event-010, event-014, event-015).",
+   "blocking": true
+  },
+  {
+   "to": "property_manager",
+   "question": "Which provider holds this job, was event-016 sent to the landlord in error about a different property, and should the £68.97 go to the landlord for approval?",
+   "why": "Agency records disagree in a way that changes the action (ESC-CONFLICT); the invoice has no spend authority behind it (APR-SPEND-OVER-CAP, PRO-PAYMENTS). Task raised at ACT-2.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-LOG",
+  "CAP-NOTIFY",
+  "CAP-HUMAN-TASK",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "RTE-LANDLORD",
+  "ESC-CONFLICT",
+  "APR-SPEND-OVER-CAP",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: with no landlord instruction record showing a standing spend cap, the mandate default of £0 applies, so the £68.97 needs the landlord's approval.",
+  "Assumption: \"Imogen\", \"Noah\", \"Alder Homes\" and \"Keystone Homes\" may be individuals and trading names of the same or different firms; this is not established from any record."
+ ],
+ "uncertainty": [
+  "Whether any work was actually carried out at Flat 16, 76 Alder Lane.",
+  "Whether the £68.97 Keystone Homes invoice belongs to this job or to the Meadow Row property mentioned in event-016.",
+  "Whether the landlord's \"Imogen\" is the operative who attended, and whether the rot/swelling and replacement recommendation relate to this door or to the other property.",
+  "The content of the unreadable contractor reply (event-011) and of attachment-60-document."
+ ],
+ "safety_actions": [
+  "Checked the report against the emergency definitions: a door sticking at the base with no lock or security failure reported is not an insecure property (event-001); urgency set routine.",
+  "Asked the tenant to confirm the door still closes and locks and to report any security concern immediately, which would raise urgency (ACT-4, consistent with event-004).",
+  "Safety-pass keywords screened: no gas, electrical, damp/mould, detector, injury or occupant-vulnerability content appears in this case's artefacts; no hazard observed or reported, so no safety red flag raised."
+ ],
+ "withheld_actions": [
+  "Did not close the request despite event-018 — definition of done unmet (CAP-CLOSE).",
+  "Did not forward, approve or action the £68.97 invoice (PRO-PAYMENTS, RTE-LANDLORD).",
+  "Did not tell the landlord or tenant which of the conflicting records is correct, or correct event-016 to the landlord — office decision (ESC-CONFLICT, rule 2).",
+  "Did not raise a quote for the recommended door replacement mentioned in event-016, as it is not established that it refers to this property.",
+  "Did not dispatch a second contractor, which would duplicate the existing work order."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:01:25.198189Z",
+ "finished_at": "2026-10-10T14:03:39.156629Z",
+ "input_tokens": 34543,
+ "output_tokens": 10645,
+ "cache_read_tokens": 56748
+}

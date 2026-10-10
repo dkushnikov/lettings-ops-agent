@@ -1,0 +1,438 @@
+{
+ "case_id": "020",
+ "case_type": "inspection_booking",
+ "playbook": "access-scheduling",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Inspection is complete and reported; the open items are the landlord's post-inspection questions — an unapproved dog flap installation and recovery of a spare front door key after a lock change. Deciding whether the dog flap is removed/reinstated and who pays is a tenant-liability decision reserved to a human (PRO-TENANT-LIABILITY), and the lock change affects the agency's management key. In-authority steps done first: tenant written to for the spare key and the facts of the alteration (ACT-1), landlord answered with the report findings and asked to confirm consent (ACT-2), case noted (ACT-3). Handing to the property manager to settle the alteration/liability question with the landlord.",
+ "recap": "Inspection done 16/02/2024, no issues; landlord's reply raises an unapproved dog flap and a missing spare key after a lock change — referred to the property manager.",
+ "stage": "final_checks",
+ "hold_reason": "",
+ "next_step": "Property manager to decide with the landlord whether the dog flap stays or is reinstated and at whose cost; tenant to supply a spare front door key (asked today, ACT-1).",
+ "definition_of_done": [
+  {
+   "item": "job_known",
+   "status": "done",
+   "evidence": "event-002/event-017: routine property inspection with photos for the landlord",
+   "text": "Purpose and urgency of the visit confirmed"
+  },
+  {
+   "item": "windows_offered",
+   "status": "done",
+   "evidence": "event-002 (13/02 AM window) and event-009 (15/02 PM window) offered to the tenant with more than 24 hours' notice",
+   "text": "Two contractor-confirmed windows offered to the tenant with the required notice"
+  },
+  {
+   "item": "tenant_agreed",
+   "status": "done",
+   "evidence": "event-006 tenant requested 15/02; event-007 agency spoke to tenant who confirmed the date, dog and occupant at home",
+   "text": "Tenant agreed a window, or consented to entry with the management key"
+  },
+  {
+   "item": "booked",
+   "status": "done",
+   "evidence": "event-012 rescheduled visit time 2024-02-15 14:00; confirmed to tenant by SMS and email (event-009, event-010)",
+   "text": "Visit booked and confirmed to both the tenant and the contractor (slot, access arrangement, pets noted)"
+  },
+  {
+   "item": "reminders",
+   "status": "done",
+   "evidence": "event-013/event-014 reminder on the day; reschedule confirmed to the tenant at event-009/event-010",
+   "text": "Reminder sent on the day; any reschedule confirmed to both sides"
+  },
+  {
+   "item": "keys",
+   "status": "pending",
+   "evidence": "event-020 landlord asks for a spare front door key after a lock change; tenant asked to confirm and supply one (ACT-1)",
+   "text": "Key handover recorded and key return confirmed after the visit, where a key was issued"
+  },
+  {
+   "item": "logged",
+   "status": "done",
+   "evidence": "event-011/event-012 slot and arrangement logged; ACT-3 note records post-inspection follow-ups",
+   "text": "Window, agreement and access arrangement logged"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Inspection at Flat 12, 162 Beacon Close was first booked for 13/02/2024 08:00-12:00 (visit time approved 2024-02-13 11:00).",
+   "source_ids": [
+    "event-002",
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Tenant asked to move the visit to Friday 15 February because of their dog; the agency spoke to the tenant and rescheduled to 15/02/2024 12:00-17:00 (visit time 2024-02-15 14:00) and confirmed by SMS and email.",
+   "source_ids": [
+    "event-006",
+    "event-007",
+    "event-009",
+    "event-010",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "A same-day reminder was sent to the tenant on 15/02/2024.",
+   "source_ids": [
+    "event-013",
+    "event-014"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The inspection report is dated 16 February 2024 (assessor signature 16/02/2024 16:32:45) and the document was uploaded with 'Inspection issues: NO', issue date 2024-02-16, expiring 2024-08-14.",
+   "source_ids": [
+    "attachment-01-property-inspection-report",
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Report checklist records carbon monoxide detectors and smoke/heat detectors tested and working, and no evidence of damp, condensation, smoking or non-tenants; evidence of pets Yes.",
+   "source_ids": [
+    "attachment-01-property-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The report records a dog flap installed by the tenants in the back door, noted in the utility-room overview, and one defect: sticker-type marks on the Bedroom 1 wall beside the window for the tenant to remove and make good.",
+   "source_ids": [
+    "attachment-01-property-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The results summary was emailed to the landlord on 17/02/2024 with the report attached, stating no issues were identified.",
+   "source_ids": [
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The landlord's reply of 18/02/2024 raises a dog flap installation that was not approved and asks about retrieval of a spare front door key following a lock change.",
+   "source_ids": [
+    "event-020"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "No lock change is recorded in the inspection report or anywhere else in the visible history; the only key arrangement mentioned is the agency's management key for access in the tenant's absence.",
+   "source_ids": [
+    "attachment-01-property-inspection-report",
+    "event-002"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F10",
+   "statement": "No landlord spend cap or standing authority is on file in the case record, so any priced work would need landlord approval.",
+   "source_ids": [
+    "get_case_details"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Landlord summary email says no issues identified; the report records a dog flap and a Bedroom 1 defect.",
+   "fact_ids": [
+    "F6",
+    "F7"
+   ],
+   "source_ids": [
+    "event-017",
+    "attachment-01-property-inspection-report"
+   ],
+   "resolution": "Specific report lines beat the general 'no issues' statement; findings restated to the landlord (ACT-2).",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Landlord correspondence names are inconsistent: event-017 addresses 'Oliver Bennett', the landlord reply at event-020 names 'Felix Clarke'. Not copied into any outbound letter.",
+   "source_ids": [
+    "event-017",
+    "event-020"
+   ],
+   "action_taken": "Recorded in the case note (ACT-3); parties addressed only by the case record's property/role."
+  },
+  {
+   "kind": "data_quality",
+   "description": "event-016 note has no text ('Text/transcription absent'), so the inspector's own comment on the visit is unavailable; findings taken from the report document instead.",
+   "source_ids": [
+    "event-016"
+   ],
+   "action_taken": "Relied on attachment-01 and event-018 for the result."
+  },
+  {
+   "kind": "other",
+   "description": "The landlord summary email states 'No issues were identified during the inspection' while the report records a dog flap installation and a Bedroom 1 defect; the specific report lines prevail.",
+   "source_ids": [
+    "event-017",
+    "attachment-01-property-inspection-report"
+   ],
+   "action_taken": "Correct findings restated to the landlord (ACT-2) and set out in the handover."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "020",
+    "title": "Case 020: Property inspection",
+    "received_at": "2024-02-07 00:49:50 UTC",
+    "track": "Property Management",
+    "case_number": "020",
+    "property": "Flat 12, 162 Beacon Close, Cedarford, ZZ9 5ZZ",
+    "source_role": "auto",
+    "agency": "Northbridge Lettings",
+    "events_visible": 20,
+    "attachments_hidden": 0,
+    "details": "# Case 020: Property inspection\n\n## Case details\n- source role: auto\n- created: 2024-02-07 00:49:50 UTC\n- property: Flat 12, 162 Beacon Close, Cedarford, ZZ9 5ZZ\n\n## Initial request\nInspection\n\n## Attachments\n- attachment-01-property-inspection-report.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "020-get_case_details-2aa99b5bf039",
+   "receipt": "{\"id\": \"020\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:03:16.854984Z",
+   "finished_at": "2026-10-10T14:03:16.855059Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "020-get_action_ledger-a09e8c3b0baa",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:16.855149Z",
+   "finished_at": "2026-10-10T14:03:16.855185Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello, the inspection at Flat 12, 162 Beacon Close, Cedarford, ZZ9 5ZZ went ahead on 16 February 2024 in the rescheduled afternoon window you agreed (rescheduled to 15/02/2024 12:00–17:00 at your request). Thank you for the access. Two follow-ups: (1) Our records suggest the front door lock has been changed. Please confirm whether the lock was changed and, if so, arrange for a spare front door key to be provided to our office so we can continue to hold a management key for access and emergencies. (2) The report notes a dog flap fitted in the back door (utility room) and sticker-type marks on the Bedroom 1 wall beside the window. Please confirm when the dog flap was fitted and whether written consent was given, and please remove the stickers and make good the wall. We will come back to you on anything further once the landlord has responded. No decision has been made about any cost."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "020-notify_tenant-6578020f456f",
+   "action_id": "020-notify_tenant-6578020f456f",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:03:46.506450Z",
+   "finished_at": "2026-10-10T14:03:46.506623Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Thank you for your reply about the inspection at Flat 12, 162 Beacon Close, Cedarford, ZZ9 5ZZ. For the record, the inspection report dated 16 February 2024 confirms: all 11 areas rated Good for condition and cleanliness; smoke/heat and carbon monoxide detectors tested and working; no damp, condensation, smoking or non-tenants; evidence of pets (small dog and fish tank); a dog flap installed in the back door, noted in the utility-room overview; and one defect — sticker-type marks on the Bedroom 1 wall beside the window, for the tenant to remove and make good. We have written to the tenant today asking them to confirm the lock change and to supply a spare front door key to our office, and to confirm when the dog flap was fitted and whether consent was given. The questions of whether the dog flap is to remain or be reinstated, and who bears any cost, are being referred to the property manager for a decision with you — we cannot determine tenant liability ourselves. Please also confirm whether you consent to the dog flap remaining in place."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "020-notify_landlord-11fc331cc590",
+   "action_id": "020-notify_landlord-11fc331cc590",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:03:46.506695Z",
+   "finished_at": "2026-10-10T14:03:46.506773Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Inspection completed 16/02/2024 (attachment-01; event-018 document uploaded, issues: NO). Landlord free-text reply event-020 raises two post-inspection items: (a) dog flap installed without approval — report confirms dog flap in back door/utility room; (b) spare front door key wanted after a lock change (lock change not recorded in the inspection report — unverified, tenant asked). Detectors (smoke/heat and CO) recorded tested and working on 16/02/2024. Tenant liability for the unapproved alteration is a human decision (PRO-TENANT-LIABILITY); referred to property manager. Name inconsistency: event-017 addresses landlord as \"Oliver Bennett\", event-020 body names \"Felix Clarke\" — not copied into any outbound letter."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "020-add_note-0ed08d413c0f",
+   "action_id": "020-add_note-0ed08d413c0f",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:03:46.506840Z",
+   "finished_at": "2026-10-10T14:03:46.506911Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Inspection visit on 15/02/2024 between 12:00 and 17:00 (rescheduled from 13/02)",
+   "due": "2024-02-15",
+   "source_id": "event-009",
+   "status": "kept"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Come back on the dog flap and spare key once the tenant replies and the property manager has the landlord's position",
+   "due": null,
+   "source_id": "event-020",
+   "status": "open"
+  },
+  {
+   "by": "tenant",
+   "to": "agency",
+   "what": "Remove the Bedroom 1 sticker marks and make good; confirm lock change and provide a spare front door key",
+   "due": null,
+   "source_id": "attachment-01-property-inspection-report",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge party correspondence within one working day",
+   "status": "prior",
+   "basis": "Landlord reply received 2024-02-18 (event-020); responded in this session (ACT-2)",
+   "deadline": null,
+   "note": "Agency SOP baseline."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "The landlord says a dog flap was installed without approval and wants the spare front door key back after a lock change. Does the flap stay or is it reinstated, and at whose cost?",
+  "summary": [
+   "Inspection completed 16/02/2024; report records all 11 areas Good/Good, no damp, condensation, smoking or non-tenants; smoke/heat and CO detectors tested and working (attachment-01, event-018).",
+   "Report notes a dog flap installed in the back door (utility-room overview) and evidence of pets - small dog and fish tank (attachment-01).",
+   "Only defect: sticker-type marks on Bedroom 1 wall beside the window, tenant to remove and make good (attachment-01).",
+   "Landlord free-text reply (event-020, untrusted) raises the unapproved dog flap and asks about retrieval of a spare front door key after a lock change; no lock change is recorded in the inspection report.",
+   "Tenant asked today to confirm the lock change, supply a spare key to the office, and confirm whether consent was given for the flap (ACT-1); landlord answered with the findings and asked to confirm consent (ACT-2)."
+  ],
+  "gap": "Whether the landlord ever consented to the flap, whether a lock change actually occurred and when, and whether the agency's management key still works.",
+  "options": [
+   "Landlord consents to the dog flap remaining; log consent and close once the spare key is received.",
+   "Require reinstatement of the back door at end of tenancy; property manager to set terms with landlord and tenant.",
+   "Instruct a contractor to quote for reinstatement now - needs landlord approval (no spend cap on file).",
+   "If the tenant will not provide a key for the changed lock, property manager to handle the access/tenancy point."
+  ],
+  "recommended": "Obtain the landlord's position on the flap (consent or reinstatement at end of tenancy) and secure the spare key from the tenant before closing; no contractor instruction without a priced quote approved by the landlord (RTE-LANDLORD).",
+  "default_if_timeout": "No action; case stays open at final_checks awaiting the landlord's position and the tenant's spare key.",
+  "deadline": null,
+  "undo": "Outbound messages ACT-1/ACT-2 can be followed up with a correction; no booking or spend has been made.",
+  "context_refs": [
+   "event-012",
+   "event-017",
+   "event-018",
+   "event-020",
+   "attachment-01-property-inspection-report"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "PRO-TENANT-LIABILITY",
+  "PRO-LEGAL",
+  "RTE-LANDLORD",
+  "RTE-STAFF",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the landlord's reply at event-020 relates to this inspection at Flat 12, 162 Beacon Close, as it is the reply to the agency's own summary email (event-017) and names no other property."
+ ],
+ "uncertainty": [
+  "Whether a front door lock change actually took place, when, and whether the agency's management key still opens the door (tenant asked).",
+  "Whether the landlord ever gave consent for the dog flap, and whether they want it retained or reinstated.",
+  "No tenancy agreement or landlord instruction document is visible, so pet/alteration clauses and any spend cap could not be checked."
+ ],
+ "safety_actions": [
+  "Safety pass: report checklist confirms smoke/heat and carbon monoxide detectors tested and working on 16/02/2024; no damp or condensation recorded (attachment-01). No hazard reported or observed.",
+  "Security point noted: if the front door lock has been changed, the agency may no longer hold a working management key - tenant asked to supply a spare (ACT-1)."
+ ],
+ "withheld_actions": [
+  "Did not decide or state that the dog flap, its removal or any making-good is tenant-payable (PRO-TENANT-LIABILITY).",
+  "Did not mention deposit deductions or any tenancy consequence to the tenant (PRO-LEGAL).",
+  "Did not instruct any contractor for reinstatement: no landlord approval and no spend cap on file (APR-SPEND-OVER-CAP)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:03:07.357345Z",
+ "finished_at": "2026-10-10T14:05:24.549476Z",
+ "input_tokens": 42427,
+ "output_tokens": 11770,
+ "cache_read_tokens": 56748
+}

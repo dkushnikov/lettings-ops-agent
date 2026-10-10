@@ -1,0 +1,631 @@
+{
+ "case_id": "046",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The agency ran the repair to a closure at event-052, but two definition-of-done items have no supporting evidence: a provider work result and the landlord's confirmation of completion. Authority for the spend is sound (landlord's own approval of GBP 90 plus VAT at event-018, given after the quote at event-015 and before the go-ahead at event-020), so no new approval is needed and no new work order was raised - raising one would duplicate the job booked at event-027. Within mandate I chased the provider for a legible PDF invoice, completion date and photos, asked the tenant to confirm the window now closes, asked the landlord to confirm completion, recorded the data-quality issues, and raised an office task to reopen the request for final checks (I cannot reopen a closed ticket). The case now waits on three named parties, so it ends as request_info rather than an escalation: nothing here requires a human to decide liability, legal or safety.",
+ "recap": "Window hinge repair was closed with no work result and no landlord confirmation on file; chased provider, tenant and landlord and asked the office to reopen for final checks.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider - Lantern Utilities to send a legible PDF invoice, completion date and photos within 2 working days of ACT-2; also Waiting for Landlord for confirmation of completion (ACT-3) and Waiting for Tenant for confirmation the window now closes (ACT-1).",
+ "next_step": "Lantern Utilities to supply the PDF invoice, completion date and photos (chased, 2 working days); in parallel the landlord to confirm completion and the tenant to confirm the window closes, then the office reopens and re-closes the request naming who paid.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 logged the fault and event-004 acknowledged it to the tenant on 12 Sept; routine, no damage-limiting steps applicable to a rusted hinge",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-007 - landlord's own reply agreeing to a contractor",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-010 provider assigned; event-012 provider briefed; event-011 tenant told Lantern Utilities would attend",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-027 provider booked 30/09/2025; event-030 and event-031 confirmed slot 10:00-17:00 to provider and tenant; event-035 reminder",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-015 quote GBP 90 plus VAT; event-018 landlord's own approval; event-020 go-ahead to provider after approval",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-036 'No work results'; event-041 is only 'Attached invoice' with the attachment unavailable; chased at ACT-2",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-048 skip reason 'not applicable'; no photos and no readable invoice on file - photos and PDF re-requested at ACT-2",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-042 and event-043 invoice emailed to landlord, though the attachment is recorded as unavailable",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-049 'Need confirmation from landlord'; no landlord reply in the history; requested again at ACT-3",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "done",
+   "evidence": "event-051 keys return confirmed",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-052 closed the request, but the resolution does not name who paid and work_result and landlord_confirmation were outstanding; office asked to reopen at ACT-5",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 11 Sept 2025 that the bedroom window at Flat 23, 143 Willowmere Road, Alderwick does not close properly and a hinge is rusted.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "No landlord spend cap or standing instruction is available in this environment; the authority relied on is the landlord's own approval in the history.",
+   "source_ids": [
+    "get_case_details",
+    "event-007",
+    "event-018"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord agreed to a contractor attending (12 Sept, 10:06) and then approved GBP 90 plus VAT for the hinge (12 Sept, 16:03); the agency instructed the provider to proceed afterwards at 16:38.",
+   "source_ids": [
+    "event-007",
+    "event-018",
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Lantern Utilities booked the visit for 30 September 2025 and the slot 10:00-17:00 was confirmed to both tenant and provider on 16 September.",
+   "source_ids": [
+    "event-027",
+    "event-029",
+    "event-030",
+    "event-031"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "No work result was ever recorded; the agency noted the absence on 2 October and the provider's only reply is 'Attached invoice' on 7 October with the attachment unavailable.",
+   "source_ids": [
+    "event-036",
+    "event-038",
+    "event-041",
+    "event-043"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The system asked for landlord confirmation of completion on 7 October; no landlord reply follows in the visible history, and the request was closed 74 minutes later.",
+   "source_ids": [
+    "event-049",
+    "event-052"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Agency emails name the landlord as both 'Grace' and 'Felix', and provider emails are signed 'Jenkins' and 'Mercer' for the same provider.",
+   "source_ids": [
+    "event-003",
+    "event-007",
+    "event-008",
+    "event-015",
+    "event-016",
+    "event-022"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The landlord is addressed as 'Grace' in the agency's outgoing emails but the landlord's replies and the agency's later emails use 'Felix'.",
+   "fact_ids": [
+    "F7"
+   ],
+   "source_ids": [
+    "event-003",
+    "event-007",
+    "event-008",
+    "event-016",
+    "event-018",
+    "event-042"
+   ],
+   "resolution": "The landlord's own replies settle landlord-owned questions, so the approval at event-018 stands regardless of the name used. The name discrepancy is a CRM data-quality item flagged to the office (ACT-5); no name was copied into any party letter.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Event-052 states all checks were completed, while event-036, event-048 and event-049 show the work result, documents and landlord confirmation were outstanding.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-036",
+    "event-048",
+    "event-049",
+    "event-052"
+   ],
+   "resolution": "The specific records of missing items beat the general closing status line; the ticket is treated as at final_checks and the office is asked to reopen (ACT-5).",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Closure line claims all checks complete while the work result, photos and landlord confirmation are absent from the record; the invoice attachment is unreadable so the invoiced total is unverified against the approved GBP 90 plus VAT.",
+   "source_ids": [
+    "event-041",
+    "event-043",
+    "event-048",
+    "event-049",
+    "event-052"
+   ],
+   "action_taken": "Chased provider for a PDF invoice, completion date and photos (ACT-2); asked landlord to confirm completion (ACT-3); asked tenant to confirm the window closes (ACT-1); office task to reopen (ACT-5)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Inconsistent party names in the agency's own correspondence: landlord 'Grace' vs 'Felix'; provider contacts 'Jenkins' vs 'Mercer' for Lantern Utilities.",
+   "source_ids": [
+    "event-003",
+    "event-007",
+    "event-015",
+    "event-016",
+    "event-022"
+   ],
+   "action_taken": "Recorded in the case note (ACT-4) and referred to the office (ACT-5); no name from a message body was reused in a letter to another party."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "046",
+    "title": "Case 046: Bedroom Window Repair",
+    "received_at": "2025-09-11 21:53:55 UTC",
+    "track": "Property Management",
+    "case_number": "046",
+    "property": "Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 52,
+    "attachments_hidden": 0,
+    "details": "# Case 046: Bedroom Window Repair\n\n## Case details\n- source role: Tenant\n- created: 2025-09-11 21:53:55 UTC\n- property: Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ\n\n## Initial request\nBedroom window is not closing  properly one of the hinges are rusted"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "046-get_case_details-eec3c7dd778c",
+   "receipt": "{\"id\": \"046\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:12:11.385412Z",
+   "finished_at": "2026-10-10T14:12:11.385601Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "046-get_action_ledger-c5aa40bb69d1",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:12:11.385901Z",
+   "finished_at": "2026-10-10T14:12:11.386004Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "confirm completion work result photos invoice",
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "046-search_history-93a180fd25c7",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:13:02.775360Z",
+   "finished_at": "2026-10-10T14:13:02.775677Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice completed attended window",
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "046-search_history-49241855049a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:13:02.775807Z",
+   "finished_at": "2026-10-10T14:13:02.776106Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-038",
+     "timestamp": "2025-10-07 10:41:42 UTC",
+     "channel": "Email",
+     "from": "Northbridge Lettings",
+     "to": "Contractor",
+     "excerpt": "[2025-10-07 10:41:42 UTC] Email · from: Northbridge Lettings · to: Contractor\nHi guys,\n\nJust checking if this was done and if you could please send a invoice. if you could send it in PDF, that would be great as the other formats are not being supported.\n\nThanks\nClara\n\nAddress: Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ"
+    },
+    {
+     "event": "event-041",
+     "timestamp": "2025-10-07 10:51:29 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2025-10-07 10:51:29 UTC] Email · from: Contractor · to: Northbridge Lettings\nMorning\n\nAttached invoice\n\nThanks Mercer"
+    },
+    {
+     "event": "event-042",
+     "timestamp": "2025-10-07 11:16:16 UTC",
+     "channel": "Email",
+     "from": "Northbridge Lettings",
+     "to": "Landlord",
+     "excerpt": "[2025-10-07 11:16:16 UTC] Email · from: Northbridge Lettings · to: Landlord\nAddress: Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ\n\nHello Felix,\n\nHope you are well.\n\nJust to make you aware, the window issue was now resolved.\n\nPlease see attached invoice for your records. I will process this on the system as normal.\n\nMany thanks\nClara"
+    },
+    {
+     "event": "event-043",
+     "timestamp": "2025-10-07 11:17:09 UTC",
+     "channel": "Email",
+     "from": "Northbridge Lettings",
+     "to": "Landlord",
+     "excerpt": "[2025-10-07 11:17:09 UTC] Email · from: Northbridge Lettings · to: Landlord\nAddress: Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ\n\nSorry, please see attached\n\nAttachment: contractor invoice (unavailable)."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "046-search_history-822e840cbebf",
+   "receipt": "[{\"event\": \"event-038\", \"timestamp\": \"2025-10-07 10:41:42 UTC\", \"channel\": \"Email\", \"from\": \"Northbridge Lettings\", \"to\": \"Contractor\", \"excerpt\": \"[2025-10-07 10:41:42 UTC] Email · from: Northbridge…",
+   "started_at": "2026-10-10T14:13:06.963170Z",
+   "finished_at": "2026-10-10T14:13:06.963500Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello Freya, regarding the bedroom window repair at Flat 23, 143 Willowmere Road. Lantern Utilities were booked to attend on 30 September 2025 between 10:00 and 17:00 (confirmation sent to you on 16 September). We do not have a work result on file from the provider. Could you confirm whether the engineer attended, and whether the bedroom window now closes and secures properly? If the window still does not close, please let us know and we will arrange a return visit. Thank you."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "046-notify_tenant-253980948876",
+   "action_id": "046-notify_tenant-253980948876",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:13:48.045489Z",
+   "finished_at": "2026-10-10T14:13:48.045778Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Window Repair Request - Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ. Your email of 7 October referred to an attached invoice, but the attachment could not be opened on our system. Please reply within 2 working days of this message with: (1) the invoice as a PDF, confirming the total against the approved figure of GBP 90 plus VAT for the hinge; (2) the date the work was completed and a short description of what was done; (3) any photos of the completed work. If we do not hear from you in that time we will chase again and flag the job to the property manager as unverified."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "046-notify_contractor-89b0e8f2d4fe",
+   "action_id": "046-notify_contractor-89b0e8f2d4fe",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:13:48.045942Z",
+   "finished_at": "2026-10-10T14:13:48.046154Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Flat 23, 143 Willowmere Road, Alderwick, ZZ2 6ZZ - bedroom window hinge repair. You approved the hinge replacement at GBP 90 plus VAT on 12 September 2025 and the provider, Lantern Utilities, was instructed the same day. A visit was booked for 30 September 2025 and the invoice was emailed to you on 7 October. Two final checks are still outstanding on our file: we have no written work result from the provider, and we do not have your confirmation that the job is complete. Please confirm you are happy the work is complete, and let us know if the invoice attachment did not open at your end so we can resend it. No further spend is being requested."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "046-notify_landlord-b043cae1c9ac",
+   "action_id": "046-notify_landlord-b043cae1c9ac",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:13:48.046307Z",
+   "finished_at": "2026-10-10T14:13:48.046494Z"
+  },
+  {
+   "seq": 9,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Review of closed ticket. Checklist gaps at closure (event-052): (a) no provider work result on file - event-036 recorded \"No work results\", the only provider response is event-041 \"Attached invoice\" and the attachment is unavailable, so neither completion nor the invoiced amount is verified; (b) documents skipped as \"not applicable\" (event-048) with no photos; (c) landlord confirmation requested by the system (event-049) but no landlord reply appears in the history. Data-quality issues recorded, no action taken on them: agency emails address the landlord as \"Grace\" (event-003, event-016) while the replies and later agency emails use \"Felix\" (event-007, event-008, event-018, event-042); provider correspondence is signed \"Jenkins\" (event-015) and \"Mercer\" (event-022 onwards) for the same provider, Lantern Utilities. Approval authority relied on: event-018, the landlord's own reply approving GBP 90 plus VAT, which post-dates the quote at event-015 and precedes the go-ahead at event-020. Event-051 records keys return confirmed with a validation message that priority could not be decreased to 0; priority left unchanged. Chases sent to tenant, provider and landlord for the outstanding items."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "046-add_note-4f2930495674",
+   "action_id": "046-add_note-4f2930495674",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:13:48.046650Z",
+   "finished_at": "2026-10-10T14:13:48.046834Z"
+  },
+  {
+   "seq": 10,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_management",
+    "title": "Case 046 closed with final checks outstanding - reopen to capture work result and landlord confirmation",
+    "summary": "Flat 23, 143 Willowmere Road - bedroom window hinge. The request was closed at event-052 (\"All checks have been completed\"), but two checklist items have no evidence in the history: (1) work result - event-036 recorded \"No work results\", and the only provider reply is event-041 \"Attached invoice\" with the attachment unavailable, so completion and the invoiced total are unverified; documents were skipped as \"not applicable\" (event-048). (2) landlord confirmation - requested at event-049, no landlord reply in the history. Authority for the spend is sound: landlord's own approval of GBP 90 plus VAT at event-018, before the go-ahead at event-020. I cannot reopen a closed request, so please reopen for final checks. I have chased the provider for a PDF invoice, completion date and photos (ACT-2), asked the tenant to confirm the window now closes (ACT-1), and asked the landlord to confirm completion (ACT-3). Also for the office: agency emails address the landlord as \"Grace\" (event-003, event-016) but the replies and later emails use \"Felix\" (event-007, event-018, event-042) - please correct the landlord name on the CRM record before the next letter."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "046-create_human_task-78d54fe57b10",
+   "action_id": "046-create_human_task-78d54fe57b10",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:13:56.245861Z",
+   "finished_at": "2026-10-10T14:13:56.246193Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "If no PDF invoice, completion date and photos arrive within 2 working days, we will chase again and flag the job to the property manager as unverified.",
+   "due": "2 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "If the window still does not close, we will arrange a return visit.",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Resend the invoice if the attachment did not open at the landlord's end.",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 11 Sept 2025 (event-001); visit booked 30 Sept 2025 (event-027)",
+   "deadline": null,
+   "note": "19 days from report to visit for a non-urgent window hinge; completion still unevidenced."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Reported 11 Sept 21:53 (event-001); acknowledged 12 Sept 08:51 (event-004)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send the invoice for the Flat 23, 143 Willowmere Road window hinge repair as a PDF (the 7 October attachment could not be opened), confirm the date the work was completed and what was done, and attach photos. Does the invoiced total match the approved GBP 90 plus VAT?",
+   "why": "No work result is on file (event-036) and the only provider reply is event-041 with an unavailable attachment, so completion and the amount are unverified.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm you are satisfied the window repair is complete, and tell us whether the invoice emailed on 7 October opened at your end.",
+   "why": "Landlord confirmation was requested by the system at event-049 and no reply appears in the history, yet the request was closed at event-052.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Did Lantern Utilities attend on 30 September 2025, and does the bedroom window now close and secure properly?",
+   "why": "Tenant-owned fact about the fault; the only independent check that the repair actually happened.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "CAP-CLOSE",
+  "CAP-DISPATCH-APPROVED"
+ ],
+ "assumptions": [
+  "Assumption: no management key was issued for this visit; the keys-return item is treated as satisfied by event-051 rather than by a physical key handover I can evidence.",
+  "Assumption: the landlord of record is a single person despite the two names used; the approval at event-018 is treated as that landlord's."
+ ],
+ "uncertainty": [
+  "Whether the 30 September visit took place at all - no attendance confirmation exists from provider or tenant.",
+  "The invoiced total: the attachment is unavailable, so it cannot be checked against the approved GBP 90 plus VAT.",
+  "Whether the landlord received a readable invoice (event-043 attachment recorded as unavailable)."
+ ],
+ "safety_actions": [
+  "Safety-pass check: no safety keyword material in this case - no gas, electrical, damp, mould or detector content, and no occupant vulnerability is reported. Checked the insecure-property emergency definition against the report: the tenant describes a window that does not close properly because of a rusted hinge, with no report of a window that cannot be secured, breakage or a break-in, so the case stays routine. The tenant has been asked to confirm the window now closes and secures (ACT-1); if it does not, urgency is to be raised, not lowered (priority rule)."
+ ],
+ "withheld_actions": [
+  "Did not close the request: work_result and landlord_confirmation are pending, and CAP-CLOSE allows closure only after the final checks.",
+  "Did not dispatch or re-instruct a contractor: the job at event-020 was already instructed on the landlord's approval at event-018; a second work order would duplicate it.",
+  "Did not request further landlord approval: the approved GBP 90 plus VAT covers the only quoted work (APR-SPEND-OVER-CAP not engaged).",
+  "Did not state who pays or comment on the invoice being settled (PRO-PAYMENTS, PRO-TENANT-LIABILITY).",
+  "Did not pass tenant contact or occupancy detail beyond what the job needs (PRO-PII)."
+ ],
+ "steps": 6,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:12:07.477649Z",
+ "finished_at": "2026-10-10T14:14:49.726701Z",
+ "input_tokens": 90953,
+ "output_tokens": 10755,
+ "cache_read_tokens": 85122
+}

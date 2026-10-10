@@ -1,0 +1,591 @@
+{
+ "case_id": "006",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "The ticket was closed by the agency's automation (event-027) while three checks are not evidenced: the landlord's completion confirmation (flagged needed at event-024, no landlord reply after event-015), a conflict in the agency's own records about which provider holds the job (Cedar Utilities, event-003/005, vs \"Sawyer\", event-013/016/020) and which property the attending contractor was at (event-018 names Flat 12, 122 Juniper Mews, Westmarsh), and no record that smoke/CO alarms were tested before the flat is remarketed. Deciding whether a closed job was performed at the right property, and whether to stand by that closure, is a human decision (ESC-CONFLICT, RTE-STAFF). Within my authority I recorded the conflicts (ACT-1) and asked the landlord to confirm completion, invoice receipt and VAT (ACT-2). I did not instruct any contractor: the works are already reported complete and a second instruction would duplicate the work order.",
+ "recap": "Check-out works auto-closed; landlord completion confirmation, provider/property record conflict and alarm test unevidenced — escalated to the office.",
+ "stage": "final_checks",
+ "hold_reason": "",
+ "next_step": "Property manager to resolve the Cedar Utilities / Sawyer and Flat 21 / Flat 12 record conflict and confirm the works were done at Flat 21; landlord to confirm completion and invoice (asked, ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 (scope logged), categorised as routine check-out works at a vacant flat; no damage-limiting advice needed — property vacant.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-015 — landlord's own message \"Pls go ahead\" approving the event-013 quote.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "Cedar Utilities assigned and briefed (event-003, event-005) but completion recorded against Sawyer (event-020); link unevidenced.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "skipped",
+   "evidence": "No slot ever confirmed in the history despite three chases (event-006, event-007, event-008); property vacant so tenant access consent not required.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-013 quote, approved by the landlord at event-015; VAT not stated — queried (ACT-2).",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-020 \"Sawyer completed\" is a system note with no photos, no address and no provider confirmation.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "done",
+   "evidence": "event-023 — skip reason recorded: \"Sawyer invoices landlord directly\".",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-023 — contractor invoices the landlord direct; receipt queried with the landlord (ACT-2).",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-024 flagged it as needed; no landlord message after event-015; requested at ACT-2.",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "done",
+   "evidence": "event-026 — keys return confirmed 29 Oct 2024.",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-027 closed the request, but work_result, provider identity and landlord confirmation are unevidenced; office to decide whether the closure stands.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property on the ticket is Flat 21, 11 Juniper Mews, Northbridge, ZZ7 0ZZ; request is check-out works after the tenant vacated: replace burnt carpet and repaint throughout.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Maintenance provider assigned and briefed on 20 Sep was Cedar Utilities; three chases were sent for an appointment (20, 21, 24 Sep) and the system flagged 3+ reminders with no booking.",
+   "source_ids": [
+    "event-003",
+    "event-005",
+    "event-006",
+    "event-007",
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The only contractor reply on file gives costs for work \"at the studio\" and no appointment details; it names no address.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Quote relayed to the landlord on 9 Oct, attributed to \"Sawyer\": painting GBP 220, carpet approx 27 sqm GBP 240, bathroom vinyl GBP 100, chrome sink waste GBP 45 (GBP 605 total); VAT not stated.",
+   "source_ids": [
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The landlord approved the quoted works in his own message: \"Pls go ahead\" (9 Oct 19:37).",
+   "source_ids": [
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Two of the four approved line items (bathroom vinyl, chrome sink waste) were not in the original request.",
+   "source_ids": [
+    "event-001",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "A hold note of 15 Oct records Sawyer attending Flat 12, 122 Juniper Mews, Westmarsh, ZZ8 7ZZ — a different property from this ticket.",
+   "source_ids": [
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Work recorded complete on 26 Oct (\"Sawyer completed\"); documents skipped with reason \"Sawyer invoices landlord directly\"; landlord confirmation flagged as still needed; keys return confirmed 29 Oct; request then closed as all checks complete.",
+   "source_ids": [
+    "event-020",
+    "event-023",
+    "event-024",
+    "event-026",
+    "event-027"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No landlord message appears in the history after the approval at event-015, so no landlord confirmation of completion is on file.",
+   "source_ids": [
+    "search_history",
+    "event-024"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No record in the case of smoke or carbon monoxide alarms being tested before the flat is remarketed.",
+   "source_ids": [
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "Priority could not be decreased to 0 at key-return (current priority 1).",
+   "source_ids": [
+    "event-026"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Agency records disagree on who holds the job: Cedar Utilities was assigned and chased, while the quote, approval relay and completion are recorded against \"Sawyer\".",
+   "fact_ids": [
+    "F2",
+    "F4",
+    "F8"
+   ],
+   "source_ids": [
+    "event-003",
+    "event-005",
+    "event-013",
+    "event-016",
+    "event-020"
+   ],
+   "resolution": "Recorded in the case note (ACT-1) and put to the office; no side taken in any message to a party.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Agency records disagree on the property: this ticket is Flat 21, 11 Juniper Mews, Northbridge, but the attendance hold names Flat 12, 122 Juniper Mews, Westmarsh, and the contractor reply calls the unit \"the studio\".",
+   "fact_ids": [
+    "F1",
+    "F3",
+    "F7"
+   ],
+   "source_ids": [
+    "event-012",
+    "event-018",
+    "index"
+   ],
+   "resolution": "Escalated to the property manager; closure rests on an unverified attendance address.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Landlord named as \"Oscar\" in the quote email but the hold asks whether \"Ruben\" approved the quote.",
+   "fact_ids": [
+    "F4",
+    "F5"
+   ],
+   "source_ids": [
+    "event-013",
+    "event-014"
+   ],
+   "resolution": "Not used; the landlord was addressed without a first name (ACT-2).",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Event-024 records landlord confirmation as outstanding; event-027 closes the request as all checks complete.",
+   "fact_ids": [
+    "F8",
+    "F9"
+   ],
+   "source_ids": [
+    "event-024",
+    "event-027"
+   ],
+   "resolution": "Landlord asked to confirm completion and invoice (ACT-2); closure flagged to the office.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion and closure recorded against a provider and an address that the agency's own records do not tie to this ticket (Cedar Utilities vs Sawyer; Flat 21 Northbridge vs Flat 12 Westmarsh).",
+   "source_ids": [
+    "event-003",
+    "event-013",
+    "event-018",
+    "event-020",
+    "event-027"
+   ],
+   "action_taken": "Logged in the case note (ACT-1) and escalated to the property manager."
+  },
+  {
+   "kind": "other",
+   "description": "Approved spend includes two items (bathroom vinyl GBP 100, chrome sink waste GBP 45) outside the original instruction, and the quote states no VAT; the landlord nonetheless approved it in his own words.",
+   "source_ids": [
+    "event-001",
+    "event-013",
+    "event-015"
+   ],
+   "action_taken": "VAT position queried with the landlord (ACT-2); no spend instructed by me."
+  },
+  {
+   "kind": "other",
+   "description": "Pre-remarketing smoke and carbon monoxide alarm test is nowhere recorded in the case; this is a check to make, not a reported hazard.",
+   "source_ids": [
+    "search_history"
+   ],
+   "action_taken": "Named in the landlord message (ACT-2) and in the handover for the office to book."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "006",
+    "title": "Case 006: Check-Out Works: Carpet Replacement and Repainting",
+    "received_at": "2024-09-20 13:25:35 UTC",
+    "track": "Property Management",
+    "case_number": "006",
+    "property": "Flat 21, 11 Juniper Mews, Northbridge, ZZ7 0ZZ",
+    "source_role": "Agency manager",
+    "agency": "Northbridge Lettings",
+    "events_visible": 27,
+    "attachments_hidden": 0,
+    "details": "# Case 006: Check-Out Works: Carpet Replacement and Repainting\n\n## Case details\n- source role: Agency manager\n- created: 2024-09-20 13:25:35 UTC\n- property: Flat 21, 11 Juniper Mews, Northbridge, ZZ7 0ZZ\n\n## Initial request\nFollowing the tenant vacating please provide an estimate to; \n1) Replace burnt carpet\n2) Repaint through out"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-get_case_details-1a5fbcae2b13",
+   "receipt": "{\"id\": \"006\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:58:02.623628Z",
+   "finished_at": "2026-10-10T13:58:02.623692Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-get_action_ledger-ae0f664440fd",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:02.623780Z",
+   "finished_at": "2026-10-10T13:58:02.623819Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "alarm smoke carbon monoxide detector tested"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-search_history-96dfa9c56048",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:58:32.634664Z",
+   "finished_at": "2026-10-10T13:58:32.634891Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-012",
+     "timestamp": "2024-10-09 12:52:13 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2024-10-09 12:52:13 UTC] Email · from: Contractor · to: Agency / system\nThe customer provides a detailed list of tasks and associated costs for maintenance work at the studio, but does not mention appointment details."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-search_history-e304bfaa8e8e",
+   "receipt": "[{\"event\": \"event-012\", \"timestamp\": \"2024-10-09 12:52:13 UTC\", \"channel\": \"Email\", \"from\": \"Contractor\", \"to\": \"Agency / system\", \"excerpt\": \"[2024-10-09 12:52:13 UTC] Email · from: Contractor · to:…",
+   "started_at": "2026-10-10T13:58:32.634942Z",
+   "finished_at": "2026-10-10T13:58:32.635028Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-015",
+     "timestamp": "2024-10-09 19:37:08 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Agency / system",
+     "excerpt": "[2024-10-09 19:37:08 UTC] Email · from: Landlord · to: Agency / system\nPls go ahead"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "006-search_history-7cf2e8a3103c",
+   "receipt": "[{\"event\": \"event-015\", \"timestamp\": \"2024-10-09 19:37:08 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Agency / system\", \"excerpt\": \"[2024-10-09 19:37:08 UTC] Email · from: Landlord · to: Age…",
+   "started_at": "2026-10-10T13:58:32.635114Z",
+   "finished_at": "2026-10-10T13:58:32.635160Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Post-closure review (ticket closed by system at event-027). Open points found: (1) Provider conflict in agency records — provider assigned/briefed was Cedar Utilities (event-003, event-005, event-006, event-007), but the quote, approval relay and completion are recorded against \"Sawyer\" (event-013, event-016, event-020); no record links the two. (2) Property conflict — the hold at event-018 records \"Sawyer attending Flat 12, 122 Juniper Mews, Westmarsh, ZZ8 7ZZ this week\", a different address from this ticket's Flat 21, 11 Juniper Mews, Northbridge; the contractor reply at event-012 refers to \"the studio\". Whether the completed work (event-020) was at this property is therefore not evidenced. (3) Scope — approved quote (event-013/015) covers bathroom vinyl £100 and chrome sink waste £45 in addition to the two items in the original request (event-001). (4) Landlord completion confirmation was flagged as needed (event-024) but no landlord reply after event-015 appears in the history; closure at event-027 therefore rests on an unevidenced check. (5) Pre-remarketing safety check: no record anywhere in the case that smoke and carbon monoxide alarms were tested (history search returned nothing). (6) Documents/invoice skipped with reason \"Sawyer invoices landlord directly\" (event-023) — landlord pays; no invoice sighted by the agency. Keys return confirmed (event-026). No hazard reported; \"burnt carpet\" (event-001) is damage, not an active hazard."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-add_note-6d5ca89d4faa",
+   "action_id": "006-add_note-6d5ca89d4faa",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:58:49.917773Z",
+   "finished_at": "2026-10-10T13:58:49.918102Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Flat 21, 11 Juniper Mews, Northbridge, ZZ7 0ZZ — check-out works (carpet and redecoration).\n\nYou approved the quoted works on 9 October (your reply \"Pls go ahead\", event-015): painting £220, carpet approx 27 sqm £240, bathroom vinyl £100, new chrome sink waste £45. Our record shows the works reported complete on 26 October and the keys returned on 29 October.\n\nTwo things we need from you to close our file:\n1. Please confirm the works at this property are complete and to your satisfaction.\n2. Our note says the contractor invoices you direct, so no invoice has come through us — please confirm you have received it, and whether VAT was in addition to the figures above (the quote did not state it).\n\nWe are also arranging a check that the smoke and carbon monoxide alarms at the flat have been tested before it is remarketed, and will confirm."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "006-notify_landlord-0d528414aaca",
+   "action_id": "006-notify_landlord-0d528414aaca",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:58:49.918305Z",
+   "finished_at": "2026-10-10T13:58:49.918651Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Confirm that smoke and CO alarms have been tested before the flat is remarketed",
+   "due": "before remarketing",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Provider will contact the tenant to arrange a time (event-004)",
+   "due": null,
+   "source_id": "event-004",
+   "status": "superseded"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 20 Sep 2024 (event-001); works reported complete 26 Oct 2024 (event-020).",
+   "deadline": null,
+   "note": "Property vacant throughout; no occupant detriment."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge report within one working day",
+   "status": "prior",
+   "basis": "Tenant and provider written on 20 Sep (event-004, event-005).",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "The check-out works at Flat 21, 11 Juniper Mews were auto-closed on 29 Oct — do we stand by that closure, or reopen until we can evidence that \"Sawyer\" (not the assigned provider Cedar Utilities) did the work at this flat and the landlord confirms it?",
+  "summary": [
+   "Provider assigned and briefed was Cedar Utilities (event-003, event-005); the quote, approval relay and completion sit against \"Sawyer\" (event-013, event-016, event-020) with no record linking them.",
+   "Hold note event-018 records Sawyer attending Flat 12, 122 Juniper Mews, Westmarsh ZZ8 7ZZ; the only contractor reply (event-012) refers only to work \"at the studio\" and names no address.",
+   "Landlord approved the GBP 605 of works in his own reply \"Pls go ahead\" (event-015) against the quote in event-013; the quote states no VAT and includes bathroom vinyl GBP 100 and a sink waste GBP 45 beyond the original request (event-001).",
+   "Landlord confirmation was flagged as outstanding (event-024) and no landlord message appears after event-015, yet event-027 closed the request as all checks complete.",
+   "No record anywhere in the case that smoke or carbon monoxide alarms were tested before remarketing; documents/invoice skipped because \"Sawyer invoices landlord directly\" (event-023); keys returned (event-026)."
+  ],
+  "gap": "No evidence of which firm attended, at which address; no landlord confirmation of completion; VAT position on the GBP 605 unknown; smoke/CO alarm test status unknown.",
+  "options": [
+   "Reopen to final_checks: obtain the landlord's written confirmation (already requested, ACT-2) and the contractor's confirmation of the address worked on, then re-close naming the landlord as payer.",
+   "Stand by the closure, log the provider/property discrepancy as a data-quality correction, and book the smoke/CO alarm test separately before remarketing.",
+   "Ask the landlord or accounts for Sawyer's invoice first, to evidence the address worked on and the VAT position."
+  ],
+  "recommended": "Reopen to final_checks: landlord confirmation is already requested; add a contractor confirmation of the address and an alarm test before the flat is remarketed.",
+  "default_if_timeout": "Ticket stays closed on the system record with the discrepancies logged (ACT-1) and the alarm test unverified.",
+  "deadline": "Before the flat is remarketed / before the landlord settles Sawyer's invoice",
+  "undo": "Nothing irreversible by me: one internal note (ACT-1) and one landlord message (ACT-2). No contractor instructed, no spend committed, no closure altered.",
+  "context_refs": [
+   "event-001",
+   "event-003",
+   "event-005",
+   "event-012",
+   "event-013",
+   "event-015",
+   "event-016",
+   "event-018",
+   "event-020",
+   "event-023",
+   "event-024",
+   "event-026",
+   "event-027"
+  ]
+ },
+ "authority_citations": [
+  "CAP-LOG",
+  "CAP-NOTIFY",
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "RTE-LANDLORD",
+  "CAP-DISPATCH-APPROVED",
+  "PRO-TENANT-LIABILITY",
+  "PRO-LEGAL",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: \"Sawyer\" is an individual or firm acting for the job; no record ties the name to Cedar Utilities, so I treat the link as unproven rather than assumed.",
+  "Assumption: the GBP 605 quote figures are exclusive of VAT is NOT assumed — VAT is simply unstated and has been queried."
+ ],
+ "uncertainty": [
+  "Whether the completed works were carried out at Flat 21, 11 Juniper Mews, Northbridge or at the Westmarsh address in event-018.",
+  "Whether Cedar Utilities and Sawyer are the same provider.",
+  "Whether the landlord has received and accepted the invoice, and whether VAT applies on top of GBP 605.",
+  "Whether smoke/CO alarms have ever been tested at this property."
+ ],
+ "safety_actions": [
+  "Checked the whole history for smoke/CO alarm testing before remarketing: no record found; flagged for the office and the landlord.",
+  "Confirmed no live hazard: the property is vacant (event-001) and 'burnt carpet' is damage, not an active fire or electrical fault, so the emergency-hazard playbook does not apply."
+ ],
+ "withheld_actions": [
+  "Did not re-instruct or duplicate a work order: the works are already reported complete (event-020).",
+  "Did not reopen or alter the system closure (event-027) — outside my authority.",
+  "Did not apportion the burnt carpet to the tenant or mention deposit deductions (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+  "Did not relay the Flat 12 / Cedar Utilities discrepancy to the landlord or contractor as a settled fact (rule 2)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T13:57:57.996206Z",
+ "finished_at": "2026-10-10T14:00:49.111947Z",
+ "input_tokens": 52521,
+ "output_tokens": 15123,
+ "cache_read_tokens": 56748
+}

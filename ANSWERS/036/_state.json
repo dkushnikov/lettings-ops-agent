@@ -1,0 +1,529 @@
+{
+ "case_id": "036",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The repair is reported complete at no charge, but three closure checks are outstanding, so the request stays open on hold rather than being closed. I updated the landlord with the outcome and the no-charge basis, asked the tenant to confirm both the original and the 14/10 secondary fault are resolved, and chased the provider for the photos the landlord asked for (reply-by 12/11/2026). No spend decision was needed: the landlord approved instruction in their own message (event-006) and the provider confirms no charge (event-050). I did not close the request: landlord confirmation (RTE-LANDLORD) and documents are pending, and a closure with pending checklist items is not valid under CAP-CLOSE.",
+ "recap": "Shower/bath tap reported complete at no charge; landlord updated, tenant and provider chased for confirmation and photos, request held at final checks, not closed.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Landlord — confirmation to close after the provider's no-charge completion; in parallel awaiting provider photos and tenant confirmation, reply-by 12/11/2026 (ACT-5)",
+ "next_step": "Landlord (Sawyer) to confirm completion so the request can be closed; provider to send photos and tenant to confirm the fault is resolved by 12/11/2026.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-002: issue logged and categorised as a shower repair; routine, no emergency definition met; no damage-limiting steps applicable to a broken tap knob",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-006 — landlord's own message approving a contractor; work ultimately carried out at no charge (event-050)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-008, event-009, event-011 — Keystone Services assigned and briefed; tenant notified",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-016/event-018/event-019 (29/09) and event-038/event-039 (09:30 Wed 4 November)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote raised; provider confirmed no charge under his own guarantee (event-050, event-051)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-050 — provider reports job complete, new bath tap fitted",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos or invoice received despite chases (event-048); provider chased again with reply-by 12/11/2026 (ACT-3)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-052 marked completed without payment; landlord told there is no invoice and no cost (ACT-1)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord asked to confirm closure (ACT-1); no reply yet",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "F9 — no management key issued; tenant provided access",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Held at final_checks (ACT-5); closure withheld until landlord confirmation, photos/skip reason and tenant confirmation are in",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 24/09/2026 that the shower pull knob is broken and the cap comes off each use at Flat 13, 73 Juniper Mews, Northbridge, ZZ1 6ZZ.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The landlord (Sawyer) approved instructing a contractor in their own reply 'Yes please!' on 25/09/2026.",
+   "source_ids": [
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Keystone Services was assigned and briefed, and the tenant was told who was attending, on 25/09/2026.",
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "A visit was confirmed with tenant and provider for 29/09/2026 09:00-09:30, and later re-booked to 09:30 Wednesday 4 November after a part was ordered.",
+   "source_ids": [
+    "event-016",
+    "event-018",
+    "event-019",
+    "event-038",
+    "event-039"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The provider reported on 07/11/2026 that the job is complete, a new bath tap was fitted, and there is no charge because the tap he fitted in February was faulty; the agency recorded the task as completed without payment.",
+   "source_ids": [
+    "event-050",
+    "event-051",
+    "event-052"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "No quote or priced spend was ever put to the landlord, because the provider carried out the work at no cost under his own guarantee; the landlord also noted the taps are under guarantee.",
+   "source_ids": [
+    "event-043",
+    "event-050"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "The landlord asked for photos of the works and raised concern about the elapsed time; the agency chased the provider for photos on 07/11/2026 but none have been received.",
+   "source_ids": [
+    "event-043",
+    "event-045",
+    "event-048"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "On 14/10/2026 the tenant reported a further symptom to the provider: shower and tap running simultaneously when a button is pressed; no record confirms this was resolved.",
+   "source_ids": [
+    "event-030"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "No management key was issued; the tenant gave access directly to the provider at agreed slots.",
+   "source_ids": [
+    "event-018",
+    "event-019"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The agency told the landlord the fitting visit was 03/11/26 (event-041) while the provider's confirmed booking was 09:30 Wednesday 4 November (event-038, event-039).",
+   "fact_ids": [
+    "F4"
+   ],
+   "source_ids": [
+    "event-038",
+    "event-039",
+    "event-041"
+   ],
+   "resolution": "Provider's own booking confirmation governs the slot; difference is now moot as the work is reported complete (event-050). Recorded in the case note (ACT-4).",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Hold at event-035 is logged as 'Waiting for Landlord' although the chase at event-034 was to the provider.",
+   "fact_ids": [],
+   "source_ids": [
+    "event-034",
+    "event-035"
+   ],
+   "resolution": "Administrative mislabel only; current hold set correctly to Waiting for Landlord for the closure confirmation (ACT-5).",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Provider's completion report is a short untrusted email with no photos and no invoice, and it describes a 'bath tap' where the tenant reported a shower pull knob; the job was auto-marked 'completed without payment' on that basis alone.",
+   "source_ids": [
+    "event-050",
+    "event-052"
+   ],
+   "action_taken": "Closure withheld; photos and scope confirmation requested from the provider and working confirmation requested from the tenant (ACT-2, ACT-3, ACT-4)."
+  },
+  {
+   "kind": "other",
+   "description": "Attachments referenced in the provider brief are listed as unavailable, and the tenant's video evidence could not be attached, so no visual record of the original fault exists.",
+   "source_ids": [
+    "event-001",
+    "event-011"
+   ],
+   "action_taken": "Recorded; photos requested from the provider to give the landlord a record (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "036",
+    "title": "Case 036: Shower Tap Repair",
+    "received_at": "2026-09-24 12:28:30 UTC",
+    "track": "Property Management",
+    "case_number": "036",
+    "property": "Flat 13, 73 Juniper Mews, Northbridge, ZZ1 6ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 52,
+    "attachments_hidden": 0,
+    "details": "# Case 036: Shower Tap Repair\n\n## Case details\n- source role: Tenant\n- created: 2026-09-24 12:28:30 UTC\n- property: Flat 13, 73 Juniper Mews, Northbridge, ZZ1 6ZZ\n\n## Initial request\nshower pull knob is broken. every time i need to use the shower the cap comes off. i have a video but there’s no way to attach here."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "036-get_case_details-fdf92630a161",
+   "receipt": "{\"id\": \"036\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:09:16.051309Z",
+   "finished_at": "2026-10-10T14:09:16.051474Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "036-get_action_ledger-872a083baa1e",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:09:16.051708Z",
+   "finished_at": "2026-10-10T14:09:16.052021Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 13, 73 Juniper Mews, Northbridge, ZZ1 6ZZ — Shower/bath tap repair\n\nUpdate: the contractor has reported the job complete on 07/11/2026. He states a new bath tap was fitted at no charge, as the tap he fitted in February was faulty (his email of 07/11/2026). There is therefore no invoice for you and no cost to the account.\n\nTwo points still open:\n1. We have asked the contractor again for photos of the completed work, which you requested.\n2. We are asking the tenant to confirm the shower and tap now operate correctly, as a further fault was raised on 14/10/2026 (shower and tap running at the same time).\n\nPlease confirm you are happy for us to close this request once those two items are back. If we do not hear from you within 3 working days we will chase again rather than close.\n\nMany thanks\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "036-notify_landlord-af780709de5a",
+   "action_id": "036-notify_landlord-af780709de5a",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:09:37.342083Z",
+   "finished_at": "2026-10-10T14:09:37.342256Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Noah Bennett,\n\nFlat 13, 73 Juniper Mews, Northbridge, ZZ1 6ZZ — Shower Repair Request\n\nKeystone Services have told us the work was completed and a new bath tap fitted, at no charge to you.\n\nCould you please confirm that the shower and tap are now working correctly — including the fault you raised on 14/10/2026 where the shower and tap ran at the same time when the button was pressed? If anything is still not right, please reply and we will arrange a return visit.\n\nWe are sorry for the time this has taken.\n\nKind regards\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "036-notify_tenant-2af1abc4f10d",
+   "action_id": "036-notify_tenant-2af1abc4f10d",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:09:37.342332Z",
+   "finished_at": "2026-10-10T14:09:37.342410Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 13, 73 Juniper Mews, Northbridge, ZZ1 6ZZ — Shower Repair Request\n\nThank you for confirming the job is complete with a new bath tap fitted at no charge.\n\nTwo things to close our file, please reply by 12/11/2026:\n1. Photos of the completed work — the landlord has asked for these specifically.\n2. Confirmation that the fault the tenant reported on 14/10/2026 (shower and tap running at the same time when the button is pressed) has also been resolved, or whether a return visit is needed.\n\nIf we have no reply by that date we will chase and record the photos as not provided.\n\nMany thanks\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "036-notify_contractor-18eb8a615ca4",
+   "action_id": "036-notify_contractor-18eb8a615ca4",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:09:37.342472Z",
+   "finished_at": "2026-10-10T14:09:37.342542Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case 036 review. Work reported complete by provider 07/11/2026 (event-050): new bath tap fitted, no charge, provider states it was his own faulty tap fitted in February. System already marked \"completed without payment\" (event-052) — request NOT closed by me: landlord confirmation (RTE-LANDLORD) and the photos the landlord asked for (event-043, event-045, event-048) are still outstanding, and the secondary fault the tenant reported on 14/10/2026 (shower and tap running together, event-030) has not been confirmed fixed. Actions ACT-1/2/3: landlord updated on outcome and no-charge basis, tenant asked to confirm both faults resolved, provider chased for photos and confirmation with a reply-by of 12/11/2026. Data-quality point: the agency told the landlord the fitting visit was 03/11/26 (event-041) while the provider's booking was 09:30 Wed 4 November (event-038, event-039) — no action needed now as work is reported done, flagged for accuracy. No cost decision taken by me; no tenant liability considered (PRO-TENANT-LIABILITY). No hazard keywords reported in this case (no gas, electrical, water ingress or damp report) — urgency routine, CLK-S11 running from 24/09/2026."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "036-add_note-fd98546e7f6b",
+   "action_id": "036-add_note-fd98546e7f6b",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:09:47.208680Z",
+   "finished_at": "2026-10-10T14:09:47.209139Z"
+  },
+  {
+   "seq": 7,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — confirmation to close following provider's no-charge completion; also awaiting provider photos and tenant confirmation (requests sent 2026-11-07, reply-by 12/11/2026)",
+    "until": "2026-11-12"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "036-put_on_hold-bc7d4d9c58d1",
+   "action_id": "036-put_on_hold-bc7d4d9c58d1",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:09:47.209312Z",
+   "finished_at": "2026-10-10T14:09:47.209573Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Chase again rather than close if no reply within 3 working days",
+   "due": "2026-11-12",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Photos and confirmation of the 14/10 fault requested, reply-by date given",
+   "due": "2026-11-12",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Arrange a return visit if the shower or tap is still faulty",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Replace the faulty part free of charge and finish the job",
+   "due": null,
+   "source_id": "event-025",
+   "status": "kept"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 24/09/2026 (event-001); work reported complete 07/11/2026 (event-050) — ~6 weeks elapsed, landlord has queried the delay (event-043)",
+   "deadline": null,
+   "note": "Delay driven by a faulty part and provider leave (event-025, event-031)"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 24/09/2026; tenant notified of provider 25/09/2026 (event-009)",
+   "deadline": null,
+   "note": ""
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Do you confirm the shower/bath tap job as complete and agree we close the request, recorded as completed without payment (new tap fitted free of charge under the provider's own guarantee)?",
+   "why": "RTE-LANDLORD: landlord confirmation is a closure check; landlord had also raised concerns about the delay (event-043).",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Please send photos of the completed work and confirm whether the tenant's 14/10/2026 fault (shower and tap running simultaneously when the button is pressed) is also resolved.",
+   "why": "Landlord specifically requested photos (event-043, event-048); documents item of the definition of done is otherwise unmet.",
+   "blocking": false
+  },
+  {
+   "to": "tenant",
+   "question": "Is the shower and tap now working correctly, including the fault you reported on 14/10/2026 where both ran at the same time?",
+   "why": "RTE-TENANT: only the tenant can confirm the fault at the property is actually resolved before closure.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-CLOSE",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the 'bath tap' in the provider's completion email (event-050) refers to the same shower/tap mixer the tenant reported; this is being verified with the tenant and provider rather than assumed in the closure."
+ ],
+ "uncertainty": [
+  "Whether the secondary fault reported on 14/10/2026 (shower and tap running simultaneously) was included in the completed work (event-030, event-050).",
+  "Whether any photos exist; the provider has not supplied them despite three chases (event-048, ACT-3)."
+ ],
+ "safety_actions": [
+  "Safety-pass check: no hazard keywords reported or observed in this case — no gas, electrical, water ingress, damp/mould, heating loss or security issue in any artefact; urgency confirmed routine, so no emergency capability engaged.",
+  "No occupant vulnerability disclosed; no health or family data shared with the provider (PRO-PII)."
+ ],
+ "withheld_actions": [
+  "close_request — CAP-CLOSE: landlord confirmation and documents are still pending, so a closure now would be invalid despite the system's 'completed without payment' status line (event-052).",
+  "Any statement on who pays or on the provider's guarantee liability — PRO-TENANT-LIABILITY / RTE-LANDLORD; the no-charge position is reported as the provider's own statement only.",
+  "No new dispatch raised: one work order only, the existing provider holds the job (playbook step 3)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:09:12.670635Z",
+ "finished_at": "2026-10-10T14:10:35.983728Z",
+ "input_tokens": 52308,
+ "output_tokens": 7075,
+ "cache_read_tokens": 56748
+}

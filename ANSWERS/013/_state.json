@@ -1,0 +1,536 @@
+{
+ "case_id": "013",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The repair was carried out and invoiced, but the ticket was auto-closed (event-034) with two final checks outstanding: landlord confirmation of completion and of the £162.85 charge (flagged by the system itself at event-031, no landlord message anywhere in the history), and provider documentation (invoice/VAT and the photo or video required at event-006). I did not re-instruct any contractor and did not decide anything about payment (PRO-PAYMENTS). I asked the landlord to confirm the completed repair and the £162.85, asked Harbour Surveying for the invoice and evidence, told the tenant the reported outcome, and raised a human task for the office about the premature closure and the \"Meadow Solutions\" naming discrepancy. The case now waits on named parties, so it finishes as request_info, not an escalation.",
+ "recap": "Dishwasher repaired and invoiced at £162.85, but the ticket closed without landlord confirmation or provider photos; both now requested.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — Clara to confirm the completed repair and the £162.85 invoice (asked now; 3-day reply clock). Also Waiting for Provider — Harbour Surveying to send invoice/VAT and photo evidence.",
+ "next_step": "Landlord to confirm completion and the £162.85 charge (request sent, ACT-2; 3-day clock) — then the office can let the closure stand.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "index / event-003: fault categorised as an integrated dishwasher repair, routine; no damage-limiting steps applicable beyond the leak advice sent at ACT-4.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "No landlord message exists in the history; only agency-to-landlord notifications (event-002, event-028). Retrospective confirmation requested at ACT-2.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-004, event-006 (provider briefed), event-005 (tenant told who is coming).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-020, event-021, event-023 — AM slot 08/10/2024 confirmed with provider and tenant.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "skipped",
+   "evidence": "No quote was ever submitted; the provider repaired on site and invoiced (event-027), contrary to the brief at event-005/event-006. Flagged to the office (ACT-5).",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-027 / event-028 — provider reported the repair complete and invoiced; result is from the provider only, tenant confirmation requested (ACT-4).",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photo/video or VAT-bearing invoice on file despite event-006 requiring evidence; requested at ACT-3.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-028 — £162.85 invoice passed to the landlord.",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-031 flagged it as needed; no landlord reply on file. Requested at ACT-2.",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "event-033 records keys return confirmed; no artefact shows a management key was issued for this visit.",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-034 records closure, but landlord confirmation and documents are still outstanding, so the closure does not meet the final checks; office asked whether it should stand (ACT-5).",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant at Flat 2, 42 Beacon Close, Bellmere, ZZ4 2ZZ reported an integrated dishwasher that starts, beeps, flashes the power light and stops working.",
+   "source_ids": [
+    "index",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Urgency is routine: an appliance fault with no hazard, no loss of an essential service, and no vulnerability reported in any artefact.",
+   "source_ids": [
+    "index"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The agency told the landlord it would send an appliance engineer (event-002) and assigned Harbour Surveying (event-004), briefing tenant and provider (event-005, event-006).",
+   "source_ids": [
+    "event-002",
+    "event-004",
+    "event-005",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "No landlord message appears anywhere in the visible history; there is therefore no landlord approval event and no spend cap on file (default cap £0).",
+   "source_ids": [
+    "event-002",
+    "event-028",
+    "event-031"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "An AM visit on 08/10/2024 was confirmed with tenant and provider.",
+   "source_ids": [
+    "event-020",
+    "event-021",
+    "event-023",
+    "event-024"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Harbour Surveying invoiced for a completed job on 12/10/2024; the agency told the landlord the dishwasher was repaired on site and that the £162.85 invoice would come from the rent.",
+   "source_ids": [
+    "event-027",
+    "event-028"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "The system flagged 'Need confirmation from landlord' (event-031) and then closed the request minutes later (event-034) with no landlord reply received.",
+   "source_ids": [
+    "event-031",
+    "event-034"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No photo or video evidence and no VAT breakdown are on file, although the provider brief required evidence with the quote.",
+   "source_ids": [
+    "event-006",
+    "event-027"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "A system note records keys return confirmed; no artefact shows a management key was issued for this visit.",
+   "source_ids": [
+    "event-032",
+    "event-033"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "A call transcript describes the job as 'assigned by Meadow Solutions' while the agency record, instruction emails and the invoice all name Harbour Surveying.",
+   "fact_ids": [
+    "F3",
+    "F6"
+   ],
+   "source_ids": [
+    "event-010",
+    "event-004",
+    "event-006",
+    "event-027"
+   ],
+   "resolution": "Agency records and the invoice (both naming Harbour Surveying) outrank an untrusted call transcript; no party was told either way, and the discrepancy was passed to the office (ACT-5).",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "The agency told the tenant and the provider that a quote would be approved with the landlord before instruction, but the provider repaired on site and invoiced instead.",
+   "fact_ids": [
+    "F3",
+    "F6"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-006",
+    "event-027"
+   ],
+   "resolution": "Landlord asked to confirm the completed repair and the £162.85 retrospectively (ACT-2); office notified (ACT-5).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Two contractor emails are empty ('[Text/transcription absent]'), so the provider's own words on scope and booking are not on file; a transcript names a different provider ('Meadow Solutions'); a provider call on 05/11/2024 reached the wrong party after closure.",
+   "source_ids": [
+    "event-011",
+    "event-017",
+    "event-010",
+    "event-035"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1) and in the human task (ACT-5); provider asked for written documentation (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Request closed (event-034) while 'Need confirmation from landlord' was still outstanding (event-031) and the invoice was stated as coming from the rent (event-028) without a landlord reply.",
+   "source_ids": [
+    "event-028",
+    "event-031",
+    "event-034"
+   ],
+   "action_taken": "Landlord confirmation requested (ACT-2); office asked whether the closure should stand and whether the rent account has already been charged (ACT-5). No money moved — PRO-PAYMENTS."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "013",
+    "title": "Case 013: Integrated Dishwasher Repair Request",
+    "received_at": "2024-10-01 13:35:29 UTC",
+    "track": "Property Management",
+    "case_number": "013",
+    "property": "Flat 2, 42 Beacon Close, Bellmere, ZZ4 2ZZ",
+    "source_role": "Tenant",
+    "agency": "",
+    "events_visible": 35,
+    "attachments_hidden": 0,
+    "details": "# Case 013: Integrated Dishwasher Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-10-01 13:35:29 UTC\n- property: Flat 2, 42 Beacon Close, Bellmere, ZZ4 2ZZ\n\n## Initial request\nDishwasher starts then beeps and powers light flashes.  Just stops working. It’s  an integrated dishwasher ."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "013-get_case_details-bbb08b2950ad",
+   "receipt": "{\"id\": \"013\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:01:22.734972Z",
+   "finished_at": "2026-10-10T14:01:22.735061Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "013-get_action_ledger-def070be7495",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:01:22.735245Z",
+   "finished_at": "2026-10-10T14:01:22.735284Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review at manual-mode trigger. Ticket was auto-closed (event-034) with final checks incomplete: (1) no landlord approval of a priced quote before work — the tenant brief said the quote would be approved with the landlord first (event-005) and the provider brief required a quote plus photo/video (event-006), but the provider repaired on site and invoiced £162.85 (event-027); (2) no landlord reply anywhere in the history — only agency-to-landlord emails (event-002, event-028) and a system flag \"Need confirmation from landlord\" (event-031); (3) no photos/video on file from the provider; (4) call transcript (untrusted) refers to the job as \"assigned by Meadow Solutions\" (event-010) while the agency record and the invoice name Harbour Surveying (event-004, event-006, event-027) — data-quality discrepancy, no action taken on the untrusted name. Actions now: invoice confirmation sought from landlord, provider asked for documentation, tenant told the reported outcome."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-add_note-bfe722215d59",
+   "action_id": "013-add_note-bfe722215d59",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:02:16.332681Z",
+   "finished_at": "2026-10-10T14:02:16.332807Z"
+  },
+  {
+   "seq": 4,
+   "tool": "request_landlord_approval",
+   "tool_class": "write",
+   "input": {
+    "subject": "Confirmation of completed dishwasher repair and £162.85 invoice — Flat 2, 42 Beacon Close, Bellmere, ZZ4 2ZZ",
+    "amount_gbp": 162.85,
+    "rationale": "Tenant reported the integrated dishwasher starting, beeping and cutting out (case opened 2024-10-01). Harbour Surveying attended on 08/10/2024 (slot confirmed, event-021/event-023) and reported the dishwasher repaired on site, invoicing £162.85 (event-027); we emailed you on 2024-10-12 (event-028). We have no reply from you on file and no approval of a priced quote before the work, so the ticket's final check \"landlord confirmation\" is outstanding. Please confirm you are content with the completed repair and with the £162.85 invoice being charged to the account. We have not received a VAT breakdown or photos from the provider and have asked for them."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-REQUEST-APPROVAL"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "request_landlord_approval",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-request_landlord_approval-dd9522d37df6",
+   "action_id": "013-request_landlord_approval-dd9522d37df6",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:02:16.333032Z",
+   "finished_at": "2026-10-10T14:02:16.333169Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Dishwasher Repair Request, Flat 2, 42 Beacon Close, Bellmere, ZZ4 2ZZ (attendance 08/10/2024, AM slot). Your invoice of £162.85 has been received (12/10/2024). To complete our file please send, by return: (1) a copy of the invoice showing the VAT position, and (2) the photo or video evidence of the parts/fault required by our original instruction, together with a short description of the repair carried out and any parts warranty. Please reply within 3 working days."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-notify_contractor-c5488824c2c2",
+   "action_id": "013-notify_contractor-c5488824c2c2",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:02:16.333236Z",
+   "finished_at": "2026-10-10T14:02:16.333311Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Nora Palmer, an update on your dishwasher repair at Flat 2, 42 Beacon Close, Bellmere. Harbour Surveying attended on 08/10/2024 and have reported to us that the dishwasher was repaired on site and is working. We are completing our paperwork with the provider and the landlord. Please let us know if the dishwasher is not working as it should — if the same fault has returned, tell us and we will reopen the job; there is no charge to you for reporting it. If you notice any water leaking around or under the appliance, please tell us straight away."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-notify_tenant-17897fc9fe8a",
+   "action_id": "013-notify_tenant-17897fc9fe8a",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:02:16.333369Z",
+   "finished_at": "2026-10-10T14:02:16.333434Z"
+  },
+  {
+   "seq": 7,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 013 closed with final checks outstanding — dishwasher repair, Flat 2, 42 Beacon Close",
+    "summary": "Ticket was marked closed on 12/10/2024 (event-034) but: no landlord approval of a priced quote before the work (tenant and provider were both told a quote would be approved first — event-005, event-006); provider repaired on site and invoiced £162.85 (event-027); agency told the landlord the invoice would \"come from the rent\" (event-028) — no landlord reply is on file and the system itself flagged \"Need confirmation from landlord\" (event-031) before closing; no photo/video evidence from the provider despite it being required (event-006); no VAT breakdown. Data quality: an untrusted call transcript refers to the job as assigned by \"Meadow Solutions\" (event-010) while the agency record and the invoice name Harbour Surveying (event-004, event-027); and a provider call on 05/11/2024 (event-035) reached the wrong party, so the provider may still be chasing something on this job. Actions taken by me: landlord asked to confirm the repair and the £162.85 charge; provider asked for invoice/VAT and photos within 3 working days; tenant told the reported outcome and asked to report any recurrence. Please confirm whether the £162.85 has already been applied to the rent account (agent does not move money, PRO-PAYMENTS) and whether the closure should stand."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "013-create_human_task-3d50ec771fb5",
+   "action_id": "013-create_human_task-3d50ec771fb5",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:02:16.333496Z",
+   "finished_at": "2026-10-10T14:02:16.333575Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Reply requested with invoice/VAT and photo evidence",
+   "due": "within 3 working days of ACT-3",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Confirmation sought on the completed repair and the £162.85 charge",
+   "due": "3 days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Job will be reopened if the same fault has returned",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time",
+   "status": "in_force",
+   "basis": "Reported 2024-10-01 (index); attended 08/10/2024 (event-021); repair reported complete 12/10/2024 (event-027)",
+   "deadline": null,
+   "note": "Met on the provider's account."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 2024-10-01 13:35, tenant acknowledged 2024-10-01 13:53 (event-005)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Please confirm you are content with the completed dishwasher repair at Flat 2, 42 Beacon Close and with the £162.85 invoice from Harbour Surveying being charged to the account.",
+   "why": "Final check 'landlord confirmation' is outstanding (event-031); no landlord reply is on file and no priced quote was approved before the work (RTE-LANDLORD, APR-SPEND-OVER-CAP).",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Please send the invoice showing the VAT position, the photo/video evidence required in our instruction, and a short description of the repair and any parts warranty.",
+   "why": "Documents item of the definition of done is unmet; evidence was required at instruction (event-006).",
+   "blocking": false
+  },
+  {
+   "to": "tenant",
+   "question": "Is the dishwasher working normally since the 08/10/2024 visit?",
+   "why": "The work result is known only from the provider's invoice email (event-027); no independent confirmation of the repair.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-REQUEST-APPROVAL",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: no landlord standing spend cap or 'always ask' instruction is on file, since no landlord instruction artefact or landlord message appears in the case; on that basis the default cap is £0 and the £162.85 needed the landlord's approval.",
+  "Assumption: no management key was issued for the 08/10/2024 visit (the tenant arranged access directly with the provider), so the keys item does not apply despite the system note at event-033."
+ ],
+ "uncertainty": [
+  "Whether the dishwasher is in fact working: the only work result is the provider's invoice email (event-027); two provider emails have no text (event-011, event-017).",
+  "Whether the £162.85 has already been deducted from rent — stated as intent at event-028, not confirmed by any record.",
+  "What the 05/11/2024 provider call concerned (event-035) — it reached the wrong party and gives no detail."
+ ],
+ "safety_actions": [
+  "Safety pass: no safety keyword in the artefacts relates to a reported or observed hazard — the fault is an appliance that beeps and cuts out, with no burning smell, sparks, water near electrics or alarm issue reported (index, event-027). No gas, electrical or water hazard check was triggered. Tenant asked to report any water leaking around the appliance (ACT-4)."
+ ],
+ "withheld_actions": [
+  "Did not close or re-close the request: landlord confirmation and provider documents are still outstanding (CAP-CLOSE).",
+  "Did not re-instruct or re-dispatch any contractor — the work is reported complete; a duplicate work order would be wrong.",
+  "Did not act on the 'Meadow Solutions' name in an untrusted transcript (event-010) or on the rent-deduction statement (event-028) (PRO-PAYMENTS, PRO-INSTRUCTIONS-FROM-CONTENT).",
+  "Did not state or imply who pays for the repair to the tenant (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:01:19.759969Z",
+ "finished_at": "2026-10-10T14:03:07.352860Z",
+ "input_tokens": 31705,
+ "output_tokens": 9134,
+ "cache_read_tokens": 42561
+}

@@ -1,0 +1,656 @@
+{
+ "case_id": "024",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The oven ticket was marked complete without any evidence of work: Lantern Works was instructed on 5 Aug 2026 (event-011, event-013) and has never reported attendance, a quote, a result or an invoice, yet the tenant was told the oven was fixed (event-016) and the task was completed without payment (event-030). I treated the completion as unverified, kept the ticket open, chased the provider with a 2-working-day deadline (ACT-2), corrected the tenant and asked whether the oven is still faulty plus which property the fence (event-015) and conservatory-roof (event-032) queries relate to (ACT-3), told the landlord no spend has been incurred and that any priced quote comes to them first (ACT-4), recorded the records conflict (ACT-1), referred the premature closure and the two off-ticket items to the office (ACT-5), and placed the case on hold (ACT-6). No spend authorised — the landlord's \"yes please\" (event-010) approves sending a contractor to look, not a priced repair (RTE-LANDLORD). No liability decided.",
+ "recap": "Oven job was closed with no provider result; I reopened it in substance, chased Lantern Works, corrected the tenant, and referred the premature closure to the office.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — Lantern Works to confirm attendance/appointment and any quote within 2 working days of the chase (ACT-2); tenant also asked to confirm the oven's current state and the fence/conservatory items (ACT-3).",
+ "next_step": "Lantern Works to reply within 2 working days with attendance status, an appointment window and any quote (amount + VAT); if they miss it, the property manager reallocates (ACT-5).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 issue logged; urgency set routine (use_playbook); workaround advice given to tenant at event-003 and water-near-electrics advice at ACT-3",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-010 landlord approved sending an appliance repair contractor in reply to event-008 (attendance only, no amount named)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-011/event-013 Lantern Works instructed; tenant told at event-012",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No appointment anywhere in the history; provider chased for a window (ACT-2)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No quote received from Lantern Works; landlord told any priced quote comes to them first (ACT-4)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No provider report on file; event-016 'fence and oven have both been fixed' is unsupported by any provider evidence",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-020/event-029 skip reason recorded ('invoices visible on Keystone Solutions') but no work photos or invoice document exists; event-017 'Invoice received' unsupported",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "event-030 marked completed without payment, but with no verified work result this status is unsafe; referred to office (ACT-5)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-021 'Need confirmation from landlord' never answered; landlord re-informed at ACT-4",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued — tenant arranges access directly with the provider (event-013); event-023/025/027 'Keys return confirmed' are system lines with a priority validation error",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Closure withheld: work result, quote, documents and landlord confirmation outstanding; ticket placed on hold (ACT-6)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 4 Aug 2026 that the oven does not cook properly — food still uncooked after 1.5 hours.",
+   "source_ids": [
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The agency first suggested a settings workaround with a manual (the manual itself is unavailable); the tenant replied the oven has not worked since move-in despite trying the settings and asked for an inspection.",
+   "source_ids": [
+    "event-003",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The landlord was asked whether an appliance repair contractor could attend and replied 'Hi, yes please' on 5 Aug 2026 — approval to attend, with no amount named.",
+   "source_ids": [
+    "event-008",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Lantern Works was assigned and briefed on 5 Aug 2026 and told to quote and only proceed after the agency's approval; the tenant was told they would make contact.",
+   "source_ids": [
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "No message from the contractor exists on this ticket: no attendance, appointment, quote, work result or invoice document.",
+   "source_ids": [
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "On 26 Aug 2026 the tenant was told the fence and oven 'have both been fixed'; the request was then marked complete, documents skipped, landlord confirmation left outstanding and the task completed without payment.",
+   "source_ids": [
+    "event-016",
+    "event-019",
+    "event-020",
+    "event-021",
+    "event-029",
+    "event-030"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Two tenant messages concern items outside this ticket: a fence repair update (5 Aug) and a leaking conservatory roof (26 Aug); neither is evidenced at Flat 6, a flat.",
+   "source_ids": [
+    "event-015",
+    "event-032"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "No landlord standing spend cap is on file in this case record, so there is no standing authority to spend (default cap £0).",
+   "source_ids": [
+    "get_case_details",
+    "CAP-DISPATCH-ROUTINE"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The agency's status records say the oven job is complete and closed without payment, but no provider result, quote, photo or invoice exists; 'Invoice received' (event-017) is unsupported by any document.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-016",
+    "event-017",
+    "event-019",
+    "event-030",
+    "search_history"
+   ],
+   "resolution": "Treated the completion as unverified: ticket kept open, provider chased (ACT-2), tenant told the 'fixed' message was sent in error (ACT-3), office asked to rule on reversing the closure (ACT-5).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Tenant correspondence on this oven ticket references a fence and a leaking conservatory roof, which do not match the reported fault or obviously the property (a flat).",
+   "fact_ids": [
+    "F7"
+   ],
+   "source_ids": [
+    "event-015",
+    "event-032"
+   ],
+   "resolution": "Asked the tenant which property these relate to and whether separate requests exist; referred to the office for routing (ACT-3, ACT-5). No side taken in messages to parties.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion, 'invoice received' and 'keys return confirmed' status lines recorded with no underlying evidence, and key-return lines carry a priority validation error; the tenant was told the work was done.",
+   "source_ids": [
+    "event-016",
+    "event-017",
+    "event-019",
+    "event-023",
+    "event-025",
+    "event-027",
+    "event-030"
+   ],
+   "action_taken": "Conflict logged (ACT-1), closure withheld, office task raised (ACT-5), tenant corrected (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Tenant emails on this ticket describe unrelated items (fence; leaking conservatory roof) — possible cross-ticket or cross-property contamination of the thread.",
+   "source_ids": [
+    "event-015",
+    "event-032"
+   ],
+   "action_taken": "Asked the tenant to confirm the property and whether separate requests exist; flagged to the office for routing."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "024",
+    "title": "Case 024: Oven repair request",
+    "received_at": "2026-08-04 00:45:42 UTC",
+    "track": "Property Management",
+    "case_number": "024",
+    "property": "Flat 6, 56 Juniper Mews, Northbridge, ZZ1 0ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 32,
+    "attachments_hidden": 0,
+    "details": "# Case 024: Oven repair request\n\n## Case details\n- source role: Tenant\n- created: 2026-08-04 00:45:42 UTC\n- property: Flat 6, 56 Juniper Mews, Northbridge, ZZ1 0ZZ\n\n## Initial request\nOven not/cooking warming food\n\nFor reference it takes more than double the amount of time to cook anything than usual\nE.g. nuggets or chips still uncooked after 1.30hrs"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "024-get_case_details-f3d1785164b8",
+   "receipt": "{\"id\": \"024\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:04:19.002700Z",
+   "finished_at": "2026-10-10T14:04:19.002785Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "024-get_action_ledger-b33adf39956e",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:04:19.002875Z",
+   "finished_at": "2026-10-10T14:04:19.002913Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "024-search_history-8c03558f56ed",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:04:28.961472Z",
+   "finished_at": "2026-10-10T14:04:28.961683Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "quote"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-012",
+     "timestamp": "2026-08-05 03:31:19 UTC",
+     "channel": "Email",
+     "from": "Northbridge Lettings",
+     "to": "Tenant",
+     "excerpt": "[2026-08-05 03:31:19 UTC] Email · from: Northbridge Lettings · to: Tenant\nDear Imogen Clarke,\n\nOur maintenance provider **Lantern Works** will be attending your property for an **Oven Repair Request**.\n\nThey will contact you soon to arrange a suitable time to quote for the job.\nThen we will need to approve the quote with the landlord and instruct the maintenance provider to do the job. It might take a while, and we will do our best to do it as quickly as possible.\n\nRequest description: Oven not/"
+    },
+    {
+     "event": "event-013",
+     "timestamp": "2026-08-05 03:31:19 UTC",
+     "channel": "Email",
+     "from": "Northbridge Lettings",
+     "to": "Maintenance provider",
+     "excerpt": "[2026-08-05 03:31:19 UTC] Email · from: Northbridge Lettings · to: Maintenance provider\nDear Lantern Works,\n\nThis is a new **Oven Repair Request** for the property at Flat 6, 56 Juniper Mews, Northbridge, ZZ1 0ZZ.\n\nPlease contact the tenant to arrange a suitable time to complete the job or provide a quote if required.\n\n**Contact Details:** 07700 900512\n**Tenant Name:** Imogen Clarke\n**Request description:** Oven not/cooking warming food\n\nFor reference it takes more than double the amount of time"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "024-search_history-b8fd973e7508",
+   "receipt": "[{\"event\": \"event-012\", \"timestamp\": \"2026-08-05 03:31:19 UTC\", \"channel\": \"Email\", \"from\": \"Northbridge Lettings\", \"to\": \"Tenant\", \"excerpt\": \"[2026-08-05 03:31:19 UTC] Email · from: Northbridge Let…",
+   "started_at": "2026-10-10T14:04:28.961755Z",
+   "finished_at": "2026-10-10T14:04:28.961901Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "fence conservatory"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "024-search_history-28c72b52f5db",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:04:28.962042Z",
+   "finished_at": "2026-10-10T14:04:28.962106Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Record review (no contractor correspondence exists on this ticket — search_history from_party=Contractor returned nil; search 'quote' returns only the agency's own briefs event-012/event-013). Conflict on the agency's own record: Lantern Works was assigned and briefed 2026-08-05 (event-011, event-013) and told to quote and \"only proceed after receiving our approval\"; no attendance, quote, work result or invoice from the provider is on file. Despite this, event-016 told the tenant the \"fence and oven have both been fixed\", event-019 marked the request completed, event-020/029 skipped documents, event-021 left landlord confirmation outstanding, and event-030 completed the task without payment. Landlord approval on file (event-010 \"Hi, yes please\") covers sending an appliance repair contractor to look (event-008); it does not name an amount, so a priced quote still needs landlord approval (RTE-LANDLORD). Two tenant messages concern items that are not this ticket and not obviously this flat: fence (event-015) and leaking conservatory roof (event-032); event-017 \"Invoice received\" is unsupported by any invoice document. Treating the completion as unverified; ticket kept open, provider chased, office asked to rule on the premature closure."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "024-add_note-db8682e3b454",
+   "action_id": "024-add_note-db8682e3b454",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:05:11.965927Z",
+   "finished_at": "2026-10-10T14:05:11.966435Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Lantern Works — chase on the Oven Repair Request at Flat 6, 56 Juniper Mews, Northbridge, ZZ1 0ZZ (tenant Imogen Clarke, 07700 900512), instructed by us on 5 August 2026. We have no record of your attendance, quote or completion report on this job. Please reply within 2 working days with: (1) whether you have contacted the tenant and attended; (2) if attended, the work result and any photos; (3) if not yet attended, your next available appointment window and, where a repair or part is needed, a written quote (amount and VAT) — do not proceed with chargeable work until we confirm the landlord's approval. If we receive no reply within 2 working days we will refer the job for reallocation."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "024-notify_contractor-453401f5afa2",
+   "action_id": "024-notify_contractor-453401f5afa2",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:05:11.966554Z",
+   "finished_at": "2026-10-10T14:05:11.966644Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Imogen Clarke, regarding the oven at Flat 6, 56 Juniper Mews. Our file shows our provider Lantern Works was instructed on 5 August 2026, but we have no report back from them, so I am not able to treat the job as finished. Our message of 26 August saying the oven had been fixed was sent in error and I am sorry for the confusion — the request stays open. I have chased Lantern Works today and asked them to reply within 2 working days with an appointment window and any quote; I will come back to you as soon as they respond, and no visit is booked until you have agreed a time with us. So that we handle this correctly, please confirm: (1) is the oven still failing to cook properly? (2) your message about a leaking conservatory roof, and the earlier one about a fence — are these at this property, and have they been reported separately? If water is coming in anywhere near lights, sockets or other electrics, please tell us straight away and avoid using those electrics; we will treat that as an emergency."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "024-notify_tenant-d95aeb5dbac8",
+   "action_id": "024-notify_tenant-d95aeb5dbac8",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:05:11.966720Z",
+   "finished_at": "2026-10-10T14:05:11.966793Z"
+  },
+  {
+   "seq": 9,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Update on the oven repair at Flat 6, 56 Juniper Mews, Northbridge, ZZ1 0ZZ. Following your approval to send an appliance repair contractor (your email of 5 August 2026), Lantern Works was instructed the same day. They have not reported attendance, a quote or a completion, so the job is not verified as done and the ticket remains open; no spend has been incurred and no invoice is on our file. We have chased the provider with a 2-working-day reply deadline. If a repair or replacement part is quoted, we will send you the amount and VAT for approval before any chargeable work starts. No action is needed from you at this point."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "024-notify_landlord-9388a0fe33db",
+   "action_id": "024-notify_landlord-9388a0fe33db",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:05:11.966896Z",
+   "finished_at": "2026-10-10T14:05:11.967029Z"
+  },
+  {
+   "seq": 10,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Oven job closed with no provider result — reopen check + two unrelated tenant items (Flat 6, 56 Juniper Mews)",
+    "summary": "Oven repair, Flat 6, 56 Juniper Mews (reported 4 Aug 2026, event-001). Landlord approved sending an appliance contractor (event-010); Lantern Works instructed 5 Aug (event-011, event-013). No contractor correspondence exists on the ticket (history search returns none): no attendance, no quote, no work result, no invoice document. Despite that, the tenant was told on 26 Aug that \"fence and oven have both been fixed\" (event-016), the request was marked completed (event-019), documents were skipped (event-020/029), landlord confirmation was left outstanding (event-021) and the task was completed without payment (event-030); event-017 records \"Invoice received\" with no invoice on file. Decisions for a person: (1) confirm the completion/\"completed without payment\" status is reversed and the ticket re-opened, or produce the provider's result/invoice held in the portal (Keystone Solutions) to evidence it; (2) whether Lantern Works should be reallocated if they miss the 2-working-day chase deadline; (3) route the tenant's fence query (event-015) and leaking conservatory roof query (event-032) — neither belongs to this oven ticket and neither is obviously this flat; confirm whether separate tickets exist, and check the conservatory leak for water-ingress/electrics risk. Actions taken by me: provider chased with a 2-working-day deadline (ACT-2), tenant told the \"fixed\" message was sent in error and the job remains open, with questions on the fence/conservatory and water-near-electrics advice (ACT-3), landlord informed no spend incurred and a priced quote will come to them first (ACT-4). No spend authorised; no liability decided."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "024-create_human_task-c5c50152cacf",
+   "action_id": "024-create_human_task-c5c50152cacf",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:05:25.301412Z",
+   "finished_at": "2026-10-10T14:05:25.301729Z"
+  },
+  {
+   "seq": 11,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — Lantern Works to confirm attendance/appointment window and any quote for the oven repair; 2-working-day deadline given (ACT-2). Also awaiting tenant's confirmation that the oven is still faulty and clarification of the fence/conservatory items (ACT-3).",
+    "until": "2 working days from 2026-08-26 chase"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-6",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "024-put_on_hold-4f5487b2f35c",
+   "action_id": "024-put_on_hold-4f5487b2f35c",
+   "receipt": "{\"id\": \"ACT-6\"}",
+   "started_at": "2026-10-10T14:05:25.301914Z",
+   "finished_at": "2026-10-10T14:05:25.302104Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Reply required within 2 working days with attendance status, appointment window and any quote, else the job is referred for reallocation",
+   "due": "2 working days from the chase (ACT-2)",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back as soon as Lantern Works responds; no visit booked without the tenant agreeing a time",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Any quote (amount and VAT) will be sent for approval before chargeable work starts",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "'Fence and oven have both been fixed' (26 Aug) — unsupported by any provider evidence",
+   "due": null,
+   "source_id": "event-016",
+   "status": "broken"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 4 Aug 2026 (event-001); still unrepaired and unverified 22+ days later",
+   "deadline": null,
+   "note": "Running against the landlord; provider delay is the cause"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 5 Aug 2026 (event-003, event-007)",
+   "deadline": null,
+   "note": "Met"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Lantern Works: have you contacted the tenant and attended Flat 6, 56 Juniper Mews for the oven repair instructed on 5 Aug 2026? If attended, send the work result and photos; if not, send your next appointment window and a quote (amount and VAT) before any chargeable work.",
+   "why": "No provider correspondence exists on the ticket (history search); scope, attendance and quote are the contractor's to settle (RTE-CONTRACTOR).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Is the oven still failing to cook properly at Flat 6, 56 Juniper Mews?",
+   "why": "The ticket was closed as fixed (event-016) with no provider result; only the tenant can confirm the current state of the fault (RTE-TENANT).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Are the fence query (5 Aug) and the leaking conservatory roof query (26 Aug) about this property, and were they reported as separate requests? If water is coming in near electrics, tell us immediately.",
+   "why": "Both items are outside this oven ticket and a flat with a fence/conservatory is ambiguous; a leak near electrics would change urgency (RTE-TENANT, ESC-SAFETY).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE",
+  "APR-SPEND-OVER-CAP",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "RTE-LANDLORD",
+  "ESC-CONFLICT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the fence and conservatory-roof queries are not part of this oven ticket; treated as items to route rather than as facts about this property.",
+  "Assumption: no management key was issued for this visit, since the provider was told to arrange access directly with the tenant (event-013)."
+ ],
+ "uncertainty": [
+  "Whether Lantern Works ever attended — the provider has sent nothing to this ticket.",
+  "Whether an invoice genuinely exists in the Keystone Solutions portal as the skip note claims (event-029); it is not visible in this case record.",
+  "Whether the oven is currently working: the tenant has not been asked since the closure message."
+ ],
+ "safety_actions": [
+  "Checked the report against the emergency definitions: an oven that cooks slowly is an appliance inconvenience — no gas smell, sparks, burning smell, water ingress, loss of heating/hot water or security failure is reported anywhere in the artefacts, so the case stays routine.",
+  "Safety-pass keyword check: the only hazard-adjacent material is the tenant's mention of a leaking conservatory roof (event-032) — not reported at this flat and not described as near electrics; asked the tenant to tell us immediately if water is near lights or sockets and to avoid those electrics, and flagged it to the office (ACT-3, ACT-5).",
+  "No occupant vulnerability is recorded in the case material; no health or family details shared with the contractor (PRO-PII)."
+ ],
+ "withheld_actions": [
+  "Did not close the request: work result, quote, documents and landlord confirmation are outstanding (CAP-CLOSE).",
+  "Did not dispatch or re-dispatch a contractor at a cost: no standing cap on file and the landlord's approval names no amount (APR-SPEND-OVER-CAP); the existing instruction to Lantern Works stands — no duplicate work order.",
+  "Did not decide who pays or whether the fault is tenant-related (PRO-TENANT-LIABILITY).",
+  "Did not state a repair cost or an appointment date, as no artefact provides one (CAP-NOTIFY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:04:14.177947Z",
+ "finished_at": "2026-10-10T14:06:22.976649Z",
+ "input_tokens": 53117,
+ "output_tokens": 9618,
+ "cache_read_tokens": 70935
+}

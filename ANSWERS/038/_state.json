@@ -1,0 +1,601 @@
+{
+ "case_id": "038",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "No contractor and no spend are needed: the tenant volunteered to replace the broken washing machine with his own and the landlord approved that in his own written reply (event-009), including covering a removal charge for the old appliance. The tenant then arranged free disposal privately (event-010, event-011), so the job runs at no cost and the agency instructs nobody. I confirmed the verbally agreed terms to the tenant in writing (ACT-1), updated the landlord and reserved any disposal invoice to him (ACT-2), recorded the inventory/ownership variation and the safety check on file (ACT-3), and sent the records conflict — a call note placing this same fault at a different property (event-004) and a wrong agency name in the tenant call (event-010) — to the property manager for correction (ACT-4). I did not close the file: the swap has not been confirmed as done, so the ticket is on hold with the tenant (ACT-5). I did not decide liability: the tenant offered the cost and the landlord accepted it (PRO-TENANT-LIABILITY).",
+ "recap": "Tenant replacing the broken washing machine with his own; landlord approved at no cost, terms confirmed in writing, file held pending the tenant's confirmation the swap is done.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Tenant — Ruben to confirm the old machine has gone, his own machine is installed, and whether any disposal charge arose (held to 31 July 2025, ACT-5).",
+ "next_step": "Tenant (Ruben) to confirm the old machine has been removed and his replacement installed, and that no disposal fee was charged; then the agency closes the file as completed without payment.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002: categorised Appliances / Power failure, severity ROUTINE, containment step (photograph machine and error codes) given to tenant; no emergency definition matched.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-005 (agency asked, naming Flat 9, 59 Alder Lane) and event-009 (landlord Henry Ingram: 'Yes this is fine') — approval for the tenant to replace the machine and for the landlord to meet a removal charge.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "not_applicable",
+   "evidence": "No provider required: tenant supplies and installs his own machine (event-001, event-009) and arranged private disposal (event-010, event-011). Tenant briefed on the arrangement at event-010 and in writing at ACT-1.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "No agency or contractor access needed; the tenant is doing the swap himself (event-011).",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No priced quote: agency spend is nil. The only possible cost, a £24.37–£30 removal charge, was pre-approved by the landlord (event-005, event-009) and is not expected to arise (event-010).",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "History shows intent only — 'ruben will get a new machine and her brother will take the old one to the tip' (event-011). Confirmation requested from the tenant at ACT-1.",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "No contractor attendance, no invoice and no photos to collect — tenant-supplied appliance at no cost to the landlord (event-012, event-013); reason recorded at ACT-3.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-013 marks the task completed without payment; ACT-2 tells the landlord no charge is expected and that any disposal invoice will be referred to him before it is agreed.",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-009 landlord agreed the arrangement; ACT-2 confirms the outcome and the ownership variation back to him.",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; no contractor visit (event-002 records no access considerations).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Held at ACT-5 pending the tenant's confirmation; closing now would record work as done that no party has confirmed.",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "The managed property on this ticket is Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ.",
+   "source_ids": [
+    "index",
+    "get_case_details",
+    "event-005",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The tenant (Ruben) reported the LG washing machine, which was in the property when he moved in, has a power failure and is not operational; he offered to replace it at his own cost on the basis that the new machine stays his property and leaves with him.",
+   "source_ids": [
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Intake classified the issue as Appliances / Power failure, severity ROUTINE, confidence high; no access constraints and no pets.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The agency asked the landlord, by email naming Flat 9, 59 Alder Lane, to approve the tenant replacement and to cover a removal charge of normally around £24.37–£30.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The landlord, Henry Ingram, replied 'Yes this is fine' on 27 July 2025 — his own message, which is the approval authority for this job.",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The tenant was told on 28 July that the landlord agreed, and said his brother would take the old machine to the tip; the agency accepted that and noted it.",
+   "source_ids": [
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The agency's notes record the replacement as at the tenant's cost with the landlord aware, and the task as completed without payment.",
+   "source_ids": [
+    "event-012",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No contractor has been instructed on this ticket and no agency spend has been incurred or committed.",
+   "source_ids": [
+    "get_action_ledger",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No sparks, burning smell, scorching or shock risk is reported anywhere in the file; the only electrical wording is the appliance's own 'power failure'.",
+   "source_ids": [
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "System validation on 27 July refused to lower priority from 8 to 5 and routed the ticket for manual review after the landlord's reply.",
+   "source_ids": [
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "The landlord-approval call note records the same washing-machine failure at a different address, Flat 18, 128 Meadow Row, Cedarford, ZZ5 9ZZ.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F12",
+   "statement": "In the call to the tenant the caller introduces herself as 'Eliza at Riverside Solutions', while the agency of record is Northbridge Lettings.",
+   "source_ids": [
+    "event-010",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Which property the landlord approval call concerned: the ticket and both emails say Flat 9, 59 Alder Lane, Eastmere; the call note of that same approval call says Flat 18, 128 Meadow Row, Cedarford.",
+   "fact_ids": [
+    "F1",
+    "F4",
+    "F11"
+   ],
+   "source_ids": [
+    "index",
+    "event-004",
+    "event-005"
+   ],
+   "resolution": "The landlord's written approval (event-009) is a reply to the email that named Flat 9, 59 Alder Lane (event-005), and crm_record/ticket outrank a call transcript, so authority for this property holds. The call note is treated as a probable mis-key; no party has been told either version and the correction (or a separate ticket for Flat 18) is with the property manager at ACT-4. The action on this ticket is unchanged either way, so no escalation.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Agency identity in the tenant call ('Riverside Solutions') differs from the agency of record (Northbridge Lettings).",
+   "fact_ids": [
+    "F12"
+   ],
+   "source_ids": [
+    "event-010",
+    "get_case_details"
+   ],
+   "resolution": "get_case_details gives the agency as Northbridge Lettings; the call-note wording is a logging error, sent for correction at ACT-4. Outbound messages use Northbridge Lettings only.",
+   "resolved_by": "tool_check"
+  },
+  {
+   "description": "Tenant referred to as 'her'/'she' in event-005, event-011 and event-012 but 'Ruben'/'he' elsewhere.",
+   "fact_ids": [
+    "F2"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-011",
+    "event-012"
+   ],
+   "resolution": "Not acted on and not copied into any letter; flagged for the office to check against the tenancy record (ACT-4). Correspondence used the name on the case record only.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "The agency's own call note for the approval call places this washing-machine fault at Flat 18, 128 Meadow Row, Cedarford, not the ticket's Flat 9, 59 Alder Lane; the tenant call also names a different agency ('Riverside Solutions'), and tenant gender is inconsistent across notes.",
+   "source_ids": [
+    "event-004",
+    "event-010",
+    "event-011"
+   ],
+   "action_taken": "Conflict recorded and sent to the property manager for correction at source (ACT-4); no party told either version; approval relied on is the landlord's reply to the email naming Flat 9 (event-005, event-009)."
+  },
+  {
+   "kind": "other",
+   "description": "The intake summary calls it 'The Willow Maintenance washing machine', a provider-style name with no basis elsewhere in the file; it was not treated as a contractor instruction or as an appliance warranty route.",
+   "source_ids": [
+    "event-001",
+    "event-002"
+   ],
+   "action_taken": "Ignored as unsupported; no provider contacted. Noted for the office at ACT-4 only as part of the record tidy-up."
+  },
+  {
+   "kind": "other",
+   "description": "Tenant-funded replacement of a landlord-supplied appliance changes what the property comes with at the end of the tenancy, and the landlord's 'Yes this is fine' is brief.",
+   "source_ids": [
+    "event-009",
+    "event-012"
+   ],
+   "action_taken": "Terms restated in writing to both parties (ACT-1, ACT-2) and the inventory amendment recorded for the file (ACT-3), so nobody relies on a verbal account at check-out. No deposit or liability statement made (PRO-LEGAL, PRO-TENANT-LIABILITY)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "038",
+    "title": "Case 038: Washing Machine Replacement Request",
+    "received_at": "2025-07-26 14:02:11 UTC",
+    "track": "Property Management",
+    "case_number": "038",
+    "property": "Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 13,
+    "attachments_hidden": 0,
+    "details": "# Case 038: Washing Machine Replacement Request\n\n## Case details\n- source role: Tenant\n- created: 2025-07-26 14:02:11 UTC\n- property: Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ\n\n## Initial request\nRequest summary with context: The Willow Maintenance washing machine is experiencing a power failure and is not operational.\n\nTenant's original query: Washing machine broken, it’s LG , we have googled it, it has power failure and can’t be fixed, I am willing to replace, this one was here when I moved in, but if I replace it will be mine and not become part of the property, if I ever was to move out I would take it with me."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "038-get_case_details-3903d104870c",
+   "receipt": "{\"id\": \"038\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:09:21.285010Z",
+   "finished_at": "2026-10-10T14:09:21.285073Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "038-get_action_ledger-567bd8072461",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:09:21.285180Z",
+   "finished_at": "2026-10-10T14:09:21.285215Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello Ruben, confirming in writing what was agreed on the phone on 28 July about the washing machine at Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ:\n\n1. Your landlord has confirmed he is happy for you to replace the broken machine with your own (his written reply, 27 July).\n2. The machine you buy stays your property and you may take it with you when the tenancy ends. The property will then be let without a washing machine unless something different is agreed in writing at that time.\n3. You told us your brother will take the old machine to the tip. If instead you are charged a removal/disposal fee, tell us before you pay it — the landlord agreed to cover a removal charge (we quoted around £24.37–£30), and we will arrange it.\n4. Please disconnect the old machine at the socket and the water valve before it is moved, and tell us straight away if you notice any scorching, burning smell or damage to the socket or wiring behind it — the report mentioned a power failure, so we want to rule out a fault with the supply rather than the appliance.\n\nCould you let us know once the old machine has gone and the new one is in, so we can complete our records? Many thanks."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "038-notify_tenant-bc8ed77b8cda",
+   "action_id": "038-notify_tenant-bc8ed77b8cda",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:10:24.438845Z",
+   "finished_at": "2026-10-10T14:10:24.439025Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Mr Ingram, update on the washing machine at Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ.\n\nThank you for your approval of 27 July. We have confirmed to the tenant in writing that: he may replace the broken machine with his own; that machine remains his property and may be removed at the end of the tenancy (so the property would then be let without a washing machine unless agreed otherwise); and that you agreed to cover a removal charge for the old appliance.\n\nThe tenant has arranged for the old machine to be taken away privately at no cost, so we expect no charge to you. No contractor has been instructed and no money has been or will be moved by us on this job; if a disposal invoice does arise we will come back to you before anything is agreed.\n\nWe have also asked the tenant to report any sign of scorching or a burning smell at the socket, so that a supply fault is ruled out rather than assumed to be the appliance. We will close the file once he confirms the swap is done."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "038-notify_landlord-c08a84b8f9ac",
+   "action_id": "038-notify_landlord-c08a84b8f9ac",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:10:24.439098Z",
+   "finished_at": "2026-10-10T14:10:24.439183Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Tenancy variation recorded: tenant supplies own washing machine at Flat 9, 59 Alder Lane; landlord Henry Ingram approved in writing (event-009) in reply to our email naming this address (event-005). Appliance remains tenant's property and may be removed on vacating; inventory/check-out file to be updated so the landlord's machine is marked removed and no replacement is a landlord fixture. Landlord agreed to fund removal of the old machine (£24.37-30 quoted, event-004/event-005); tenant's own arrangement means no spend expected (event-010, event-011), so no contractor instructed and no payment made (event-013). Liability for the cost of the new machine was volunteered by the tenant (event-001) and accepted by the landlord (event-009) - not an agency liability decision (PRO-TENANT-LIABILITY). Safety check: report is an appliance \"power failure\" (event-002); no sparks, burning smell or shock risk reported anywhere in the file, so no emergency trigger; tenant asked to report any scorching at the socket so a supply-side electrical fault is excluded. Priority remains 8 per validation at event-008; urgency assessed routine, priority not lowered."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "038-add_note-6b47882a023d",
+   "action_id": "038-add_note-6b47882a023d",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:10:24.439245Z",
+   "finished_at": "2026-10-10T14:10:24.439316Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Record conflict on Case 038: call note cites a different property and a different agency name",
+    "summary": "Two agency-side records on this ticket disagree with the case record and need correcting at source; no party has been told either version.\n\n1. Property: the ticket, the email to the landlord (event-005) and the email to the tenant (event-006) all name Flat 9, 59 Alder Lane, Eastmere, ZZ4 4ZZ. The call note of the landlord approval call (event-004) records the same washing-machine failure at \"Flat 18, 128 Meadow Row, Cedarford, ZZ5 9ZZ\". The landlord's approval (event-009) is a reply to the email that named Flat 9, so authority for this property is sound; the call note appears mis-keyed, or a second property has an unlogged washing-machine fault.\n2. Agency name: the tenant call (event-010) has the caller introducing herself as \"Eliza at Riverside Solutions\"; the agency of record is Northbridge Lettings.\n3. Tenant gender is recorded inconsistently across event-005, event-011 and event-012 (\"her\" / \"his\"); check the tenancy record before any further correspondence.\n\nAsks: correct event-004 (or raise a ticket for Flat 18, 128 Meadow Row if that property genuinely has a failed machine), correct the agency name in the call log, and confirm the inventory amendment noted on file (landlord's machine removed; tenant's machine not a landlord fixture)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "038-create_human_task-4dece3bcdfeb",
+   "action_id": "038-create_human_task-4dece3bcdfeb",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:10:24.439377Z",
+   "finished_at": "2026-10-10T14:10:24.439458Z"
+  },
+  {
+   "seq": 7,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant - confirmation that the old machine has been removed and his own machine installed, and that no disposal charge was incurred, before final checks are completed and the file is closed.",
+    "until": "2025-07-31"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "038-put_on_hold-ad93b8e79874",
+   "action_id": "038-put_on_hold-ad93b8e79874",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:10:24.439512Z",
+   "finished_at": "2026-10-10T14:10:24.439573Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back to the tenant once the landlord responded",
+   "due": "2025-07-28",
+   "source_id": "event-006",
+   "status": "kept"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Landlord will cover a removal/disposal charge for the old machine if one is incurred; tenant to tell us before paying",
+   "due": null,
+   "source_id": "event-009",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "The replacement machine remains the tenant's property and may be taken when he vacates",
+   "due": null,
+   "source_id": "event-009",
+   "status": "open"
+  },
+  {
+   "by": "tenant",
+   "to": "agency",
+   "what": "Tenant to buy and install his own machine; his brother to take the old one to the tip",
+   "due": null,
+   "source_id": "event-010",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Any disposal invoice will be referred to the landlord before it is agreed; no money moved by the agency on this job",
+   "due": null,
+   "source_id": "event-005",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report logged 26 July 2025 14:02 UTC (event-001); tenant acknowledged by email 27 July 07:02 UTC (event-006).",
+   "deadline": "2025-07-27",
+   "note": "Met."
+  },
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 26 July 2025 (event-001). Landlord's repairing obligation for the supplied appliance was discharged by the agreed substitution: the tenant supplies his own machine with the landlord's written consent (event-009).",
+   "deadline": null,
+   "note": "No outstanding landlord repair unless the tenant reports a socket or wiring fault, which would restart the clock as a landlord repair."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Tenant reply window on the held file",
+   "status": "sop",
+   "basis": "Hold placed at ACT-5 to 31 July 2025, consistent with the 3-day party-reply wait at event-007.",
+   "deadline": "2025-07-31",
+   "note": "If no reply by then, the manual-mode 'wait expired' trigger applies: a person closes the file as completed without payment on the tenant call record (event-010, event-011) or chases once."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Please confirm once the old washing machine has been taken away and your own machine is installed — and tell us before you pay if anyone charges you a removal or disposal fee, as your landlord agreed to cover that cost.",
+   "why": "Completion of the work and the absence of any chargeable disposal are the last two final-check items; the history shows only the tenant's plan (event-010, event-011), not that it has happened.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "When the old machine is pulled out, is there any scorching, melting, burning smell or damage at the socket or the wiring behind it?",
+   "why": "The fault was reported as a 'power failure' (event-002). A supply-side electrical fault would be a landlord repair and could affect a new machine; nothing in the file reports sparks or a burning smell, so this is a check to record, not a reported hazard.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "APR-SPEND-OVER-CAP",
+  "PRO-TENANT-LIABILITY",
+  "PRO-LEGAL",
+  "PRO-PAYMENTS",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "PRO-PII",
+  "CLK-S11",
+  "CLK-SOP-ACK",
+  "CAP-CLOSE"
+ ],
+ "assumptions": [
+  "Assumption: the tenant's private disposal will cost nothing, so no spend arises. Not yet confirmed — this is why the file is held rather than closed (ACT-5).",
+  "Assumption: the £24.37–£30 removal figure is the agency's own indicative band from event-005, not a quote from any provider.",
+  "Assumption: 'The Willow Maintenance washing machine' in the intake summary is a garbled machine/provider label, not an instructed contractor or a warranty route."
+ ],
+ "uncertainty": [
+  "Whether the old machine has actually been removed and a new one installed — only the tenant's stated plan is on file (event-011).",
+  "Whether the 'power failure' is the appliance or the socket/supply circuit; nobody has tested the socket, and the tenant's diagnosis is a web search (event-001).",
+  "Whether event-004 is a mis-keyed address or a genuine second property with the same fault; if the latter, Flat 18, 128 Meadow Row may have an unlogged repair (ACT-4).",
+  "Why ticket priority is 8 while severity is ROUTINE (event-008); priority left at 8 and not lowered, per the priority rule."
+ ],
+ "safety_actions": [
+  "Checked the report against the emergency definitions: an inoperative washing machine is not loss of an essential service and no gas, water-ingress, security or electrical-hazard trigger is present (event-002, F9) — handled under maintenance-request, not emergency-hazard.",
+  "Safety-pass keyword 'electrical/power failure' addressed explicitly: no sparks, scorching or burning smell reported in any artefact; asked the tenant to check and report the socket and wiring behind the machine when it is pulled out, so a supply-side fault is excluded rather than assumed (ACT-1).",
+  "Asked the tenant to isolate the machine at the socket and the water valve before it is moved (ACT-1).",
+  "No occupant health, age or family details exist in the file and none were shared; no contractor was given tenant data (PRO-PII)."
+ ],
+ "withheld_actions": [
+  "Did not instruct any contractor: no spend is needed and there is no standing cap on file (CAP-DISPATCH-ROUTINE default cap £0).",
+  "Did not close the request: work_result is unconfirmed, and closing on the strength of a system status line (event-013) would record unverified completion (CAP-CLOSE).",
+  "Did not state that the tenant is liable for the repair, or mention the deposit or end-of-tenancy deductions (PRO-TENANT-LIABILITY, PRO-LEGAL) — the cost was offered by the tenant and accepted by the landlord.",
+  "Did not act on the intake's 'Willow Maintenance' label or the call note's Cedarford address by contacting anyone (PRO-INSTRUCTIONS-FROM-CONTENT); routed to the office instead.",
+  "Did not escalate: the only decision needing a person is a records correction, which is a human task, and the landlord has already settled the landlord-owned question (event-009)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:09:17.426898Z",
+ "finished_at": "2026-10-10T14:11:58.574713Z",
+ "input_tokens": 22200,
+ "output_tokens": 11347,
+ "cache_read_tokens": 42561
+}

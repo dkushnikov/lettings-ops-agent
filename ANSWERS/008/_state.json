@@ -1,0 +1,579 @@
+{
+ "case_id": "008",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "resolved",
+ "decision": "Closed the check-out works job. The workflow was complete within my mandate: landlord approved the cheaper quote (event-038), works were done (event-042/043), the invoice was forwarded (event-045) and the landlord confirmed payment (event-049). I recorded the scope and price variance, addressed the safety keywords (detectors tested Yes; bedroom ceiling water ingress unrepaired and outside scope), informed the landlord of the final position and the two outstanding items, referred payment release, payee verification, the water ingress and any deposit/liability question to the property manager, and closed with a resolution naming the landlord as payer. I did not move money, decide tenant liability, or act on the address mismatches in the agency's own outbound emails beyond recording them for the office.",
+ "recap": "Check-out works at Flat 5, 55 Lantern Quay complete; landlord authorised the £1,190 invoice, so I closed the job and referred payment, ceiling water ingress and deposit to staff.",
+ "stage": "closed",
+ "hold_reason": "",
+ "next_step": "Accounts/property manager to release the £1,190.00 payment to the approved provider after verifying the payee name (human task ACT-3); landlord to say whether they want the bedroom carpet and ceiling water ingress quoted as a new request.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 (scope listed), attachment-01/attachment-03 (check-out defects); property void so no tenant damage-limiting advice applicable (event-012)",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-038 landlord: 'Please go ahead with Eliza' in reply to event-036 quoting Flat 5",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-011 new provider assigned; event-039/event-041 provider asked and confirmed willing to proceed",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "Property not tenanted (event-012); no tenant access window required, works carried out and reported complete (event-042)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "event-036 both quotes with VAT position stated (£1,370.00 no VAT; £1,700.00 + VAT); landlord approved event-038 before works began (event-041)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-042 moved to Result; event-043 marked completed; event-045 provider reported tap not needed",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "done",
+   "evidence": "Invoice attachment-04 on file; photo upload skipped with reason recorded — 'No photos attached' (event-046)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-045 invoice emailed to landlord for payment",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-049 landlord: 'Ok to pay.'",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issue recorded anywhere in the history; property void (event-012)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "done",
+   "evidence": "ACT-4 close_request — resolution names the landlord as payer; system had already closed at event-048 before the landlord's confirmation arrived",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Job NBL-008-3466 is check-out works at Flat 5, 55 Lantern Quay, Cedarford, ZZ2 4ZZ: repaint, replace burnt bedroom carpet, replace bathroom flooring, repair broken plug, dripping bath tap and damaged bathroom shelf.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-003",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The property is not tenanted; the system paused the request for that reason on 6 April 2025.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "First estimate £1,370.00 with no VAT itemised; its scope excludes the bedroom carpet ('carpet in the main room can stay as it's not that bad') and includes replacing the bathroom tap.",
+   "source_ids": [
+    "attachment-02"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The landlord asked for a second quote for comparison (6 April 2025); the second quote was £1,700.00 + VAT.",
+   "source_ids": [
+    "event-009",
+    "event-036"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Both quotes with their VAT position were put to the landlord on 25 May 2025 naming 'Flat 5', and the landlord approved the cheaper provider the same day.",
+   "source_ids": [
+    "event-036",
+    "event-038"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The provider confirmed willingness to proceed on 26 May 2025; works were reported complete on 2 June 2025.",
+   "source_ids": [
+    "event-041",
+    "event-042",
+    "event-043"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Final invoice is £1,190.00 with no VAT stated, for painting the bathroom in damp paint, painting all walls and ceiling in the main room, replacing bathroom lino, repairing the plug socket and repairing the shelf; no photos included.",
+   "source_ids": [
+    "attachment-04"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The bath tap was not replaced because the provider found it did not need replacing, which is why the invoice is below the approved estimate.",
+   "source_ids": [
+    "event-045"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "The burnt bedroom carpet was not replaced: it was excluded from the estimate the landlord approved, and it does not appear on the invoice.",
+   "source_ids": [
+    "attachment-02",
+    "attachment-04",
+    "event-038"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The invoice was forwarded to the landlord on 2 June 2025 and the landlord authorised payment on 17 June 2025 ('Ok to pay'), after the system had already closed the request on 2 June 2025.",
+   "source_ids": [
+    "event-045",
+    "event-048",
+    "event-049"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "Photo upload was skipped with the recorded reason 'No photos attached'.",
+   "source_ids": [
+    "event-046"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F12",
+   "statement": "Smoke and carbon monoxide detectors are recorded as tested — Yes, with no adverse comments, in both check-out reports.",
+   "source_ids": [
+    "attachment-01",
+    "attachment-03"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F13",
+   "statement": "Both check-out reports record a bedroom ceiling watermark and evidence of water ingress to the ceiling; this item was never quoted and is absent from the invoiced scope. Bathroom water damage to boxing was covered by the damp-paint works.",
+   "source_ids": [
+    "attachment-01",
+    "attachment-03",
+    "attachment-02",
+    "attachment-04"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F14",
+   "statement": "The estimate and invoice are headed 'Alder Compliance' while the history calls the approved provider 'Eliza Bennett'; the quoted figure £1,370.00 matches exactly across both.",
+   "source_ids": [
+    "attachment-02",
+    "attachment-04",
+    "event-024",
+    "event-036",
+    "event-038"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F15",
+   "statement": "Several outbound agency emails on this job name other properties in the body while the header, reports and financial documents are Flat 5, 55 Lantern Quay.",
+   "source_ids": [
+    "event-021",
+    "event-027",
+    "event-028",
+    "event-045"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider identity: approved provider named 'Eliza Bennett' in the agency history, but the estimate and invoice documents are headed 'Alder Compliance' (and event-016 mentions 'Meadow Compliance').",
+   "fact_ids": [
+    "F14"
+   ],
+   "source_ids": [
+    "attachment-02",
+    "attachment-04",
+    "event-016",
+    "event-036",
+    "event-038"
+   ],
+   "resolution": "Not resolved by me and not asserted to any party. Quote value matches exactly, so the approved quote and invoice relate to the same instruction; payee verification before payment referred to the office (ACT-3).",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Property identity in agency outbound emails: event-021, event-027, event-028 and event-045 name Juniper Mews, Meadow Row or Flat 13 Harbour View in the body of a job headed Flat 5, 55 Lantern Quay.",
+   "fact_ids": [
+    "F15"
+   ],
+   "source_ids": [
+    "event-021",
+    "event-027",
+    "event-028",
+    "event-045",
+    "index"
+   ],
+   "resolution": "The case record, both check-out reports and both financial documents are all Flat 5, 55 Lantern Quay, and the approval at event-038 answered event-036 which correctly stated 'Flat 5'. Worked the job at the record address; template fault reported to the office (ACT-3), not argued with any party.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Scope: the original instruction (event-001) asked for the burnt bedroom carpet to be replaced; the approved estimate says it can stay.",
+   "fact_ids": [
+    "F9"
+   ],
+   "source_ids": [
+    "event-001",
+    "attachment-02",
+    "event-038"
+   ],
+   "resolution": "The landlord's own approval of that estimate (event-038) governs the instructed scope. Carpet recorded as outstanding and put back to the landlord (ACT-2).",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Document dates (inspection 5 January 2026, invoice 09/03/2026) sit outside the April–June 2025 case timeline.",
+   "fact_ids": [],
+   "source_ids": [
+    "attachment-01",
+    "attachment-03",
+    "attachment-04"
+   ],
+   "resolution": "Recorded as a data-quality anomaly (ACT-1, ACT-3); does not change the action.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Agency outbound emails on this job repeatedly quote unrelated addresses (Juniper Mews, Meadow Row, Flat 13 Harbour View) and event-027 is addressed 'Hi Langley' but sent to the contractor; document dates are a year out from the case timeline.",
+   "source_ids": [
+    "event-021",
+    "event-027",
+    "event-028",
+    "event-045",
+    "attachment-04"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1) and referred to the property manager (ACT-3); worked the job at the address on the case record."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Payee name on the financial documents ('Alder Compliance') differs from the provider name the landlord approved ('Eliza'); event-016 mentions a third name.",
+   "source_ids": [
+    "attachment-02",
+    "attachment-04",
+    "event-016",
+    "event-038"
+   ],
+   "action_taken": "Flagged for payee verification before payment release (ACT-3); no payment moved (PRO-PAYMENTS)."
+  },
+  {
+   "kind": "other",
+   "description": "Unrepaired bedroom ceiling water ingress recorded in both check-out reports and never scoped or quoted; source of the leak unknown. Property is void, so no occupant is exposed.",
+   "source_ids": [
+    "attachment-01",
+    "attachment-03"
+   ],
+   "action_taken": "Raised with the landlord with a recommendation to investigate before re-let (ACT-2) and referred to the property manager (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "008",
+    "title": "Case 008: Check-Out Works",
+    "received_at": "2025-04-03 02:34:11 UTC",
+    "track": "Property Management",
+    "case_number": "008",
+    "property": "Flat 5, 55 Lantern Quay, Cedarford, ZZ2 4ZZ",
+    "source_role": "Agency manager",
+    "agency": "Northbridge Lettings",
+    "events_visible": 49,
+    "attachments_hidden": 0,
+    "details": "# Case 008: Check-Out Works\n\n## Case details\n- source role: Agency manager\n- created: 2025-04-03 02:34:11 UTC\n- property: Flat 5, 55 Lantern Quay, Cedarford, ZZ2 4ZZ\n\n## Initial request\nFollowing the tenant vacating please provide an estimate to; \nRepaint bedroom any other rooms if needed\nReplace bedroom carpet that is burnt\nReplace bathroom flooring \nRepair broken plug \nRepair dripping bath tap \nRepair damaged shelf in bathroom\n\n## Attachments\n- attachment-01-check-out-inspection-report.pdf\n- attachment-02-estimate.pdf\n- attachment-03-check-out-inspection-report.pdf\n- attachment-04-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "008-get_case_details-bb21983431ec",
+   "receipt": "{\"id\": \"008\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:59:37.321267Z",
+   "finished_at": "2026-10-10T13:59:37.321444Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "008-get_action_ledger-6dcf99a69c47",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:59:37.321715Z",
+   "finished_at": "2026-10-10T13:59:37.321819Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review at manual-mode trigger (free-text landlord reply event-049 \"Ok to pay\", received after the system closed the ticket at event-048).\n\nScope/price variance: approved estimate attachment-02 (£1,370.00, no VAT itemised; supplier shown as Alder Compliance) excluded the burnt bedroom carpet (\"carpet in the main room can stay\"), although the original instruction event-001 asked for it to be replaced. Final invoice attachment-04 is £1,190.00 for painting, bathroom lino, plug socket and shelf — bath tap not replaced (event-045 states it did not need replacing). Net: two items from event-001 were not carried out — bedroom carpet replacement (excluded at estimate stage, landlord approved that estimate at event-038) and bath tap (contractor found no replacement needed).\n\nNaming conflict (recorded, not resolved by me): history names the chosen provider \"Eliza Bennett\" (event-024, event-034, event-036, event-038) while the estimate and invoice documents are headed \"Alder Compliance\" (attachment-02, attachment-04); event-027 also refers to \"Alder Compliance\" chasing payment and event-016 to \"Meadow Compliance\". Quote value £1,370.00 matches exactly, so the approved quote and the invoice relate to the same instruction.\n\nAddress data quality: several outbound agency emails on job NBL-008-3466 quote other properties in the body — event-021 (Juniper Mews / Meadow Row), event-027 (Juniper Mews), event-028 and event-045 (Flat 13, 83 Harbour View) — while the job header, both check-out reports and both financial documents are for Flat 5, 55 Lantern Quay. Landlord approval event-038 followed event-036, which correctly states \"Flat 5\". Also noted: event-023 (landlord) discusses roof works at Flat 18, 8 Alder Lane — a different property, not this job.\n\nDate anomaly: inspection appointment recorded as 5 January 2026 and invoice issued 09/03/2026 (attachment-01, attachment-03, attachment-04) against a case timeline running April–June 2025.\n\nSafety pass: smoke and carbon monoxide detectors recorded tested — Yes, no adverse comments (attachment-01, attachment-03); no detector fault to act on. Damp/water: bedroom ceiling water ingress staining and bathroom water damage to boxing/flooring are recorded in both reports. Bathroom boxing was within the completed works (damp paint, attachment-04); the bedroom ceiling water ingress was never scoped, quoted or repaired — flagged to the landlord and to the office. No occupant (property not tenanted, event-012), so no occupant risk.\n\nNot decided by me: whether any item is tenant-payable from the deposit (PRO-TENANT-LIABILITY); release of payment (PRO-PAYMENTS)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-add_note-387694d79d12",
+   "action_id": "008-add_note-387694d79d12",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:00:57.626042Z",
+   "finished_at": "2026-10-10T14:00:57.626234Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: check-out works, Flat 5, 55 Lantern Quay, Cedarford, ZZ2 4ZZ (job NBL-008-3466).\n\nThank you for your authorisation to pay. For your record, the final position on this job:\n\n- Works completed and reported on 2 June 2025; the provider you approved on 25 May 2025 carried them out.\n- Final invoice £1,190.00 (no VAT stated), against the approved estimate of £1,370.00 — the bath tap did not need replacing, so the cost came in lower. The invoice was sent to you on 2 June 2025 and your authorisation has been passed to our accounts team for processing; we do not release payment ourselves.\n- Works invoiced: bathroom sanded, filled and painted in damp paint; all walls and ceiling painted in the main room; bathroom lino replaced; plug socket repaired; shelf repaired.\n- No completion photographs were supplied by the provider, so the photo upload was recorded as skipped.\n\nTwo items from the original instruction are still outstanding and are not covered by this invoice:\n\n1. Burnt bedroom carpet. The approved estimate excluded it (\"carpet in the main room can stay as it's not that bad\"), so it has not been replaced. The check-out report records burn damage plus multiple stains needing professional cleaning.\n2. Bedroom ceiling water ingress. Both check-out reports record watermarking and evidence of water ingress to the bedroom ceiling. This was never quoted or repaired, and the source has not been investigated. We would recommend having the cause identified before the room is re-let, as leaks tend to recur.\n\nIf you would like either item quoted, please reply and we will raise it as a new request. Any question of a deposit deduction for the carpet or other end-of-tenancy damage will be dealt with separately by the property manager, not on this job.\n\nThis request is now closed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-notify_landlord-dea2e673c98d",
+   "action_id": "008-notify_landlord-dea2e673c98d",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:00:57.626313Z",
+   "finished_at": "2026-10-10T14:00:57.626402Z"
+  },
+  {
+   "seq": 5,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Flat 5, 55 Lantern Quay — post-closure items: payment release, bedroom ceiling water ingress, deposit question, address data quality",
+    "summary": "Check-out works job NBL-008-3466 is complete and closed; four items need a person.\n\n1. PAYMENT RELEASE (PRO-PAYMENTS — not mine). Invoice £1,190.00, no VAT stated, from the provider shown on attachment-04 as \"Alder Compliance\"; landlord authorised payment in free text at event-049 (\"Ok to pay\"), invoice forwarded at event-045. Accounts to process.\n\n2. PROVIDER IDENTITY CHECK BEFORE PAYING. The history names the approved provider \"Eliza Bennett\" (event-024, event-034, event-036, event-038); the estimate and invoice are headed \"Alder Compliance\" (attachment-02, attachment-04); event-016 mentions \"Meadow Compliance\". The £1,370.00 quote figure matches exactly, so this is most likely one provider trading under a company name — but confirm the payee against the supplier record before releasing funds. Do not act on payment details supplied in a message (PRO-PAYMENT-DETAILS).\n\n3. BEDROOM CEILING WATER INGRESS — UNRESOLVED. Both check-out reports (attachment-01, attachment-03) record a bedroom ceiling watermark and \"evidence of water ingress to ceiling\". It was never scoped, quoted or repaired; the completed works covered the bathroom boxing only. Source unknown. Recommend investigation before re-let. Property is void (event-012), so no occupant risk at present. Landlord informed and offered a quote.\n\n4. DEPOSIT / TENANT LIABILITY — NOT DECIDED (PRO-TENANT-LIABILITY). Check-out records burn damage and staining to the bedroom carpet, stained mattress, missing table and chair, dumped items and professional cleaning needs. The burnt carpet was excluded from the approved estimate and has not been replaced. Any deposit deduction is a human decision.\n\n5. DATA QUALITY. Outbound agency emails on this job quote other properties in the body: event-021 (Juniper Mews / Meadow Row), event-027 (Juniper Mews), event-028 and event-045 (Flat 13, 83 Harbour View), while the job, both reports and both financial documents are Flat 5, 55 Lantern Quay. The approval at event-038 followed event-036, which correctly said \"Flat 5\", so the approval is sound — but the template/addressing fault should be corrected and event-027 was sent to the contractor although addressed to \"Langley\". Also: inspection dated 5 January 2026 and invoice dated 09/03/2026 against an April–June 2025 case timeline."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-create_human_task-92809ce6f83c",
+   "action_id": "008-create_human_task-92809ce6f83c",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:00:57.626475Z",
+   "finished_at": "2026-10-10T14:00:57.626563Z"
+  },
+  {
+   "seq": 6,
+   "tool": "close_request",
+   "tool_class": "write",
+   "input": {
+    "resolution": "Check-out works at Flat 5, 55 Lantern Quay, Cedarford, ZZ2 4ZZ (job NBL-008-3466) completed and closed. Two quotes obtained at the landlord's request (event-009): £1,370.00 no VAT (attachment-02) and Kendall £1,700.00 + VAT (event-036). Landlord approved the cheaper provider on 25 May 2025 (event-038); provider confirmed willing to proceed (event-041); works reported complete 2 June 2025 (event-042, event-043). Invoiced scope: bathroom sanded, filled and painted in damp paint; all walls and ceiling painted in main room; bathroom lino replaced; plug socket and shelf repaired (attachment-04). Bath tap not replaced — not required (event-045). Burnt bedroom carpet not replaced: excluded from the estimate the landlord approved (attachment-02). Final cost £1,190.00, no VAT stated — payable by the LANDLORD; invoice forwarded to the landlord at event-045 and authorised by the landlord at event-049 (\"Ok to pay\"); payment release referred to accounts/property manager (PRO-PAYMENTS, ACT-3). Photographs skipped — none supplied by the provider (event-046). No keys issued on this job; property void (event-012). Detectors recorded tested — Yes with no adverse comment (attachment-01, attachment-03). Bedroom ceiling water ingress remains unrepaired and outside this job's scope: raised with the landlord (ACT-2) and with the property manager for investigation before re-let (ACT-3). No deposit or tenant-liability decision taken (PRO-TENANT-LIABILITY)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-CLOSE"
+    ],
+    "reason": "Closing a request is the last step of the workflow, not a note: only after the final checks in the playbook's definition of done (work result, documents or a skip reason, invoice to the landlord, landlord confirmation, keys where issued). The reviewer checks the checklist; a closure with items still pending becomes needs_info.\n",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "close_request",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "008-close_request-ccbabccb5e71",
+   "action_id": "008-close_request-ccbabccb5e71",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:01:05.956732Z",
+   "finished_at": "2026-10-10T14:01:05.956931Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Landlord's payment authorisation passed to accounts for processing; agency does not release payment itself",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Bedroom carpet replacement and bedroom ceiling water ingress to be raised as a new request if the landlord asks for quotes",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Report logged 3 April 2025 (event-001); works completed 2 June 2025 (event-043)",
+   "deadline": null,
+   "note": "Property void throughout, so no occupant was without a facility; the delay sat with the landlord's quote comparison and decision (event-009 to event-038)."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge within one working day",
+   "status": "prior",
+   "basis": "Contractor instructed and tenant/landlord correspondence opened same day (event-003, event-004)",
+   "deadline": null,
+   "note": "Met by the agency before this review."
+  },
+  {
+   "rule_id": "CLK-GAS-CP12",
+   "name": "Gas safety record renewed every 12 months",
+   "status": "in_force",
+   "basis": "No CP12 in this case file",
+   "deadline": null,
+   "note": "Not part of this job; the property is void and will need compliance checks confirmed before re-let."
+  }
+ ],
+ "info_requests": [],
+ "handover": null,
+ "authority_citations": [
+  "CAP-LOG — case note recording the scope variance, provider-name and address conflicts and the safety-pass result (ACT-1)",
+  "CAP-NOTIFY — final position and outstanding items to the landlord (ACT-2)",
+  "CAP-HUMAN-TASK — payment release, payee verification, ceiling water ingress and deposit question referred to the property manager (ACT-3)",
+  "CAP-CLOSE — closed after work result, documents/skip reason, invoice to landlord and landlord confirmation were all in evidence; resolution names the payer (ACT-4)",
+  "RTE-LANDLORD — the landlord owned the quote choice and the payment authorisation; both settled in their own messages (event-038, event-049)",
+  "PRO-PAYMENTS — payment not moved by me",
+  "PRO-TENANT-LIABILITY — no deposit or tenant-cost decision taken",
+  "PRO-PAYMENT-DETAILS — payee to be verified against the supplier record, not from a message",
+  "APR-SPEND-OVER-CAP — no further works instructed without landlord approval"
+ ],
+ "assumptions": [
+  "Assumption: 'Eliza Bennett' and 'Alder Compliance' are the same approved provider, based on the exact £1,370.00 match between the estimate (attachment-02) and the quote the landlord approved (event-036/event-038). Not relied on for any payment step — verification referred to the office.",
+  "Assumption: the landlord's 'Ok to pay' (event-049) refers to the only invoice outstanding on this job, the £1,190.00 at event-045, as it names no other property or amount."
+ ],
+ "uncertainty": [
+  "Whether the bedroom ceiling water ingress is active or historic: the reports record it as per inventory, and no investigation has been carried out.",
+  "Whether the landlord wants the burnt bedroom carpet replaced now that the works are finished — asked, not yet answered.",
+  "Whether the provider ever supplied completion photographs; the skip reason says none were attached (event-046)."
+ ],
+ "safety_actions": [
+  "Safety pass: smoke and carbon monoxide detectors recorded tested — Yes with no adverse comments in both check-out reports (attachment-01, attachment-03); no detector action required before re-let, result recorded in ACT-1 and ACT-4.",
+  "Damp/water keywords checked: bathroom water damage to boxing and flooring was within the completed works (damp paint, new lino — attachment-04); bedroom ceiling water ingress was not, and has been flagged to the landlord and the property manager for investigation before re-let.",
+  "No gas, electrical, fire or security hazard reported or observed; property void (event-012), so no occupant at risk and no emergency capability engaged."
+ ],
+ "withheld_actions": [
+  "Did not release or process payment of the £1,190.00 invoice (PRO-PAYMENTS) — referred to accounts/property manager.",
+  "Did not decide that any item (burnt carpet, stained mattress, missing furniture, cleaning) is tenant-payable or deductible from the deposit (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+  "Did not instruct any further works for the bedroom carpet or the ceiling water ingress: no landlord approval exists for that spend (APR-SPEND-OVER-CAP); offered to quote on the landlord's instruction.",
+  "Did not tell any party which provider name or which property is 'correct' where agency records disagree; recorded the conflict and asked the office instead."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T13:59:31.582780Z",
+ "finished_at": "2026-10-10T14:02:11.617603Z",
+ "input_tokens": 102047,
+ "output_tokens": 12905,
+ "cache_read_tokens": 56748
+}

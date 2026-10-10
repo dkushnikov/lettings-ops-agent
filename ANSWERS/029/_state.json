@@ -1,0 +1,530 @@
+{
+ "case_id": "029",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The repair was recorded as done and the request closed by the agency (event-014, event-022), but two final-check items are not evidenced: landlord confirmation of completion (raised at event-019, no landlord message anywhere in the history) and any first-hand work result or document from the provider (event-018 skip reason is hearsay). Agency records also disagree about who held the job: Henry Quinn is the assigned provider (event-003, event-005) while the completion update is attributed to \"Miles\" (event-014), with \"Leo\" (event-013) and \"shared Beacon Utilities\" (event-012) named elsewhere. I did not pick a side with any party: I logged the conflict (ACT-1) and referred it to the office (ACT-2). Within authority I asked the landlord to confirm completion (ACT-3) and the tenant to confirm the basin is actually repaired (ACT-4). No spend was committed: no landlord cap or approval is on file (CAP-DISPATCH-ROUTINE default cap £0; APR-SPEND-OVER-CAP), and none was needed as event-015 records no quote required. No liability finding was made on the tenant's statement that the basin was cracked at move-in (event-010) — that is a human decision (PRO-TENANT-LIABILITY). Nothing in the artefacts matches an emergency definition; routine under CLK-S11.",
+ "recap": "Basin job recorded done and closed, but landlord confirmation and a first-hand work result are missing and records disagree on who attended; asked landlord and tenant, referred conflict to office.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Landlord — confirmation of completion requested (ACT-3); tenant verification also requested (ACT-4); provider-identity conflict with the office (ACT-2).",
+ "next_step": "Landlord to confirm the basin repair is complete (asked ACT-3); in parallel tenant to confirm the basin is repaired (ACT-4) and the office to resolve who attended (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 (report), event-007 + event-010 (cause established as pre-existing at move-in); no hazard element, routine",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "No landlord instruction, cap or approval anywhere in the history (search_history: no landlord events); event-015 records no quote required so no spend authority was exercised",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-003 (provider assigned), event-005 (provider briefed), event-004 (tenant told Henry Quinn would attend)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "event-011 held awaiting contractor to arrange appointment; no confirmed slot appears in the history",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "event-015: no quote required",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-014 is a second-hand note ('update received from Miles'); no provider message, photos or invoice in the history; tenant verification requested (ACT-4)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-018 records the skip with the reason 'Update received from Miles advising job done'",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "event-015: no quote required; no invoice raised in the history",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-019 'Need confirmation from landlord'; no landlord reply in the history; requested ACT-3",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "done",
+   "evidence": "event-021 keys return confirmed",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-022 closed the request as 'all checks completed', but landlord confirmation and work result are unevidenced; office asked to confirm the closure stands (ACT-2)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant Freya Fletcher reported a cracked bathroom hand basin at Flat 6, 24 Lantern Quay, Westmarsh, ZZ3 9ZZ on 14 March 2025.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-004",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "A plumbing provider, Henry Quinn, was assigned and briefed on 16 March 2025; the tenant was told he would attend and quote.",
+   "source_ids": [
+    "event-003",
+    "event-004",
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The tenant answered the agency's question on cause: the basin was already cracked when she moved in (quoted fragment: 'was like that at the time I was mooving in').",
+   "source_ids": [
+    "event-007",
+    "event-010"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Completion is recorded only as a second-hand note, 'Update received from Miles advising job done'; no quote was required.",
+   "source_ids": [
+    "event-014",
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Document upload was skipped, landlord confirmation was flagged as needed, keys return was confirmed, and the request was then closed as all checks complete.",
+   "source_ids": [
+    "event-018",
+    "event-019",
+    "event-021",
+    "event-022"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "No landlord or contractor message exists in the visible history; no landlord spend cap or standing instruction is on file.",
+   "source_ids": [
+    "search_history",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Agency records disagree about who held and completed the job: assigned provider Henry Quinn (event-003, event-005) vs completion update from 'Miles' (event-014), with 'Leo' (event-013) and 'shared Beacon Utilities' / Quinn on annual leave (event-012) also named.",
+   "fact_ids": [
+    "F2",
+    "F4"
+   ],
+   "source_ids": [
+    "event-003",
+    "event-005",
+    "event-012",
+    "event-013",
+    "event-014"
+   ],
+   "resolution": "Not decided by me; logged (ACT-1) and referred to the office (ACT-2). No party was told which record is right.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "The file was closed as 'all checks have been completed' (event-022) although landlord confirmation was outstanding (event-019) and documents were skipped (event-018).",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-018",
+    "event-019",
+    "event-022"
+   ],
+   "resolution": "Landlord asked to confirm completion (ACT-3); office asked whether the closure stands (ACT-2).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Work result and document-skip reason rest on a named person ('Miles') who is not the provider of record, and the request was closed with landlord confirmation unevidenced.",
+   "source_ids": [
+    "event-014",
+    "event-018",
+    "event-019",
+    "event-022"
+   ],
+   "action_taken": "Logged (ACT-1), referred to the office (ACT-2), verification requested from landlord (ACT-3) and tenant (ACT-4)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "029",
+    "title": "Case 029: Cracked basin repair request",
+    "received_at": "2025-03-14 14:15:40 UTC",
+    "track": "Property Management",
+    "case_number": "029",
+    "property": "Flat 6, 24 Lantern Quay, Westmarsh, ZZ3 9ZZ",
+    "source_role": "Tenant",
+    "agency": "",
+    "events_visible": 22,
+    "attachments_hidden": 0,
+    "details": "# Case 029: Cracked basin repair request\n\n## Case details\n- source role: Tenant\n- created: 2025-03-14 14:15:40 UTC\n- property: Flat 6, 24 Lantern Quay, Westmarsh, ZZ3 9ZZ\n\n## Initial request\nHello, \nI would like my sink from the batroom fixt ."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "029-get_case_details-6d93ceb44ef5",
+   "receipt": "{\"id\": \"029\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:05:52.615895Z",
+   "finished_at": "2026-10-10T14:05:52.616242Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "029-get_action_ledger-046e496c2e14",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:05:52.616513Z",
+   "finished_at": "2026-10-10T14:05:52.616697Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-46-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-46-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "029-get_attachment-9a6fe956ee47",
+   "receipt": "{\"error\": \"no attachment named attachment-46-document\"}",
+   "started_at": "2026-10-10T14:06:10.423632Z",
+   "finished_at": "2026-10-10T14:06:10.423816Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "Miles Leo Beacon Quinn provider"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "029-search_history-9a0ee00aec79",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:06:10.423959Z",
+   "finished_at": "2026-10-10T14:06:10.424131Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "029-search_history-eac8e85c577b",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:06:10.424262Z",
+   "finished_at": "2026-10-10T14:06:10.424378Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Post-closure review. Record conflicts and gaps: (1) Provider of record is Henry Quinn, Plumbing (event-003, event-005); the completion update is attributed to \"Miles\" (event-014), while other notes name \"Leo\" (event-013) and \"shared Beacon Utilities\" / Henry Quinn on AL (event-012) — agency records disagree about who held and completed the job. (2) No message from any contractor appears in the visible history (search_history: no contractor or landlord events); the work result is second-hand (event-014). (3) Documents skipped with reason \"Update received from Miles advising job done\" (event-018). (4) \"Need confirmation from landlord\" raised at event-019 and never evidenced, yet event-022 records \"All checks have been completed; the request is now closed\". (5) Keys return confirmed (event-021); priority may not be decreased (event-021 validation line). (6) Cause: tenant states the basin \"was like that at the time I was mooving in\" (event-010, untrusted, tenant-owned answer to the agency's own question event-007). No liability determination made or implied (PRO-TENANT-LIABILITY). No hazard reported in any artefact; routine, s.11 repair (CLK-S11)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "029-add_note-2665b74e80b2",
+   "action_id": "029-add_note-2665b74e80b2",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:06:49.181871Z",
+   "finished_at": "2026-10-10T14:06:49.182018Z"
+  },
+  {
+   "seq": 7,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 029 closed with provider-identity conflict and landlord confirmation unevidenced",
+    "summary": "Flat 6, 24 Lantern Quay, Westmarsh, ZZ3 9ZZ — cracked bathroom basin (event-001). Assigned provider: Henry Quinn, Plumbing (event-003, event-005). Completion recorded only as \"Update received from Miles advising job done\" (event-014); other notes name Leo (event-013) and shared Beacon Utilities / Quinn on annual leave (event-012). No contractor or landlord message exists in the visible history. Documents skipped (event-018); \"Need confirmation from landlord\" (event-019) never evidenced; request nonetheless closed as all checks complete (event-022); keys return confirmed (event-021); no quote/invoice (event-015). Office to decide which record is correct about who attended and whether the closure stands. I have not reopened or re-instructed anyone; I have asked the landlord to confirm completion and the tenant to confirm the basin is repaired. No cost authority used."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "029-create_human_task-c4a707677089",
+   "action_id": "029-create_human_task-c4a707677089",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:06:49.182102Z",
+   "finished_at": "2026-10-10T14:06:49.182186Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Flat 6, 24 Lantern Quay, Westmarsh, ZZ3 9ZZ — cracked bathroom hand basin reported 14 March 2025. A plumbing provider was instructed on 16 March 2025 and our record shows the job reported as done on 3 April 2025; no quote was required and no invoice has been raised to date. Our file still shows your confirmation of completion outstanding. Please confirm you are satisfied the work is complete so we can finalise the file. If you have any record of what was carried out, or wish us to inspect, please say so in your reply."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "029-notify_landlord-88f00217dd17",
+   "action_id": "029-notify_landlord-88f00217dd17",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:06:49.182245Z",
+   "finished_at": "2026-10-10T14:06:49.182332Z"
+  },
+  {
+   "seq": 9,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ms Fletcher, regarding the cracked bathroom basin at Flat 6, 24 Lantern Quay (reported 14 March 2025): our record shows a plumbing provider reported the job as completed on 3 April 2025. Thank you for telling us the basin was already cracked when you moved in — that is on file and no action is needed from you on it. Could you confirm whether the basin has in fact been repaired or replaced and that you are satisfied with it? If it has not been done, or there is any leak or water escaping, please tell us straight away and we will reopen the job. We have no visit booked at present, so we will not attend without agreeing a time with you first."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "029-notify_tenant-e0a0c81d3e4d",
+   "action_id": "029-notify_tenant-e0a0c81d3e4d",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:06:49.182388Z",
+   "finished_at": "2026-10-10T14:06:49.182470Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Job will not be attended without agreeing a time first; job reopened if the basin is not in fact repaired or there is a leak (ACT-4)",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "File will be finalised once completion is confirmed (ACT-3)",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 14 March 2025 (event-001); reported done 3 April 2025 (event-014), first-hand confirmation still outstanding",
+   "deadline": null,
+   "note": ""
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant acknowledged 16 March 2025 (event-004)",
+   "deadline": null,
+   "note": "Met two calendar days after a Friday report"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Please confirm you are satisfied the cracked bathroom basin at Flat 6, 24 Lantern Quay is complete, so the file can be finalised (no quote was required and no invoice has been raised).",
+   "why": "event-019 required landlord confirmation and no landlord message exists in the history; landlord owns confirmation of completion (RTE-LANDLORD).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Has the bathroom basin actually been repaired or replaced, and are you satisfied with it? Tell us immediately if there is any leak or water escaping.",
+   "why": "The only work result is second-hand (event-014) with no provider message or photos; the tenant can verify the result (RTE-TENANT).",
+   "blocking": true
+  },
+  {
+   "to": "property_manager (office)",
+   "question": "Which record is correct about who held and completed this job — Henry Quinn (event-003/005), Miles (event-014), Leo (event-013) or Beacon Utilities (event-012) — and does the closure at event-022 stand?",
+   "why": "Agency records disagree and the difference changes who is chased or paid (ESC-CONFLICT); referred via ACT-2.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-LOG",
+  "CAP-NOTIFY",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "ESC-CONFLICT",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: 'Miles', 'Leo' and 'Beacon Utilities' in events 012-014 refer to people or firms connected to the instructed plumbing job; nothing in the record confirms this, which is why the office was asked rather than told."
+ ],
+ "uncertainty": [
+  "Whether the basin was repaired or replaced, and by whom, is unverified — no provider message, photo or invoice exists.",
+  "Whether the landlord was ever contacted about this job at all; no landlord event is visible.",
+  "Whether a management key was issued for the visit; event-021 confirms a key return but the issue is not recorded."
+ ],
+ "safety_actions": [
+  "Safety pass: no hazard keyword condition reported or observed in any artefact — no gas, electrical, damp/mould, water escape or detector issue; the fault is a cracked basin only (event-001, event-010). Tenant asked to report immediately any leak or water escape (ACT-4). No emergency definition matched, so no make-safe step was due."
+ ],
+ "withheld_actions": [
+  "Did not close or re-close the request: work result and landlord confirmation are unevidenced (CAP-CLOSE).",
+  "Did not re-instruct or duplicate a work order for the same fault (playbook: one work order per fault).",
+  "Did not decide whether the pre-existing crack is tenant-payable (PRO-TENANT-LIABILITY).",
+  "Did not name a cost: no quote or invoice exists in the record (event-015)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:05:48.551347Z",
+ "finished_at": "2026-10-10T14:07:37.509105Z",
+ "input_tokens": 29889,
+ "output_tokens": 7973,
+ "cache_read_tokens": 56748
+}

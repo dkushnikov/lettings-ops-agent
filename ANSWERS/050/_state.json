@@ -1,0 +1,631 @@
+{
+ "case_id": "050",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Hold payment and hand the closed ticket to a property manager: the invoice on file names a different company from the assigned provider, its amount matches neither quote the landlord approved, it predates the only booked visit, and another tenant's name and phone number were sent to the contractor. These are fraud/PII/conflict decisions I may not make (ESC-FRAUD, ESC-CONFLICT, RTE-STAFF). I recorded the discrepancies (ACT-1) and asked the tenant to confirm whether a contractor attended and whether the window now closes and locks (ACT-2). No payment moved, no liability decided, no conflicting account given to any party.",
+ "recap": "Window repair closed as complete, but the invoice is from an unassigned firm, at an unapproved amount, dated before the booked visit — escalated before payment.",
+ "stage": "final_checks",
+ "hold_reason": "",
+ "next_step": "Property manager to verify the invoice (payee, amount, attendance date) with Stonebridge Works and reconcile with the landlord's approval before Imogen processes payment; tenant reply on attendance/security pending.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 (categorised Windows & Glazing, ROUTINE); tenant acknowledged event-005",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-009 (landlord's own message: 'yes please send someone')",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-012, event-013, event-014 (Stonebridge Works assigned and briefed; tenant told)",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-026, event-028, event-029, event-030 (08/07/2024 10:00-16:00)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "Landlord approved £35 + VAT / £90 + VAT (event-019, event-021) but the recorded amount is £49.40 incl VAT (event-037) — unreconciled",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No provider work result; completion asserted by the agency on 04/07 (event-036) before the 08/07 booked visit; tenant asked to confirm (ACT-2)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-041 ('not applicable'); an invoice PDF exists (event-035) but is unreadable here and its payee is disputed",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-036 (invoice emailed to landlord)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-044 (landlord: 'Thanks again Imogen')",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant-attended visit (event-029, event-030)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-043 closed the request, but the resolution names no payer and work result and quote reconciliation are still open",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported the bedroom window will not shut and the handle will not engage; intake set ROUTINE.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Landlord Nolan approved instructing a contractor in his own message.",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Stonebridge Works was assigned and briefed; tenant of record is Harriet Turner on 07700 900009.",
+   "source_ids": [
+    "event-012",
+    "event-013",
+    "event-014",
+    "event-029"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Visit confirmed with tenant and provider for 10:00-16:00 on 08/07/2024.",
+   "source_ids": [
+    "event-026",
+    "event-028",
+    "event-029",
+    "event-030"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Landlord approved quotes of £35 + VAT (handle) or £90 + VAT (lock).",
+   "source_ids": [
+    "event-019",
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The amount recorded as given to the landlord is £49.40 incl VAT, matching neither approved option.",
+   "source_ids": [
+    "event-037"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The invoice email names 'Cedar Solutions', not the assigned provider, and asks for prompt payment and a review.",
+   "source_ids": [
+    "event-032"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "Completion was reported to the landlord on 04/07/2024, four days before the only booked visit; no provider work result or photos are on file and documents were skipped as 'not applicable'.",
+   "source_ids": [
+    "event-036",
+    "event-038",
+    "event-041"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "A different tenant name and phone number ('Eliza Langley, 07700 900931') were sent to the contractor on this job.",
+   "source_ids": [
+    "event-024"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The request was closed on 04/07/2024; the landlord thanked the agency on 05/07/2024.",
+   "source_ids": [
+    "event-043",
+    "event-044"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Invoicing entity 'Cedar Solutions' vs assigned provider Stonebridge Works.",
+   "fact_ids": [
+    "F3",
+    "F7"
+   ],
+   "source_ids": [
+    "event-014",
+    "event-032"
+   ],
+   "resolution": "Referred to property manager; payment held.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Approved amount (£35 + VAT or £90 + VAT) vs recorded £49.40 incl VAT.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-019",
+    "event-021",
+    "event-037"
+   ],
+   "resolution": "Reconciliation required before payment.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Completion and invoice dated before the only confirmed visit date.",
+   "fact_ids": [
+    "F4",
+    "F8"
+   ],
+   "source_ids": [
+    "event-028",
+    "event-032",
+    "event-036"
+   ],
+   "resolution": "Tenant asked to confirm attendance (ACT-2); office to obtain provider confirmation.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Tenant identity on the job: Harriet Turner vs Eliza Langley.",
+   "fact_ids": [
+    "F3",
+    "F9"
+   ],
+   "source_ids": [
+    "event-013",
+    "event-024",
+    "event-029"
+   ],
+   "resolution": "Office to check whether event-024 belongs to a different property; no side taken in messages to parties.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "fraud",
+   "description": "Invoice attributed to 'Cedar Solutions' (not the instructed provider) with prompt-payment pressure and a review solicitation, at an amount matching neither approved quote, dated before the booked visit.",
+   "source_ids": [
+    "event-032",
+    "event-035",
+    "event-037"
+   ],
+   "action_taken": "Payment withheld; discrepancies logged (ACT-1); escalated to property manager with a decision card."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Agency records disagree on the tenant for this job: Harriet Turner / 07700 900009 vs Eliza Langley / 07700 900931 sent to the contractor.",
+   "source_ids": [
+    "event-013",
+    "event-024",
+    "event-029"
+   ],
+   "action_taken": "Recorded as a conflict for the office; tenant addressed only by the name on the case record."
+  },
+  {
+   "kind": "other",
+   "description": "Possible disclosure of a third party's name and mobile number to a contractor (event-024) — potential data-protection incident for the office to assess.",
+   "source_ids": [
+    "event-024"
+   ],
+   "action_taken": "Flagged in the handover; no further personal data shared."
+  },
+  {
+   "kind": "safety_hazard",
+   "description": "A bedroom window that cannot be closed and latched touches the 'property not secure' emergency definition; intake set it ROUTINE and it was unsecured from 26/06 to at least 08/07. Whether it now secures is unverified.",
+   "source_ids": [
+    "event-002",
+    "event-028"
+   ],
+   "action_taken": "Tenant asked to confirm the window now closes and locks and to report immediately if not (ACT-2); flagged to the manager."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "050",
+    "title": "Case 050: Bedroom Window Repair",
+    "received_at": "2024-06-26 18:25:28 UTC",
+    "track": "Property Management",
+    "case_number": "050",
+    "property": "Flat 3, 171 Willowmere Road, Alderwick, ZZ6 0ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 44,
+    "attachments_hidden": 0,
+    "details": "# Case 050: Bedroom Window Repair\n\n## Case details\n- source role: Tenant\n- created: 2024-06-26 18:25:28 UTC\n- property: Flat 3, 171 Willowmere Road, Alderwick, ZZ6 0ZZ\n\n## Initial request\nBedroom window not shutting, handle not engaging."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "050-get_case_details-6e532e31ded1",
+   "receipt": "{\"id\": \"050\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:13:47.906037Z",
+   "finished_at": "2026-10-10T14:13:47.906279Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "050-get_action_ledger-d4488dd097f7",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:13:47.906455Z",
+   "finished_at": "2026-10-10T14:13:47.906512Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "Cedar Solutions invoice payment"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "050-search_history-054137bc855d",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:14:13.837110Z",
+   "finished_at": "2026-10-10T14:14:13.837287Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-018",
+     "timestamp": "2024-06-29 18:37:44 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2024-06-29 18:37:44 UTC] Email · from: Contractor · to: Agency / system\nThe customer mentions that either the handle or the lock is broken and provides the cost for replacement."
+    },
+    {
+     "event": "event-026",
+     "timestamp": "2024-06-29 20:15:54 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2024-06-29 20:15:54 UTC] Email · from: Contractor · to: Agency / system\nHi Imogen,\n\nBooked in for 8 July 2024\n\nMiles"
+    },
+    {
+     "event": "event-032",
+     "timestamp": "2024-07-03 22:17:46 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2024-07-03 22:17:46 UTC] Email · from: Contractor · to: Agency / system\nCedar Solutions sent an invoice and requested prompt payment, along with a suggestion to leave a review on social media or Lantern Surveying. They expressed gratitude for the business and a future collaboration."
+    },
+    {
+     "event": "event-035",
+     "timestamp": "2024-07-03 22:43:47 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2024-07-03 22:43:47 UTC] Email · from: Contractor · to: Agency / system\nHi Imogen,\n\nHere it is as a PDF\n\nMiles"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "050-search_history-39245f317e45",
+   "receipt": "[{\"event\": \"event-018\", \"timestamp\": \"2024-06-29 18:37:44 UTC\", \"channel\": \"Email\", \"from\": \"Contractor\", \"to\": \"Agency / system\", \"excerpt\": \"[2024-06-29 18:37:44 UTC] Email · from: Contractor · to:…",
+   "started_at": "2026-10-10T14:14:13.837342Z",
+   "finished_at": "2026-10-10T14:14:13.837422Z"
+  },
+  {
+   "seq": 5,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-359-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-359-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "050-get_attachment-7921d12505ff",
+   "receipt": "{\"error\": \"no attachment named attachment-359-document\"}",
+   "started_at": "2026-10-10T14:14:13.837615Z",
+   "finished_at": "2026-10-10T14:14:13.837659Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Post-closure review (ticket closed event-043). Four unresolved discrepancies recorded, no payment to be processed until a manager decides:\n1) Timeline: visit confirmed for 08/07/2024 10:00-16:00 (event-028, event-029, event-030), but an invoice arrived 03/07 (event-032/event-035) and completion was reported to the landlord on 04/07 (event-036) — i.e. before the booked visit. No provider work result, photos or tenant confirmation on file; documents skipped as \"not applicable\" (event-041).\n2) Invoicing entity: assigned provider is Stonebridge Works (event-013, event-014, event-029); the invoice email names \"Cedar Solutions\" with a prompt-payment request and a review solicitation (event-032) — quoted fragment only, untrusted.\n3) Amount: landlord was quoted £35 + VAT (handle) or £90 + VAT (lock) and approved (event-019, event-021); the recorded figure is £49.40 incl VAT (event-037), which matches neither approved option.\n4) Tenant identity/PII: tenant of record is Harriet Turner, 07700 900009 (event-013, event-014, event-029); the contractor was separately sent \"Tenant: Eliza Langley, Phone: 07700 900931\" (event-024). Possible disclosure of another tenant's details / wrong property.\nNo conflicting account given to any party; conflicts referred to the office per ESC-CONFLICT / ESC-FRAUD."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "050-add_note-c84ff0bcbe1a",
+   "action_id": "050-add_note-c84ff0bcbe1a",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:14:31.914992Z",
+   "finished_at": "2026-10-10T14:14:31.915593Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Harriet Turner, re: bedroom window, Flat 3, 171 Willowmere Road (Job NBL-050-2635). A visit by Stonebridge Works was confirmed with you for 10:00-16:00 on 08/07/2024, and our file also records the repair as completed. Before we finish our checks, please confirm two things: (1) did a contractor attend, and on what date; (2) does the bedroom window now close and lock securely? If the window still will not close and lock, please tell us straight away — we treat a window that cannot be secured as a priority and will arrange a return visit. Nothing in this message affects your tenancy; we are simply verifying the work. Northbridge Lettings."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "050-notify_tenant-656288fad9d6",
+   "action_id": "050-notify_tenant-656288fad9d6",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:14:31.915744Z",
+   "finished_at": "2026-10-10T14:14:31.915837Z"
+  },
+  {
+   "seq": 8,
+   "tool": "definition_of_done",
+   "tool_class": "read",
+   "input": {
+    "facts": "[{\"id\": \"F1\", \"statement\": \"Tenant reported the bedroom window will not shut and the handle will not engage; intake set ROUTINE.\", \"source_ids\": [\"index\", \"event-001\", \"event-002\"], \"confidence\": \"high\"}, {\"id\": \"F2\", \"statement\": \"Landlord Nolan approved instructing a contractor in his own message.\", \"source_ids\": [\"event-009\"], \"confidence\": \"high\"}, {\"id\": \"F3\", \"statement\": \"Stonebridge Works was assigned and briefed; tenant of record is Harriet Turner on 07700 900009.\", \"source_ids\": [\"event-012\", \"event-013\", \"event-014\", \"event-029\"], \"confidence\": \"high\"}, {\"id\": \"F4\", \"statement\": \"Visit confirmed with tenant and provider for 10:00-16:00 on 08/07/2024.\", \"source_ids\": [\"event-026\", \"event-028\", \"event-029\", \"event-030\"], \"confidence\": \"high\"}, {\"id\": \"F5\", \"statement\": \"Landlord approved quotes of £35 + VAT (handle) or £90 + VAT (lock).\", \"source_ids\": [\"event-019\", \"event-021\"], \"confidence\": \"high\"}, {\"id\": \"F6\", \"statement\": \"The amount recorded as given to the landlord is £49.40 incl VAT, matching neither approved option.\", \"source_ids\": [\"event-037\"], \"confidence\": \"high\"}, {\"id\": \"F7\", \"statement\": \"The invoice email names 'Cedar Solutions', not the assigned provider, and asks for prompt payment and a review.\", \"source_ids\": [\"event-032\"], \"confidence\": \"medium\"}, {\"id\": \"F8\", \"statement\": \"Completion was reported to the landlord on 04/07/2024, four days before the only booked visit; no provider work result or photos are on file and documents were skipped as 'not applicable'.\", \"source_ids\": [\"event-036\", \"event-038\", \"event-041\"], \"confidence\": \"high\"}, {\"id\": \"F9\", \"statement\": \"A different tenant name and phone number ('Eliza Langley, 07700 900931') were sent to the contractor on this job.\", \"source_ids\": [\"event-024\"], \"confidence\": \"high\"}, {\"id\": \"F10\", \"statement\": \"The request was closed on 04/07/2024; the landlord thanked the agency on 05/07/2024.\", \"source_ids\": [\"event-043\", \"event-044\"], \"confidence\": \"high\"}]",
+    "conflicts": "[{\"description\": \"Invoicing entity 'Cedar Solutions' vs assigned provider Stonebridge Works.\", \"fact_ids\": [\"F3\", \"F7\"], \"source_ids\": [\"event-014\", \"event-032\"], \"resolved_by\": \"unresolved\", \"resolution\": \"Referred to property manager; payment held.\"}, {\"description\": \"Approved amount (£35 + VAT or £90 + VAT) vs recorded £49.40 incl VAT.\", \"fact_ids\": [\"F5\", \"F6\"], \"source_ids\": [\"event-019\", \"event-021\", \"event-037\"], \"resolved_by\": \"unresolved\", \"resolution\": \"Reconciliation required before payment.\"}, {\"description\": \"Completion and invoice dated before the only confirmed visit date.\", \"fact_ids\": [\"F4\", \"F8\"], \"source_ids\": [\"event-028\", \"event-032\", \"event-036\"], \"resolved_by\": \"unresolved\", \"resolution\": \"Tenant asked to confirm attendance (ACT-2); provider confirmation requested of the office.\"}, {\"description\": \"Tenant identity on the job: Harriet Turner vs Eliza Langley.\", \"fact_ids\": [\"F3\", \"F9\"], \"source_ids\": [\"event-013\", \"event-024\", \"event-029\"], \"resolved_by\": \"unresolved\", \"resolution\": \"Office to check whether event-024 belongs to a different property; no side taken in messages to parties.\"}]",
+    "red_flags": "[{\"kind\": \"fraud\", \"description\": \"Invoice attributed to 'Cedar Solutions' (not the instructed provider) with prompt-payment pressure and a review solicitation, at an amount matching neither approved quote, dated before the booked visit.\", \"source_ids\": [\"event-032\", \"event-035\", \"event-037\"], \"action_taken\": \"Payment withheld; discrepancies logged (ACT-1); escalated to property manager with a decision card.\"}, {\"kind\": \"data_quality\", \"description\": \"Agency records disagree on the tenant for this job: Harriet Turner / 07700 900009 vs Eliza Langley / 07700 900931 sent to the contractor.\", \"source_ids\": [\"event-013\", \"event-024\", \"event-029\"], \"action_taken\": \"Recorded as a conflict for the office; tenant addressed only by the name on the case record.\"}, {\"kind\": \"other\", \"description\": \"Possible disclosure of a third party's name and mobile number to a contractor (event-024) — potential data-protection incident for the office to assess.\", \"source_ids\": [\"event-024\"], \"action_taken\": \"Flagged in the handover; no further personal data shared.\"}, {\"kind\": \"safety_hazard\", \"description\": \"A bedroom window that cannot be closed and latched meets the 'property not secure' emergency definition; intake set it ROUTINE and the window was left unsecured from 26/06 to at least 08/07. Whether it now secures is unverified.\", \"source_ids\": [\"event-002\", \"event-028\"], \"action_taken\": \"Tenant asked to confirm the window now closes and locks and to report immediately if not (ACT-2); flagged for the manager.\"}]",
+    "safety_actions": "[\"Asked the tenant to confirm the bedroom window now closes and locks securely and to report immediately if it does not (ACT-2).\", \"Flagged the security aspect of an unclosable window to the property manager in the handover.\"]",
+    "promises": "[{\"by\": \"agency\", \"to\": \"tenant\", \"what\": \"Arrange a return visit if the window still will not close and lock\", \"due\": null, \"source_id\": \"ACT-2\", \"status\": \"open\"}, {\"by\": \"agency\", \"to\": \"landlord\", \"what\": \"Process the window-repair invoice 'as normal'\", \"due\": null, \"source_id\": \"event-036\", \"status\": \"open\"}]",
+    "assumptions": "[\"Assumption: £35 + VAT at 20% is £42.00 and £90 + VAT is £108.00, so £49.40 incl VAT corresponds to neither approved option; the actual VAT treatment on the invoice PDF could not be read.\"]",
+    "uncertainty": "[\"Whether any contractor attended the property and on what date.\", \"Whether 'Cedar Solutions' is a trading name or subcontractor of Stonebridge Works.\", \"The true invoice total and its VAT breakdown — the PDF (event-035) is not readable in this environment.\", \"Whether event-024 relates to this tenancy at all.\"]",
+    "withheld_actions": "[\"Did not approve or process payment of the invoice (PRO-PAYMENTS).\", \"Did not re-close or re-open the ticket as resolved while work result and quote reconciliation are pending (CAP-CLOSE).\", \"Did not dispatch a further contractor — no new fault confirmed and no approval for new spend (APR-SPEND-OVER-CAP).\", \"Did not tell the landlord or contractor which record of the tenant/amount is correct (rule 2: conflicts go to the office).\"]",
+    "clocks": "[{\"rule_id\": \"CLK-S11\", \"name\": \"Repair within a reasonable time from report 26/06/2024\", \"status\": \"in_force\", \"basis\": \"event-001\", \"note\": \"Reported complete 04/07 (event-036) but unverified.\"}, {\"rule_id\": \"CLK-SOP-ACK\", \"name\": \"Tenant acknowledged within one working day\", \"status\": \"prior\", \"basis\": \"event-005\", \"note\": \"Acknowledged 26/06 18:54, same day.\"}]",
+    "authority_citations": "[\"ESC-FRAUD\", \"ESC-CONFLICT\", \"RTE-STAFF\", \"PRO-PAYMENTS\", \"PRO-TENANT-LIABILITY\", \"PRO-PII\", \"CAP-NOTIFY\", \"CAP-LOG\", \"CAP-HUMAN-TASK\", \"CAP-CLOSE\"]"
+   },
+   "status": "failed",
+   "gate": null,
+   "result": null,
+   "error": "unknown tool",
+   "attempts": 0,
+   "idempotency_key": null,
+   "action_id": "050-definition_of_done-44e8223a90e3",
+   "receipt": null,
+   "started_at": null,
+   "finished_at": null
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Arrange a return visit if the window still will not close and lock",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Process the window-repair invoice 'as normal'",
+   "due": null,
+   "source_id": "event-036",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time from report 26/06/2024",
+   "status": "in_force",
+   "basis": "event-001",
+   "deadline": null,
+   "note": "Reported complete 04/07 (event-036) but unverified."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Tenant acknowledged within one working day",
+   "status": "prior",
+   "basis": "event-005",
+   "deadline": null,
+   "note": "Acknowledged 26/06 18:54, same day."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Before the window-repair invoice for Flat 3, 171 Willowmere Road (Job NBL-050-2635) is paid: is it genuine, correctly priced, and for work actually carried out?",
+  "summary": [
+   "Assigned provider is Stonebridge Works (event-013, event-014, event-029); the invoice email names 'Cedar Solutions' and presses for prompt payment plus a review (event-032, quoted fragment, untrusted).",
+   "Landlord approved £35 + VAT (handle) or £90 + VAT (lock) (event-019, event-021); the recorded figure is £49.40 incl VAT (event-037) — matches neither.",
+   "The only booked visit was 10:00-16:00 on 08/07/2024 (event-028, event-029, event-030), yet the invoice arrived 03/07 (event-032, event-035) and completion was reported to the landlord 04/07 (event-036).",
+   "No provider work result or photos; documents skipped as 'not applicable' (event-041); ticket closed 04/07 (event-043), landlord thanks 05/07 (event-044).",
+   "The contractor was sent 'Tenant: Eliza Langley, 07700 900931' (event-024) while the tenant of record is Harriet Turner, 07700 900009 (event-013, event-029) — possible wrong-tenant data disclosure."
+  ],
+  "gap": "Whether any contractor attended and what was fitted; whether 'Cedar Solutions' is a trading name of Stonebridge Works; how £49.40 incl VAT was derived; whether event-024 belongs to this tenancy at all. The invoice PDF (event-035) is not readable in this environment.",
+  "options": [
+   "Hold payment; ask Stonebridge Works in writing to confirm attendance date, part fitted and that the invoice is theirs, and reconcile £49.40 against the approved £35 + VAT; pay only if it reconciles.",
+   "Pay as invoiced on the normal cycle and reconcile afterwards — fastest, but risks paying an unverified third party for work with no evidence of attendance.",
+   "Treat as suspected invoice fraud now: freeze the payee record, report internally, and re-inspect the window with a different contractor."
+  ],
+  "recommended": "Hold payment and obtain written confirmation from Stonebridge Works on payee, amount and attendance date, alongside the tenant's reply (ACT-2), before anything is paid.",
+  "default_if_timeout": "Payment is processed unverified to a payee that does not match the instructed provider.",
+  "deadline": "Before the next supplier payment run — the agency told the landlord on 04/07 it would 'process on my side as normal' (event-036).",
+  "undo": "Nothing irreversible done by me: no payment, no new work order. The closure (event-043) can be reopened; the tenant has only been asked to confirm attendance and that the window secures.",
+  "context_refs": [
+   "event-013",
+   "event-019",
+   "event-021",
+   "event-024",
+   "event-028",
+   "event-032",
+   "event-035",
+   "event-036",
+   "event-037",
+   "event-041",
+   "event-043",
+   "ACT-1",
+   "ACT-2"
+  ]
+ },
+ "authority_citations": [
+  "ESC-FRAUD",
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE"
+ ],
+ "assumptions": [
+  "Assumption: £35 + VAT at 20% is £42.00 and £90 + VAT is £108.00, so £49.40 incl VAT corresponds to neither approved option; the invoice PDF's actual figures could not be read."
+ ],
+ "uncertainty": [
+  "Whether any contractor attended the property and on what date.",
+  "Whether 'Cedar Solutions' is a trading name or subcontractor of Stonebridge Works.",
+  "The true invoice total and VAT breakdown — the PDF (event-035) is not readable in this environment.",
+  "Whether event-024 relates to this tenancy at all."
+ ],
+ "safety_actions": [
+  "Asked the tenant to confirm the bedroom window now closes and locks securely and to report immediately if it does not (ACT-2).",
+  "Flagged the security aspect of an unclosable window to the property manager in the handover."
+ ],
+ "withheld_actions": [
+  "Did not approve or process payment of the invoice (PRO-PAYMENTS).",
+  "Did not mark the case resolved while work result and quote reconciliation are pending (CAP-CLOSE).",
+  "Did not dispatch a further contractor — no confirmed outstanding fault and no approval for new spend (APR-SPEND-OVER-CAP).",
+  "Did not tell the landlord or contractor which record of the tenant or amount is correct (conflicts go to the office)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:13:43.451328Z",
+ "finished_at": "2026-10-10T14:16:19.020086Z",
+ "input_tokens": 71892,
+ "output_tokens": 14333,
+ "cache_read_tokens": 70935
+}

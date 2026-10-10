@@ -1,0 +1,610 @@
+{
+ "case_id": "047",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Did not close the request. The only evidence of completion is an unsourced system note (event-035) and a \"completed without payment\" flag (event-036); no provider report, photo, invoice or landlord message supports it, and the agency's own instructed provider (Oscar Turner, event-018) never confirmed anything after three chases (event-020, event-022, event-024, event-026). Within my mandate I: asked the tenant to confirm the window is repaired and now closes and locks (ACT-1); asked the landlord to confirm their own contractor completed the Flat 24 window works and whether an invoice follows (ACT-2); stood Oscar Turner down to prevent a duplicate visit or charge (ACT-3); referred the three record conflicts (property named by the landlord, \"Dawson\" vs Oscar Turner, unverified completion) to the office rather than picking a side with any party (ACT-4); recorded the safety check and the absence of a spend cap (ACT-5); and placed the ticket on hold (ACT-6). No spend was authorised: no landlord standing cap is on file and the landlord never approved window works (APR-SPEND-OVER-CAP).",
+ "recap": "Window repair reportedly done by the landlord's own contractor but unverified; stood down the agency provider, asked tenant and landlord to confirm, referred record conflicts to the office.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — tenant to confirm the bedroom window is repaired and now closes and locks; landlord to confirm their contractor's completion and any invoice. 3-day reply window from today.",
+ "next_step": "Tenant (Eliza Jenkins) to confirm the bedroom window has been repaired and now closes and locks (asked ACT-1, 3-day clock); landlord confirmation requested in parallel (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-015 issue categorised as window repair; urgency set routine this session (use_playbook, ACT-5); no damage-limiting steps applicable to a window that will not close beyond the security question put to the tenant (ACT-1).",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "Landlord asked on 22 Feb (event-004, event-011) and never answered on the window; his only reply named a different property (event-010). Re-asked ACT-2. No spend cap on file (F8).",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-016, event-018 (Oscar Turner instructed); tenant told who was coming (event-017). Provider now stood down pending office review (ACT-3).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No slot was ever confirmed: three chases unanswered (event-020, event-022, event-024, event-026). No tenant consent to any window exists, so schedule_access was not used.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote was ever received from any provider; no amount is on file (event-026).",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Only an unsourced system note claims completion (event-035); no provider report. Confirmation requested from tenant and landlord (ACT-1, ACT-2).",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No photos or invoice on file; no skip reason recorded by the agency (event-036 states only 'completed without payment').",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "not_applicable",
+   "evidence": "Request marked completed without payment (event-036); no agency-side invoice exists. Landlord asked whether any invoice follows from his own contractor (ACT-2).",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-035 is a system note, not a landlord message; confirmation requested (ACT-2).",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key was issued; no visit was ever confirmed (event-020 to event-026).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Not closed: work result, documents and landlord confirmation outstanding; ticket placed on hold (ACT-6).",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant Eliza Jenkins reported on 21 Feb 2024 that the bedroom window at Flat 24, 150 Copperfield Walk, Kingshaven, ZZ3 7ZZ is not closing properly.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The toilet element of the original report was withdrawn by the tenant on 22 Feb: the tenant said her mother fixed it and only the window needs attention.",
+   "source_ids": [
+    "event-006",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The agency asked the landlord on 22 Feb whether to send its own contractor or the landlord's; the landlord's only reply named a plumber for Flat 18, 88 Alder Lane, Willowbank, ZZ3 5ZZ, a different property, and never answered on the window.",
+   "source_ids": [
+    "event-004",
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "On 1 Mar the agency assigned maintenance provider Oscar Turner and briefed tenant and provider; the brief states the provider should only proceed after agency approval if a quote is required.",
+   "source_ids": [
+    "event-016",
+    "event-017",
+    "event-018"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Three reminders were sent to the provider (4, 6, 8 Mar) with no reply; on 10 Mar the system flagged 3+ reminders with no response.",
+   "source_ids": [
+    "event-020",
+    "event-022",
+    "event-024",
+    "event-026"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Every hold note from 11 Mar to 30 May records 'Held awaiting update from Dawson', a name that appears nowhere else on the file; the holds switch from 'Waiting for Provider' to 'Waiting for Landlord' without any new message.",
+   "source_ids": [
+    "event-027",
+    "event-028",
+    "event-029",
+    "event-030",
+    "event-031",
+    "event-032",
+    "event-033",
+    "event-034"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "On 11 Jun a system note states the landlord's contractor confirmed the job complete, and the task was marked completed without payment; no provider report, photo, invoice or landlord message supports this.",
+   "source_ids": [
+    "event-035",
+    "event-036"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "No landlord standing spend cap or instruction document is on file in this case, so there is no standing authority to spend and no landlord approval of window works exists.",
+   "source_ids": [
+    "get_case_details",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No gas, electrical, water, heating, damp/mould or occupant-vulnerability content appears anywhere in the file; the tenant did not report the property as insecure.",
+   "source_ids": [
+    "event-001",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The tenant was acknowledged within one working day of the report (22 Feb) and updated again on 22 Feb and 1 Mar.",
+   "source_ids": [
+    "event-003",
+    "event-013",
+    "event-017"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The ticket property is Flat 24, 150 Copperfield Walk, Kingshaven; the landlord's only reply (event-010) names Flat 18, 88 Alder Lane, Willowbank and a plumber. The reply explicitly names a different property, so it cannot be read as an instruction for this job.",
+   "fact_ids": [
+    "F1",
+    "F3"
+   ],
+   "source_ids": [
+    "index",
+    "event-004",
+    "event-010"
+   ],
+   "resolution": "Not decided with any party. Conflict referred to the office (ACT-4) and the landlord asked to confirm the Flat 24 window works (ACT-2); the agency's own record of the address was kept for all outgoing messages.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Who held the job: the agency assigned Oscar Turner (event-016/018) while eight hold notes record 'awaiting update from Dawson' (event-027 to event-034).",
+   "fact_ids": [
+    "F4",
+    "F6"
+   ],
+   "source_ids": [
+    "event-016",
+    "event-018",
+    "event-027",
+    "event-034"
+   ],
+   "resolution": "Referred to the office (ACT-4); meanwhile the contractor named on the agency's own work order was contacted to confirm attendance and stood down (ACT-3).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Completion status: a system note says the landlord's contractor completed the job and the task was closed without payment (event-035, event-036), but the agency's instructed provider never confirmed any booking or visit and there is no work result from any provider.",
+   "fact_ids": [
+    "F5",
+    "F7"
+   ],
+   "source_ids": [
+    "event-035",
+    "event-036",
+    "event-026"
+   ],
+   "resolution": "Treated as unverified; the request was not closed and confirmation was sought from the tenant and the landlord.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion recorded with no supporting provider report, photo, invoice or landlord message, following eight identical hold notes naming a person ('Dawson') who appears nowhere else on the file; the agency's instructed provider was never stood down and could still attend or charge.",
+   "source_ids": [
+    "event-027",
+    "event-034",
+    "event-035",
+    "event-036"
+   ],
+   "action_taken": "Request left open, provider stood down (ACT-3), confirmations requested from tenant and landlord (ACT-1, ACT-2), office task raised (ACT-4)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Outgoing agency messages are signed under two different brands ('Meadow Solutions' and 'Northbridge Lettings') for the same ticket, and the landlord's email in event-004 quotes a request text that differs from the ticket description.",
+   "source_ids": [
+    "event-012",
+    "event-019",
+    "event-025",
+    "event-004"
+   ],
+   "action_taken": "Noted for the office in ACT-4; no party was told which brand or text is correct."
+  },
+  {
+   "kind": "other",
+   "description": "A repair reported on 21 Feb 2024 ran to 11 Jun 2024 without a confirmed visit — relevant to the reasonable-time duty under s.11 Landlord and Tenant Act 1985.",
+   "source_ids": [
+    "event-001",
+    "event-035"
+   ],
+   "action_taken": "Recorded as clock CLK-S11 and included in the office task."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "047",
+    "title": "Case 047: Bedroom Window Repair Request",
+    "received_at": "2024-02-21 03:01:42 UTC",
+    "track": "Property Management",
+    "case_number": "047",
+    "property": "Flat 24, 150 Copperfield Walk, Kingshaven, ZZ3 7ZZ",
+    "source_role": "Tenant",
+    "agency": "",
+    "events_visible": 36,
+    "attachments_hidden": 0,
+    "details": "# Case 047: Bedroom Window Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-02-21 03:01:42 UTC\n- property: Flat 24, 150 Copperfield Walk, Kingshaven, ZZ3 7ZZ\n\n## Initial request\nHello. can come and fix the window from the bedroom because it isn’t closing properly.Thank you!"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "047-get_case_details-c01efdd98a46",
+   "receipt": "{\"id\": \"047\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:12:18.726379Z",
+   "finished_at": "2026-10-10T14:12:18.726609Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "047-get_action_ledger-7280613c1a5c",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:12:18.726933Z",
+   "finished_at": "2026-10-10T14:12:18.727085Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Eliza Jenkins — regarding the bedroom window at Flat 24, 150 Copperfield Walk that was not closing properly (reported 21 February, event-001). Our record shows a contractor arranged by the landlord reported the job as complete on 11 June (event-035). Before we close the request, please confirm: (1) has anyone attended and repaired the bedroom window, and (2) does the window now close and lock securely? If it still does not close or lock, tell us straight away and we will treat the security of the property as a priority. No charge has been raised to you and none is implied by this message."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "047-notify_tenant-b020ff773e94",
+   "action_id": "047-notify_tenant-b020ff773e94",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:13:00.047632Z",
+   "finished_at": "2026-10-10T14:13:00.047837Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Flat 24, 150 Copperfield Walk, Kingshaven, ZZ3 7ZZ — bedroom window not closing (tenant report 21 February, event-001). Our file records on 11 June that a contractor arranged by you confirmed the job complete (event-035) and the request was marked completed without payment (event-036). Please confirm: (1) that your own contractor has carried out and completed the bedroom window repair at this address, and (2) whether any invoice or paperwork is to follow to us. Note for your records: your email of 22 February (event-010) referred to a plumber attending Flat 18, 88 Alder Lane, Willowbank — a different address from this request — so we would like your confirmation that the window works at Flat 24 were covered."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "047-notify_landlord-d15ea709754b",
+   "action_id": "047-notify_landlord-d15ea709754b",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:13:00.047918Z",
+   "finished_at": "2026-10-10T14:13:00.048070Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Window Repair Request, Flat 24, 150 Copperfield Walk, Kingshaven, ZZ3 7ZZ (instructed 1 March, event-018; reminders event-020, event-022, event-024). Our file records on 11 June that a contractor arranged by the landlord reported this job complete (event-035). Please stand down and do not attend or quote further unless we re-instruct you. Please reply confirming whether you booked or attended any visit at this address and whether any charge has been raised, so we can reconcile our record."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "047-notify_contractor-2d22776c40a7",
+   "action_id": "047-notify_contractor-2d22776c40a7",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:13:00.048205Z",
+   "finished_at": "2026-10-10T14:13:00.048304Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 047 — reconcile conflicting records before closure (property named by landlord, provider identity, unverified completion)",
+    "summary": "Window repair, Flat 24, 150 Copperfield Walk (tenant report 21 Feb, event-001). Three record conflicts to settle in the office, not with the parties:\n1) Property: the only landlord reply (event-010) names Flat 18, 88 Alder Lane, Willowbank and a plumber; the ticket is Flat 24 Copperfield Walk and the toilet element was withdrawn by the tenant (event-006). The landlord never answered the window question (event-011).\n2) Provider: the agency assigned Oscar Turner (event-016/event-018) and chased three times with no reply (event-020, 022, 024, 026), but every hold note from 11 Mar to 30 May says \"awaiting update from Dawson\" (event-027 to event-034) — a name that appears nowhere else on the file.\n3) Completion: event-035 (\"Landlord's contractor confirmed job complete\") is a system note with no provider report, photo, invoice or landlord message behind it; the request was then marked completed without payment (event-036) while Oscar Turner was still instructed.\nAgent actions this session: tenant asked to confirm the window now closes and locks; landlord asked to confirm their contractor completed the Flat 24 window works and whether an invoice follows; Oscar Turner stood down and asked to confirm no attendance/charge. Request not closed — closure needs the tenant's confirmation of the work and the landlord's confirmation. No spend authorised; no landlord spend cap is on file."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "047-create_human_task-59abca4ca4e0",
+   "action_id": "047-create_human_task-59abca4ca4e0",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:13:00.048382Z",
+   "finished_at": "2026-10-10T14:13:00.048471Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Safety check recorded: the fault is a bedroom window that \"isn't closing properly\" (event-001). The tenant has not reported the property as insecure or the window as unlockable, so the insecure-property emergency definition is not met on the evidence; urgency set routine. Tenant asked directly whether the window now closes and locks — if the answer is no, re-triage as a security emergency. No gas, electrical, water, damp/mould or vulnerability content appears in the file. Landlord spend cap: none on file, so no standing authority to spend (APR-SPEND-OVER-CAP); no contractor spend was authorised by the agent. Case held open pending tenant and landlord confirmation; conflicts referred to the office (see human task)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "047-add_note-8cbbb50dd390",
+   "action_id": "047-add_note-8cbbb50dd390",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:13:00.048538Z",
+   "finished_at": "2026-10-10T14:13:00.048611Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant — confirmation that the bedroom window has been repaired and now closes and locks (also awaiting landlord confirmation of their own contractor's completion and any invoice) before final checks and closure.",
+    "until": "3 days from today"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-6",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "047-put_on_hold-83554ca8f63d",
+   "action_id": "047-put_on_hold-83554ca8f63d",
+   "receipt": "{\"id\": \"ACT-6\"}",
+   "started_at": "2026-10-10T14:13:02.829513Z",
+   "finished_at": "2026-10-10T14:13:02.830155Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Landlord would be asked and the tenant updated on his response",
+   "due": null,
+   "source_id": "event-013",
+   "status": "kept"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Provider Oscar Turner would contact the tenant to arrange a time or quote",
+   "due": null,
+   "source_id": "event-017",
+   "status": "broken"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Confirm the repair outcome and re-triage immediately if the window still does not close or lock",
+   "due": "3 days from today",
+   "source_id": "ACT-1",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant report 21 Feb 2024 (event-001); no confirmed visit on file before the 11 Jun completion note (event-035).",
+   "deadline": null,
+   "note": "Approximately 16 weeks elapsed; flagged to the office."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 22 Feb 2024 (event-003).",
+   "deadline": "2024-02-22",
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Has anyone attended and repaired the bedroom window at Flat 24, 150 Copperfield Walk, and does the window now close and lock securely?",
+   "why": "Only an unsourced system note (event-035) says the job is complete; the tenant's confirmation is needed before the request can be closed, and a window that still will not lock would be a security matter (RTE-TENANT).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm that your own contractor carried out and completed the bedroom window repair at Flat 24, 150 Copperfield Walk, and whether any invoice or paperwork will follow to us.",
+   "why": "Landlord confirmation of completion and of who paid is required by the playbook's final checks; the landlord's only reply on file (event-010) named a different address, Flat 18, 88 Alder Lane (RTE-LANDLORD).",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Oscar Turner: did you book or attend any visit at Flat 24, 150 Copperfield Walk, and has any charge been raised?",
+   "why": "He was instructed (event-018) and never replied to three chases; needed to rule out a duplicate visit or charge (RTE-CONTRACTOR).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE",
+  "APR-SPEND-OVER-CAP",
+  "ESC-CONFLICT",
+  "RTE-TENANT",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the tenant's 22 Feb reply (event-006), which names no address, relates to this ticket as the agency's own question; the landlord's 22 Feb reply is treated differently because it names a different property expressly."
+ ],
+ "uncertainty": [
+  "Whether the bedroom window at Flat 24 was in fact repaired, and by whom.",
+  "Whether Oscar Turner ever attended or raised a charge.",
+  "Who 'Dawson' is and whether that name refers to the provider, the landlord's contractor or a colleague.",
+  "Whether the landlord's Flat 18 Alder Lane message was a mis-addressed reply or a genuinely different job."
+ ],
+ "safety_actions": [
+  "Checked the file against the safety keyword list: no gas, electrical, water, heating, damp/mould, detector or vulnerability content present (F9).",
+  "Asked the tenant explicitly whether the bedroom window now closes and locks securely, so that a still-insecure window is re-triaged as a security emergency rather than closed as routine (ACT-1, ACT-5)."
+ ],
+ "withheld_actions": [
+  "Did not close the request: completion is unverified and the playbook's final checks (work result, documents, landlord confirmation) are not satisfied (CAP-CLOSE).",
+  "Did not instruct or re-instruct any contractor at agency cost: no landlord spend cap is on file and no landlord approval of window works exists (APR-SPEND-OVER-CAP).",
+  "Did not tell any party which property or which contractor is the correct one; the conflict went to the office instead (ESC-CONFLICT routing to RTE-STAFF via create_human_task).",
+  "Did not state or imply who pays for the repair (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:12:15.175553Z",
+ "finished_at": "2026-10-10T14:14:08.834650Z",
+ "input_tokens": 45598,
+ "output_tokens": 9240,
+ "cache_read_tokens": 56748
+}

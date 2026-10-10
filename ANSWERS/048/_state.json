@@ -1,0 +1,634 @@
+{
+ "case_id": "048",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "Case 048 was closed (event-036) on the strength of two contractor completion reports that name a different property (event-016, event-017: \"Flat 7, 177 Beacon Close, Kingshaven\"). No verified work result, photos, tenant confirmation or landlord completion confirmation exists for Flat 20, 120 Lantern Quay. I logged the conflict (ACT-1), chased the contractor for the address and result (ACT-2), asked the tenant whether the window now opens (ACT-3), raised an office task (ACT-4), and escalate for a human to decide whether to reopen and re-dispatch and to check the invoice. I did not re-dispatch (no priced landlord approval: event-006 names no amount — APR-SPEND-OVER-CAP / RTE-LANDLORD) and did not tell any party the job was or was not done at their address.",
+ "recap": "Window repair ticket closed on completion reports naming a different property; conflict logged, contractor and tenant chased, escalated to verify or reopen.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Riverside Solutions to confirm which address was attended and the result (2 working days); office to decide on reopening.",
+ "next_step": "Property manager to decide whether to reopen Case 048 and re-dispatch to Flat 20 and to check no invoice was raised against the wrong property; contractor reply due within 2 working days (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 fault logged and categorised as a window repair; urgency routine (no emergency definition matched)",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-006 — landlord's own message 'Yes please get that sorted' (no amount named)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-009, event-011 provider briefed; event-010 tenant told who is attending",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-018 slot 12/12/2024 15:57; event-019 and event-020 confirmed to contractor and tenant",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "event-024 quote contents unavailable; event-026 is a system status line, not a landlord message — no amount or VAT evidenced (RTE-LANDLORD)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-016, event-017 report completion at a different property (Flat 7, 177 Beacon Close); no result for Flat 20 — contractor asked (ACT-2), tenant asked (ACT-3)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-032 skip reason 'all works completed' — unsupported given the address mismatch",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice on file; no forwarding event in the history",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-033 'Need confirmation from landlord'; no landlord message confirming completion",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issue event; event-035 keys line failed validation (assumption: tenant-attended visit)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-036 closed, but resolution names neither the verified work nor who paid; referred to property manager (ACT-4)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant Amelia Ingram reported on 05/12/2024 that the bathroom window at Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ is stuck and will not open.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The landlord ('Felix') approved getting the fault fixed in their own message on 06/12/2024, without naming an amount.",
+   "source_ids": [
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Riverside Solutions was assigned and briefed on 06/12/2024; the tenant was told they would attend.",
+   "source_ids": [
+    "event-009",
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "A visit slot of 12/12/2024 15:57 was recorded on 13/12 and confirmed to contractor and tenant.",
+   "source_ids": [
+    "event-018",
+    "event-019",
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The only completion reports on this ticket name a different property, 'Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ', with handle, gearbox and hinges replaced.",
+   "source_ids": [
+    "event-016",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "A quote document was added but its contents are unavailable; approval of the quote appears only as a system status line, not a landlord message.",
+   "source_ids": [
+    "event-024",
+    "event-026"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Documents were skipped, landlord confirmation was still needed, the keys update failed validation, and the request was then closed.",
+   "source_ids": [
+    "event-032",
+    "event-033",
+    "event-035",
+    "event-036"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No message from the tenant confirms the window was repaired; the agency itself noted on 15/12 that there were no work results.",
+   "source_ids": [
+    "event-021",
+    "search_history"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The agency record places this job at Flat 20, 120 Lantern Quay; the contractor's two completion reports place the completed window repair at Flat 7, 177 Beacon Close, Kingshaven. The difference decides whether the tenant's window was ever repaired.",
+   "fact_ids": [
+    "F1",
+    "F5"
+   ],
+   "source_ids": [
+    "index",
+    "event-011",
+    "event-016",
+    "event-017"
+   ],
+   "resolution": "Contractor asked which address was attended and the result (ACT-2); tenant asked whether the window now opens (ACT-3); office task raised (ACT-4). Unresolved pending replies.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Closure (event-036) and the skip reason 'all works completed' (event-032) assert a finished job, while event-021 ('No work results') and the mismatched completion reports show no verified result at this property.",
+   "fact_ids": [
+    "F5",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-021",
+    "event-032",
+    "event-036"
+   ],
+   "resolution": "Referred to the property manager (ACT-4).",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Two contractor completion emails on this ticket name a property that is not the ticket's property; the ticket was then closed, documents skipped and landlord confirmation bypassed. Risk of an unrepaired window and an invoice booked to the wrong property.",
+   "source_ids": [
+    "event-016",
+    "event-017",
+    "event-032",
+    "event-036"
+   ],
+   "action_taken": "Conflict logged (ACT-1), contractor and tenant asked for the missing facts (ACT-2, ACT-3), office task raised (ACT-4), escalated."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "048",
+    "title": "Case 048: Bathroom Window Repair Request",
+    "received_at": "2024-12-05 10:30:31 UTC",
+    "track": "Property Management",
+    "case_number": "048",
+    "property": "Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 36,
+    "attachments_hidden": 0,
+    "details": "# Case 048: Bathroom Window Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-12-05 10:30:31 UTC\n- property: Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ\n\n## Initial request\nBathroom window will not open -please can you fix"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "048-get_case_details-8bf3cbaf6070",
+   "receipt": "{\"id\": \"048\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:12:37.867077Z",
+   "finished_at": "2026-10-10T14:12:37.867267Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "048-get_action_ledger-758463430f17",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:12:37.867673Z",
+   "finished_at": "2026-10-10T14:12:37.867777Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-006",
+     "timestamp": "2024-12-06 02:54:06 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Agency / system",
+     "excerpt": "[2024-12-06 02:54:06 UTC] Email · from: Landlord · to: Agency / system\nHi Ruben,\nYes please get that sorted. Thank you.\nFelix"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "048-search_history-8a219ef82589",
+   "receipt": "[{\"event\": \"event-006\", \"timestamp\": \"2024-12-06 02:54:06 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Agency / system\", \"excerpt\": \"[2024-12-06 02:54:06 UTC] Email · from: Landlord · to: Age…",
+   "started_at": "2026-10-10T14:12:51.960421Z",
+   "finished_at": "2026-10-10T14:12:51.960569Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Contractor"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-016",
+     "timestamp": "2024-12-13 08:43:08 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2024-12-13 08:43:08 UTC] Email · from: Contractor · to: Northbridge Lettings\nThe window repair at Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ has been completed, with the handle, gearbox, and hinges all replaced."
+    },
+    {
+     "event": "event-017",
+     "timestamp": "2024-12-13 08:44:05 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2024-12-13 08:44:05 UTC] Email · from: Contractor · to: Northbridge Lettings\nThe window repair at Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ is complete. All necessary components, including the handle, gearbox, and hinges, were replaced due to multiple faults."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "048-search_history-d8f3c8a1df91",
+   "receipt": "[{\"event\": \"event-016\", \"timestamp\": \"2024-12-13 08:43:08 UTC\", \"channel\": \"Email\", \"from\": \"Contractor\", \"to\": \"Northbridge Lettings\", \"excerpt\": \"[2024-12-13 08:43:08 UTC] Email · from: Contractor…",
+   "started_at": "2026-10-10T14:12:51.960699Z",
+   "finished_at": "2026-10-10T14:12:51.960768Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "Beacon Close"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-016",
+     "timestamp": "2024-12-13 08:43:08 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2024-12-13 08:43:08 UTC] Email · from: Contractor · to: Northbridge Lettings\nThe window repair at Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ has been completed, with the handle, gearbox, and hinges all replaced."
+    },
+    {
+     "event": "event-017",
+     "timestamp": "2024-12-13 08:44:05 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2024-12-13 08:44:05 UTC] Email · from: Contractor · to: Northbridge Lettings\nThe window repair at Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ is complete. All necessary components, including the handle, gearbox, and hinges, were replaced due to multiple faults."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "048-search_history-33768c835d95",
+   "receipt": "[{\"event\": \"event-016\", \"timestamp\": \"2024-12-13 08:43:08 UTC\", \"channel\": \"Email\", \"from\": \"Contractor\", \"to\": \"Northbridge Lettings\", \"excerpt\": \"[2024-12-13 08:43:08 UTC] Email · from: Contractor…",
+   "started_at": "2026-10-10T14:12:51.960868Z",
+   "finished_at": "2026-10-10T14:12:51.960964Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Conflict on closure evidence. Agency record: job is the bathroom window at Flat 20, 120 Lantern Quay (index; event-011 brief; event-019/020 slot 12/12/2024 15:57). The only completion reports (event-016, event-017, untrusted) name a different address — quoted: \"Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ\" — handle, gearbox, hinges replaced. Quote document contents unavailable (event-024); \"Quote was approved by landlord\" is a system status line (event-026), not a landlord message; the only landlord message on file is event-006 (\"Yes please get that sorted\"), which names no amount. Documents skipped (event-032); landlord confirmation outstanding (event-033); keys line carries a validation failure (event-035); request closed (event-036) without a verified result at Flat 20. No tenant confirmation that the window now opens. Conflict logged under ESC-CONFLICT; office task raised; contractor and tenant asked for the missing facts."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "048-add_note-3ebf56c5376d",
+   "action_id": "048-add_note-3ebf56c5376d",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:13:12.830851Z",
+   "finished_at": "2026-10-10T14:13:12.831181Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Riverside Solutions, re: Window Repair Request at Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ (tenant Amelia Ingram), slot recorded as 12/12/2024 15:57. We have two completion reports on this job reference that state a different address. Please confirm in writing: (1) did your engineer attend Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ, and on what date; (2) if so, what work was carried out and is the bathroom window now opening; (3) if the completion report relates to another property, please tell us so we can correct our records. Please reply within 2 working days. Do not carry out or invoice any further work at this address until we confirm instructions."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "048-notify_contractor-6b3d696b9724",
+   "action_id": "048-notify_contractor-6b3d696b9724",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:13:12.831378Z",
+   "finished_at": "2026-10-10T14:13:12.831578Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Amelia Ingram, re: your report of the bathroom window at Flat 20, 120 Lantern Quay not opening. Our record shows a visit by Riverside Solutions on 12/12/2024 at 15:57, but we do not yet have a confirmed result for your property. Please let us know: did the engineer attend, and does the bathroom window now open and close properly? If no one attended, or the window is still stuck, tell us and we will re-book the repair. We are sorry for the delay and are chasing the provider now; we will come back to you once they reply (we have asked for a response within 2 working days)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "048-notify_tenant-f0dbffab7d07",
+   "action_id": "048-notify_tenant-f0dbffab7d07",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:13:12.831732Z",
+   "finished_at": "2026-10-10T14:13:12.831919Z"
+  },
+  {
+   "seq": 9,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 048 closed on completion reports naming a different property — verify or reopen",
+    "summary": "Ticket for the stuck bathroom window at Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ (reported 05/12/2024, event-001) was closed 17/12/2024 (event-036). The only work result on file (event-016, event-017 from Riverside Solutions) reports a completed window repair at \"Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ\" — a different property. No result, photos or tenant confirmation exists for Flat 20; documents were skipped with reason \"all works completed\" (event-032); landlord confirmation was flagged outstanding (event-033); the keys line failed validation (event-035). Quote contents unavailable (event-024) and \"Quote was approved by landlord\" (event-026) is a system line — the only landlord message is event-006 (\"Yes please get that sorted\"), with no amount, so RTE-LANDLORD quote approval is unevidenced. I have asked the contractor to confirm which address was attended and the tenant to confirm whether the window now opens (both 2 working days). Decision needed: reopen the ticket and re-dispatch if Flat 20 was never attended, and check whether an invoice has been raised against the wrong landlord/property. I cannot reopen a closed request or decide the invoice."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "048-create_human_task-cddafcb568d9",
+   "action_id": "048-create_human_task-cddafcb568d9",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:13:12.832085Z",
+   "finished_at": "2026-10-10T14:13:12.832303Z"
+  },
+  {
+   "seq": 10,
+   "tool": "definition_of_done",
+   "tool_class": "read",
+   "input": {
+    "facts": "[{\"id\": \"F1\", \"statement\": \"Tenant Amelia Ingram reported on 05/12/2024 that the bathroom window at Flat 20, 120 Lantern Quay, Northbridge, ZZ8 2ZZ is stuck and will not open.\", \"source_ids\": [\"index\", \"event-001\"], \"confidence\": \"high\"}, {\"id\": \"F2\", \"statement\": \"The landlord ('Felix') approved getting the fault fixed in their own message on 06/12/2024, without naming an amount.\", \"source_ids\": [\"event-006\"], \"confidence\": \"high\"}, {\"id\": \"F3\", \"statement\": \"Riverside Solutions was assigned and briefed on 06/12/2024; the tenant was told they would attend.\", \"source_ids\": [\"event-009\", \"event-010\", \"event-011\"], \"confidence\": \"high\"}, {\"id\": \"F4\", \"statement\": \"A visit slot of 12/12/2024 15:57 was recorded on 13/12 and confirmed to contractor and tenant.\", \"source_ids\": [\"event-018\", \"event-019\", \"event-020\"], \"confidence\": \"high\"}, {\"id\": \"F5\", \"statement\": \"The only completion reports on this ticket name a different property, 'Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ', with handle, gearbox and hinges replaced.\", \"source_ids\": [\"event-016\", \"event-017\"], \"confidence\": \"high\"}, {\"id\": \"F6\", \"statement\": \"A quote document was added but its contents are unavailable; approval of the quote is recorded only as a system status line.\", \"source_ids\": [\"event-024\", \"event-026\"], \"confidence\": \"high\"}, {\"id\": \"F7\", \"statement\": \"Documents were skipped, landlord confirmation was still needed, the keys update failed validation, and the request was then closed.\", \"source_ids\": [\"event-032\", \"event-033\", \"event-035\", \"event-036\"], \"confidence\": \"high\"}, {\"id\": \"F8\", \"statement\": \"No message from the tenant confirms the window was repaired.\", \"source_ids\": [\"search_history\"], \"confidence\": \"medium\"}]",
+    "conflicts": "[{\"description\": \"The agency record places this job at Flat 20, 120 Lantern Quay; the contractor's two completion reports place the completed window repair at Flat 7, 177 Beacon Close, Kingshaven. The difference decides whether the tenant's window was ever repaired.\", \"fact_ids\": [\"F1\", \"F5\"], \"source_ids\": [\"index\", \"event-011\", \"event-016\", \"event-017\"], \"resolved_by\": \"asked\", \"resolution\": \"Contractor asked to confirm which address was attended and the result (ACT-2); tenant asked whether the window now opens (ACT-3); office task raised (ACT-4). Unresolved pending replies.\"}, {\"description\": \"Closure (event-036) and the skip reason 'all works completed' (event-032) assert a finished job, while event-021 ('No work results') and the mismatched completion reports show no verified result at this property.\", \"fact_ids\": [\"F5\", \"F7\"], \"source_ids\": [\"event-021\", \"event-032\", \"event-036\"], \"resolved_by\": \"unresolved\", \"resolution\": \"Referred to the property manager.\"}]",
+    "red_flags": "[{\"kind\": \"data_quality\", \"description\": \"Two contractor completion emails on this ticket name a property that is not the ticket's property; the ticket was then closed, documents skipped and landlord confirmation bypassed. Risk of an unrepaired window and an invoice booked to the wrong property.\", \"source_ids\": [\"event-016\", \"event-017\", \"event-032\", \"event-036\"], \"action_taken\": \"Conflict logged (ACT-1), contractor and tenant asked for the missing facts (ACT-2, ACT-3), office task raised (ACT-4), escalated.\"}]",
+    "authority_citations": "[\"ESC-CONFLICT\", \"RTE-STAFF\", \"RTE-CONTRACTOR\", \"RTE-LANDLORD\", \"CAP-NOTIFY\", \"CAP-LOG\", \"CAP-HUMAN-TASK\", \"CAP-CLOSE\", \"APR-SPEND-OVER-CAP\", \"CLK-S11\"]",
+    "assumptions": "[\"Assumption: no management key was issued for this visit, as the record shows a tenant-attended appointment and no key issue event; the keys item is therefore treated as not applicable.\"]",
+    "uncertainty": "[\"Whether Riverside Solutions attended Flat 20 at all on 12/12/2024.\", \"The quote amount and VAT, and whether an invoice has been raised and against which property.\", \"Whether the 'Flat 7, 177 Beacon Close' reports are a typo by the contractor or a genuinely different job.\"]",
+    "promises": "[{\"by\": \"agency\", \"to\": \"tenant\", \"what\": \"Come back to the tenant once the provider replies about whether the window repair was carried out at Flat 20\", \"due\": \"within 2 working days of ACT-2\", \"source_id\": \"ACT-3\", \"status\": \"open\"}, {\"by\": \"agency\", \"to\": \"contractor\", \"what\": \"Asked for written confirmation of the address attended, date and result; no further work or invoicing until instructions are confirmed\", \"due\": \"2 working days from ACT-2\", \"source_id\": \"ACT-2\", \"status\": \"open\"}]",
+    "clocks": "[{\"rule_id\": \"CLK-S11\", \"name\": \"Repair within a reasonable time\", \"status\": \"in_force\", \"basis\": \"Tenant report 05/12/2024 (event-001)\", \"deadline\": null, \"note\": \"Still running: no verified repair at this property.\"}, {\"rule_id\": \"CLK-SOP-ACK\", \"name\": \"Acknowledge tenant report within one working day\", \"status\": \"prior\", \"basis\": \"event-010 tenant notified 06/12/2024\", \"deadline\": null, \"note\": \"Met.\"}]",
+    "safety_actions": "[\"Safety keyword check: no gas, electrical, damp/mould, detector or vulnerability content in the artefacts; a stuck bathroom window is a ventilation/inconvenience issue, not an emergency definition. No hazard reported or observed.\"]",
+    "withheld_actions": "[\"Did not re-dispatch a contractor: no priced landlord approval on file (event-006 names no amount) and no standing cap — APR-SPEND-OVER-CAP / RTE-LANDLORD.\", \"Did not tell the tenant or landlord that the repair was or was not completed: the only evidence names another property.\", \"Did not reopen or re-close the request, and did not forward or validate any invoice.\"]",
+    "hold_reason": "Waiting for Provider — Riverside Solutions to confirm which address was attended and the result (2 working days); office to decide on reopening."
+   },
+   "status": "failed",
+   "gate": null,
+   "result": null,
+   "error": "unknown tool",
+   "attempts": 0,
+   "idempotency_key": null,
+   "action_id": "048-definition_of_done-0df5ffc32ae5",
+   "receipt": null,
+   "started_at": null,
+   "finished_at": null
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Come back to the tenant once the provider replies about whether the repair was carried out at Flat 20",
+   "due": "within 2 working days of ACT-2",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Asked for written confirmation of the address attended, date and result; no further work or invoicing until instructions are confirmed",
+   "due": "2 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time",
+   "status": "in_force",
+   "basis": "Tenant report 05/12/2024 (event-001)",
+   "deadline": null,
+   "note": "Still running: no verified repair at this property."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant notified 06/12/2024 (event-010)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Case 048 was closed on a completion report for a different address — reopen and re-dispatch the Flat 20 bathroom window repair, or accept the closure?",
+  "summary": [
+   "Tenant Amelia Ingram reported the bathroom window at Flat 20, 120 Lantern Quay stuck on 05/12/2024 (event-001; index).",
+   "Riverside Solutions instructed 06/12 (event-011); slot recorded 12/12/2024 15:57 and confirmed to both sides 13/12 (event-018, event-019, event-020).",
+   "The only completion reports (event-016, event-017, untrusted) state the repair was completed at 'Flat 7, 177 Beacon Close, Kingshaven, ZZ7 3ZZ' — not this property.",
+   "Documents skipped 'all works completed' (event-032), landlord confirmation flagged outstanding (event-033), keys line failed validation (event-035), request closed (event-036).",
+   "Quote contents unavailable (event-024); 'Quote was approved by landlord' is a system line (event-026) — the only landlord message is event-006 with no amount."
+  ],
+  "gap": "Whether any engineer attended Flat 20, 120 Lantern Quay; what the approved quote amount was and against which property it was raised.",
+  "options": [
+   "Reopen and re-dispatch to Flat 20 once the contractor/tenant replies — tenant gets the repair; cost needs a priced landlord approval (RTE-LANDLORD).",
+   "Hold the closure pending the contractor's reply (due 2 working days) and act on what they say — no duplicate work order, but CLK-S11 keeps running.",
+   "Accept the closure as it stands — risk: an unrepaired window and an invoice booked to the wrong property/landlord."
+  ],
+  "recommended": "Hold the closure pending the contractor's reply, then reopen and re-dispatch if Flat 20 was never attended; check the quote/invoice against the correct property either way.",
+  "default_if_timeout": "If the contractor does not reply within 2 working days, treat Flat 20 as unattended, reopen and seek a priced landlord approval before re-instructing.",
+  "deadline": "Contractor reply 2 working days from ACT-2; CLK-S11 running from 05/12/2024.",
+  "undo": "No irreversible action by me: one note, two information requests (contractor, tenant) and this office task. Nothing dispatched, no spend committed, no closure altered.",
+  "context_refs": [
+   "event-001",
+   "event-006",
+   "event-011",
+   "event-016",
+   "event-017",
+   "event-018",
+   "event-024",
+   "event-026",
+   "event-032",
+   "event-033",
+   "event-035",
+   "event-036",
+   "ACT-1",
+   "ACT-2",
+   "ACT-3",
+   "ACT-4"
+  ]
+ },
+ "authority_citations": [
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "RTE-CONTRACTOR",
+  "RTE-LANDLORD",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE",
+  "APR-SPEND-OVER-CAP",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: no management key was issued for this visit (no key issue event; tenant-attended appointment), so the keys item is treated as not applicable."
+ ],
+ "uncertainty": [
+  "Whether Riverside Solutions attended Flat 20 at all on 12/12/2024.",
+  "The quote amount and VAT, and whether an invoice has been raised and against which property.",
+  "Whether the 'Flat 7, 177 Beacon Close' reports are a contractor typo or a genuinely different job."
+ ],
+ "safety_actions": [
+  "Safety keyword pass: no gas, electrical, damp/mould, detector or vulnerability content in the artefacts; a stuck bathroom window matches no emergency definition. No hazard reported or observed — nothing to make safe."
+ ],
+ "withheld_actions": [
+  "Did not re-dispatch a contractor: no priced landlord approval on file (event-006 names no amount) and no standing cap — APR-SPEND-OVER-CAP / RTE-LANDLORD.",
+  "Did not tell the tenant or landlord that the repair was or was not completed: the only evidence names another property.",
+  "Did not reopen or re-close the request, and did not forward or validate any invoice (PRO-PAYMENTS)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:12:34.467719Z",
+ "finished_at": "2026-10-10T14:14:54.065850Z",
+ "input_tokens": 59081,
+ "output_tokens": 12439,
+ "cache_read_tokens": 70935
+}

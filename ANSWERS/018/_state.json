@@ -1,0 +1,499 @@
+{
+ "case_id": "018",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Did not close the request. The supervisor's completion flag (event-017) is not backed by a work result: the instructed provider never confirmed a booking or attendance (event-008–event-012), no photos or visit report exist, and the invoice attachment is unavailable (event-016). I logged the gaps (ACT-1), asked the tenant to confirm whether the garden was actually cleared and which phone number is correct (ACT-2), asked Riverside Services to confirm attendance, a booked date, or stand down to avoid a duplicate visit (ACT-3), and handed the invoice/rent-offset, the unpriced landlord approval and the communal-area question to the office (ACT-4). No spend instructed, no money moved, no liability decided.",
+ "recap": "Garden overgrowth ticket marked complete without a provider work result or invoice on file; chased tenant and provider for confirmation and raised an office task.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Riverside Services to confirm attendance/booking or stand down (3 working days); also Waiting for Tenant to confirm the garden was cleared.",
+ "next_step": "Riverside Services to confirm attendance with date, photos and invoice (or stand down) within 3 working days; tenant to confirm the work was done; office to locate the invoice and route the rent offset to accounts.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002: categorised External & Communal, severity ROUTINE, containment steps shown to tenant",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "event-005 is a system status line, not a landlord message; landlord's own reply (event-015) is a post-hoc 'Thanks' naming no amount — figure still to be confirmed (APR-SPEND-OVER-CAP)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-006/event-008 Riverside Services instructed; tenant told by event-007",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "event-012: 3+ reminders, no provider confirmation; chased again ACT-3",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "skipped",
+   "evidence": "No quote was ever returned by the provider (no reply on file after event-008)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-013 is an agency staff statement that the work is done; no provider report, date or photos on file",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-016: invoice logged but attachment unavailable; no photos",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "event-013 told the landlord it 'will be invoiced off the rent'; the invoice itself has not been forwarded (event-016 attachment unavailable); rent offset routed to the office (ACT-4)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-015 landlord replied 'Thanks' to the completion notice at event-013",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; external/garden works, tenant in occupation",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Not closed: work result, documents and invoice forwarding outstanding (CAP-CLOSE)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported overgrown tree and weeds at Flat 17, 67 Willowmere Road, Alderwick on 2025-12-16; classified External & Communal, severity ROUTINE.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Tenant answered that the overgrowth is in a 'communal area', contradicting the intake assumption of a private garden.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord approval for the job appears only as a system status line ('Landlord approval confirmed'), not as a landlord message.",
+   "source_ids": [
+    "event-005"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Riverside Services was instructed on 2025-12-17 and chased on 18, 20 and 23 December 2025; no booking or attendance was ever confirmed by the provider.",
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-010",
+    "event-011",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Two different tenant contact numbers were issued to the provider: 07700 900504 ext 900418 and 07700 900710.",
+   "source_ids": [
+    "event-008",
+    "event-009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "On 2026-01-03 agency staff told the landlord the garden maintenance 'has been done now and will be invoiced off the rent'; the landlord replied 'Thanks' with no amount discussed.",
+   "source_ids": [
+    "event-013",
+    "event-015"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "An invoice document was logged on 2026-01-06 but the attachment is unavailable in the case record; the task was then marked complete by a supervisor.",
+   "source_ids": [
+    "event-016",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "The tenant was never told the outcome of the job; the last message to the tenant (2025-12-17) said the provider would make contact.",
+   "source_ids": [
+    "event-007"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider never confirmed a booking or attendance (3+ chases) yet the landlord was told the work was done; no work result evidences who did the job.",
+   "fact_ids": [
+    "F4",
+    "F6"
+   ],
+   "source_ids": [
+    "event-012",
+    "event-013"
+   ],
+   "resolution": "Asked Riverside Services to confirm attendance/booking or stand down (ACT-3) and the tenant to confirm the garden was cleared (ACT-2); office task raised (ACT-4).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Intake assumed a private garden; the tenant's own answer says communal area — affects whether the cost sits with this landlord or a service charge.",
+   "fact_ids": [
+    "F2"
+   ],
+   "source_ids": [
+    "event-002"
+   ],
+   "resolution": "Flagged to the office in ACT-4 before the cost is finally allocated.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Two tenant contact numbers issued to the provider, a likely cause of the non-contact.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-008",
+    "event-009"
+   ],
+   "resolution": "Tenant asked to confirm the correct number (ACT-2); provider told not to call until confirmed (ACT-3).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion reported to the landlord and the ticket closed by a supervisor with no provider work result, no photos and an unavailable invoice attachment.",
+   "source_ids": [
+    "event-012",
+    "event-013",
+    "event-016",
+    "event-017"
+   ],
+   "action_taken": "Did not close the request; chased provider and tenant; office task raised (ACT-1, ACT-3, ACT-4)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Landlord's reply carries an unrelated footer, quoted fragment: 'Sent from Oakfield Utilities'. No payment-detail change or instruction was requested, so no fraud action taken; logged for awareness.",
+   "source_ids": [
+    "event-015"
+   ],
+   "action_taken": "Recorded in ACT-1 and the office task (ACT-4); no reliance placed on it."
+  },
+  {
+   "kind": "other",
+   "description": "Statement that the cost 'will be invoiced off the rent' is a money movement the agent may not make or confirm (PRO-PAYMENTS).",
+   "source_ids": [
+    "event-013"
+   ],
+   "action_taken": "Routed to the office/accounts via ACT-4; no payment action taken."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "018",
+    "title": "Case 018: Garden Maintenance Request",
+    "received_at": "2025-12-16 07:54:00 UTC",
+    "track": "Property Management",
+    "case_number": "018",
+    "property": "Flat 17, 67 Willowmere Road, Alderwick, ZZ7 4ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 17,
+    "attachments_hidden": 0,
+    "details": "# Case 018: Garden Maintenance Request\n\n## Case details\n- source role: Tenant\n- created: 2025-12-16 07:54:00 UTC\n- property: Flat 17, 67 Willowmere Road, Alderwick, ZZ7 4ZZ\n\n## Initial request\nRequest summary with context: Garden vegetation, including a tree and weeds, has become overgrown and too large for the tenant to maintain.\n\nTenant's original query: Garden is a mess to big to maintain myself we had at least 1 gardener come out once a year to sort this over grown tree weeds"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "018-get_case_details-62f2c2e609ff",
+   "receipt": "{\"id\": \"018\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:02:36.538871Z",
+   "finished_at": "2026-10-10T14:02:36.538940Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "018-get_action_ledger-eb97ac798e3a",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:02:36.539038Z",
+   "finished_at": "2026-10-10T14:02:36.539098Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review at handover. Facts: routine garden overgrowth reported 2025-12-16 (event-001/002; tenant answered \"communal area\" to the private/communal question). Landlord-approval step was marked complete only by a system status line (event-005) — not a landlord message. Riverside Services instructed (event-008) and chased three times (event-009, event-010, event-011); provider never confirmed a booking (event-012). Two different tenant contact numbers were given to the provider: 07700 900504 ext 900418 (event-008) vs 07700 900710 (event-009/010/011) — possible cause of the non-contact. Agency then told the landlord the work \"has been done now and will be invoiced off the rent\" (event-013); landlord replied \"Thanks\" (event-015). Invoice logged but attachment unavailable (event-016); supervisor marked the task complete (event-017). Open gaps: no work result or attendance confirmation from any provider; no tenant confirmation that the garden was cleared; invoice document not in the record; rent-offset is an accounts action outside agent authority (PRO-PAYMENTS). Not closing the request on this evidence."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-add_note-3aa5c20fbb3d",
+   "action_id": "018-add_note-3aa5c20fbb3d",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:03:20.396513Z",
+   "finished_at": "2026-10-10T14:03:20.396771Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Freya Palmer, regarding your garden maintenance request at Flat 17, 67 Willowmere Road, Alderwick (reported 16 December 2025): our records show the garden work was reported as completed on 3 January 2026, but we do not have a visit report from the provider on file. Could you confirm whether a gardener has attended and whether the overgrown tree and weeds have been cleared? If no one has attended, please tell us and we will re-book the visit with you. Please also note that we have two different contact numbers for you on file; please confirm the best number to reach you on so the provider can arrange access."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-notify_tenant-0b14ecd198ad",
+   "action_id": "018-notify_tenant-0b14ecd198ad",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:03:20.396844Z",
+   "finished_at": "2026-10-10T14:03:20.396924Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Riverside Services, regarding the Garden Maintenance Request at Flat 17, 67 Willowmere Road, Alderwick, ZZ7 4ZZ (instructed 17 December 2025, reminders sent 18, 20 and 23 December 2025): we have no confirmation from you of a booking or an attendance. Please reply confirming one of the following: (a) you attended — with the date and the work completed, plus photos and your invoice; (b) you have a visit booked — with the date and time; or (c) you have not been able to arrange access, in which case we will stand the job down to avoid a duplicate visit. Please reply within 3 working days. Note the tenant's contact number should be confirmed with us before you call — two numbers were issued in error."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-notify_contractor-172f05d15c8c",
+   "action_id": "018-notify_contractor-172f05d15c8c",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:03:20.396983Z",
+   "finished_at": "2026-10-10T14:03:20.397052Z"
+  },
+  {
+   "seq": 6,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_management",
+    "title": "Case 018 Willowmere Rd garden: completion unevidenced, invoice missing, rent-offset to handle",
+    "summary": "Routine garden overgrowth, Flat 17, 67 Willowmere Road (event-001/002). Supervisor marked the task complete (event-017), but the file does not support closure: (1) instructed provider Riverside Services never confirmed a booking or attendance despite three chases (event-008 to event-012), yet event-013 tells the landlord the work \"has been done now\"; no work result, no photos. (2) Invoice logged but the attachment is unavailable (event-016) — it has not been forwarded to the landlord. (3) event-013 states the cost \"will be invoiced off the rent\": a rent offset is an accounts action, outside agent authority (PRO-PAYMENTS) — please route to accounts and confirm who paid before closure. (4) Landlord approval for the spend exists only as a system status line (event-005); the landlord's own reply (event-015) is a post-hoc \"Thanks\" with no amount named — confirm the figure with the landlord when the invoice is located. (5) Data quality: two tenant phone numbers issued to the provider (event-008 vs event-009); landlord's reply carries an unrelated \"Sent from Oakfield Utilities\" footer (event-015) — no payment-detail change requested, logged for awareness only. (6) Tenant answered \"communal area\" (event-002) while intake assumed a private garden — confirm whether this is a communal area with a service-charge route before the cost is placed on this landlord. Agent has asked the tenant to confirm completion and the contractor to confirm attendance or stand down."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "018-create_human_task-72f32d086e01",
+   "action_id": "018-create_human_task-72f32d086e01",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:03:20.397116Z",
+   "finished_at": "2026-10-10T14:03:20.397198Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Gardener to be booked in at the earliest convenience on his return from annual leave",
+   "due": null,
+   "source_id": "event-004",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Riverside Services will contact you to arrange a convenient visit time",
+   "due": null,
+   "source_id": "event-007",
+   "status": "broken"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Confirm attendance with date/photos/invoice, confirm a booked slot, or stand down",
+   "due": "within 3 working days of ACT-3",
+   "source_id": null,
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2025-12-16 (event-001); completion still unevidenced as of 2026-01-06",
+   "deadline": null,
+   "note": "Routine garden works; 3+ weeks elapsed with no provider confirmation."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Reported 2025-12-16 07:54 (event-001); agency replied to tenant 2025-12-17 (event-004)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Did you attend Flat 17, 67 Willowmere Road, Alderwick for the garden maintenance job instructed on 17 December 2025? Please confirm (a) attended — date, work done, photos and invoice; (b) visit booked — date and time; or (c) no access arranged, stand down.",
+   "why": "No booking or attendance confirmation exists after three chases (event-009, event-010, event-011, event-012), yet completion was reported to the landlord (event-013). Scope and attendance are contractor-owned (RTE-CONTRACTOR).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Has a gardener attended and cleared the overgrown tree and weeds? If not, we will re-book. Also, which of the two numbers on file is the correct contact number?",
+   "why": "Tenant owns facts about the property's condition and access contact details (RTE-TENANT); needed before the request can be closed.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-LOG",
+  "CAP-NOTIFY",
+  "CAP-HUMAN-TASK",
+  "CAP-CLOSE (withheld — definition-of-done items pending)",
+  "APR-SPEND-OVER-CAP",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "RTE-CONTRACTOR",
+  "RTE-TENANT",
+  "RTE-STAFF"
+ ],
+ "assumptions": [
+  "Assumption: the job as instructed (event-008) and the work reported done (event-013) are the same job at the same property; no artefact names a second property.",
+  "Assumption (mine, unverified): the tree's proximity to cables, buildings and fences is unknown because the tenant did not answer that intake question (event-002); it should be checked on the visit."
+ ],
+ "uncertainty": [
+  "Who, if anyone, carried out the garden work — event-004 refers to 'the gardener' on annual leave, while Riverside Services was the instructed provider (event-008) and never replied.",
+  "The amount of the invoice and whether VAT applies: the attachment is unavailable (event-016).",
+  "Whether the area is communal (service charge) or the landlord's private garden (event-002)."
+ ],
+ "safety_actions": [
+  "Checked the material against the safety pass: no gas, electrical, damp/mould, detector, child/vulnerability or injury content appears in any artefact. Intake recorded no immediate hazard and the tenant did not answer the safety question; the overgrown tree was assumed clear of overhead cables (event-002). No hazard reported or observed, so no emergency route applies; the tree-proximity check is listed as outstanding for the provider's visit."
+ ],
+ "withheld_actions": [
+  "close_request — withheld: no provider work result, invoice attachment unavailable, invoice not forwarded (CAP-CLOSE).",
+  "Any confirmation or processing of the rent offset (PRO-PAYMENTS).",
+  "Any statement on who pays for a communal-area garden cost (PRO-TENANT-LIABILITY).",
+  "No new contractor dispatched — would risk a duplicate visit and there is no priced landlord approval on file (APR-SPEND-OVER-CAP)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:02:32.389619Z",
+ "finished_at": "2026-10-10T14:04:14.173374Z",
+ "input_tokens": 25997,
+ "output_tokens": 8323,
+ "cache_read_tokens": 42561
+}

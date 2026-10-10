@@ -1,0 +1,504 @@
+{
+ "case_id": "025",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Repair is complete under the manufacturer's warranty at no cost (event-062, event-063) and the ticket is recorded as completed without payment (event-064), so no spend authority, quote approval or further dispatch is needed. I did not close the request: two final-check items are outstanding — the landlord has not been told the outcome or confirmed closure (his last update, event-025, said the oven was unfixed), and the tenant's last word was that the oven \"appeared to be fixed but had not been fully tested\" (event-060). I notified the landlord (ACT-1) and the tenant (ACT-2), recorded the warranty conflict and data-quality issues (ACT-3) and placed the ticket on hold (ACT-4). The case now waits on two named parties, so it finishes as request_info rather than an escalation.",
+ "recap": "Oven repaired under manufacturer's warranty at no charge; landlord and tenant asked to confirm outcome before closure; ticket on hold at final checks.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Landlord — Felix asked to confirm completion/closure (ACT-1, 3-day wait); tenant also asked to confirm the oven heats correctly (ACT-2).",
+ "next_step": "Landlord (Felix) to confirm completion so the request can be closed as completed without payment; tenant (Leo Bennett) to confirm the oven heats on oven and grill settings.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 fault logged; routine urgency — electric oven not heating, no hazard reported; no damage-limiting steps applicable",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-006 landlord instructed the oven-fitting contractor be used for a charge-free warranty service; event-003 request to landlord; repair ultimately carried out at zero cost (event-062)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-011 provider assigned; event-013 contractor briefed; event-012 tenant told Harbour Services would attend",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-018/event-029 first visit; event-053/event-054 follow-up slot agreed with occupant; event-058 engineer attendance on 21/06",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote raised — work carried out under manufacturer's warranty at no charge (event-062)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-062 contractor confirms repair completed under warranty; event-063 agency note 'Oven repaired under warranty'",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "No photos or invoice supplied; warranty job with no charge, so no invoice exists (event-062, event-064) — skip reason recorded in ACT-3",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-064 task completed without payment; landlord told there is no invoice and no cost (ACT-1)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "ACT-1 completion notice and closure request sent; no reply yet — last landlord contact event-024/event-025",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant provided access (event-053, event-058)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Held open pending landlord confirmation and tenant verification (ACT-4)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 19/05/2024 that the oven does not heat on any oven or grill setting; light and sound still work; appliance replaced the previous year.",
+   "source_ids": [
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Property is Flat 2, 176 Lantern Quay, Westmarsh, ZZ8 5ZZ; tenant of record Leo Bennett.",
+   "source_ids": [
+    "get_case_details",
+    "event-012",
+    "event-029"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord (Felix) asked that the contractor who fitted the oven be contacted for a charge-free warranty service.",
+   "source_ids": [
+    "event-006"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Harbour Services fitted the oven (agency record) and were instructed on this job on 21/05/2024.",
+   "source_ids": [
+    "event-007",
+    "event-011",
+    "event-013"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Harbour Services attended, could not repair the oven, and initially reported the 12-month warranty had just expired.",
+   "source_ids": [
+    "event-020",
+    "event-022",
+    "event-025"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "On 12/06/2024 the contractor reported the oven is covered by a 2-year manufacturer's warranty; the manufacturer's engineer attended, ordered parts, and returned.",
+   "source_ids": [
+    "event-042",
+    "event-047",
+    "event-050"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "On 21/06/2024 the contractor confirmed the oven repair was completed under warranty with no charge to the landlord; agency recorded the task completed without payment.",
+   "source_ids": [
+    "event-062",
+    "event-063",
+    "event-064"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "At the contractor's follow-up call on 21/06 the occupant said the oven appeared fixed but had not yet been fully tested.",
+   "source_ids": [
+    "event-060"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "No landlord standing spend cap is on file in this case record; no spend was incurred, so no cap rule was engaged.",
+   "source_ids": [
+    "get_case_details",
+    "get_action_ledger"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Warranty status: contractor first said the 12-month warranty had expired (oven fitted March 2025), later said a 2-year manufacturer's warranty applied and the repair was done free of charge.",
+   "fact_ids": [
+    "F5",
+    "F6",
+    "F7"
+   ],
+   "source_ids": [
+    "event-020",
+    "event-022",
+    "event-042",
+    "event-062"
+   ],
+   "resolution": "RTE-CONTRACTOR owns scope and warranty cover; the later, more specific contractor confirmation that the work was completed under warranty at no charge (event-062) prevails. No cost arises either way, so the action does not change.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Landlord's email refers to the oven having been fitted by the contractor used by 'Keystone Works'; the agency note records Harbour Services as the fitter.",
+   "fact_ids": [
+    "F3",
+    "F4"
+   ],
+   "source_ids": [
+    "event-006",
+    "event-007"
+   ],
+   "resolution": "Agency record (event-007) followed; Harbour Services instructed and they accepted the job as the original fitter (event-010).",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Occupant named in contractor transcripts ('Oliver Ashford') differs from the tenant of record (Leo Bennett); property has multiple tenants.",
+   "fact_ids": [
+    "F2"
+   ],
+   "source_ids": [
+    "event-053",
+    "event-058",
+    "event-017",
+    "event-059"
+   ],
+   "resolution": "Case record name (Leo Bennett) used in all correspondence; discrepancy logged for the office (ACT-3). Access was obtained and the work completed, so it does not change the action.",
+   "resolved_by": "tool_check"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Appointment data in the record is internally inconsistent: 'Confirmed Time Slot: tomorrow, 21st June (21/06/2024)' sent on 24/05 (event-028, event-029), 'Visit date selected - 22/05/2024 12:00 am' (event-027), hold comment 'Appointment booked for between 25/3' (event-056), and the fault text placed in the 'Pets' field (event-028).",
+   "source_ids": [
+    "event-027",
+    "event-028",
+    "event-029",
+    "event-056"
+   ],
+   "action_taken": "Logged for the office (ACT-3); no date promised to any party that is not backed by a confirmed booking."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Occupant name mismatch between contractor transcripts ('Oliver Ashford') and the tenant of record (Leo Bennett) at a property with multiple tenants.",
+   "source_ids": [
+    "event-053",
+    "event-058",
+    "event-017"
+   ],
+   "action_taken": "Correspondence addressed to the name on the case record only; mismatch logged (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "025",
+    "title": "Case 025: Oven Repair Request",
+    "received_at": "2024-05-19 18:21:07 UTC",
+    "track": "Property Management",
+    "case_number": "025",
+    "property": "Flat 2, 176 Lantern Quay, Westmarsh, ZZ8 5ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 64,
+    "attachments_hidden": 0,
+    "details": "# Case 025: Oven Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-05-19 18:21:07 UTC\n- property: Flat 2, 176 Lantern Quay, Westmarsh, ZZ8 5ZZ\n\n## Initial request\nThe oven has stopped heating up. Does not work on any settings, the light still switches on and it makes a sound but does not heat up on oven or grill settings. It was replaced sometime last year as the last one stopped working too."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-get_case_details-a1797e34daf8",
+   "receipt": "{\"id\": \"025\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:05:20.122893Z",
+   "finished_at": "2026-10-10T14:05:20.123053Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "025-get_action_ledger-50bdd80055d8",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:05:20.123290Z",
+   "finished_at": "2026-10-10T14:05:20.123388Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 2, 176 Lantern Quay, Westmarsh, ZZ8 5ZZ — Oven Repair Request\n\nGood afternoon, Felix,\n\nAn update further to my email of 24 May (event-025). Harbour Services established with the supplier that the oven is covered by a 2-year manufacturer's warranty (reported 12 June, event-042). The manufacturer's engineer attended, ordered parts (event-050) and returned on 21 June; Harbour Services have confirmed the repair is complete under warranty with no charge to you (event-062).\n\nThere is therefore no invoice and no cost to the account; the request is recorded as completed without payment (event-064).\n\nPlease confirm you are happy for us to close the request. We are also asking the tenant to confirm the oven is working normally, as at the follow-up call on 21 June it had not yet been fully tested (event-060).\n\nKind regards\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-notify_landlord-d6e94650a3ec",
+   "action_id": "025-notify_landlord-d6e94650a3ec",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:05:47.081841Z",
+   "finished_at": "2026-10-10T14:05:47.082021Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Leo Bennett,\n\nRe: Oven Repair Request — Flat 2, 176 Lantern Quay, Westmarsh, ZZ8 5ZZ\n\nHarbour Services have confirmed the manufacturer's engineer completed the oven repair on 21 June under warranty, at no charge (event-062).\n\nWhen Harbour Services called that afternoon the oven appeared to be working but had not yet been fully tested (event-060). Could you please confirm the oven now heats correctly on both oven and grill settings? If it does not, reply to this email and we will reopen the job with Harbour Services straight away — there is nothing for you to arrange or pay.\n\nKind regards\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-notify_tenant-fe1d8efc6304",
+   "action_id": "025-notify_tenant-fe1d8efc6304",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:05:47.082097Z",
+   "finished_at": "2026-10-10T14:05:47.082178Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review (maintenance-request playbook). Work result: oven repaired 21/06 under manufacturer's warranty, no charge (event-062, event-063); request marked completed without payment (event-064) — no invoice or quote approval required, so RTE-LANDLORD quote approval not engaged.\nWarranty conflict recorded and resolved by later contractor evidence: event-020 and event-022 stated the warranty had expired (12-month, fitted March 2025 per event-014/event-025); event-042 states a 2-year manufacturer's warranty; event-062 confirms the repair was carried out under warranty free of charge. Later, more specific contractor statement (RTE-CONTRACTOR owns scope) prevails.\nData-quality flags for the office (no action taken on them): (a) event-006 landlord email refers to \"the contractor used by Keystone Works\", while the agency record (event-007) shows Harbour Services fitted the oven — agency record followed; (b) contractor transcripts event-053 and event-058 name \"Oliver Ashford\" as the person confirming access, while the tenancy contact on the case record is Leo Bennett and the property has multiple tenants (event-017, event-059) — access was nonetheless attended and completed; (c) appointment dates in the record are internally inconsistent (\"tomorrow, 21st June\" in event-028/029 sent 24/05; visit date selected 22/05/2024 in event-027; hold comment \"25/3\" in event-056); (d) event-028 placed the fault description in the \"Pets\" field.\nOutstanding: landlord confirmation of completion (asked) and tenant confirmation that the oven heats correctly (asked; untested at event-060). No safety keywords (gas, electrical fault, burning smell) reported — electric oven not heating, light and fan still operating (event-001); no hazard observed, so no safety red flag raised."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-add_note-7864998ec6df",
+   "action_id": "025-add_note-7864998ec6df",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:05:47.082249Z",
+   "finished_at": "2026-10-10T14:05:47.082327Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — completion notice and request to close sent to Felix (ACT-1); also awaiting tenant confirmation the oven heats correctly (ACT-2). Repair completed under warranty, no charge (event-062).",
+    "until": "3 days from today's notice"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "025-put_on_hold-861c99946ea8",
+   "action_id": "025-put_on_hold-861c99946ea8",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:05:50.647087Z",
+   "finished_at": "2026-10-10T14:05:50.647439Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "If the oven is not heating correctly, the job will be reopened with Harbour Services on the tenant's reply",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Confirmation that the repair is complete under warranty with no charge and no invoice to follow",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "kept"
+  },
+  {
+   "by": "contractor",
+   "to": "tenant",
+   "what": "Call back if there are any issues with the repaired oven",
+   "due": null,
+   "source_id": "event-060",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 19/05/2024 (event-001); repair completed 21/06/2024 (event-062)",
+   "deadline": null,
+   "note": "Approximately one month without an oven — delay driven by the warranty investigation and parts order (event-039, event-050); satisfied on completion."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 19/05 (event-001); tenant first written update 21/05 (event-012)",
+   "deadline": null,
+   "note": "Acknowledgement to tenant came two days after report."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Please confirm you are content for us to close the oven repair at Flat 2, 176 Lantern Quay as completed under the manufacturer's warranty with no charge to your account.",
+   "why": "Landlord confirmation is a required final check before closure (RTE-LANDLORD); his last substantive update (event-025) said the oven was unrepaired.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Does the oven now heat correctly on both oven and grill settings following the engineer's visit on 21 June?",
+   "why": "At the contractor's follow-up call the oven 'appeared to be fixed but had not been fully tested yet' (event-060); the work result needs tenant verification before closure.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-CLOSE",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "PRO-TENANT-LIABILITY"
+ ],
+ "assumptions": [
+  "Assumption: the engineer visit on 21/06 (event-058, event-060) is the same attendance the contractor reports as completed under warranty in event-062; no separate work result document is on file."
+ ],
+ "uncertainty": [
+  "Whether the oven in fact heats correctly — the occupant had not fully tested it when the contractor called (event-060).",
+  "No invoice, photos or written warranty paperwork are on file; the no-charge outcome rests on the contractor's email (event-062) and the agency note (event-063)."
+ ],
+ "safety_actions": [
+  "Checked the report and history for safety-pass keywords: the fault is an electric oven not heating with the light and fan still operating (event-001); no burning smell, sparks, shock risk, gas or alarm issue reported or observed, so no emergency definition is met and no safety red flag raised; result recorded in ACT-3."
+ ],
+ "withheld_actions": [
+  "Did not close the request: landlord confirmation and tenant verification of the work result are still outstanding (CAP-CLOSE requires the final checks first).",
+  "Did not instruct or re-dispatch any contractor: the work is reported complete and no spend authority or standing cap is on file (APR-SPEND-OVER-CAP).",
+  "Did not state or imply who would pay had the warranty not applied (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:05:16.692598Z",
+ "finished_at": "2026-10-10T14:07:08.399511Z",
+ "input_tokens": 59515,
+ "output_tokens": 7159,
+ "cache_read_tokens": 56748
+}

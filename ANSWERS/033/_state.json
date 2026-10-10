@@ -1,0 +1,577 @@
+{
+ "case_id": "033",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "The ticket was closed (event-044) on a work result that names a different property, with documents skipped, the invoice never sent to the landlord and landlord confirmation never obtained. I did not confirm completion or re-close. I chased the contractor for the address, photos and invoice (ACT-1), asked the tenant whether the engineer attended and whether the tap is fixed (ACT-2), logged the conflict (ACT-3), and hand the record conflict and the premature closure to a property manager under ESC-CONFLICT and RTE-STAFF.",
+ "recap": "Bathroom tap repair closed on a completion report naming another address; chased contractor and tenant, escalated the premature closure to the office.",
+ "stage": "final_checks",
+ "hold_reason": "",
+ "next_step": "Property manager to decide whether to reverse the closure pending Juniper Solutions' confirmation of which property the 14/10 completion and invoice relate to (contractor chased, 3-working-day reply-by).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-002 categorised as Plumbing request, routine; tenant given damage-limiting advice at ACT-2",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-008 landlord agrees to a contractor being instructed",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-009, event-010, event-011 Juniper Solutions assigned and briefed; tenant told",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-033, event-034, event-035 visit confirmed 13/10/2026 mid-day",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "event-023 landlord approves raising an order, but the quote at event-020 is not retrievable so no amount or VAT is on file",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-037 completion report names a different property (Flat 21, 161 Meadow Row, Cedarford); contractor chased at ACT-1",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-040 skipped as 'Not required' although event-037 claims photos and invoice; photos/invoice for Flat 19 requested at ACT-1",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice forwarded in the visible history (search_history); no verified invoice for this property",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-041 'Need confirmation from landlord' left open",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "done",
+   "evidence": "event-043 keys return confirmed",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-044 recorded a closure, but with work result, documents, invoice and landlord confirmation outstanding; closure reversal is with the property manager",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Ticket property is Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ; tenant Leo Fletcher; reported fault: bathroom tap squirts water when the shower is running, reported 03/10/2026.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Tenant was acknowledged the same night and told the landlord had been asked how to proceed.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord email of 04/10 agrees to a contractor being instructed for this property; landlord email of 07/10 approves raising an order for the quoted works.",
+   "source_ids": [
+    "event-008",
+    "event-023"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Juniper Solutions was assigned and briefed, and the tenant was told who would attend.",
+   "source_ids": [
+    "event-009",
+    "event-010",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "A visit was confirmed with tenant and provider for 13/10/2026 mid-day, with an SMS reminder on the day.",
+   "source_ids": [
+    "event-033",
+    "event-034",
+    "event-035",
+    "event-036"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The contractor's quote email describes bath taps needing replacement and recommends changing the TRV; the quote document referenced at event-020 is not retrievable, so no amount or VAT is on file.",
+   "source_ids": [
+    "event-019",
+    "event-020",
+    "get_attachment"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The only completion report names a different property, Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ.",
+   "source_ids": [
+    "event-037"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Documents were skipped with reason 'Not required', landlord confirmation was flagged as still needed, keys return was confirmed, and the request was then closed.",
+   "source_ids": [
+    "event-040",
+    "event-041",
+    "event-043",
+    "event-044"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No invoice has been forwarded to the landlord in the visible history.",
+   "source_ids": [
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "A contractor email of 04/10 claims a service and gas safety check was scheduled that day; no gas certificate or CP12 appears anywhere in the file and the agency instructed plumbing only.",
+   "source_ids": [
+    "event-013",
+    "event-011"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The completion report and invoice (event-037) name Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ, while the instructed job, the confirmed visit and every agency record name Flat 19, 159 Juniper Mews, Kingshaven. The difference decides whether this job is done and whether the invoice is payable against this landlord.",
+   "fact_ids": [
+    "F1",
+    "F7"
+   ],
+   "source_ids": [
+    "event-011",
+    "event-034",
+    "event-037"
+   ],
+   "resolution": "Contractor asked to confirm the address and resend photos/invoice for Flat 19 (ACT-1); tenant asked whether the engineer attended on 13/10 (ACT-2); conflict handed to the property manager.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Documents were skipped as 'Not required' (event-040) although the completion email states images and an invoice were attached (event-037).",
+   "fact_ids": [
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-037",
+    "event-040"
+   ],
+   "resolution": null,
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "The quote scope (bath tap replacement plus a TRV/radiator valve change, event-019) is wider than the reported bathroom tap fault (event-001), and no amount is verifiable.",
+   "fact_ids": [
+    "F1",
+    "F6"
+   ],
+   "source_ids": [
+    "event-001",
+    "event-019",
+    "event-020"
+   ],
+   "resolution": null,
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion report and invoice for this ticket name a different property (quoted fragment: 'Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ'); the ticket was closed on it.",
+   "source_ids": [
+    "event-037",
+    "event-044"
+   ],
+   "action_taken": "Contractor chased for clarification (ACT-1); conflict logged (ACT-3) and escalated."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Quote document referenced at event-020 cannot be retrieved, so the approved amount and VAT are unknown; the landlord's approval names no figure.",
+   "source_ids": [
+    "event-020",
+    "event-023"
+   ],
+   "action_taken": "Contractor asked for the amount and VAT of the items actually fitted (ACT-1)."
+  },
+  {
+   "kind": "other",
+   "description": "Contractor email claims a gas service and safety check at the property; nothing gas-related was instructed by the agency and no CP12 is on file. Safety-pass keyword check recorded, not a reported hazard.",
+   "source_ids": [
+    "event-011",
+    "event-013"
+   ],
+   "action_taken": "Recorded in the case note (ACT-3) and in the handover for the office to verify CLK-GAS-CP12 separately."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "033",
+    "title": "Case 033: Bathroom Tap Plumbing Request",
+    "received_at": "2026-10-03 22:58:43 UTC",
+    "track": "Property Management",
+    "case_number": "033",
+    "property": "Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 44,
+    "attachments_hidden": 0,
+    "details": "# Case 033: Bathroom Tap Plumbing Request\n\n## Case details\n- source role: Tenant\n- created: 2026-10-03 22:58:43 UTC\n- property: Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ\n\n## Initial request\nThe tap in the bathroom has started to squirt water out when the shower is running"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "033-get_case_details-dc29c215418b",
+   "receipt": "{\"id\": \"033\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:07:33.146674Z",
+   "finished_at": "2026-10-10T14:07:33.146762Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "033-get_action_ledger-3e3086401232",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:07:33.146856Z",
+   "finished_at": "2026-10-10T14:07:33.146894Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-03-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-03-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "033-get_attachment-13dd38ecee21",
+   "receipt": "{\"error\": \"no attachment named attachment-03-document\"}",
+   "started_at": "2026-10-10T14:07:43.546818Z",
+   "finished_at": "2026-10-10T14:07:43.546969Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-029",
+     "timestamp": "2026-10-08 01:27:27 UTC",
+     "channel": "Email",
+     "from": "Northbridge Lettings",
+     "to": "Contractor",
+     "excerpt": "[2026-10-08 01:27:27 UTC] Email · from: Northbridge Lettings · to: Contractor\nDear Juniper Solutions,\n\nLandlord approved your quote for the **Plumbing request** at the property located at Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ is ready to be scheduled.\n\nPlease contact the tenant to arrange a suitable time to carry out these works.\n\nContact Details: 07700 900677\nTenant Name: Leo Fletcher\nRequest description: The tap in the bathroom has started to squirt water out when the shower is runnin"
+    },
+    {
+     "event": "event-037",
+     "timestamp": "2026-10-14 23:41:25 UTC",
+     "channel": "Email",
+     "from": "Contractor",
+     "to": "Agency / system",
+     "excerpt": "[2026-10-14 23:41:25 UTC] Email · from: Contractor · to: Agency / system\nThe customer confirms that the plumbing work at Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ is completed and provides attached images and an invoice."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "033-search_history-c7cd51346c56",
+   "receipt": "[{\"event\": \"event-029\", \"timestamp\": \"2026-10-08 01:27:27 UTC\", \"channel\": \"Email\", \"from\": \"Northbridge Lettings\", \"to\": \"Contractor\", \"excerpt\": \"[2026-10-08 01:27:27 UTC] Email · from: Northbridge…",
+   "started_at": "2026-10-10T14:07:43.547105Z",
+   "finished_at": "2026-10-10T14:07:43.547431Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Northbridge Lettings — Plumbing request, Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ (tenant Leo Fletcher; visit booked 13/10/2026 12:00, our email of 09/10/2026).\n\nYour completion email of 14/10/2026 reports the plumbing work as completed at a different address (\"Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ\") and we cannot match it to this job. Before this file can be settled, please confirm by reply:\n1. The address the completed works and the attached invoice relate to.\n2. Whether the works at Flat 19, 159 Juniper Mews were carried out on 13/10/2026, and by whom.\n3. The completion photos and the invoice for Flat 19 (the quote you sent on 07/10/2026 covered bath tap replacement and a recommended TRV change — please state which items were actually fitted, with the amount and VAT).\n\nPlease reply within 3 working days. Do not carry out any further chargeable work at this property without a fresh written instruction from us."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "033-notify_contractor-1ee99b247c51",
+   "action_id": "033-notify_contractor-1ee99b247c51",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:08:19.748147Z",
+   "finished_at": "2026-10-10T14:08:19.748689Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Leo Fletcher,\n\nRe: bathroom tap, Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ.\n\nA visit by Juniper Solutions was confirmed with you for 13 October 2026, mid-day. Before we finish this file, please confirm two things:\n1. Did the engineer attend on 13 October and carry out the work?\n2. Is the tap now working normally, or does it still squirt water when the shower is running?\n\nIf the fault is still there, tell us and we will re-open the job. In the meantime, please avoid running the shower with the bath tap open, and let us know immediately if water is escaping onto the floor or getting anywhere near electrics, as that would be treated as an emergency.\n\nWe have not been asked to decide, and are not deciding, who pays for anything here.\n\nKind regards,\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "033-notify_tenant-80117e1ae192",
+   "action_id": "033-notify_tenant-80117e1ae192",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:08:19.748867Z",
+   "finished_at": "2026-10-10T14:08:19.749118Z"
+  },
+  {
+   "seq": 7,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Conflict on closure. The ticket was closed at event-044 although: (a) the only work result (event-037, untrusted contractor email) names a different property, \"Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ\", not the ticket address Flat 19, 159 Juniper Mews (index, event-011); (b) documents were skipped as \"Not required\" (event-040) even though the same email claims photos and an invoice were attached; (c) the invoice was never forwarded to the landlord and the landlord-confirmation step was left open (event-041). Quote amount and VAT are not establishable: the attachment referenced at event-020 (\"attachment-03-document\") is not retrievable, so the landlord's approval at event-023 is an approval to raise an order with no amount on file. Scope drift noted: quote at event-019 adds bath tap replacement plus a TRV (heating) change, beyond the reported bathroom tap fault. Safety-pass keyword check: event-013 (untrusted) claims \"a service and gas safety check is scheduled for today\" — no CP12 or gas certificate appears anywhere in the visible history and no gas work was instructed by us; flagged to the office to verify CLK-GAS-CP12 status separately. No gas, electrical or water hazard was reported by the tenant. Chased contractor for address clarification, photos and invoice; asked tenant to confirm attendance and whether the fault is fixed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "033-add_note-dbc5d7a5a0a8",
+   "action_id": "033-add_note-dbc5d7a5a0a8",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:08:19.749215Z",
+   "finished_at": "2026-10-10T14:08:19.749325Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "Agency",
+   "to": "Contractor",
+   "what": "Reply requested within 3 working days confirming the address, items fitted, amount/VAT, photos and invoice",
+   "due": "3 working days from 15/10/2026",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "Agency",
+   "to": "Tenant",
+   "what": "If the fault is still present the job will be re-opened",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time",
+   "status": "in_force",
+   "basis": "Tenant reported 03/10/2026 (event-001)",
+   "deadline": null,
+   "note": "Still running: no verified work result for this property."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 04/10/2026 (event-004)",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "CLK-GAS-CP12",
+   "name": "Gas safety record renewed every 12 months",
+   "status": "in_force",
+   "basis": "Contractor mention of a gas safety check (event-013)",
+   "deadline": null,
+   "note": "No CP12 in this file; office to verify on the property record."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "The tap job at Flat 19, 159 Juniper Mews was closed on a completion report for a different address - reverse the closure and hold for the contractor's clarification, or let the closure stand?",
+  "summary": [
+   "Ticket is for Flat 19, 159 Juniper Mews, Kingshaven, ZZ9 2ZZ, tenant Leo Fletcher; fault: bathroom tap squirts water when the shower runs (index, event-001).",
+   "The only work result is a contractor email of 14/10 reporting completion at 'Flat 21, 161 Meadow Row, Cedarford, ZZ5 7ZZ' with images and an invoice attached (event-037, untrusted).",
+   "On that result the ticket was marked complete (event-039), documents skipped as 'Not required' (event-040) and closed (event-044), while 'Need confirmation from landlord' was still open (event-041).",
+   "Quote amount and VAT cannot be established: the attachment at event-020 is not retrievable; the landlord approved raising an order with no amount visible (event-023); the quote scope adds bath taps plus a TRV change (event-019).",
+   "Keys return was confirmed (event-043); an earlier contractor email claiming 'a service and gas safety check is scheduled' (event-013) has no CP12 anywhere in the file."
+  ],
+  "gap": "Whether any work was actually carried out at Flat 19 on 13/10/2026, the quote/invoice amount and VAT, and whether the Cedarford address in event-037 is a typo or a genuinely different job.",
+  "options": [
+   "Reverse the closure, hold pending the contractor's confirmation of address, photos and invoice for Flat 19, then forward the invoice to the landlord for confirmation.",
+   "Let the closure stand and open a separate billing query with Juniper Solutions about the Cedarford invoice.",
+   "Reverse the closure and re-instruct a different plumber if the tenant reports the fault is still present."
+  ],
+  "recommended": "Reverse the closure and hold pending the contractor's reply and the tenant's confirmation; close only once the Flat 19 invoice and photos are on file and the landlord has confirmed.",
+  "default_if_timeout": "If the contractor does not reply within 3 working days, the file stays open with no verified work result and no payable invoice for this property; re-contact the tenant and consider a new plumber.",
+  "deadline": "Contractor reply-by 3 working days from 15/10/2026; CLK-S11 reasonable-time clock runs from the report of 03/10/2026.",
+  "undo": "Nothing irreversible by me: a contractor chase, a tenant query and a case note. Reversing the system closure is an office action.",
+  "context_refs": [
+   "event-013",
+   "event-019",
+   "event-020",
+   "event-023",
+   "event-037",
+   "event-040",
+   "event-041",
+   "event-044"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "ESC-CONFLICT",
+  "RTE-STAFF",
+  "RTE-CONTRACTOR",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CAP-CLOSE",
+  "CLK-S11",
+  "CLK-GAS-CP12",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the Cedarford address in event-037 may be a contractor clerical error rather than a different job - treated as unverified and put to the contractor, not acted on."
+ ],
+ "uncertainty": [
+  "Whether the 13/10/2026 visit took place and whether the tap fault is resolved.",
+  "The approved quote amount and VAT.",
+  "Whether a gas safety check was in fact carried out and whether a valid CP12 exists for this property."
+ ],
+ "safety_actions": [
+  "Tenant reminded to report immediately if water escapes onto the floor or reaches electrics, as that would be treated as an emergency (ACT-2).",
+  "No gas, electrical, water-ingress, heating-loss or security hazard was reported by the tenant; emergency definitions do not apply."
+ ],
+ "withheld_actions": [
+  "Did not confirm completion to the landlord or forward an invoice: the only work result names another property (event-037).",
+  "Did not re-close or re-open the request; closure reversal is an office decision.",
+  "Did not state or approve any cost: no retrievable quote amount (event-020).",
+  "Did not decide who pays for anything (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:07:24.822578Z",
+ "finished_at": "2026-10-10T14:10:40.179159Z",
+ "input_tokens": 64020,
+ "output_tokens": 13512,
+ "cache_read_tokens": 70935
+}

@@ -1,0 +1,453 @@
+{
+ "case_id": "035",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The landlord took the job on himself — he obtained the parts and arranged to fit them with the tenant directly (event-005, event-006) — and then telephoned to confirm completion (event-011, event-012); the task was marked completed without payment (event-013). No agency contractor was instructed and no agency spend arose, so no approval under APR-SPEND-OVER-CAP / APR-ALWAYS-ASK was needed. I did not close the request: the landlord's call summary (event-004) refers to water damage affecting a smoke detector and to new smoke detectors, and nothing in the file records that an alarm was tested, and no party has confirmed the shower itself is working. I messaged the tenant asking for both confirmations (ACT-1), noted the position (ACT-2) and put the ticket on hold Waiting for Tenant (ACT-3).",
+ "recap": "Landlord repaired the shower himself and confirmed completion; held at final checks pending tenant confirmation of the repair and a smoke-alarm test.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant - tenant to confirm the shower repair is complete and that the smoke alarm nearest the bathroom sounds on test; 3-day wait, then manual-mode review.",
+ "next_step": "Tenant to confirm the shower works and that the smoke alarm sounds on test (asked ACT-1; 3-day clock, then the office reviews before closure).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 (Plumbing, ROUTINE) plus tenant Q&A confirming bathroom shower; no damage-limiting steps applicable to low pressure",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-005/event-006 - landlord elected to supply the parts and carry out the work himself; no agency spend",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-006 - landlord acting as his own provider; tenant told he would make contact",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "event-006 - landlord arranging access directly with the tenant; no agency booking made",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote: landlord supplied parts and labour at his own cost",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-011/event-012 record the landlord's phone confirmation only; tenant confirmation requested at ACT-1",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "No contractor photos or invoice exist - landlord did the work himself (event-005, event-012); skip reason recorded at ACT-2",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-013 - task completed without payment; no agency invoice",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-011, event-012 - landlord rang to confirm the work was done",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; landlord attended by arrangement with the tenant",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Held open pending tenant confirmation of the repair and the smoke-alarm test (ACT-1, ACT-3)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported very low shower pressure and a loose hose connection at Flat 23, 63 Meadow Row, Bellmere, ZZ6 6ZZ on 2025-10-12.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Intake classified the issue as Plumbing, severity ROUTINE, medium confidence; tenant confirmed it is the bathroom shower and 'the flow is very less'; no pets.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "No emergency definition is met: water supply is present, no leak, flood, water near electrics, no loss of heating or security.",
+   "source_ids": [
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Agency sent the landlord a photo of the shower and told the tenant the landlord would obtain the parts and contact the tenant directly to fit them.",
+   "source_ids": [
+    "event-005",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Landlord telephoned and confirmed he had sorted the work; the task was recorded as completed without payment.",
+   "source_ids": [
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "The landlord call summary refers to water damage affecting a smoke detector and ceiling repairs, and to new smoke detectors having been fitted; no test result for any alarm is recorded in the file.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "No landlord standing spend cap or standing instruction is on file in this case record; no agency contractor was instructed and no agency spend arose.",
+   "source_ids": [
+    "get_action_ledger",
+    "event-003"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "Tenant replied 'That's great, thank you' to the arrangement that the landlord would supply and fit the parts.",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion rests on two internal one-line notes of a landlord phone call ('ll rang and confirmed this is all done'); no tenant verification and no document evidence of the repair.",
+   "source_ids": [
+    "event-011",
+    "event-012"
+   ],
+   "action_taken": "Asked the tenant to confirm; ticket held open rather than closed (ACT-1, ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Safety pass keyword check: the landlord call summary mentions water damage affecting a smoke detector and new smoke detectors, with no test recorded. No hazard is reported or observed, so this is logged as an open check, not a hazard.",
+   "source_ids": [
+    "event-004"
+   ],
+   "action_taken": "Tenant asked to test the alarm nearest the bathroom and report the result (ACT-1); check recorded at ACT-2."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "035",
+    "title": "Case 035: Shower Repair Request",
+    "received_at": "2025-10-12 02:51:06 UTC",
+    "track": "Property Management",
+    "case_number": "035",
+    "property": "Flat 23, 63 Meadow Row, Bellmere, ZZ6 6ZZ",
+    "source_role": "Tenant",
+    "agency": "",
+    "events_visible": 13,
+    "attachments_hidden": 0,
+    "details": "# Case 035: Shower Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2025-10-12 02:51:06 UTC\n- property: Flat 23, 63 Meadow Row, Bellmere, ZZ6 6ZZ\n\n## Initial request\nI would like to report an issue with the shower in my property.\n\nThe water pressure from the shower has become very low compared to its normal performance. In addition, the shower hose/pipe appears to be loose where it connects to the shower head, and I am concerned that it may be damaged or starting to break.\n\nThe low water pressure is affecting normal use of the shower. I would appreciate it if someone could inspect the shower, hose, and connections to determine the cause of the problem and carry out any necessary repairs."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "035-get_case_details-2fb5953c4f61",
+   "receipt": "{\"id\": \"035\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:08:02.516456Z",
+   "finished_at": "2026-10-10T14:08:02.516630Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "035-get_action_ledger-91dfe67c5830",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:08:02.516976Z",
+   "finished_at": "2026-10-10T14:08:02.517079Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "smoke detector water damage ceiling"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "035-search_history-c4b9d62f6381",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:08:20.190410Z",
+   "finished_at": "2026-10-10T14:08:20.190606Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "landlord parts fit arrange"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "035-search_history-1d9c646fccd1",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:08:20.190730Z",
+   "finished_at": "2026-10-10T14:08:20.190901Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Hello, an update on your shower report at Flat 23, 63 Meadow Row.\n\nThe landlord obtained the parts and arranged to fit them with you directly (our email of 12 October), and he has since telephoned us to confirm the work is complete. Before we close the request, please confirm two things:\n\n1. Has the shower work been carried out, and are the water pressure and the hose connection now working normally?\n2. The landlord's call with us referred to water damage affecting a smoke detector at the flat. Please press the test button on the smoke alarm nearest the bathroom/hallway and tell us whether it sounds. If it does not sound, or if any alarm is missing or damaged, tell us straight away and we will arrange for it to be dealt with as a priority.\n\nIf anything is still not right with the shower, let us know and we will re-open the job."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "035-notify_tenant-21f1118bf14e",
+   "action_id": "035-notify_tenant-21f1118bf14e",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:08:34.102125Z",
+   "finished_at": "2026-10-10T14:08:34.102553Z"
+  },
+  {
+   "seq": 6,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case review. Repair route: landlord elected to supply parts and fit them himself and to contact the tenant directly (event-005, event-006); no agency contractor instructed, no agency spend, no standing spend cap on file. Landlord reported completion by phone (event-011, event-012) and the task was marked completed without payment (event-013). Safety pass: the landlord call summary (event-004) refers to water damage affecting a smoke detector and to new smoke detectors; no test result is recorded anywhere in the file. Asked the tenant to test the alarm nearest the bathroom and to confirm the shower repair (this action). Not closing until the tenant confirms both; the landlord's completion call alone does not evidence a working alarm. No hazard reported or observed, so no safety red flag raised - this is an open check."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "035-add_note-b5fb316e9848",
+   "action_id": "035-add_note-b5fb316e9848",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:08:34.102683Z",
+   "finished_at": "2026-10-10T14:08:34.102764Z"
+  },
+  {
+   "seq": 7,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant - confirmation that the landlord's shower repair is complete and that the smoke alarm nearest the bathroom sounds on test (event-004 refers to water damage affecting a smoke detector).",
+    "until": "3 days from today"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "035-put_on_hold-217d6c1ad39b",
+   "action_id": "035-put_on_hold-217d6c1ad39b",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:08:34.102822Z",
+   "finished_at": "2026-10-10T14:08:34.102891Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Landlord will obtain the parts and contact the tenant to arrange fitting",
+   "due": null,
+   "source_id": "event-006",
+   "status": "kept"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Re-open the job if the shower is still not right, and treat a failed or missing smoke alarm as a priority",
+   "due": null,
+   "source_id": "ACT-1",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2025-10-12 (event-001); landlord reported completion 2025-10-12 (event-012)",
+   "deadline": null,
+   "note": "Satisfied on the landlord's account; awaiting tenant verification"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant emailed the same day (event-006)",
+   "deadline": null,
+   "note": "Met"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Has the landlord carried out the shower work, and are the water pressure and hose connection now normal?",
+   "why": "Only the tenant can confirm the repair at the fixture; the landlord's phone confirmation (event-011, event-012) is second-hand and the request cannot be closed without a work result verified at the property.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Please press the test button on the smoke alarm nearest the bathroom/hallway - does it sound? Is any alarm missing or damaged?",
+   "why": "event-004 records water damage affecting a smoke detector at the flat; no test result exists in the file. Safety pass item that must be resolved before the ticket can be called resolved.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-CLOSE",
+  "RTE-TENANT",
+  "CLK-S11",
+  "CLK-SOP-ACK",
+  "PRO-TENANT-LIABILITY"
+ ],
+ "assumptions": [
+  "Assumption: the smoke detector referred to in the call summary (event-004) is at this property; the summary does not name an address, so the tenant is asked to check rather than any conclusion being drawn.",
+  "Assumption: no management key was issued for this visit, as none is mentioned anywhere in the file."
+ ],
+ "uncertainty": [
+  "Whether the parts were actually fitted and the pressure restored - only the landlord's phone report supports it (event-011, event-012).",
+  "Whether the smoke detector affected by water damage was replaced and tested (event-004).",
+  "No landlord standing spend cap or written instruction is visible in this case; it did not bind the outcome because the landlord self-performed."
+ ],
+ "safety_actions": [
+  "Asked the tenant to test the smoke alarm nearest the bathroom and to report immediately if it does not sound or is missing/damaged (ACT-1).",
+  "Recorded the untested-detector question in the case record so it cannot be closed silently (ACT-2)."
+ ],
+ "withheld_actions": [
+  "Did not close the request: work_result unverified and the smoke-alarm check unresolved (CAP-CLOSE requires the final checks first).",
+  "Did not instruct a contractor: the landlord is doing the work himself and there is no spend authority on file (APR-SPEND-OVER-CAP).",
+  "Did not comment on who pays for any damage discussed in the landlord call (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:07:56.214307Z",
+ "finished_at": "2026-10-10T14:09:17.334087Z",
+ "input_tokens": 26907,
+ "output_tokens": 6109,
+ "cache_read_tokens": 56748
+}

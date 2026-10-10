@@ -1,0 +1,478 @@
+{
+ "case_id": "041",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The landlord handled this repair with his own operatives and reported the washing machine fixed (event-023); the agency instructed no contractor and incurred no spend (event-025). Because the tenant had previously reported that the advised self-help steps failed (event-014), I did not close the request: I asked the tenant to confirm the machine now spins and drains, asked the landlord to confirm which firm attended and the towel rail part fitting date, and placed the case on hold (Waiting for Tenant).",
+ "recap": "Landlord's own contractor reportedly fixed the washing machine; tenant asked to confirm before closure, case on hold, no agency spend.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — confirmation that the washing machine completes a full cycle after the landlord's operative attended (event-023); landlord also asked for the attending firm and the towel rail part date (ACT-3). Review in 3 days.",
+ "next_step": "Tenant to confirm the washing machine now spins and drains (asked ACT-2; 3-day wait, then chase or close).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 (fault logged), event-009 (damage-limiting drain-pump advice to tenant); urgency set routine this turn.",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-011/event-021: landlord declined agency instruction and used his own operatives; no agency spend (event-025).",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "Landlord's own operatives (event-021); tenant told who would contact them (event-012).",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-019: appointment booked for the landlord's contractor on Tuesday 02/10; access handled directly with the tenant.",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No agency quote proceeded; the £65.00 + VAT estimate (event-003) was never instructed.",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Landlord reports the machine fixed (event-023) but no provider report and no tenant confirmation; tenant asked (ACT-2).",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "No photos or invoice available — work carried out by the landlord's own contractor outside agency instruction (event-021, event-023); reason recorded in ACT-1.",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-025: completed without payment; no agency cost arose (ACT-1).",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-023: landlord confirmed the washing machine has been fixed.",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant gave access directly (event-012, event-019).",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Held pending tenant confirmation (ACT-4) and the outstanding towel rail part (event-023).",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 19/09/2024 that the washing machine at Flat 18, 108 Lantern Quay does not spin or drain at the end of any cycle; tenant had already cleaned the filter and manually drained twice.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "No hazard reported: no water ingress, no electrical fault, no loss of an essential service; a washing machine is a non-essential appliance, so the case is routine under CLK-S11.",
+   "source_ids": [
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Agency emailed the landlord on 21/09 advising an appliance engineer at a minimum of £65.00 + VAT and asked for approval to arrange it.",
+   "source_ids": [
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The landlord did not approve agency instruction; he said he would use his own people — operative Amelia to contact the tenant for access and also check the towel rail.",
+   "source_ids": [
+    "event-011",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Self-help drain-pump advice was sent to the tenant on 24/09; the tenant reported it did not resolve the fault.",
+   "source_ids": [
+    "event-009",
+    "event-014"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "Amelia attended on 29/09 but could not fix the machine; the landlord then passed the job to a firm he named as Willow Services, noting the machine was fitted new on 21 June 2021.",
+   "source_ids": [
+    "event-021"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "An appointment for the landlord's contractor was booked for Tuesday 02/10.",
+   "source_ids": [
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "On 02/10 the landlord emailed confirming the washing machine has been fixed (attributing the work to Lantern Solutions) and that a replacement towel rail part has been ordered and will be fitted on receipt.",
+   "source_ids": [
+    "event-023"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No agency contractor was instructed and no agency spend arose; the request was marked completed without payment.",
+   "source_ids": [
+    "event-024",
+    "event-025",
+    "get_action_ledger"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "The same fault history exists at the property: in May 2023 previous tenants reported the machine not emptying and Lantern Solutions unblocked the sink spigot.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider identity for the successful repair: event-021 says the landlord passed the job to Willow Services; event-023 says Lantern Solutions attended and fixed it.",
+   "fact_ids": [
+    "F6",
+    "F8"
+   ],
+   "source_ids": [
+    "event-021",
+    "event-023"
+   ],
+   "resolution": "Both statements come from the landlord and both describe his own contractor; no agency instruction or invoice turns on it. Asked the landlord to confirm for the record (ACT-3); not action-changing, so not escalated.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Two tenant emails one minute apart on 24/09: one reports the advised fix did not work (event-014), the other only thanks the agency for the update (event-015).",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-014",
+    "event-015"
+   ],
+   "resolution": "Treated the substantive report (event-014) as the fault status at that date; superseded by the landlord's 02/10 repair report (event-023), which is being verified with the tenant.",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Correspondence names are inconsistent: landlord emails address 'Bennett' (event-023, event-024) while the case manager on file is Noah Ingram (event-017). Names in message bodies were not copied into letters to other parties.",
+   "source_ids": [
+    "event-017",
+    "event-023",
+    "event-024"
+   ],
+   "action_taken": "Recorded in case note ACT-1; parties addressed only by their case-record roles."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Conflicting contractor names for the completed repair (Willow Services vs Lantern Solutions).",
+   "source_ids": [
+    "event-021",
+    "event-023"
+   ],
+   "action_taken": "Non-blocking question put to the landlord (ACT-3); logged in ACT-1."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "041",
+    "title": "Case 041: Washing Machine Repair Request",
+    "received_at": "2024-09-19 13:44:52 UTC",
+    "track": "Property Management",
+    "case_number": "041",
+    "property": "Flat 18, 108 Lantern Quay, Westmarsh, ZZ6 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 25,
+    "attachments_hidden": 0,
+    "details": "# Case 041: Washing Machine Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-09-19 13:44:52 UTC\n- property: Flat 18, 108 Lantern Quay, Westmarsh, ZZ6 1ZZ\n\n## Initial request\nHey, the washing machine isn't spinning when it comes to the end of a cycle with washing inside the washer. No matter the cycle, with clothes in it doesn't spin/drain resulting in powering off the machine and draining it mainly front the front drain pipe. The cycle says at \"0:01\" minute left indefinitely as it continues to spin, presumably to try and remove the water.\n\nI have cleaned/empited out the front filter and fully drained the machine twice since it started. Both times because the door wouldn't unlock due to water being left in the machine. \n\nThanks,\nTurner"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "041-get_case_details-be0038a8aff7",
+   "receipt": "{\"id\": \"041\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:10:42.781240Z",
+   "finished_at": "2026-10-10T14:10:42.781502Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "041-get_action_ledger-2954836002cd",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:10:42.781811Z",
+   "finished_at": "2026-10-10T14:10:42.781917Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Status review. Landlord took the job on with his own operatives (event-011, event-021): Amelia attended 29/09 without success (event-021); landlord then confirmed on 02/10 that the washing machine has been fixed (event-023) and that a towel rail part is on order to be fitted on receipt (event-023). Agency instructed no contractor and incurred no spend; request marked completed without payment (event-025). Data-quality conflict recorded, not action-changing: event-021 says the landlord passed the job to \"Willow Services\", event-023 says \"Lantern Solutions\" attended and fixed it (Lantern Solutions is the firm named in the 2023 history, event-011). Either way the provider was the landlord's own and no agency invoice arises. Earlier tenant message (event-014) reported the self-help drain-pump steps (event-009) did not resolve the fault, so completion is being verified with the tenant before closure. Name inconsistency noted in event-023/event-024 (\"Bennett\" vs case manager Noah Ingram, event-017) — not copied into correspondence."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "041-add_note-df70aa323bb4",
+   "action_id": "041-add_note-df70aa323bb4",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:11:18.255276Z",
+   "finished_at": "2026-10-10T14:11:18.255428Z"
+  },
+  {
+   "seq": 4,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Good afternoon,\n\nYour landlord has confirmed to us that his operative attended and that the washing machine has now been repaired (reported to us on 2 October). He has also advised that a replacement part has been ordered for the towel rail and will be fitted once it arrives.\n\nAs you told us earlier that the drain-pump steps we suggested had not resolved the fault, could you please confirm that the machine is now spinning and draining normally on a full cycle? If it is not, reply to this email and we will take the repair forward again.\n\nWe will keep the request open until we hear from you.\n\nKind regards\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "041-notify_tenant-edd71284689b",
+   "action_id": "041-notify_tenant-edd71284689b",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:11:18.255516Z",
+   "finished_at": "2026-10-10T14:11:18.255606Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Good afternoon,\n\nThank you for confirming the washing machine repair at Flat 18, 108 Lantern Quay, Westmarsh, ZZ6 1ZZ. We have asked the tenant to confirm the machine is now completing a full cycle, and will close the request once that is confirmed. No agency contractor was instructed, so there is no invoice from us for this job.\n\nTwo points for our record, please:\n1) For the file, which firm carried out the repair? Your earlier email mentioned Willow Services and your latest one Lantern Solutions.\n2) Please let us know the expected date for fitting the ordered towel rail part so we can give the tenant a timescale.\n\nKind regards\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "041-notify_landlord-234279234f1b",
+   "action_id": "041-notify_landlord-234279234f1b",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:11:18.255667Z",
+   "finished_at": "2026-10-10T14:11:18.255741Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant — confirmation that the washing machine now spins and drains after the landlord's operative attended (event-023); landlord also asked to confirm the towel rail part fitting date.",
+    "until": "3 days from today"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "041-put_on_hold-28e7190726b4",
+   "action_id": "041-put_on_hold-28e7190726b4",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:11:18.255797Z",
+   "finished_at": "2026-10-10T14:11:18.255862Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Keep the request open until the tenant confirms the machine is working; take the repair forward again if it is not.",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "landlord",
+   "to": "agency/tenant",
+   "what": "Fit the ordered replacement towel rail part once received.",
+   "due": null,
+   "source_id": "event-023",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 19/09/2024 (event-001); landlord's contractor reported repair complete 02/10/2024 (event-023).",
+   "deadline": null,
+   "note": "Satisfied subject to tenant confirmation."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 19/09 (event-001); first substantive tenant contact 24/09 (event-009).",
+   "deadline": null,
+   "note": "Acknowledgement to the tenant was later than the SOP baseline."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Is the washing machine now spinning and draining normally on a full cycle following the landlord's operative's visit? If not, please tell us what it is still doing.",
+   "why": "The tenant earlier reported the advised steps had not resolved the fault (event-014); completion must be verified before the request is closed.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Which firm carried out the repair (event-021 names Willow Services, event-023 names Lantern Solutions), and what is the expected fitting date for the ordered towel rail part?",
+   "why": "Record accuracy and a timescale to give the tenant; does not block closure of the washing machine item.",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "RTE-TENANT",
+  "RTE-LANDLORD",
+  "APR-SPEND-OVER-CAP",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the towel rail is tracked alongside this request because the landlord raised it here (event-006, event-023); it remains outstanding pending the ordered part and does not block the washing machine item."
+ ],
+ "uncertainty": [
+  "Whether the repair reported on 02/10 has actually resolved the fault is unverified by the tenant or by a provider report; the earlier advised remedy failed (event-014).",
+  "No invoice, photographs or job sheet exists on file for the landlord's contractor."
+ ],
+ "safety_actions": [
+  "Safety-pass check: no gas, electrical, damp/mould, detector or occupant-vulnerability keyword appears in the artefacts for this appliance fault; standing water was contained by the tenant draining the machine (event-001) and no water-near-electrics risk was reported, so no hazard flag raised."
+ ],
+ "withheld_actions": [
+  "Did not instruct an appliance engineer: the landlord declined agency instruction and used his own contractor (event-011, event-021); no standing spend cap is on file (APR-SPEND-OVER-CAP).",
+  "Did not close the request: work result is unverified by tenant or provider and the towel rail part is outstanding (CAP-CLOSE).",
+  "Did not comment on who pays for any call-out (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:10:35.987236Z",
+ "finished_at": "2026-10-10T14:12:04.054898Z",
+ "input_tokens": 25085,
+ "output_tokens": 6732,
+ "cache_read_tokens": 42561
+}

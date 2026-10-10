@@ -1,0 +1,667 @@
+{
+ "case_id": "023",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "The ticket was closed (event-027) although the completion claim is unverified and several closing checks were never met: no quote was approved, no invoice has been received, no appointment was ever confirmed with the tenant, and the landlord confirmation flagged at event-024 was never obtained. I took the reversible steps inside my mandate — chased the provider for the invoice, attendance date and photos (ACT-1), asked the tenant whether anyone attended and whether the lock now works (ACT-2), told the landlord that no amount is approved and no invoice is on file (ACT-3), and logged the discrepancies (ACT-4). Reopening a closed request, accepting an invoice for work carried out without the required prior approval, and deciding who bears that cost are human decisions (RTE-STAFF, APR-SPEND-OVER-CAP), so the case goes to the property manager.",
+ "recap": "Balcony door lock repair closed on an unverified contractor completion claim with no approved quote, no invoice and no confirmed visit; chased all parties and escalated.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — invoice, attendance date and photos requested from Juniper Surveying (ACT-1); tenant confirmation also outstanding (ACT-2).",
+ "next_step": "Property manager to decide whether to reopen the request pending the provider's invoice and evidence (chased, 2 working days) and the tenant's confirmation that the lock is repaired.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 / event-007: fault categorised as a lock repair; urgency routine; tenant advised to report immediately if the door cannot be secured (ACT-2)",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-006: landlord agreed to someone attending (no amount named)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-008, event-009, event-010: Juniper Surveying assigned and briefed; tenant told who is attending",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "event-012, event-016, event-019: voicemail and chases only; no slot ever confirmed with the tenant",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "event-010 required a quote before proceeding; no quote or approved amount exists on the request",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "event-020 is an untrusted one-line claim with no photos, date or detail; provider chased (ACT-1)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-023: skipped with reason 'No further documents to add' — recorded, but no photos or invoice exist",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice received by the agency (search_history, ACT-1); landlord told nothing is approved (ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-024 flagged confirmation as needed; no landlord reply after event-006",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "event-026 records a key return, but no management key issue is recorded for this visit",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-027 closed the request, but the resolution names no payer and the checks above are outstanding",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported the balcony glass door locking mechanism not turning/locking at Flat 20, 110 Meadow Row, Northbridge, ZZ2 5ZZ on 25 Jul 2025.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The landlord (Isaac) replied agreeing someone should attend — 'needs sorting fairly soon' — without naming an amount or approving a quote.",
+   "source_ids": [
+    "event-003",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "No landlord spend cap or standing instruction is available to me in this case record; the only landlord authority is the attendance agreement at event-006.",
+   "source_ids": [
+    "event-006",
+    "get_case_details"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F4",
+   "statement": "Juniper Surveying were assigned and briefed, with instructions to quote and to proceed only after the agency's approval.",
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "No appointment was ever confirmed with the tenant: a voicemail was left, two SMS chases were sent and the request sat on hold asking whether the tenant had called back.",
+   "source_ids": [
+    "event-012",
+    "event-014",
+    "event-015",
+    "event-016",
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The provider claims by email 'I've done the job and sent you the invoice yesterday'; no invoice, quote, photos or attendance date is on the request.",
+   "source_ids": [
+    "event-020",
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The request was moved to Result, documents skipped as 'No further documents to add', landlord confirmation flagged as still needed, key return marked confirmed, and the request closed.",
+   "source_ids": [
+    "event-021",
+    "event-022",
+    "event-023",
+    "event-024",
+    "event-026",
+    "event-027"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No key issue to the provider is recorded anywhere on the request, yet a key return was confirmed.",
+   "source_ids": [
+    "event-025",
+    "event-026"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "The tenant of record is Theo Ingram; Freya is named as the Juniper Surveying operative, but a call note records a voicemail left for 'Freya Langley'.",
+   "source_ids": [
+    "event-009",
+    "event-010",
+    "event-012",
+    "event-014"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider says the job is done and invoiced (event-020), while the agency record shows no confirmed appointment, no quote approval and no invoice received.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-016",
+    "event-019",
+    "event-020"
+   ],
+   "resolution": "Provider asked for attendance date, work done, photos and the invoice (ACT-1); tenant asked whether anyone attended and whether the lock works (ACT-2).",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Request closed as all checks completed (event-027) while landlord confirmation was still outstanding (event-024) and no invoice or work evidence exists.",
+   "fact_ids": [
+    "F6",
+    "F7"
+   ],
+   "source_ids": [
+    "event-024",
+    "event-027"
+   ],
+   "resolution": "Referred to the property manager to decide on reopening.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Key return confirmed although no management key is recorded as issued for this visit.",
+   "fact_ids": [
+    "F8"
+   ],
+   "source_ids": [
+    "event-025",
+    "event-026"
+   ],
+   "resolution": null,
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Name inconsistency: voicemail recorded as left for 'Freya Langley' while Freya is the provider's operative and the tenant is Theo Ingram.",
+   "fact_ids": [
+    "F9"
+   ],
+   "source_ids": [
+    "event-012",
+    "event-014"
+   ],
+   "resolution": "Addressed the tenant by the name on the case record (Theo Ingram); flagged as data quality.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Completion and closure rest on a single untrusted one-line provider email; no invoice, quote, photos or attendance record exists, and the key-return check was marked confirmed with no key issued.",
+   "source_ids": [
+    "event-020",
+    "event-023",
+    "event-026",
+    "event-027"
+   ],
+   "action_taken": "Chased the provider for evidence and the invoice (ACT-1), asked the tenant to confirm attendance and repair (ACT-2), logged the discrepancies (ACT-4) and escalated."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Occupant name inconsistency between the call note ('Freya Langley') and the tenancy/brief (tenant Theo Ingram; Freya is the provider's operative).",
+   "source_ids": [
+    "event-009",
+    "event-012",
+    "event-014"
+   ],
+   "action_taken": "Used the case-record name for the tenant; raised for office check."
+  },
+  {
+   "kind": "other",
+   "description": "Work appears to have been carried out without the prior approval the provider brief required, creating an unapproved-spend/invoice-dispute risk for the landlord.",
+   "source_ids": [
+    "event-010",
+    "event-020"
+   ],
+   "action_taken": "Landlord told no amount is approved and no invoice processed (ACT-3); decision referred to the property manager."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "023",
+    "title": "Case 023: Balcony Door Lock Repair",
+    "received_at": "2025-07-25 02:24:28 UTC",
+    "track": "Property Management",
+    "case_number": "023",
+    "property": "Flat 20, 110 Meadow Row, Northbridge, ZZ2 5ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 27,
+    "attachments_hidden": 0,
+    "details": "# Case 023: Balcony Door Lock Repair\n\n## Case details\n- source role: Tenant\n- created: 2025-07-25 02:24:28 UTC\n- property: Flat 20, 110 Meadow Row, Northbridge, ZZ2 5ZZ\n\n## Initial request\nThe tenant has reported that the locking mechanism on the glass door which leads out to the balcony is not turning / locking. Can you please get in touch with them to schedule a date and time to attend the property and quote to have the issue resolved. Thank you."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "023-get_case_details-fbe2352db8e3",
+   "receipt": "{\"id\": \"023\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:03:59.612566Z",
+   "finished_at": "2026-10-10T14:03:59.612812Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "023-get_action_ledger-86519c7634bc",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:59.613074Z",
+   "finished_at": "2026-10-10T14:03:59.613179Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-59-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-59-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "023-get_attachment-26d61d34d978",
+   "receipt": "{\"error\": \"no attachment named attachment-59-document\"}",
+   "started_at": "2026-10-10T14:03:59.613293Z",
+   "finished_at": "2026-10-10T14:03:59.613408Z"
+  },
+  {
+   "seq": 4,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-42-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-42-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "023-get_attachment-a4005c361b62",
+   "receipt": "{\"error\": \"no attachment named attachment-42-document\"}",
+   "started_at": "2026-10-10T14:03:59.613542Z",
+   "finished_at": "2026-10-10T14:03:59.613647Z"
+  },
+  {
+   "seq": 5,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice quote"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "023-search_history-26b2e9ea6e0c",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:04:01.872017Z",
+   "finished_at": "2026-10-10T14:04:01.872306Z"
+  },
+  {
+   "seq": 6,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-006",
+     "timestamp": "2025-07-25 04:29:47 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Northbridge Lettings",
+     "excerpt": "[2025-07-25 04:29:47 UTC] Email · from: Landlord · to: Northbridge Lettings\nHi Oliver\n\nYes that sounds like it needs sorting fairly soon.\n\nThanks\n\nIsaac\n\nSent from Riverside Homes"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "023-search_history-18edea6b6db5",
+   "receipt": "[{\"event\": \"event-006\", \"timestamp\": \"2025-07-25 04:29:47 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Northbridge Lettings\", \"excerpt\": \"[2025-07-25 04:29:47 UTC] Email · from: Landlord · to…",
+   "started_at": "2026-10-10T14:04:01.872454Z",
+   "finished_at": "2026-10-10T14:04:01.872625Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Lock Repair Request, Flat 20, 110 Meadow Row, Northbridge, ZZ2 5ZZ. Your email of 27 July states the job is done and an invoice was sent; no invoice, quote, photos or attendance record has reached us on this request. The instruction of 25 July asked you to quote and to proceed only after our written approval, and we have no record of an approved quote or a confirmed appointment with the tenant. Please reply within 2 working days with: (1) the date and time you attended, (2) what was done to the balcony door lock and any parts used, (3) photos of the completed work, (4) a copy of the invoice showing the amount and VAT, and (5) who authorised the work. We cannot process an invoice or confirm completion until we have these."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "023-notify_contractor-4baaa5bbeedc",
+   "action_id": "023-notify_contractor-4baaa5bbeedc",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:04:42.615750Z",
+   "finished_at": "2026-10-10T14:04:42.616102Z"
+  },
+  {
+   "seq": 8,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Theo Ingram, regarding the balcony door lock at Flat 20, 110 Meadow Row. Our provider Juniper Surveying has told us the job is complete, but we have no record of a confirmed appointment with you. Could you please confirm: (1) has anyone attended the flat about the balcony door lock, and on what date, and (2) is the door now locking normally? If no one has attended, or the lock is still not turning, please tell us and we will arrange a visit at a time that suits you. In the meantime, if the balcony door cannot be secured, please keep it shut and let us know straight away so we can treat it as urgent."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "023-notify_tenant-54f8fc3f626e",
+   "action_id": "023-notify_tenant-54f8fc3f626e",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:04:42.616331Z",
+   "finished_at": "2026-10-10T14:04:42.616491Z"
+  },
+  {
+   "seq": 9,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: balcony door lock, Flat 20, 110 Meadow Row, Northbridge, ZZ2 5ZZ. Following your email of 25 July agreeing someone should attend, Juniper Surveying were instructed. On 27 July they emailed to say the work is done and an invoice was sent; we have not received any invoice, quote or photos, and no appointment with the tenant was confirmed on our records. We have asked the provider for the invoice, attendance date and evidence of the work, and the tenant to confirm whether the lock has been repaired. No amount has been approved by you and we will not process any invoice until the facts are verified and you have seen the cost. We will come back to you as soon as the provider replies."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "023-notify_landlord-f0a34a72c3b0",
+   "action_id": "023-notify_landlord-f0a34a72c3b0",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:04:42.616556Z",
+   "finished_at": "2026-10-10T14:04:42.616635Z"
+  },
+  {
+   "seq": 10,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Case was closed at event-027 with checks outstanding: contractor completion claim is untrusted and unevidenced (event-020), no quote or approved amount on file (brief at event-010 required approval before proceeding), no invoice received, no visit ever confirmed with the tenant (holds at event-016/event-019 unanswered), landlord confirmation still flagged as needed at event-024, and \"keys return confirmed\" at event-026 although no management key was recorded as issued. Landlord's only authority on file is event-006 (agreement to send someone), which names no amount. Data quality: event-012 records a voicemail left for \"Freya Langley\" while event-014 names Freya as the Juniper Surveying operative and event-009/010 name the tenant as Theo Ingram. Chases sent to provider and tenant; landlord informed that no invoice is approved."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "023-add_note-78ab95dbfe48",
+   "action_id": "023-add_note-78ab95dbfe48",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:04:42.616694Z",
+   "finished_at": "2026-10-10T14:04:42.616782Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "Agency",
+   "to": "Contractor",
+   "what": "Invoice, attendance date, description of work and photos requested; no invoice processed until received",
+   "due": "2 working days from 2025-07-28 chase",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "Agency",
+   "to": "Tenant",
+   "what": "If no one attended or the lock is still faulty, a visit will be arranged at a time that suits the tenant",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "Agency",
+   "to": "Landlord",
+   "what": "Come back with the provider's reply and any cost before any invoice is processed",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time from report",
+   "status": "in_force",
+   "basis": "Tenant report 25 Jul 2025 (event-001)",
+   "deadline": null,
+   "note": "Still running if the lock is in fact unrepaired."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant contacted by the agency on 25 Jul (event-009)",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "CLK-RRA-2025",
+   "name": "Renters' Rights Act 2025 provisions",
+   "status": "in_force",
+   "basis": "SI 2026/421",
+   "deadline": null,
+   "note": "No bearing on this repair."
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "The lock job was closed on the provider's word alone, with no approved quote and no invoice on file — do we reopen and withhold payment until Juniper Surveying evidences the work, or accept the closure?",
+  "summary": [
+   "Tenant reported the balcony door lock not turning/locking on 25 Jul (event-001); property Flat 20, 110 Meadow Row.",
+   "Landlord Isaac agreed someone should attend — 'needs sorting fairly soon' (event-006) — but named no amount; the provider brief required a quote and said 'only proceed after receiving our approval' (event-010).",
+   "No appointment was ever confirmed: the tenant never called Freya back (event-012, event-016, event-019); then the provider emailed 'I've done the job and sent you the invoice yesterday' (event-020, untrusted).",
+   "No invoice, quote or photos exist on the request; documents were skipped as 'No further documents to add' (event-023) and landlord confirmation was still flagged as needed (event-024).",
+   "Request was nonetheless closed (event-027), and 'keys return confirmed' (event-026) although no management key is recorded as issued."
+  ],
+  "gap": "Whether the work was actually carried out, on what date, at what cost, and under whose authority — the only evidence is the provider's one-line untrusted email.",
+  "options": [
+   "Reopen the request, hold payment, and act on the provider's reply and the tenant's confirmation (chased today).",
+   "Accept the closure and pass any invoice the provider sends to the landlord for approval after the fact — risk of a disputed, unapproved charge.",
+   "Instruct a different provider to inspect and quote if the tenant reports the lock is still faulty — needs the landlord's approval of the cost."
+  ],
+  "recommended": "Reopen the request, hold payment, and act on the provider's and tenant's replies.",
+  "default_if_timeout": "If the provider does not reply within 2 working days and the tenant confirms the lock is still faulty, re-instruct a locksmith with the landlord's priced approval under APR-SPEND-OVER-CAP.",
+  "deadline": "Provider reply due 2 working days from today's chase (ACT-1)",
+  "undo": "No spend has been authorised and no money moved; the messages sent (ACT-1 to ACT-3) state that no invoice is approved and can be followed up or corrected.",
+  "context_refs": [
+   "event-006",
+   "event-010",
+   "event-012",
+   "event-020",
+   "event-023",
+   "event-024",
+   "event-026",
+   "event-027"
+  ]
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "CAP-SCHEDULE-ACCESS",
+  "RTE-STAFF",
+  "RTE-CONTRACTOR",
+  "RTE-LANDLORD",
+  "ESC-CONFLICT",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: no management key was issued for this visit, since none is recorded on the request; the key-return confirmation at event-026 therefore appears to be a process artefact.",
+  "Assumption: the balcony door is currently closed and the flat is not insecure — no artefact reports forced entry or an open door; the tenant has been asked to say if that is wrong."
+ ],
+ "uncertainty": [
+  "Whether Juniper Surveying attended at all, and on what date.",
+  "The cost of any work carried out — no amount appears in any artefact.",
+  "Whether the balcony door lock now operates.",
+  "Whether a landlord spend cap exists on file; none is visible in this case record."
+ ],
+ "safety_actions": [
+  "Told the tenant that if the balcony door cannot be secured they should keep it shut and tell us immediately so it can be treated as urgent (ACT-2) — an insecure property is an emergency under the mandate's definitions."
+ ],
+ "withheld_actions": [
+  "Did not confirm completion or close/approve payment on the provider's untrusted claim (PRO-PAYMENTS, CAP-CLOSE).",
+  "Did not decide who bears the cost of work done without prior approval (PRO-TENANT-LIABILITY, APR-SPEND-OVER-CAP).",
+  "Did not dispatch a replacement contractor: no priced landlord approval and no standing cap on file (APR-SPEND-OVER-CAP).",
+  "Did not book an access window: no tenant consent or agreed slot on record (CAP-SCHEDULE-ACCESS)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:03:48.779327Z",
+ "finished_at": "2026-10-10T14:05:43.779558Z",
+ "input_tokens": 45316,
+ "output_tokens": 8827,
+ "cache_read_tokens": 70935
+}

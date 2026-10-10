@@ -1,0 +1,589 @@
+{
+ "case_id": "040",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Reopened a ticket that had been closed prematurely. The tenant self-swapped the appliance (event-008) and the landlord approved an inspection minutes later (event-009), while the agency promised the tenant a visit \"when you're back\" (event-010) and then marked the job complete without payment (event-011, event-012). No contractor is instructed and no spend is committed: there is no standing spend cap on file and the landlord's approval names no amount, so a priced quote must be approved before work (APR-SPEND-OVER-CAP, RTE-LANDLORD). I replied to the landlord's chase (event-013) with the position and the decision he owns, asked the tenant for a return date and access windows plus a leak/electrical check after the DIY swap, logged the reopening and the premature closure, and put the case on hold. The ticket now waits on two named parties, so it finishes as request_info rather than an escalation; no safety hazard has been reported by any party.",
+ "recap": "Washing machine job closed too early: tenant swapped in his own machine, landlord approved an inspection; reopened, landlord and tenant asked, case on hold.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — return date and two access windows (asked ACT-3); and Waiting for Landlord — decision on the faulty machine in the garage and inventory amendment (asked ACT-2). Chase both after 3 days (by 31 Dec 2026).",
+ "next_step": "Tenant to give his return date and two access windows; in parallel the landlord to confirm whether the faulty machine is to be inspected/repaired (quote with VAT then goes to him for approval before any work).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 — categorised Appliances/washing machine not starting, ROUTINE, containment steps given to tenant",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "event-009 landlord agrees to someone attending, but names no amount and predates knowledge of the tenant's swap; no standing cap on file — amount approval requested at ACT-2",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "pending",
+   "evidence": "No contractor instructed; dispatch withheld until access date and an approved figure exist",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "Tenant away on holiday (event-008); return date and windows requested at ACT-3",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "pending",
+   "evidence": "No quote obtained; landlord told at ACT-2 that any quote (incl. VAT) comes to him before work",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "No visit has taken place",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "No provider documents exist yet",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "event-012 marked 'completed without payment', but that closure was premature — no inspection took place and the landlord's approved check is still outstanding",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "Landlord is instead chasing for an update (event-013); answered at ACT-2",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; tenant provides access (event-002: no access codes/alarms)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "Reopened at ACT-1; case on hold at ACT-4 pending tenant and landlord replies",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property is Flat 15, 55 Alder Lane, Northbridge, ZZ1 6ZZ; tenant reported the Juniper NBL-040-4451 washing machine fills with water but does not start the cycle, no error codes, reset tried.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Intake classified the issue Appliances / washing machine not starting, severity ROUTINE, confidence high; containment advice given to the tenant; no pets, no access codes or alarms.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "The tenant's report states there are no isolation valves on the water pipes and offers their own machine as a replacement, asking for the existing machine to be checked first.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Agency asked the landlord on 24 Dec 10:02 how to proceed and told the tenant at 10:04 it would revert; a 3-day wait was logged.",
+   "source_ids": [
+    "event-004",
+    "event-005",
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "On 24 Dec 11:47 the tenant emailed that he had swapped the machines himself and stored the faulty one in the garage, as he was leaving for holiday soon.",
+   "source_ids": [
+    "event-008"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F6",
+   "statement": "On 24 Dec 12:12 the landlord emailed agreeing to have someone attend the flat to check the washing machine issue; no amount, contractor or date is named.",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "At 14:42 the agency told the tenant 'I will have someone check this when you're back at a later date' and then marked the ticket 'Completed- no further action' / 'completed without payment'.",
+   "source_ids": [
+    "event-010",
+    "event-011",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "On 28 Dec the landlord asked for an update and whether any action is required from his side.",
+   "source_ids": [
+    "event-013"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F9",
+   "statement": "No contractor has been instructed and no cost has been incurred on this ticket; the action ledger was empty before my actions.",
+   "source_ids": [
+    "get_action_ledger"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No landlord standing spend limit is on file for this property, so the default cap of £0 applies and any spend needs the landlord's approval of a named amount.",
+   "source_ids": [
+    "CAP-DISPATCH-ROUTINE",
+    "APR-SPEND-OVER-CAP"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "No leak, water ingress, electrical fault or occupant vulnerability has been reported by any party; the safety keywords present (electrical/water adjacency of an appliance swap) are checks, not reported hazards.",
+   "source_ids": [
+    "index",
+    "event-002",
+    "event-008"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The ticket was closed as complete and 'without payment' while an open promise to the tenant (a later inspection) and the landlord's approval for an inspection both remained live.",
+   "fact_ids": [
+    "F6",
+    "F7",
+    "F8"
+   ],
+   "source_ids": [
+    "event-009",
+    "event-010",
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "resolution": "Treated the closure as premature: reopened and put on hold (ACT-1, ACT-4). The landlord's own chase (event-013) confirms he does not regard the matter as finished. No party was told the ticket was or was not validly closed.",
+   "resolved_by": "tool_check"
+  },
+  {
+   "description": "Sequencing: the landlord approved an engineer visit 25 minutes after the tenant said he had already swapped the machines, so it is unclear whether the landlord knew the swap had happened when he approved.",
+   "fact_ids": [
+    "F5",
+    "F6"
+   ],
+   "source_ids": [
+    "event-008",
+    "event-009"
+   ],
+   "resolution": "Put to the landlord at ACT-2: confirm whether he still wants the faulty machine inspected now that the tenant's own machine is in use.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Ticket marked 'Completed- no further action' and 'completed without payment' (event-011, event-012) while an inspection promised to the tenant (event-010) and approved by the landlord (event-009) was still outstanding — the landlord's chase (event-013) shows the closure was wrong.",
+   "source_ids": [
+    "event-010",
+    "event-011",
+    "event-012",
+    "event-013"
+   ],
+   "action_taken": "Reopened and logged at ACT-1; case placed on hold at ACT-4; landlord given the true position at ACT-2."
+  },
+  {
+   "kind": "other",
+   "description": "Appliance swap carried out by the tenant himself on pipework the report says has no isolation valves (event-008, index) — risk of leak or a poorly made electrical/water connection, though no leak or fault has been reported.",
+   "source_ids": [
+    "index",
+    "event-008"
+   ],
+   "action_taken": "Asked the tenant to confirm no leak, damp or socket issue and to report any water or electrical sign immediately as an emergency (ACT-3). Not recorded as a safety_hazard: nothing has been reported or observed."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Party messages are third-person summaries naming 'Rowan' (tenant email) and 'Oliver' (landlord email); names inside message bodies were not copied into letters to other parties.",
+   "source_ids": [
+    "event-008",
+    "event-009",
+    "event-013"
+   ],
+   "action_taken": "Addressed each party by role only; no cross-quoting of names."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "040",
+    "title": "Case 040: Washing Machine Repair Request",
+    "received_at": "2026-12-23 16:14:07 UTC",
+    "track": "Property Management",
+    "case_number": "040",
+    "property": "Flat 15, 55 Alder Lane, Northbridge, ZZ1 6ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 13,
+    "attachments_hidden": 0,
+    "details": "# Case 040: Washing Machine Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2026-12-23 16:14:07 UTC\n- property: Flat 15, 55 Alder Lane, Northbridge, ZZ1 6ZZ\n\n## Initial request\nRequest summary with context: The Juniper Services NBL-040-4451 washing machine fills with water but does not start the wash cycle.\n\nTenant's original query: The washing machine is no longer working.\n\nIt fills with water as normal, but the wash cycle never starts. There are no error codes displayed, and we've tried resetting the machine, and other settings, but unfortunately that hasn't resolved the issue.\n\nWe do have our own washing machine that could be installed as a replacement if necessary. However, I thought it would be best to have the existing machine checked first before making any changes.\n\nIf it does need replacing, could someone carry out the swap? There isn't any isolation valves on the water pipes.\n\nPlease let us know how you'd like to proceed."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "040-get_case_details-6878afb2ac44",
+   "receipt": "{\"id\": \"040\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:09:59.784241Z",
+   "finished_at": "2026-10-10T14:09:59.784308Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "040-get_action_ledger-4a42fc1b3184",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:09:59.784433Z",
+   "finished_at": "2026-10-10T14:09:59.784469Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "holiday return access date washing machine swapped garage"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "040-search_history-121a99f05c31",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:10:21.571834Z",
+   "finished_at": "2026-10-10T14:10:21.571925Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "approval cap contractor instruct"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "040-search_history-7c02edca3e68",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:10:21.571970Z",
+   "finished_at": "2026-10-10T14:10:21.572027Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Reopening for follow-up. Ticket was marked \"Completed- no further action\" / \"completed without payment\" (event-011, event-012) on 24 Dec, but an open promise remains: the agency told the tenant \"I will have someone check this when you're back at a later date\" (event-010), and the landlord gave approval for an inspection at 12:12 on 24 Dec (event-009) — i.e. after the tenant's self-swap message at 11:47 (event-008). Landlord chased for an update on 28 Dec (event-013). Outstanding facts: (a) tenant's return date / access windows — unknown, nothing in the history gives one; (b) whether the landlord still wants the faulty Juniper NBL-040-4451 machine (now stored in the garage per event-008) inspected/repaired, disposed of, or left, and whether the tenant's own machine remaining in situ needs an inventory amendment — landlord's decision (RTE-LANDLORD), not mine. Safety check recorded: tenant reports carrying out the swap himself although the report states there are no isolation valves on the water pipes (index, event-008); no leak, water ingress or electrical fault has been reported by any party — asking the tenant to confirm. No contractor instructed; no spend committed; no landlord standing spend cap on file (default £0), so any priced work needs a named-amount approval (APR-SPEND-OVER-CAP)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "040-add_note-b0b000332397",
+   "action_id": "040-add_note-b0b000332397",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:10:41.539494Z",
+   "finished_at": "2026-10-10T14:10:41.539689Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 15, 55 Alder Lane, Northbridge, ZZ1 6ZZ — washing machine (Juniper NBL-040-4451)\n\nThank you for chasing. Update and one decision for you:\n\n1. On 24 December the tenant told us he had swapped the machines himself and put the faulty appliance in the garage, as he was leaving for a holiday. Your approval for an engineer to attend arrived shortly afterwards, so no contractor has been instructed and no cost has been incurred to date.\n2. We have asked the tenant for his return date and two access windows so we can arrange the inspection you approved.\n\nAction required from you: please confirm what you would like done with the faulty machine now in the garage — (a) have an appliance engineer inspect/repair it once the tenant is back, (b) no inspection, and you will deal with the appliance yourself, or (c) no inspection and the tenant's own machine stays in use. If you choose (a) we will obtain a quote and come back to you with the amount including VAT for your approval before any work starts; we hold no standing spend limit for this property, so nothing will be instructed without your written go-ahead on a figure.\n\nPlease also let us know whether you want the tenancy inventory amended to record that the tenant's own machine is in place.\n\nWe will hold the file open pending your reply and the tenant's return date."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "040-notify_landlord-2ae6f5fc91aa",
+   "action_id": "040-notify_landlord-2ae6f5fc91aa",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:10:41.539782Z",
+   "finished_at": "2026-10-10T14:10:41.539884Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 15, 55 Alder Lane, Northbridge, ZZ1 6ZZ — washing machine\n\nThank you again for the update that you had swapped the machines yourself and put the faulty one in the garage. As promised, we would still like to have the faulty appliance looked at once you are back.\n\nCould you please let us know:\n1. The date you return to the property, and two access windows (day and a morning/afternoon preference) that suit you in the following weeks. We will only book a visit you have agreed, with at least 24 hours' notice.\n2. Since the machines were swapped without isolation valves on the water pipes: has there been any leak, damp patch or drip under or behind the machine, or any issue with the socket or plug? If you notice water or anything electrical, please tell us straight away and we will treat it as an emergency.\n\nNothing is booked yet — we will not give you a date until an engineer is confirmed. We have also asked the landlord to confirm how he would like the faulty machine dealt with, and we will update you as soon as we hear back."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "040-notify_tenant-458f6048bc3a",
+   "action_id": "040-notify_tenant-458f6048bc3a",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:10:41.539949Z",
+   "finished_at": "2026-10-10T14:10:41.540029Z"
+  },
+  {
+   "seq": 8,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Tenant — return date and two access windows for the appliance inspection; and Waiting for Landlord — confirmation of what to do with the faulty machine now in the garage (inspect/repair, dispose, or leave) before any priced work is instructed.",
+    "until": "3 days from 2026-12-28 (chase both parties if no reply)"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "040-put_on_hold-2a46e52b9dcd",
+   "action_id": "040-put_on_hold-2a46e52b9dcd",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:10:59.840140Z",
+   "finished_at": "2026-10-10T14:10:59.840540Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "Northbridge Lettings",
+   "to": "tenant",
+   "what": "Someone will check the washing machine when the tenant is back from holiday",
+   "due": null,
+   "source_id": "event-010",
+   "status": "open"
+  },
+  {
+   "by": "Northbridge Lettings",
+   "to": "tenant",
+   "what": "Update the tenant once the landlord replies; no date given until an engineer is confirmed",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "Northbridge Lettings",
+   "to": "landlord",
+   "what": "Obtain a quote and put the amount including VAT to him for approval before any work starts; hold the file open pending his reply",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Tenant reported 2026-12-23 16:14 UTC (event-001)",
+   "deadline": null,
+   "note": "Routine appliance fault; tenant has a working machine in use in the interim (event-008), which reduces but does not remove the duty on the landlord's appliance."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Acknowledged 2026-12-24 10:04 (event-005)",
+   "deadline": null,
+   "note": "Met."
+  },
+  {
+   "rule_id": "CLK-LANDLORD-REPLY",
+   "name": "3-day wait for landlord/tenant reply",
+   "status": "sop",
+   "basis": "Agency SOP logged at event-006; re-started by ACT-2 and ACT-3 on 2026-12-28",
+   "deadline": "2026-12-31",
+   "note": "Chase both parties if no reply; manual-mode trigger if the wait expires."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "What date do you return to the property, and which two access windows suit you for an appliance engineer to inspect the faulty machine (24 hours' notice minimum)?",
+   "why": "No visit can be booked without the tenant's consent and availability (CAP-SCHEDULE-ACCESS, RTE-TENANT); the history gives no return date.",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Since the machines were swapped with no isolation valves on the pipes, has there been any leak, damp patch, drip or any issue with the socket/plug?",
+   "why": "Safety check on a DIY swap involving water and a socket; no hazard has been reported, this confirms it (ESC-SAFETY check, not a reported hazard).",
+   "blocking": false
+  },
+  {
+   "to": "landlord",
+   "question": "Should the faulty Juniper NBL-040-4451 machine now in the garage be inspected/repaired, disposed of, or left with the tenant's own machine in use — and do you want the inventory amended to record the tenant's machine?",
+   "why": "Landlord owns the decision on works at his cost and on the appliance/inventory (RTE-LANDLORD); his approval at event-009 predates knowing the tenant had already swapped the machines.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm a spend figure (or a standing limit) we may work to; otherwise we will return with the engineer's quote including VAT for approval before any work starts.",
+   "why": "No standing cap is on file (default £0) and event-009 names no amount (APR-SPEND-OVER-CAP).",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-SCHEDULE-ACCESS",
+  "APR-SPEND-OVER-CAP",
+  "CAP-DISPATCH-APPROVED",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the tenant's email of 24 Dec (event-008) and the landlord's of 28 Dec (event-013) relate to this ticket and this property, as they arrived in reply to the agency's own messages on it and name no other address.",
+  "Assumption: 'Rowan' in event-008 is the reporting tenant and 'Oliver' in event-009/event-013 is the landlord of this property; the case record gives only the roles."
+ ],
+ "uncertainty": [
+  "The tenant's return date is unknown; the duration of the holiday is not stated anywhere.",
+  "Whether the landlord knew of the tenant's swap when he approved the visit (25-minute gap) is unclear.",
+  "Whether the faulty appliance is landlord-owned and on the inventory is not confirmed by any record available to me."
+ ],
+ "safety_actions": [
+  "Asked the tenant to confirm there is no leak, damp patch, drip or socket/plug issue following the DIY machine swap on pipework with no isolation valves, and to report any water or electrical sign immediately for emergency handling (ACT-3).",
+  "Confirmed no occupant vulnerability, no loss of an essential service and no hazard reported in any artefact; ESC-VULNERABLE and ESC-SAFETY not triggered."
+ ],
+ "withheld_actions": [
+  "Did not instruct a contractor: although the landlord approved an inspection in his own message (event-009, CAP-DISPATCH-APPROVED), no amount is named, no standing cap is on file, and the tenant is away with no access date — dispatching would book nothing and could commit unapproved spend (APR-SPEND-OVER-CAP).",
+  "Did not schedule access: no tenant consent or return date on file (CAP-SCHEDULE-ACCESS).",
+  "Did not close the request: multiple definition-of-done items are pending.",
+  "Did not decide whether the tenant bears any cost or consequence for swapping the appliance himself, or whether the landlord's appliance is now his liability (PRO-TENANT-LIABILITY).",
+  "Did not state a repair cost or an appointment date — no quote or booking exists."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:09:55.139456Z",
+ "finished_at": "2026-10-10T14:12:07.473094Z",
+ "input_tokens": 41197,
+ "output_tokens": 8850,
+ "cache_read_tokens": 70935
+}

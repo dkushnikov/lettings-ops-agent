@@ -1,0 +1,548 @@
+{
+ "case_id": "044",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The repair itself was properly authorised (landlord's own approval, event-012) and a provider was instructed (event-013/015), but the ticket was closed at event-027 with final checks outstanding: the only evidence of completion is the provider's untrusted email (event-019) whose invoice attachment is unavailable, documents were skipped \"not needed\" (event-023), no invoice was forwarded to the landlord, and the landlord confirmation flagged at event-024 was never obtained. I did not re-dispatch or duplicate the work order. Within mandate I chased Cedar Homes for the invoice, attendance date and photo (ACT-3), asked the tenant to confirm the handle is working (ACT-4), and told the landlord the position with no cost stated (ACT-5). The conflict between the agency's own records about who the tenant is (Harriet in event-005/event-007 vs Nora Quinn with two different numbers in event-014/015/016) was recorded and sent to the office rather than put to any party (ACT-1, ACT-2). The case now waits on three named parties, so it finishes as request_info rather than an escalation.",
+ "recap": "Window handle at Flat 21 was approved and instructed, but closed without an invoice or landlord confirmation; I chased provider, tenant and landlord and flagged the tenant-identity conflict to the office.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — Cedar Homes to resend the invoice, attendance date and photo (asked ACT-3, 3 working days); tenant and landlord confirmations also outstanding.",
+ "next_step": "Cedar Homes to send the missing invoice (amount + VAT), attendance date and photo within 3 working days; office to decide on reopening the closed ticket and reconcile the tenant name on record.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 report; event-005/event-007 clarified which window; routine urgency set, no damage-limiting steps applicable to a detached window handle",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-012 — landlord's own message \"Please go ahead\" (CAP-DISPATCH-APPROVED); no spend cap on file",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-013/event-015 provider instructed; event-014 tenant told Cedar Homes would attend",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "No slot ever recorded; chasers event-017, event-018, alert event-020; attendance date requested from Cedar Homes (ACT-3)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote was ever produced; landlord approved the job itself at event-012 and no amount has been put to them",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "pending",
+   "evidence": "Only the provider's untrusted claim at event-019 with the attachment unavailable; tenant confirmation requested (ACT-4)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-023 skipped as \"not needed\", but the invoice and photo referenced in event-019 never arrived; re-requested (ACT-3)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice on file to forward; landlord informed of the position (ACT-5)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-024 flagged it as needed; no landlord confirmation exists in the history; requested (ACT-5)",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "event-026 records a keys return but no artefact shows a management key was issued; flagged to the office (ACT-2)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-027 closed the request, but the resolution names no payer and the checks above were outstanding; office asked to decide on reopening (ACT-2)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 2025-01-13 that the window handle fell off and the window cannot be opened at Flat 21, 129 Juniper Mews, Northbridge, ZZ9 4ZZ.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The window concerned is the one at the top of the staircase, described by the tenant as having a broken latch.",
+   "source_ids": [
+    "event-007"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F3",
+   "statement": "No hazard is reported anywhere in the artefacts: no gas, electrical, water, heating or security failure; the window cannot be opened rather than cannot be secured — routine urgency.",
+   "source_ids": [
+    "event-001",
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The landlord approved the job in their own message on 2025-02-09: \"Please go ahead\" — authority for dispatch under CAP-DISPATCH-APPROVED; no spend cap or standing instruction is on file.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Cedar Homes was assigned and briefed on 2025-02-09, and the tenant was told who was attending.",
+   "source_ids": [
+    "event-013",
+    "event-014",
+    "event-015",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "No appointment slot was ever confirmed on the record; two reminders were sent to the provider (10 and 11 February) and an automation alert on 12 February reported 3+ reminders with no booking confirmation.",
+   "source_ids": [
+    "event-017",
+    "event-018",
+    "event-020"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "Cedar Homes emailed on 2025-02-11 \"This is complete, invoice attached\"; the invoice attachment is unavailable, so no priced invoice, photo or attendance date is on file.",
+   "source_ids": [
+    "event-019"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Document upload was skipped with the reason \"not needed\"; landlord confirmation was flagged as needed but no landlord confirmation appears in the history; the request was nonetheless closed on 2025-02-14.",
+   "source_ids": [
+    "event-023",
+    "event-024",
+    "event-027"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "A keys return was recorded as confirmed, although no artefact shows a management key was issued for this visit.",
+   "source_ids": [
+    "event-026"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F10",
+   "statement": "No quote amount was ever produced or put to the landlord; the provider brief states the contractor should only proceed after agency approval if a quote is required.",
+   "source_ids": [
+    "event-015"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Agency records disagree about the tenant of Flat 21: agency email addresses \"Harriet\" and the reply is signed \"Harriet\", while the provider and tenant briefs name \"Nora Quinn\"; two different contact numbers are also given to the provider (07700 900307 and 07700 900251).",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-005",
+    "event-007",
+    "event-014",
+    "event-015",
+    "event-016"
+   ],
+   "resolution": "Not decided by me. Recorded and sent to the office (ACT-1, ACT-2); messages to parties avoid using either name. Routine steps continued meanwhile.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Provider says the job was complete on 11 February, but the agency's own automation reported on 12 February that 3+ reminders had been sent with no booking confirmation, and no appointment was ever recorded.",
+   "fact_ids": [
+    "F6",
+    "F7"
+   ],
+   "source_ids": [
+    "event-019",
+    "event-020"
+   ],
+   "resolution": "Asked Cedar Homes for the attendance date and photo (ACT-3) and asked the tenant to confirm the handle works (ACT-4).",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Ticket closed with final checks outstanding: no invoice on file despite \"invoice attached\", documents skipped as \"not needed\", no invoice to landlord, no landlord confirmation, and a keys return confirmed with no key issued.",
+   "source_ids": [
+    "event-019",
+    "event-023",
+    "event-024",
+    "event-026",
+    "event-027"
+   ],
+   "action_taken": "Recorded in the case note and handed to the property manager queue (ACT-1, ACT-2); chased the provider for the invoice (ACT-3)."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Two tenant names and two phone numbers for the same property across the agency's own records.",
+   "source_ids": [
+    "event-005",
+    "event-007",
+    "event-015",
+    "event-016"
+   ],
+   "action_taken": "Conflict recorded; office asked to reconcile; no name used when writing to parties."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "044",
+    "title": "Case 044: Window Handle Repair Request",
+    "received_at": "2025-01-13 07:04:33 UTC",
+    "track": "Property Management",
+    "case_number": "044",
+    "property": "Flat 21, 129 Juniper Mews, Northbridge, ZZ9 4ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 27,
+    "attachments_hidden": 0,
+    "details": "# Case 044: Window Handle Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2025-01-13 07:04:33 UTC\n- property: Flat 21, 129 Juniper Mews, Northbridge, ZZ9 4ZZ\n\n## Initial request\nOpened the blind above this window this morning and the window handle fell off.... Now unable to open the window."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "044-get_case_details-cc4bebdce80c",
+   "receipt": "{\"id\": \"044\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:12:01.502031Z",
+   "finished_at": "2026-10-10T14:12:01.502203Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "044-get_action_ledger-4afe115ea83b",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:12:01.502530Z",
+   "finished_at": "2026-10-10T14:12:01.502794Z"
+  },
+  {
+   "seq": 3,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Review of closed ticket 044 (window handle, Flat 21, 129 Juniper Mews). Findings: (1) Conflict in agency records over the tenant for this ticket — agency email event-005 addresses \"Harriet\" and the reply event-007 is signed \"Harriet\", while the provider/tenant briefs event-014/event-015/event-016 name the tenant as \"Nora Quinn\" with two different phone numbers (07700 900307 in event-015/017/018, 07700 900251 in event-016). (2) Landlord approval for the job is on file (event-012, \"Please go ahead\") — authority for dispatch; no priced quote was ever put to the landlord. (3) Work result rests only on the provider's untrusted email event-019 (\"This is complete, invoice attached\") with the invoice attachment unavailable; automation still sent a 3+ reminder alert the next day (event-020). (4) Documents skipped \"not needed\" (event-023); landlord confirmation was flagged as needed (event-024) but no landlord confirmation exists in the history; no invoice was forwarded to the landlord. (5) Request closed at event-027 with those final checks outstanding; keys return \"confirmed\" at event-026 although no record shows a management key was issued. No hazard reported in the artefacts: window cannot be opened, property not reported insecure; no gas/electrical/water/heating element — routine under CLK-S11 from 2025-01-13."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "044-add_note-4b07121b1a62",
+   "action_id": "044-add_note-4b07121b1a62",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:12:49.310126Z",
+   "finished_at": "2026-10-10T14:12:49.310311Z"
+  },
+  {
+   "seq": 4,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 044 closed with final checks outstanding + tenant-identity conflict on record",
+    "summary": "Flat 21, 129 Juniper Mews — window handle. Two issues for the office. (A) Records conflict over who the tenant is: event-005/event-007 use \"Harriet\"; event-014/015/016 brief the provider with \"Nora Quinn\" and two different numbers (07700 900307, 07700 900251). I have not told any party which is correct. Office to reconcile against the tenancy record. (B) The request was closed at event-027 although: no invoice is actually on file (provider's event-019 says \"invoice attached\" but the attachment is unavailable); documents skipped as \"not needed\" (event-023); no invoice forwarded to the landlord; no landlord confirmation of completion despite event-024 flagging it; \"keys return confirmed\" (event-026) with no record of a key ever being issued. Completion is evidenced only by an untrusted provider email. Please decide whether to reopen for final checks. I have (within mandate) asked Cedar Homes to resend the invoice and confirm the attendance date, asked the tenant to confirm the handle works, and told the landlord the position. Landlord authority for the job itself is sound (event-012)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "044-create_human_task-910353b2b25e",
+   "action_id": "044-create_human_task-910353b2b25e",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:12:49.310389Z",
+   "finished_at": "2026-10-10T14:12:49.310480Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Cedar Homes — ref Window Repair Request, Flat 21, 129 Juniper Mews, Northbridge, ZZ9 4ZZ (ext NBL-044-1849). Your email of 11 February 2025 said the job was complete with an invoice attached, but no attachment reached us. Please reply with: (1) the invoice (amount and VAT shown separately), (2) the date and time you attended, and (3) a photo of the fitted handle. We cannot complete the file or forward the invoice to the landlord without these. Please reply within 3 working days."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "044-notify_contractor-33ec2fcac2a3",
+   "action_id": "044-notify_contractor-33ec2fcac2a3",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:12:49.310541Z",
+   "finished_at": "2026-10-10T14:12:49.310611Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: window handle, Flat 21, 129 Juniper Mews — our contractor Cedar Homes has reported this job as completed on 11 February 2025. Before we close the file, please confirm that the handle on the window at the top of the stairs has been refitted and that the window now opens and closes properly. If the work was not carried out, or anything is still not working, please reply and we will arrange a return visit. Apologies for the time this has taken."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "044-notify_tenant-c754177d9ec0",
+   "action_id": "044-notify_tenant-c754177d9ec0",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:12:49.310665Z",
+   "finished_at": "2026-10-10T14:12:49.310729Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Flat 21, 129 Juniper Mews — window handle repair you approved on 9 February 2025. Cedar Homes have reported the work complete (11 February 2025) but the invoice they referred to did not reach us, so we have no priced invoice or photo on file yet. We have asked them to resend the invoice and confirm the attendance date, and we have asked the tenant to confirm the handle is working. We will forward the invoice to you for confirmation as soon as it arrives. No cost figure has been quoted or agreed to date."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "044-notify_landlord-1767fc05897d",
+   "action_id": "044-notify_landlord-1767fc05897d",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:12:49.310782Z",
+   "finished_at": "2026-10-10T14:12:49.310845Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Invoice, attendance date and photo requested; reply within 3 working days",
+   "due": "3 working days from ACT-3",
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Forward the invoice for confirmation as soon as it arrives",
+   "due": null,
+   "source_id": "ACT-5",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Arrange a return visit if the handle was not repaired",
+   "due": null,
+   "source_id": "ACT-4",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2025-01-13 (event-001); provider only instructed 2025-02-09 (event-013)",
+   "deadline": null,
+   "note": "27 days elapsed between report and instruction; completion still unverified."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 2025-01-13 (event-001); first message to the tenant 2025-02-01 (event-005)",
+   "deadline": null,
+   "note": "Not met by the agency."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send the invoice for the Flat 21, 129 Juniper Mews window handle job (amount and VAT separately), the date and time you attended, and a photo of the fitted handle — the attachment referred to in your 11 February email did not arrive.",
+   "why": "No invoice or work evidence is on file; the file cannot be completed and the landlord cannot be billed without it (event-019, event-023).",
+   "blocking": true
+  },
+  {
+   "to": "tenant",
+   "question": "Has the handle on the window at the top of the stairs been refitted, and does the window now open and close properly?",
+   "why": "Completion rests only on the provider's untrusted email; the tenant's confirmation is the independent check (event-019).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Once the invoice arrives we will forward it — please confirm you are content the job is complete and the cost is approved.",
+   "why": "Landlord confirmation was flagged as required at event-024 and never obtained before closure at event-027 (RTE-LANDLORD).",
+   "blocking": true
+  },
+  {
+   "to": "property_manager",
+   "question": "Which name on our record is the tenant of Flat 21 — Harriet (event-005/007) or Nora Quinn (event-014/015/016) — and should the closed ticket be reopened for final checks?",
+   "why": "Two agency records disagree about the tenant and the contact number; I must not pick a side in a message to a party (ESC-CONFLICT).",
+   "blocking": false
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-DISPATCH-APPROVED",
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "ESC-CONFLICT",
+  "PRO-TENANT-LIABILITY",
+  "PRO-PII",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: no management key was issued for this visit, since no artefact records one; the keys-return confirmation at event-026 therefore appears to be an automation default rather than a real key movement.",
+  "Assumption: the window at the top of the stairs is openable in normal use and its inability to open is an inconvenience, not an escape-route or ventilation hazard; nothing in the artefacts states otherwise."
+ ],
+ "uncertainty": [
+  "Whether Cedar Homes actually attended and fitted the handle is unverified — the only evidence is an untrusted provider email with a missing attachment (event-019).",
+  "The cost of the job is unknown; no amount appears anywhere in the artefacts.",
+  "Which of the two names on record is the tenant of Flat 21."
+ ],
+ "safety_actions": [
+  "Checked the report against the emergency definitions: no gas, electrical, water, heating or security hazard — the window cannot be opened, and the property is not reported insecure, so no make-safe step was due.",
+  "Safety-pass keywords screened: no smoke/CO alarm, damp, mould, electrical or occupant-vulnerability content appears in any artefact of this case; no occupant health, age or family details were shared with the contractor."
+ ],
+ "withheld_actions": [
+  "Did not re-dispatch or raise a second work order for the same fault (one report, one work order).",
+  "Did not state or imply any cost, attendance date or who pays — no artefact gives them.",
+  "Did not tell any party which tenant name or number is correct.",
+  "Did not re-close the request: final checks are incomplete and reopening is the office's decision."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:11:58.579356Z",
+ "finished_at": "2026-10-10T14:13:43.447464Z",
+ "input_tokens": 25808,
+ "output_tokens": 8875,
+ "cache_read_tokens": 42561
+}

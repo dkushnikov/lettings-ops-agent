@@ -1,0 +1,574 @@
+{
+ "case_id": "021",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Treated the ticket as still in final checks rather than closed: the automation closed it (event-029) while the invoice and the landlord's completion confirmation were still outstanding (event-026), and \"documents skipped\" was recorded with no cost anywhere on file (event-025). Landlord authority for the works is sound — the landlord's own email approved them (event-006) — and the provider has reported the work complete (event-020), so no new dispatch or spend decision was needed. I chased the provider for the invoice and written confirmation of the keys handed to the office, asked the landlord to confirm completion, updated the tenant, logged the data-quality points, and put the case on hold pending those two replies. No closure: a resolution cannot name who paid while no invoice exists.",
+ "recap": "Key replacement reported complete by the provider; closed prematurely, so I reopened final checks and chased the invoice, key handover and landlord confirmation.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Provider — Alder Compliance to send the invoice (VAT shown) and confirm the keys delivered to the office by 28 November 2024; landlord confirmation of completion also awaited (ACT-2).",
+ "next_step": "Alder Compliance to send the invoice and confirm the key drop-off at the office by 28 November 2024 (ACT-1); landlord Quinn to confirm completion (ACT-2).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/index: snapped conservatory back door key, no spare; categorised routine — conservatory back door, no hazard and no loss of security of the main entry reported",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-006 — landlord's own email approving the works and the new keys; no standing spend cap on file, so this message is the authority (CAP-DISPATCH-APPROVED)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-010/event-012 provider Alder Compliance instructed; tenant told who is attending at event-011",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "No slot was ever recorded in the history (chase at event-018), but the provider attended and completed the job — event-020",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "event-025 — no quote required, repaired on site; no priced quote was ever issued",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-020 — provider reports cylinder and handles replaced",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "done",
+   "evidence": "event-025 — skip reason recorded: 'No quote required, repaired on site'. No photos supplied; invoice still requested at ACT-1",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "No invoice anywhere in the history and no cost figure recorded; requested from the provider at ACT-1 and the position explained to the landlord at ACT-2",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-026 flagged it as needed; no request was sent before closure at event-029 — now asked at ACT-2",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "pending",
+   "evidence": "No management key was issued for the visit (agency held no spare, event-003). The 4 new keys are a deliverable: provider promised the office drop-off 'tomorrow' (event-020) and event-028 records 'Keys return confirmed' the same early morning, which the provider has not evidenced — written confirmation requested at ACT-1",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-029 marked the request closed while invoice, landlord confirmation and key-handover evidence were outstanding; file kept open at final checks (ACT-5). A resolution cannot name who paid with no invoice on file",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property is Flat 22, 148 Lantern Quay, Westmarsh, ZZ4 1ZZ; tenant on the record is Clara Jenkins.",
+   "source_ids": [
+    "index",
+    "get_case_details",
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Reported fault: the key for the conservatory back door snapped and the tenants have no spare; the agency holds no spare for that door either.",
+   "source_ids": [
+    "event-001",
+    "event-003"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Scope instructed: replace the lock and supply 4 keys — 2 tenants, 1 agency, 1 landlord, the latter two to the office.",
+   "source_ids": [
+    "index",
+    "event-008",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The landlord (Quinn) approved the works and the new keys in their own email of 21 November 2024.",
+   "source_ids": [
+    "event-006"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Alder Compliance was instructed as the provider and briefed that any quote needed agency approval before proceeding.",
+   "source_ids": [
+    "event-010",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The provider reported on 22 November 2024 that the job is complete — cylinder and handles replaced — and that remaining keys would be dropped at the office the next day.",
+   "source_ids": [
+    "event-020"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "No cost, quote or invoice appears anywhere in the visible history; documents were skipped with the reason 'No quote required, repaired on site'.",
+   "source_ids": [
+    "event-025",
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Landlord confirmation was flagged as required at 04:22 on 23 November and the request was marked closed 16 seconds later, with no confirmation request sent.",
+   "source_ids": [
+    "event-026",
+    "event-029"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "No appointment slot was ever confirmed in the history; the provider was chased once for a booking before reporting the job done.",
+   "source_ids": [
+    "event-018",
+    "event-020"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Agency note records 'Keys return confirmed' at 04:22 on 23 November, while the provider had only promised to drop the keys off 'tomorrow' (sent 16:04 on 22 November); the same note carries a validation error about priority.",
+   "fact_ids": [],
+   "source_ids": [
+    "event-020",
+    "event-028"
+   ],
+   "resolution": "Written confirmation of the key handover requested from the provider (ACT-1); item left pending rather than relying on the system note.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Two different tenant phone numbers were sent to the provider: 07700 900625 (described as a code to enter when calling) and 07700 900336.",
+   "fact_ids": [],
+   "source_ids": [
+    "event-012",
+    "event-016",
+    "event-018"
+   ],
+   "resolution": "Logged for the office (ACT-4); no action needed as the provider reached the tenant and completed the job (event-020).",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "System closed the request (event-029) while final checks flagged as outstanding (event-026) were incomplete.",
+   "fact_ids": [],
+   "source_ids": [
+    "event-026",
+    "event-029"
+   ],
+   "resolution": "Specific outstanding-item note beats the generic 'all checks completed' line; file kept at final checks and placed on hold (ACT-5).",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Outbound agency emails to the contractor are addressed 'Hi Clara' / 'Good morning Clara' — Clara Jenkins is the tenant, not the provider; the provider is Alder Compliance.",
+   "source_ids": [
+    "event-016",
+    "event-021"
+   ],
+   "action_taken": "Logged at ACT-4; my own messages address each party by their name on the case record."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Request closed with invoice, landlord confirmation and key-handover evidence outstanding, and a key-return note that the provider's own message does not support.",
+   "source_ids": [
+    "event-026",
+    "event-028",
+    "event-029"
+   ],
+   "action_taken": "Case kept at final checks and put on hold (ACT-5); the three outstanding items chased (ACT-1, ACT-2)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "021",
+    "title": "Case 021: Key Replacement Request",
+    "received_at": "2024-11-21 09:30:14 UTC",
+    "track": "Property Management",
+    "case_number": "021",
+    "property": "Flat 22, 148 Lantern Quay, Westmarsh, ZZ4 1ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 29,
+    "attachments_hidden": 0,
+    "details": "# Case 021: Key Replacement Request\n\n## Case details\n- source role: Tenant\n- created: 2024-11-21 09:30:14 UTC\n- property: Flat 22, 148 Lantern Quay, Westmarsh, ZZ4 1ZZ\n\n## Initial request\nHi Clara,\n\nThe tenants have advised that the key snapped for the back door for the conservatory and they do not have a spare.\n\nPlease can you replace the lock and provide 4 new keys, 2 for the tenants, 1 for us and 1 for the landlord. The ones for us and the landlord will need to be given to the office."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "021-get_case_details-ac5a7a42c3df",
+   "receipt": "{\"id\": \"021\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T14:03:16.873874Z",
+   "finished_at": "2026-10-10T14:03:16.874049Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "021-get_action_ledger-6e8dacc3a132",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:16.874353Z",
+   "finished_at": "2026-10-10T14:03:16.874611Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice cost quote payment"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "021-search_history-52ce908d5368",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:31.137649Z",
+   "finished_at": "2026-10-10T14:03:31.137803Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "keys office drop off"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "021-search_history-80b4b60d8128",
+   "receipt": "[]",
+   "started_at": "2026-10-10T14:03:31.137853Z",
+   "finished_at": "2026-10-10T14:03:31.137924Z"
+  },
+  {
+   "seq": 5,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Key Replacement Request — Flat 22, 148 Lantern Quay, Westmarsh, ZZ4 1ZZ.\n\nThank you for confirming on 22 November that the job is complete (cylinder and handles replaced). To close our file we still need two things:\n\n1. Your invoice for the works (with VAT shown separately), so it can be forwarded to the landlord.\n2. Written confirmation that the remaining keys have been delivered to our office, and how many were handed in. The instruction was 4 keys in total: 2 for the tenants, 1 for the agency and 1 for the landlord.\n\nPlease reply with both by close of business on 28 November 2024. If we do not hear from you by then we will chase again and flag the outstanding items to the landlord."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-notify_contractor-449db833e539",
+   "action_id": "021-notify_contractor-449db833e539",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T14:04:01.528455Z",
+   "finished_at": "2026-10-10T14:04:01.528815Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 22, 148 Lantern Quay, Westmarsh, ZZ4 1ZZ\n\nDear Quinn,\n\nUpdate on the snapped conservatory back door key you approved on 21 November.\n\nOur provider, Alder Compliance, attended and reported on 22 November that the job is complete: the cylinder and handles have been replaced. No quote was required as the work was carried out on site, so no priced estimate was issued for your approval.\n\nTwo items are still outstanding before we can close the file:\n- the provider's invoice, which we have requested and will forward to you as soon as it arrives (we have no cost figure yet);\n- confirmation of the keys delivered to our office. Four keys were ordered: 2 for the tenants, 1 for the agency and 1 for you.\n\nPlease confirm you are happy with the works as completed. Your set of keys will be held at the office for collection once the provider's delivery is confirmed."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-notify_landlord-cfc7013adea7",
+   "action_id": "021-notify_landlord-cfc7013adea7",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T14:04:01.529004Z",
+   "finished_at": "2026-10-10T14:04:01.529221Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Clara Jenkins,\n\nRe: Flat 22, 148 Lantern Quay, Westmarsh, ZZ4 1ZZ — snapped conservatory back door key.\n\nOur provider, Alder Compliance, has reported that the work is complete: the lock cylinder and handles have been replaced and new keys supplied. Two keys were for you; the remaining keys are being delivered to our office for the agency and the landlord.\n\nPlease let us know if the new lock or either of your keys is not working properly, or if you did not receive both keys, and we will go back to the provider. We are not closing the file until the paperwork from the provider is in."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-notify_tenant-b93dc6886056",
+   "action_id": "021-notify_tenant-b93dc6886056",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T14:04:01.529405Z",
+   "finished_at": "2026-10-10T14:04:01.529629Z"
+  },
+  {
+   "seq": 8,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Final checks review. Work result is on file: contractor reported cylinder and handles replaced (event-020). Landlord authority is on file: landlord's own email approving the works (event-006); no cost figure was ever quoted or recorded in the history, and documents were skipped with the reason \"No quote required, repaired on site\" (event-025). Outstanding at the time of this review: (a) no invoice from Alder Compliance and nothing forwarded to the landlord; (b) landlord completion confirmation flagged as needed (event-026) but never requested. The system marked the request closed (event-029) with these items still open — premature closure, file treated as still in final checks. Data quality points for the office: event-028 records \"Keys return confirmed\" at 04:22 on 23 Nov although the contractor had only promised to drop keys off \"tomorrow\" (event-020), and the same note carries a validation error (\"Priority cannot be decreased to 0. Current priority is 3.\"); two different tenant numbers appear in outbound mail (07700 900625 in event-012/event-018, 07700 900336 in event-016); agency replies to the contractor are addressed \"Hi Clara\"/\"Good morning Clara\", which is the tenant's name (event-016, event-021). No liability or cost apportionment has been decided (PRO-TENANT-LIABILITY)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-add_note-18aad677a1b9",
+   "action_id": "021-add_note-18aad677a1b9",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T14:04:01.529843Z",
+   "finished_at": "2026-10-10T14:04:01.530120Z"
+  },
+  {
+   "seq": 9,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Provider — Alder Compliance to supply the invoice (VAT shown) and confirm the keys delivered to the office; landlord confirmation of completion also outstanding (requested ACT-2). Request was marked closed at event-029 with these final checks still open.",
+    "until": "2024-11-28"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-5",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "021-put_on_hold-6ea533f051dd",
+   "action_id": "021-put_on_hold-6ea533f051dd",
+   "receipt": "{\"id\": \"ACT-5\"}",
+   "started_at": "2026-10-10T14:04:18.229682Z",
+   "finished_at": "2026-10-10T14:04:18.229885Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Chase again and flag outstanding items to the landlord if the invoice and key confirmation are not received",
+   "due": "2024-11-28",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Forward the provider's invoice as soon as it arrives",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "Go back to the provider if the new lock or either key is faulty, and not close the file until the provider's paperwork is in",
+   "due": null,
+   "source_id": "ACT-3",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Drop the remaining keys at the office",
+   "due": "2024-11-23",
+   "source_id": "event-020",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 21 November 2024 (event-001); provider reported completion 22 November 2024 (event-020)",
+   "deadline": null,
+   "note": "Satisfied on the provider's report; administrative closure outstanding."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 21 November 09:30 (event-001); tenant written to same day 12:04 (event-011)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send your invoice for the key/lock replacement at Flat 22, 148 Lantern Quay (VAT shown separately), and confirm in writing that the remaining keys have been delivered to our office and how many were handed in.",
+   "why": "No invoice or cost figure exists anywhere on the file, so the invoice cannot be forwarded to the landlord and the resolution cannot name who paid; the key drop-off was only promised, not evidenced by the provider (event-020).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm you are satisfied the works at Flat 22, 148 Lantern Quay are complete (cylinder and handles replaced, 4 keys supplied).",
+   "why": "Landlord completion confirmation was flagged as required at event-026 but never requested before the file was closed at event-029.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-DISPATCH-APPROVED",
+  "CAP-CLOSE",
+  "RTE-CONTRACTOR",
+  "RTE-LANDLORD",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT"
+ ],
+ "assumptions": [
+  "Assumption: the conservatory back door is a secondary door and the property remained secure after the key snapped — no artefact states the door could not be locked. If the tenant reports otherwise the urgency becomes an insecure-property emergency."
+ ],
+ "uncertainty": [
+  "Whether the provider actually delivered the keys to the office — only the provider's intention (event-020) and an unevidenced system note (event-028) exist.",
+  "The cost of the works and who is to be invoiced: no figure exists on file.",
+  "Whether the tenant has both working keys in hand; asked in ACT-3 as a non-blocking check."
+ ],
+ "safety_actions": [
+  "Safety-pass check: the only trigger word in the material is the security of a door lock. The snapped key was for the conservatory back door, not the property's main entry, and no report of the property being left insecure appears in the history (event-001, event-003); the lock has since been replaced (event-020), so no insecure-property emergency applies and no hazard red flag is recorded.",
+  "No gas, electrical, damp/mould, detector or occupant-vulnerability content appears anywhere in the artefacts; nothing to test or record under the safety pass."
+ ],
+ "withheld_actions": [
+  "Did not close the request: invoice, landlord confirmation and key-handover evidence are outstanding, so no resolution can name who paid (CAP-CLOSE).",
+  "Did not instruct any further contractor spend: the works are already reported complete and no new quote exists (APR-SPEND-OVER-CAP).",
+  "Did not state or apportion any cost, and did not suggest the tenant pays for the snapped key (PRO-TENANT-LIABILITY)."
+ ],
+ "steps": 5,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T14:03:12.215038Z",
+ "finished_at": "2026-10-10T14:05:16.684389Z",
+ "input_tokens": 50436,
+ "output_tokens": 8545,
+ "cache_read_tokens": 70935
+}
