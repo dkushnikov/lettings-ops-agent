@@ -23,13 +23,13 @@ test:
 	uv run pytest -q
 
 run:
-	$(PY) run --cases $(CASES) --out $(OUT) $(ARGS)
+	$(PY) run --cases "$(CASES)" --out "$(OUT)" $(ARGS)
 
 demo:
-	$(PY) demo --cases $(CASES) $(ARGS)
+	$(PY) demo --cases "$(CASES)" $(ARGS)
 
 eval:
-	$(PY) eval --answers $(OUT) --cases $(CASES) $(ARGS)
+	$(PY) eval --answers "$(OUT)" --cases "$(CASES)" $(ARGS)
 
 cases-browser:
 	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html $(foreach r,$(RUNS),--runs $(r)) --open
@@ -44,7 +44,7 @@ replay:
 	open "file://$(abspath runs/cases/index.html)#$(notdir $(CASES_ROOT))/$(CASE)" || true
 
 report:
-	$(PY) report --run $(OUT) --cases $(CASES) --open
+	$(PY) report --run "$(OUT)" --cases "$(CASES)" --open
 
 pm-index:
 	uv run python -m evalkit.pm_cases_extract --cases "$(CASES_ROOT)" --out data/pm-cases-index.json
@@ -56,7 +56,7 @@ rules-extract:
 	$(PY) rules-extract --docs $(DOCS) $(ARGS)
 
 rehearse:
-	$(PY) rehearse --cases $(CASES) $(ARGS)
+	$(PY) rehearse --cases "$(CASES)" $(ARGS)
 
 freeze:
 	$(PY) freeze --tag $(TAG)
