@@ -11,7 +11,7 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 | Commit hash at code freeze (16:30 BST) | <!-- TODO(event): output of `make freeze` --> |
 | Commit hash containing Reality Test results | <!-- TODO(event): the commit that adds ANSWERS/ --> |
 | Reality Test results path | `ANSWERS/` (`ANSWERS/<case-id>/ANSWER.md`, `REASONING.md`, `trace.jsonl`; `ANSWERS/_run.json`) |
-| Demo video path inside the repository | `video/demo.mp4` (Git LFS) |
+| Demo video path inside the repository | `video/demo.mp4` (plain git file, 42 MB) |
 | LinkedIn post URL | <!-- TODO(event) --> |
 | X post URL | <!-- TODO(event) --> |
 
