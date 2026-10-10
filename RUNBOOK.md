@@ -25,18 +25,19 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 
 - [ ] `make freeze` → creates tag `freeze-1630`, prints the commit hash; paste it into `SUBMISSION.md`.
 - [ ] `git push --tags`.
-- [ ] Reality Test cases pulled: `git -C ../HackatonPublicCases pull` (do not edit them). Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `HackatonChallendges/Property Management`, change only `CASES=`.
+- [ ] Reality Test cases pulled: `git -C ../HackatonPublicCases pull` (do not edit them). Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `Property Management`, change only `CASES=`.
 - [ ] Count the cases. The runner prints the capacity estimate: `T ≈ ⌈N / C⌉ × t_case + margin`. Measured today: 50 cases at concurrency 6 take about 16 minutes with no 429s; 100 cases would take about 32, so raise concurrency to 8 only if the count is above 60.
 - [ ] Launch (the exact form tested all day; `--id-style number` → `ANSWERS/<case number>/`):
 
 ```
 git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
-ls "../HackatonPublicCases/HackatonChallendges/Property Management"   # expect NNN/ folders with index.md + history.md
+ls "../HackatonPublicCases/Property Management"   # expect NNN/ folders with index.md + history.md
 make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
-  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
+  CASES="../HackatonPublicCases/Property Management" OUT=ANSWERS
 ```
 
 - [ ] Watch the dashboard. 429s → the runner backs off by itself; do not restart it. A crash → restart the same command; checkpoints skip finished cases.
+- [ ] `ANSWERS/` already holds the pre-freeze records generated from the public cases (~15:00). If the pulled cases changed, `rm -rf ANSWERS` before launching: the runner reuses finished case folders (checkpoint) and would not regenerate them. If the cases did not change, the existing records stand and the run is a no-op.
 
 ## 16:50 — stop launching, start verifying
 

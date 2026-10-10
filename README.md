@@ -145,7 +145,7 @@ Options (pass with `ARGS="..."`):
 make freeze                     # tag freeze-1630, record the hash
 git -C ../HackatonPublicCases pull      # Reality Test cases arrive at 16:30
 make run ARGS="--adapter dwelly --id-style number --concurrency 6" \
-  CASES="../HackatonPublicCases/HackatonChallendges/Property Management" OUT=ANSWERS
+  CASES="../HackatonPublicCases/Property Management" OUT=ANSWERS
 ```
 
 Each case gets `ANSWERS/<case number>/ANSWER.md`, `REASONING.md`, `trace.jsonl` and `_state.json`; run details are in `ANSWERS/_run.json`. A case that times out or fails still gets a record: an escalation with what was done so far and why it stopped.
