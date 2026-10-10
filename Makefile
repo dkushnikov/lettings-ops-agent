@@ -7,7 +7,7 @@ N ?= 20
 C ?= 4
 PY = uv run python -m harness.cli
 
-.PHONY: setup check test lint run demo eval cases-browser pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
+.PHONY: setup check test lint run demo eval cases-browser replay pm-index report mutate rules-extract rehearse freeze capacity video-check secrets-scan clean
 
 setup:
 	uv sync
@@ -32,7 +32,16 @@ eval:
 	$(PY) eval --answers $(OUT) --cases $(CASES) $(ARGS)
 
 cases-browser:
-	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html --open
+	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html $(foreach r,$(RUNS),--runs $(r)) --open
+
+# One real case, one decision point, then the browser opens on it with the step-by-step replay.
+# make replay CASE=038 CUTOFF=9   (CUTOFF omitted → first external message)
+replay:
+	@test -n "$(CASE)" || (echo "usage: make replay CASE=038 [CUTOFF=9]" && exit 2)
+	rm -rf runs/replay-$(CASE) runs/replay-cases && mkdir -p runs/replay-cases && ln -s "$(abspath $(CASES_ROOT))/$(CASE)" runs/replay-cases/$(CASE)
+	$(PY) run --cases runs/replay-cases --out runs/replay-$(CASE) --adapter dwelly --id-style number --emit-expected $(if $(CUTOFF),--cutoff $(CUTOFF),--auto-cutoff first-external) $(ARGS)
+	$(PY) cases-browser --cases "$(CASES_ROOT)" --out runs/cases/index.html --runs runs/replay-$(CASE) $(foreach r,$(RUNS),--runs $(r))
+	open "file://$(abspath runs/cases/index.html)#$(notdir $(CASES_ROOT))/$(CASE)" || true
 
 report:
 	$(PY) report --run $(OUT) --cases $(CASES) --open

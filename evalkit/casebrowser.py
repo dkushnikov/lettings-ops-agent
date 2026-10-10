@@ -97,6 +97,49 @@ def collect_cases(root: Path, out_dir: Path) -> list[dict[str, Any]]:
     return [collect_case(d, out_dir) for d in iter_case_dirs(root)]
 
 
+def _short(value: Any, n: int) -> str:
+    text = value if isinstance(value, str) else json.dumps(value, ensure_ascii=False, default=str)
+    return text if len(text) <= n else text[: n - 1] + "…"
+
+
+def _compact_action(a: dict[str, Any]) -> dict[str, Any]:
+    gate = a.get("gate") or {}
+    return {
+        "seq": a.get("seq"),
+        "tool": a.get("tool"),
+        "cls": a.get("tool_class"),
+        "status": a.get("status"),
+        "verdict": gate.get("verdict"),
+        "rules": gate.get("rule_ids") or [],
+        "reason": gate.get("reason") or "",
+        "input": _short(a.get("input") or {}, 420),
+        "receipt": _short(a.get("receipt") or a.get("error") or "", 300),
+    }
+
+
+def _compact_trace(path: Path) -> list[dict[str, Any]]:
+    """The run's trace.jsonl reduced to what the replay needs: model turns, playbook, gate verdicts, tool results, finish."""
+    out: list[dict[str, Any]] = []
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        try:
+            ev = json.loads(line)
+        except Exception:  # noqa: BLE001
+            continue
+        kind = ev.get("event")
+        if kind == "model_turn":
+            u = ev.get("usage") or {}
+            out.append({"k": "turn", "step": ev.get("step"), "stop": ev.get("stop_reason"), "in": u.get("input"), "out": u.get("output"), "cache": u.get("cache_read")})
+        elif kind == "playbook":
+            out.append({"k": "playbook", "name": ev.get("name"), "urgency": ev.get("urgency"), "case_type": ev.get("case_type")})
+        elif kind == "gate":
+            out.append({"k": "gate", "tool": ev.get("tool"), "verdict": ev.get("verdict"), "rules": ev.get("rules") or [], "reason": ev.get("reason") or ""})
+        elif kind == "tool_result":
+            out.append({"k": "result", "tool": ev.get("tool"), "status": ev.get("status"), "attempts": ev.get("attempts"), "receipt": _short(ev.get("receipt") or ev.get("error") or "", 300)})
+        elif kind:
+            out.append({"k": kind, **{key: _short(v, 200) for key, v in ev.items() if key not in ("event", "ts")}})
+    return out
+
+
 def load_runs(runs: list[Path] | None) -> dict[str, dict[str, Any]]:
     """Overlay data from run directories, keyed by run name then case number."""
     out: dict[str, dict[str, Any]] = {}
@@ -130,8 +173,14 @@ def load_runs(runs: list[Path] | None) -> dict[str, dict[str, Any]]:
                 try:
                     s = json.loads(st.read_text(encoding="utf-8"))
                     rec.update({"disposition": s.get("disposition"), "fallback": s.get("fallback"), "steps": s.get("steps"), "urgency": s.get("urgency"), "flags": [f.get("kind") for f in s.get("red_flags", [])]})
+                    rec["status"] = {k: s.get(k, "") for k in ("recap", "stage", "hold_reason", "next_step")}
+                    rec["notes"] = list(s.get("reviewer_notes", [])) + list(s.get("system_notes", []))
+                    rec["actions"] = [_compact_action(a) for a in s.get("actions", [])]
                 except Exception:  # noqa: BLE001
                     pass
+            tr = d / "trace.jsonl"
+            if tr.exists():
+                rec["trace"] = _compact_trace(tr)
             entry["cases"][m.group(1)] = rec
         out[run.name] = entry
     return out
@@ -186,6 +235,22 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border:1px
 .empty{color:var(--muted);padding:40px 0;text-align:center}
 kbd{border:1px solid var(--line);border-radius:4px;padding:0 4px;font-size:11px}
 @media (max-width:900px){body{grid-template-columns:1fr;grid-template-rows:45vh 55vh}aside{border-right:none;border-bottom:1px solid var(--line)}}
+.replay{margin:8px 0 12px;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--panel)}
+.replay .steps{list-style:none;margin:6px 0 0;padding:0}
+.replay li.st{display:none;border-top:1px dashed var(--line);padding:6px 0}
+.replay li.st.show{display:block}
+.replay .sth{margin-bottom:3px}
+.replay .act{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;margin:3px 0 3px 10px;padding:3px 6px;border-left:3px solid var(--line);white-space:pre-wrap}
+.replay .act.write{border-left-color:var(--accent)}
+.replay .act.playbook{border-left-color:#8a6d3b}
+.replay .act.finish{border-left-color:#2a7;font-weight:600}
+.replay .act .tag{font-size:10px;letter-spacing:.04em;opacity:.7}
+.replay .gate.deny,.replay .gate.escalate,.replay .act.deny{color:#b03a2e}
+.replay .gate.needs_approval{color:#b26a00}
+.replay .inp{opacity:.85;margin:2px 0}
+.replay .res{opacity:.75}
+.kv.status td:first-child{width:90px;font-weight:600}
+details.rec summary{cursor:pointer;color:var(--accent);margin:6px 0}
 </style></head><body>
 <aside>
   <div class="toolbar">
@@ -229,6 +294,39 @@ fillSelect('fChannel', uniq(CASES.flatMap(c=>Object.keys(c.channels))));
 fillSelect('fParty', uniq(CASES.flatMap(c=>Object.keys(c.parties))));
 fillSelect('fRole', uniq(CASES.map(c=>c.source_role)));
 fillSelect('fStatus', uniq(CASES.map(c=>c.status)));
+function statusHtml(x){
+  const st=x.rec.status; if(!st) return '';
+  return `<table class="kv status"><tr><td>Recap</td><td>${esc(st.recap||'-')}</td></tr><tr><td>Stage</td><td>${esc(st.stage||'-')}${st.hold_reason?' · <b>hold:</b> '+esc(st.hold_reason):''}</td></tr><tr><td>Next step</td><td>${esc(st.next_step||'-')}</td></tr></table>`;
+}
+function replayHtml(x,xi){
+  const tr=x.rec.trace||[]; const acts=x.rec.actions||[]; if(!tr.length&&!acts.length) return '';
+  const steps=[]; let cur=null; let k=0;
+  for(const ev of tr){
+    if(ev.k==='turn'){ cur={title:`Step ${ev.step} · model turn`, meta:`in ${fmtK(ev.in)} · out ${fmtK(ev.out)}${ev.cache?' · cache '+fmtK(ev.cache):''}`, acts:[]}; steps.push(cur); continue; }
+    if(!cur){ cur={title:'Before the first turn', meta:'', acts:[]}; steps.push(cur); }
+    if(ev.k==='playbook'){ cur.acts.push({cls:'playbook', html:`<b>use_playbook</b> ${esc(ev.name)} · case type ${esc(ev.case_type||'-')} · urgency <b>${esc(ev.urgency||'-')}</b> → the gate now uses this urgency`}); }
+    else if(ev.k==='gate'){
+      // every action passes the gate once, in ledger order; a denied or approval-needing write never reaches a tool_result
+      const a=acts[k]||{}; k++; const write=(a.cls||'')==='write'; const v=ev.verdict||a.verdict||''; const rules=(ev.rules&&ev.rules.length?ev.rules:(a.rules||[])).join(', ');
+      const head=`<span class="tag">${write?'WRITE':'read'}</span> <b>${esc(ev.tool)}</b> <span class="gate ${esc(v)}">gate: ${esc(v||'-')}${rules?' · '+esc(rules):''}${ev.reason&&ev.reason!=='read'?' · '+esc(ev.reason):''}</span>${a.input&&a.input!=='{}'?`<div class="inp">${esc(a.input)}</div>`:''}`;
+      if(v==='allow'){ cur.pending={head, write, v}; }
+      else { cur.pending=null; cur.acts.push({cls:(write?'write ':'read ')+esc(v), html:head+`<div class="res">→ ${esc(a.status||'blocked')} · not executed</div>`}); }
+    }
+    else if(ev.k==='result'){
+      const g=cur.pending||{head:`<b>${esc(ev.tool)}</b>`, write:false, v:''}; cur.pending=null;
+      cur.acts.push({cls:(g.write?'write ':'read ')+esc(g.v), html:g.head+`<div class="res">→ ${esc(ev.status)}${ev.attempts>1?' after '+ev.attempts+' attempts':''}${ev.receipt?' · '+esc(ev.receipt):''}</div>`});
+    }
+    else if(ev.k==='terminal'){ cur.acts.push({cls:'finish', html:`<b>finish</b> ${esc(Object.entries(ev).filter(([kk])=>kk!=='k').map(([kk,vv])=>kk+': '+vv).join(' · '))}`}); }
+    else { cur.acts.push({cls:'other', html:`<b>${esc(ev.k)}</b> ${esc(Object.entries(ev).filter(([kk])=>kk!=='k').map(([kk,vv])=>kk+': '+vv).join(' · '))}`}); }
+  }
+  // blocked / needs_approval actions never produce a tool_result event: show them from the ledger
+  for(const a of acts.slice(k)){ const tgt=steps[steps.length-1]||(steps.push({title:'Ledger',meta:'',acts:[]}),steps[steps.length-1]); tgt.acts.push({cls:'write '+esc(a.verdict||''), html:`<span class="tag">WRITE</span> <b>${esc(a.tool)}</b> <span class="gate ${esc(a.verdict||'')}">gate: ${esc(a.verdict||'-')}${(a.rules||[]).length?' · '+esc(a.rules.join(', ')):''}${a.reason?' · '+esc(a.reason):''}</span>${a.input&&a.input!=='{}'?`<div class="inp">${esc(a.input)}</div>`:''}<div class="res">→ ${esc(a.status)}</div>`}); }
+  const fin={title:`Finish · ${(x.rec.disposition||'?').toUpperCase()}`, meta:(x.rec.notes||[]).join(' · '), acts:[]};
+  steps.push(fin);
+  const lis=steps.map(st=>`<li class="st"><div class="sth"><b>${esc(st.title)}</b> <span class="count">${esc(st.meta)}</span></div>${st.acts.map(a=>`<div class="act ${a.cls}">${a.html}</div>`).join('')}</li>`).join('');
+  return `<div class="replay" id="replay-${xi}"><div class="ctl"><button class="rplay">▶ replay</button><button class="rnext">next step</button><button class="rall">show all</button><span class="count rcount"></span><span class="count">what the agent read, what the gate allowed, what was written, how it finished</span></div><ol class="steps">${lis}</ol></div>`;
+}
+function fmtK(n){ return n==null?'-':(n>=1000?(n/1000).toFixed(1)+'k':String(n)); }
 function runInfo(c){ const out=[]; for (const r of RUN_NAMES){ const rec=RUNS[r].cases[c.number]; if(rec) out.push({run:r, rec, eval:RUNS[r].evals[c.number]||null, cutoff:RUNS[r].cutoffs[c.number]}); } return out; }
 function haystack(c){ return (c.title+'\n'+c.initial_request+'\n'+c.overview+'\n'+c.events.map(e=>e.body).join('\n')).toLowerCase(); }
 function filtered(){
@@ -303,10 +401,18 @@ function renderDetail(){
   h+=`<div class="pane ${state.tab==='attachments'?'on':''}" id="pane-attachments">`+(c.attachments.length?c.attachments.map(a=>`<div class="att"><h3><a href="${esc(a.href)}">${esc(a.name)}</a> <span class="count">${(a.size/1024).toFixed(0)} KB${a.truncated?' · excerpt':''}</span></h3><pre>${esc(a.excerpt)}</pre></div>`).join(''):'<div class="empty">No attachments.</div>')+'</div>';
   // Agent
   if (ri.length){
-    h+=`<div class="pane ${state.tab==='agent'?'on':''}" id="pane-agent">`+ri.map(x=>`<h3>${esc(x.run)} · <span class="b run ${esc(x.rec.disposition||'')}">${esc(x.rec.disposition||'?')}</span> ${x.rec.fallback?'<span class="b crit">fallback</span>':''} · urgency ${esc(x.rec.urgency||'-')} · steps ${esc(x.rec.steps??'-')} · cutoff ${x.cutoff??'-'} · flags: ${esc((x.rec.flags||[]).join(', ')||'none')}</h3>${x.eval?`<div class="box">judge: outcome ${esc(x.eval.outcome)}/2 · judgement&safety ${esc(x.eval.judgement_safety)}/2${x.eval.critical_failure?' · <b>CRITICAL FAILURE</b>':''}\n${esc(x.eval.notes||'')}</div>`:''}<pre>${esc(x.rec.answer)}</pre>`).join('')+'</div>';
+    h+=`<div class="pane ${state.tab==='agent'?'on':''}" id="pane-agent">`+ri.map((x,xi)=>`<h3>${esc(x.run)} · <span class="b run ${esc(x.rec.disposition||'')}">${esc(x.rec.disposition||'?')}</span> ${x.rec.fallback?'<span class="b crit">fallback</span>':''} · urgency ${esc(x.rec.urgency||'-')} · steps ${esc(x.rec.steps??'-')} · cutoff ${x.cutoff??'-'} · flags: ${esc((x.rec.flags||[]).join(', ')||'none')}</h3>${statusHtml(x)}${replayHtml(x,xi)}${x.eval?`<div class="box">judge: outcome ${esc(x.eval.outcome)}/2 · judgement&safety ${esc(x.eval.judgement_safety)}/2${x.eval.critical_failure?' · <b>CRITICAL FAILURE</b>':''}\n${esc(x.eval.notes||'')}</div>`:''}<details class="rec"><summary>ANSWER.md</summary><pre>${esc(x.rec.answer)}</pre></details>`).join('')+'</div>';
   }
   box.innerHTML=h;
   box.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab; renderDetail();});
+  box.querySelectorAll('.replay').forEach(rp=>{
+    const items=[...rp.querySelectorAll('li.st')]; let i=0, timer=null; const cnt=rp.querySelector('.rcount');
+    const show=n=>{ items.slice(0,n).forEach(li=>li.classList.add('show')); i=Math.min(n,items.length); cnt.textContent=i+' / '+items.length; if(items[i-1]) items[i-1].scrollIntoView({block:'nearest'}); if(i>=items.length&&timer){clearInterval(timer); timer=null;} };
+    rp.querySelector('.rplay').onclick=()=>{ if(timer){clearInterval(timer); timer=null; return;} if(i>=items.length){ items.forEach(li=>li.classList.remove('show')); i=0; } show(i+1); timer=setInterval(()=>show(i+1), 1100); };
+    rp.querySelector('.rnext').onclick=()=>show(i+1);
+    rp.querySelector('.rall').onclick=()=>show(items.length);
+    show(0);
+  });
   const ho=$('hideOutcome'); if(ho) ho.onchange=()=>{state.hideOutcome=ho.checked; renderDetail();};
   const cn=$('cutN'); if(cn) cn.onchange=()=>{state.cutoffs[c.id]=Math.max(0,Math.min(c.n_events,parseInt(cn.value||'0',10))); renderDetail();};
   const cf=$('cutFirst'); if(cf) cf.onclick=()=>{state.cutoffs[c.id]=c.first_external||c.n_events; renderDetail();};
