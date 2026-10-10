@@ -139,7 +139,7 @@ Options (pass with `ARGS="..."`):
 
 ### Reality Test
 
-<!-- TODO(event): exact command, start/end times, model id, concurrency, the runner's summary line, and the commit hash of the frozen code. -->
+Run on 10 October 2026 at 16:34 BST on the frozen code (tag `freeze-1630`, implementation unchanged since): 30 Property Management cases from `DwellyOrg/HackatonChallenges`, commit 6bcba14, dirty False, model claude-opus-5 effort high, concurrency 6, budget 540.0 s; results in commit `f96e8c6`.
 
 ```
 make freeze                     # tag freeze-1630, record the hash

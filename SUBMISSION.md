@@ -9,7 +9,7 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 | Track | Property Management |
 | Team members | Dmitry Kushnikov, Dmitry Taranov |
 | Commit hash at code freeze (16:30 BST) | `850ccd3` (tag `freeze-1630`; only SUBMISSION.md and ANSWERS/ change after it) |
-| Commit hash containing Reality Test results | <!-- TODO(event): the commit that adds ANSWERS/ --> |
+| Commit hash containing Reality Test results | `f96e8c6` |
 | Reality Test results path | `ANSWERS/` (`ANSWERS/<case-id>/ANSWER.md`, `REASONING.md`, `trace.jsonl`; `ANSWERS/_run.json`) |
 | Demo video path inside the repository | `video/demo.mp4` (plain git file, 42 MB) |
 | LinkedIn post URL | <!-- TODO(event) --> |
@@ -17,7 +17,7 @@ Fields required by the hackathon submission form. Fill before 17:00 BST on 10 Oc
 
 ## Reality Test run record
 
-<!-- TODO(event): paste the exact command, start and end times, model id, concurrency, and the summary line printed by the runner. -->
+Run on 10 October 2026, started 16:34:54 BST, 30 cases from `DwellyOrg/HackatonChallenges/Property Management`; commit 6bcba14, dirty False, model claude-opus-5 effort high, concurrency 6, budget 540.0 s; results committed as `f96e8c6`.
 
 ```
 git -C ../HackatonPublicCases pull                     # the Reality Test cases arrive at 16:30
