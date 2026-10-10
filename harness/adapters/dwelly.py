@@ -323,21 +323,56 @@ def cutoff_for(case_dir: Path, default: int | None, cutoffs: dict[str, int]) -> 
     return cutoffs.get(case_dir.name, cutoffs.get(case_dir.name.lstrip("0") or case_dir.name, default))
 
 
+def auto_cutoff(events: list[HistoryEvent], strategy: str = "first-external") -> int | None:
+    """Pick a decision point automatically.
+
+    `first-external`: the history up to and including the first message from an
+    outside party (contractor, landlord, tenant) — the agency must now decide
+    what to do next. Falls back to ~40 % of the history when nobody outside has
+    spoken yet. `fraction:0.4` uses the fraction directly.
+    """
+    if not events:
+        return None
+    n = len(events)
+    if strategy.startswith("fraction:"):
+        frac = float(strategy.split(":", 1)[1])
+        return max(1, min(n, round(n * frac)))
+    for e in events:
+        if e.trust == "untrusted" and e.number > 1:
+            return e.number
+    return max(1, min(n, round(n * 0.4)))
+
+
 class DwellyCasesAdapter:
     name = "dwelly"
 
-    def __init__(self, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, cutoffs: dict[str, int] | None = None):
+    def __init__(self, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, cutoffs: dict[str, int] | None = None, auto_cutoff: str | None = None):
         self.hide_outcome = hide_outcome
         self.cutoff = cutoff
         self.cutoffs = cutoffs or {}
+        self.auto_cutoff = auto_cutoff
         self.with_attachments = with_attachments
+        self.effective_cutoffs: dict[str, int] = {}
         self._ledgers: dict[str, CaseLedger] = {}
 
+    def _cutoff_for(self, case_dir: Path) -> int | None:
+        explicit = cutoff_for(case_dir, None, self.cutoffs)
+        if explicit is not None:
+            return explicit
+        if self.auto_cutoff:
+            history = case_dir / "history.md"
+            events = parse_history(history.read_text(encoding="utf-8", errors="replace")) if history.exists() else []
+            return auto_cutoff(events, self.auto_cutoff)
+        return self.cutoff
+
     def load_cases(self, path: Path) -> list[Case]:
-        return [
-            load_dwelly_case(d, hide_outcome=self.hide_outcome, cutoff=cutoff_for(d, self.cutoff, self.cutoffs), with_attachments=self.with_attachments)
-            for d in iter_case_dirs(Path(path))
-        ]
+        cases: list[Case] = []
+        for d in iter_case_dirs(Path(path)):
+            c = self._cutoff_for(d)
+            if c is not None:
+                self.effective_cutoffs[d.name] = c
+            cases.append(load_dwelly_case(d, hide_outcome=self.hide_outcome, cutoff=c, with_attachments=self.with_attachments))
+        return cases
 
     def tools_for(self, case: Case) -> ToolRegistry:
         ledger = CaseLedger(case)
