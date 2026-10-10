@@ -1,3 +1,3 @@
-# X post (≤ 280 characters; placeholders in braces)
+# X post (≤ 280 characters)
 
-We built {one_line_what} at the Real-World Agents Hackathon. The agent acts only within authority it can cite and turns every exception into a 90-second decision for a human. Open source, with unseen-case results in the repo: {repo_url}
+At the Real-World Agents Hackathon we built a lettings ops agent that acts only within authority it can cite and turns every exception into a 90-second decision for a human. 50 public cases, 94/100 on outcomes, 0 prohibited actions. Open source: https://github.com/dkushnikov/lettings-ops-agent
