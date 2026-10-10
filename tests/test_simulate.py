@@ -195,3 +195,14 @@ def test_script_triggers_survive_yaml_boolean_keys():
     sc01 = next(sc for sc in lib.scenarios if sc["id"] == "SC-01")
     landlord = next(t for t in sc01["script"] if t.get("actor") == "landlord")
     assert landlord["on"] == "agent requests approval"
+
+
+def test_opening_turns_can_fire():
+    """A first turn with neither `on` nor `message` leaves the director nothing to wait for."""
+    lib = load_library()
+    for sc in lib.scenarios:
+        turns = sc.get("script") or []
+        if not turns:
+            continue
+        t0 = turns[0]
+        assert t0.get("on") or t0.get("message"), f"{sc['id']} opening turn needs on: or a literal message"
