@@ -1,0 +1,11 @@
+{"ts": "2026-10-10T13:18:04.705+00:00", "event": "model_turn", "step": 1, "stop_reason": "tool_use", "usage": {"input": 5009, "output": 242, "cache_read": 14088}}
+{"ts": "2026-10-10T13:18:04.706+00:00", "event": "playbook", "name": "maintenance-request", "case_type": "maintenance_request", "urgency": "routine"}
+{"ts": "2026-10-10T13:18:04.706+00:00", "event": "gate", "tool": "get_case_details", "verdict": "allow", "rules": [], "reason": "read", "case_id": "006", "action_seq": 1, "action_id": "006-get_case_details-1a5fbcae2b13"}
+{"ts": "2026-10-10T13:18:04.706+00:00", "event": "tool_result", "tool": "get_case_details", "status": "completed", "attempts": 1, "error": null, "receipt": "{\"id\": \"006\", \"attachments_hidden\": 0}", "case_id": "006", "action_seq": 1, "action_id": "006-get_case_details-1a5fbcae2b13"}
+{"ts": "2026-10-10T13:18:04.707+00:00", "event": "gate", "tool": "get_action_ledger", "verdict": "allow", "rules": [], "reason": "read", "case_id": "006", "action_seq": 2, "action_id": "006-get_action_ledger-ae0f664440fd"}
+{"ts": "2026-10-10T13:18:04.707+00:00", "event": "tool_result", "tool": "get_action_ledger", "status": "completed", "attempts": 1, "error": null, "receipt": "[]", "case_id": "006", "action_seq": 2, "action_id": "006-get_action_ledger-ae0f664440fd"}
+{"ts": "2026-10-10T13:18:53.830+00:00", "event": "model_turn", "step": 2, "stop_reason": "tool_use", "usage": {"input": 8322, "output": 3461, "cache_read": 14088}}
+{"ts": "2026-10-10T13:18:53.831+00:00", "event": "gate", "tool": "add_note", "verdict": "allow", "rules": ["CAP-LOG"], "reason": "Within mandate", "case_id": "006", "action_seq": 3, "action_id": "006-add_note-59493d67239f"}
+{"ts": "2026-10-10T13:18:53.831+00:00", "event": "tool_result", "tool": "add_note", "status": "completed", "attempts": 1, "error": null, "receipt": "{\"id\": \"ACT-1\"}", "case_id": "006", "action_seq": 3, "action_id": "006-add_note-59493d67239f"}
+{"ts": "2026-10-10T13:19:55.407+00:00", "event": "model_turn", "step": 3, "stop_reason": "tool_use", "usage": {"input": 11845, "output": 5289, "cache_read": 14088}}
+{"ts": "2026-10-10T13:19:55.408+00:00", "event": "terminal", "tool": "escalate", "ok": true, "message": null}

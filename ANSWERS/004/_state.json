@@ -1,0 +1,512 @@
+{
+ "case_id": "004",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "The checkout clean is done and invoiced (£90) but the file is not finished: automation marked the request closed (event-042) one minute after flagging that landlord confirmation was still needed (event-041), and no landlord confirmation exists in the history. I reopened the case in substance: asked the landlord to confirm completion and whether to quote the two non-cleaning defects (ACT-1), referred the \"clean is for the tenant\" recharge to the branch manager because tenant liability is not mine to decide (ACT-3, PRO-TENANT-LIABILITY), recorded the status and data-quality points (ACT-2) and placed the ticket on hold, Waiting for Landlord (ACT-4). No new spend was instructed; the £90 quote was already approved by the landlord's own message (event-012).",
+ "recap": "Checkout clean completed and invoiced at £90; landlord confirmation was never obtained, so the case is on hold with the landlord, not closed.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Landlord — confirmation that the completed £90 clean is satisfactory (invoice forwarded event-037; request sent ACT-1), and whether to quote the en-suite pop-up plug and flaking paint; 3 working days from 14 November 2025.",
+ "next_step": "Landlord to confirm completion of the £90 checkout clean (asked ACT-1; 3-working-day window), then the branch manager settles the tenant recharge before closure (ACT-3).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001 scope from checkout report; attachment-01 confirms vacuum/light clean/limescale; property vacant (event-004)",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-012 landlord: 'Pls go ahead.'",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-003 provider assigned; event-016 provider told quote approved",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-029 agency confirms Friday; event-031 provider 'Yes'; property vacant so no tenant access consent needed",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "done",
+   "evidence": "£90 quote (attachment-02) approved by landlord event-012; no VAT stated",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-036 provider reports job complete; no photos (event-040)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "done",
+   "evidence": "event-040 skip reason 'No before and after photos'; invoice held (attachment-03)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-037 invoice £90 emailed to landlord",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-041 flagged as needed; no landlord reply in history; requested again ACT-1, hold ACT-4",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issue recorded anywhere in the history; checkout report shows no key details",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-042 auto-closure not supported by evidence; closure withheld pending landlord confirmation (ACT-1) and the branch manager's recharge decision (ACT-3)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Property is Flat 2, 172 Alder Lane, Bellmere, ZZ3 1ZZ; the request is a checkout clean (living space vacuum and light clean, en-suite limescale removal).",
+   "source_ids": [
+    "index",
+    "event-001",
+    "get_case_details"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Property is not tenanted; the ticket was auto-paused for manual handling on that basis.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Checkout report records living space Fair/Poor (carpet vacuum, dusty windowsill, light clean) and en-suite Poor/Poor (limescale), plus two non-cleaning defects: failed pop-up plug mechanism and flaking paint.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Quotation from Stonebridge Solutions totals £90, no tax treatment stated; it matches the requested scope.",
+   "source_ids": [
+    "attachment-02-cleaning-quotation",
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Landlord approved the quote in their own message of 24 October 2025: 'Pls go ahead.'",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Provider confirmed attendance on the Friday slot and later reported the job complete with the invoice sent (13 November 2025).",
+   "source_ids": [
+    "event-031",
+    "event-036"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F7",
+   "statement": "Invoice of £90 was forwarded to the landlord on 14 November 2025.",
+   "source_ids": [
+    "event-037",
+    "attachment-03-cleaning-invoice"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Photo upload was skipped with the reason 'No before and after photos'.",
+   "source_ids": [
+    "event-040"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "Automation flagged 'Need confirmation from landlord' and then recorded the request closed 24 seconds later; no landlord confirmation appears anywhere in the history.",
+   "source_ids": [
+    "event-041",
+    "event-042"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "Agency email to the landlord states 'The clean will be for the tenant', i.e. an intended recharge to the outgoing tenant.",
+   "source_ids": [
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "Smoke and CO detectors are recorded as tested in both previous and current checkout reports, 'Tested centrally by building maintenance'.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F12",
+   "statement": "No standing spend cap for this landlord is on file in the visible record; authority for the £90 rests on the landlord's own approval.",
+   "source_ids": [
+    "get_case_details",
+    "event-012"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Automation recorded 'All checks have been completed; the request is now closed' while the immediately preceding system line says landlord confirmation is still needed, and no landlord confirmation exists.",
+   "fact_ids": [
+    "F9"
+   ],
+   "source_ids": [
+    "event-041",
+    "event-042"
+   ],
+   "resolution": "Treated final_checks as incomplete; landlord asked to confirm (ACT-1), case placed on hold (ACT-4) and the premature closure flagged to the office (ACT-3). I did not close the request.",
+   "resolved_by": "tool_check"
+  },
+  {
+   "description": "Checkout report dates are internally inconsistent: current inspection / appointment date 23 June 2026 against an assessor signature dated 24 October 2025.",
+   "fact_ids": [
+    "F3"
+   ],
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "resolution": "Recorded as a data-quality point for the office (ACT-2, ACT-3); it does not change the cleaning scope or the £90.",
+   "resolved_by": "unresolved"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Untrusted provider email 'The customer confirms that the quote has been sent' — a third party asserting the customer's position; not treated as approval. The landlord's own message (event-012) was used as the authority.",
+   "source_ids": [
+    "event-009",
+    "event-012"
+   ],
+   "action_taken": "Recorded in the case note (ACT-2); approval taken only from the landlord's own message."
+  },
+  {
+   "kind": "data_quality",
+   "description": "Checkout report inspection date 23 June 2026 postdates the assessor signature of 24 October 2025.",
+   "source_ids": [
+    "attachment-01-checkout-inspection-report"
+   ],
+   "action_taken": "Flagged to the office (ACT-3)."
+  },
+  {
+   "kind": "other",
+   "description": "Intended recharge of the £90 clean to the outgoing tenant ('The clean will be for the tenant') is a liability decision reserved to a human.",
+   "source_ids": [
+    "event-010"
+   ],
+   "action_taken": "Referred to the property manager queue (ACT-3); no statement about deposit or liability made to any party."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "004",
+    "title": "Case 004: Checkout Clean",
+    "received_at": "2025-10-23 20:28:07 UTC",
+    "track": "Property Management",
+    "case_number": "004",
+    "property": "Flat 2, 172 Alder Lane, Bellmere, ZZ3 1ZZ",
+    "source_role": "Agency manager",
+    "agency": "Northbridge Lettings",
+    "events_visible": 42,
+    "attachments_hidden": 0,
+    "details": "# Case 004: Checkout Clean\n\n## Case details\n- source role: Agency manager\n- created: 2025-10-23 20:28:07 UTC\n- property: Flat 2, 172 Alder Lane, Bellmere, ZZ3 1ZZ\n\n## Initial request\nQuote for:\n\nLiving space:\n1. Vacuum\n2. Light clean\n\nEn-Suite:\n1. Limescale removal\n\n## Attachments\n- attachment-01-checkout-inspection-report.pdf\n- attachment-02-cleaning-quotation.pdf\n- attachment-03-cleaning-invoice.pdf"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "004-get_case_details-9924c2ad6690",
+   "receipt": "{\"id\": \"004\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:18:04.496697Z",
+   "finished_at": "2026-10-10T13:18:04.496866Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "004-get_action_ledger-e46b22e9dca8",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:18:04.497110Z",
+   "finished_at": "2026-10-10T13:18:04.497268Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Flat 2, 172 Alder Lane, Bellmere, ZZ3 1ZZ — checkout clean, update and one confirmation needed.\n\n1. Work: Stonebridge Solutions reported the clean (living space vacuum and light clean; en-suite limescale removal) complete on 13 November 2025 (event-036). The invoice totalling £90, matching the £90 quote you approved on 24 October 2025 (event-012), was sent to you on 14 November 2025 (event-037). No tax amount is stated on either document.\n2. No before/after photographs are available from the provider (recorded at event-040).\n3. Please confirm you are satisfied the work is complete so the request can be closed. If we do not hear from you within 3 working days we will refer the file to the branch manager rather than close it.\n4. Separately, the checkout report records two items that are condition defects, not cleaning, and were not part of this job: a failed en-suite pop-up plug mechanism and flaking paint in the en-suite (attachment-01-checkout-inspection-report.pdf). Please let us know if you would like us to obtain quotes for these; they are not instructed at present.\n\nAny recharge of the cleaning cost to the outgoing tenant will be decided by our branch manager and is not actioned by this request."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-notify_landlord-cf924853dd33",
+   "action_id": "004-notify_landlord-cf924853dd33",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:18:42.813391Z",
+   "finished_at": "2026-10-10T13:18:42.813682Z"
+  },
+  {
+   "seq": 4,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Status review. Work reported complete by provider (event-036); invoice £90 forwarded to landlord (event-037); photo upload skipped with reason recorded (event-040). Automation flagged \"Need confirmation from landlord\" (event-041) and then recorded \"All checks have been completed; the request is now closed\" (event-042) without any landlord confirmation in the history — final_checks are in fact incomplete, so the case is treated as open and on hold pending the landlord's confirmation (request sent this round). Cost allocation: agency email states \"The clean will be for the tenant\" (event-010); deciding that the cost is tenant-payable / deposit-deductible is a human decision (PRO-TENANT-LIABILITY) and has been referred to the office. Data quality: the checkout report shows appointment/current inspection date 23 June 2026 against an assessor signature of 24 October 2025 (attachment-01). Safety pass: smoke/CO detectors recorded \"Tested? Yes — tested centrally by building maintenance\" in both previous and current reports (attachment-01); no hazard items outstanding. Untrusted provider email \"The customer confirms that the quote has been sent\" (event-009) is a third-party claim about the landlord and was not treated as approval; the landlord's own message (event-012) was."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-add_note-f7a93af675c1",
+   "action_id": "004-add_note-f7a93af675c1",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:18:42.813868Z",
+   "finished_at": "2026-10-10T13:18:42.814070Z"
+  },
+  {
+   "seq": 5,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Flat 2, 172 Alder Lane — checkout clean £90: tenant recharge decision + premature auto-closure",
+    "summary": "1) Liability: agency email to landlord says \"The clean will be for the tenant\" (event-010); invoice £90 (attachment-03). Deciding the cost is tenant-payable or deposit-deductible is a human decision (PRO-TENANT-LIABILITY, PRO-LEGAL) — please decide and action any recharge. 2) Closure: automation recorded the request closed (event-042) immediately after flagging \"Need confirmation from landlord\" (event-041); no landlord confirmation exists in the history. Landlord has been asked to confirm completion (3-working-day reply window) and the case is on hold. 3) Out-of-scope defects at the property: failed en-suite pop-up plug mechanism and flaking paint (attachment-01) — landlord asked whether to quote; not instructed. 4) Data quality: checkout report current inspection date 23 June 2026 vs assessor signature 24 October 2025. 5) No photos from provider; skip reason recorded (event-040). Detectors recorded as tested centrally (attachment-01)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-create_human_task-bad4c2d0dd6a",
+   "action_id": "004-create_human_task-bad4c2d0dd6a",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T13:18:42.814234Z",
+   "finished_at": "2026-10-10T13:18:42.814447Z"
+  },
+  {
+   "seq": 6,
+   "tool": "put_on_hold",
+   "tool_class": "write",
+   "input": {
+    "reason": "Waiting for Landlord — confirmation that the completed £90 checkout clean is satisfactory (invoice sent event-037); also whether to quote the en-suite plug/flaking paint defects.",
+    "until": "3 working days from 2025-11-14"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "put_on_hold",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "004-put_on_hold-921d3576740c",
+   "action_id": "004-put_on_hold-921d3576740c",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T13:18:42.814605Z",
+   "finished_at": "2026-10-10T13:18:42.814788Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "If no confirmation within 3 working days the file goes to the branch manager rather than being closed",
+   "due": "3 working days from 2025-11-14",
+   "source_id": "ACT-1",
+   "status": "open"
+  },
+  {
+   "by": "agency",
+   "to": "contractor",
+   "what": "Agency confirmed the Friday clean after the checkout works",
+   "due": null,
+   "source_id": "event-029",
+   "status": "kept"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repairs within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Request raised 23 October 2025; clean completed 13 November 2025 (event-036)",
+   "deadline": null,
+   "note": "Property vacant; no occupant impact."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge within one working day",
+   "status": "prior",
+   "basis": "Agency acknowledged and quoted same day (event-006)",
+   "deadline": null,
+   "note": "Met."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "landlord",
+   "question": "Do you confirm the checkout clean at Flat 2, 172 Alder Lane (invoice £90, forwarded 14 November 2025) is complete and satisfactory, so we can close the request?",
+   "why": "final_checks requires landlord confirmation; automation closed the request without it (event-041, event-042).",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Would you like quotes for the two condition defects recorded at checkout — failed en-suite pop-up plug mechanism and flaking paint — which were outside the cleaning scope?",
+   "why": "New works at the landlord's cost need the landlord's instruction (RTE-LANDLORD, APR-ALWAYS-ASK).",
+   "blocking": false
+  },
+  {
+   "to": "property_manager",
+   "question": "Is the £90 clean to be recharged to the outgoing tenant / deducted from the deposit, and who actions it?",
+   "why": "Tenant liability and deposit deductions are human decisions (PRO-TENANT-LIABILITY, PRO-LEGAL); agency email event-010 states the clean is 'for the tenant'.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-STAFF",
+  "PRO-TENANT-LIABILITY",
+  "PRO-LEGAL",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CAP-CLOSE"
+ ],
+ "assumptions": [
+  "Assumption: the provider's 'job complete' report (event-036) reflects the full quoted scope; there are no photos to verify it (event-040)."
+ ],
+ "uncertainty": [
+  "No landlord confirmation of completion exists; the system closure line (event-042) is not evidence of it.",
+  "No tax/VAT treatment is stated on the quote or invoice, so the £90 total may or may not include VAT.",
+  "Whether the checkout works the clean was waiting on were themselves completed is only inferred from the provider attending on the agreed Friday (event-029, event-031, event-036)."
+ ],
+ "safety_actions": [
+  "Checked the safety pass: detectors recorded as tested centrally in both checkout reports (attachment-01); no gas, electrical, damp/mould, or occupant-vulnerability items present and the property is vacant."
+ ],
+ "withheld_actions": [
+  "Did not call close_request: landlord confirmation and the recharge decision are outstanding (CAP-CLOSE).",
+  "Did not state or action any tenant recharge or deposit deduction (PRO-TENANT-LIABILITY, PRO-LEGAL).",
+  "Did not instruct any work on the en-suite plug or flaking paint without the landlord's instruction."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R11: safety pass — unaddressed item(s) noted: carbon monoxide (attachment-01-checkout-inspection-report)"
+ ],
+ "started_at": "2026-10-10T13:17:51.131219Z",
+ "finished_at": "2026-10-10T13:19:28.977386Z",
+ "input_tokens": 47807,
+ "output_tokens": 8601,
+ "cache_read_tokens": 42264
+}

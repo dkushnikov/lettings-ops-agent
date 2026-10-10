@@ -1,0 +1,575 @@
+{
+ "case_id": "026",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "needs_info",
+ "decision": "Repair is verifiably done (tenant confirmed the replaced oven element works, event-029), but the ticket was closed at event-038 with final checks outstanding: no invoice forwarded to the landlord and no landlord confirmation (event-035 still open). I did not re-close or re-dispatch. I chased the instructed provider for the invoice and job paperwork, asked the landlord to confirm completion, and raised an office task for the conflict between agency records about which provider holds the job (Keystone Compliance per event-014/018 vs \"Riverside Works\" event-016 / \"Harbour Works\" event-029 / \"Lantern Utilities\" event-020) — no provider was named to any party as the one who invoiced, and no payment was actioned.",
+ "recap": "Oven element replaced and confirmed working; file reopened at final checks — invoice chased from provider, landlord asked to confirm, provider-identity conflict sent to the office.",
+ "stage": "final_checks",
+ "hold_reason": "Waiting for Provider — invoice, job sheet and photos requested (3 working days, ACT-3); also Waiting for Landlord — completion confirmation requested (ACT-2).",
+ "next_step": "Provider to send the invoice (net/VAT/total) and job sheet within 3 working days (ACT-3); then forward to the landlord for confirmation (ACT-2) and the office to settle which provider invoices (ACT-4).",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-002 (Appliances, ROUTINE); tenant acknowledged event-006",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-009 landlord's own email 'Yes go ahead'",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-012/event-014 provider instructed; event-013 tenant briefed",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "done",
+   "evidence": "event-019 slot confirmed; date corrected to 8 Sept (event-023, event-025, event-028)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "event-030 'no quote needed'",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-029 element replaced, oven working; event-031 moved to Result",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "pending",
+   "evidence": "event-034 skip reason recorded but does not cover job paperwork; invoice/job sheet/photos requested ACT-3",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "pending",
+   "evidence": "no forwarding event in history (search_history 'invoice' returns only event-029); landlord told invoice will follow ACT-2",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "pending",
+   "evidence": "event-035 'Need confirmation from landlord'; requested ACT-2",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "done",
+   "evidence": "event-037 keys return confirmed",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "pending",
+   "evidence": "event-038 marked closed, but documents, invoice and landlord confirmation outstanding — not re-closed (CAP-CLOSE)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported the main oven element not heating; grill element works; appliance is electric.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Intake classified the issue as Appliances, severity ROUTINE.",
+   "source_ids": [
+    "event-002"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Landlord approved instructing a contractor: 'Yes go ahead' (26 Aug 2025).",
+   "source_ids": [
+    "event-009"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Agency instructed Keystone Compliance and briefed the tenant that they would attend.",
+   "source_ids": [
+    "event-012",
+    "event-013",
+    "event-014"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "Appointment first set for 30/08/2025 10:00-12:00, then the tenant stated the provider had arranged 8 September; the agency told the tenant to take the provider's confirmed date.",
+   "source_ids": [
+    "event-017",
+    "event-018",
+    "event-019",
+    "event-021",
+    "event-023",
+    "event-025",
+    "event-028"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Work completed: heating element replaced, oven confirmed working by the occupant on 8 Sept 2025; hobs cleaned.",
+   "source_ids": [
+    "event-029"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No quote was required for the job.",
+   "source_ids": [
+    "event-030"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "Document upload was skipped with the reason 'approved by landlord in activity notes'.",
+   "source_ids": [
+    "event-034"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F9",
+   "statement": "'Need confirmation from landlord' was flagged and no invoice forwarding to the landlord appears in the history; the request was nonetheless marked closed.",
+   "source_ids": [
+    "event-035",
+    "event-038",
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F10",
+   "statement": "No invoice amount appears anywhere in the record; the only reference is a call mentioning 'the invoice from Harbour Works'.",
+   "source_ids": [
+    "event-029",
+    "search_history"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F11",
+   "statement": "Keys return confirmed at final checks.",
+   "source_ids": [
+    "event-037"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "Provider identity: agency instruction and appointment confirmation name Keystone Compliance; a booking call names 'Riverside Works'; the closing call cites an invoice from 'Harbour Works'; the reminder SMS is signed 'Lantern Utilities'.",
+   "fact_ids": [
+    "F4",
+    "F10"
+   ],
+   "source_ids": [
+    "event-014",
+    "event-016",
+    "event-018",
+    "event-020",
+    "event-029"
+   ],
+   "resolution": "No side taken in any message to a party; invoice chased from the provider on the agency's own record (Keystone Compliance) and the conflict sent to the office (ACT-4) before any payment.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "Occupant/contact names are inconsistent across the history (Clara, Ruben Oakley, Grace Mercer, Harriet Fletcher, Leo).",
+   "fact_ids": [
+    "F1",
+    "F6"
+   ],
+   "source_ids": [
+    "event-013",
+    "event-016",
+    "event-018",
+    "event-021",
+    "event-029"
+   ],
+   "resolution": "Names from message bodies not copied into outgoing letters; flagged to the office for a tenancy-record check.",
+   "resolved_by": "unresolved"
+  },
+  {
+   "description": "Visit date: system recorded 30/08/2025 while the tenant stated 8 September with the provider.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-017",
+    "event-021",
+    "event-023",
+    "event-025"
+   ],
+   "resolution": "Settled by events: attendance and completion occurred on 8 September (event-028, event-029).",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Four different provider trading names and five different occupant names appear across the same ticket; the job was also closed with landlord confirmation and invoice forwarding outstanding.",
+   "source_ids": [
+    "event-014",
+    "event-016",
+    "event-020",
+    "event-029",
+    "event-035",
+    "event-038"
+   ],
+   "action_taken": "Conflict recorded (ACT-1) and sent to the property_manager queue (ACT-4); no provider named to any party as the invoicing party; no payment actioned."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "026",
+    "title": "Case 026: Oven Repair Request",
+    "received_at": "2025-08-26 15:01:21 UTC",
+    "track": "Property Management",
+    "case_number": "026",
+    "property": "Flat 3, 3 Willowmere Road, Alderwick, ZZ9 6ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 38,
+    "attachments_hidden": 0,
+    "details": "# Case 026: Oven Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2025-08-26 15:01:21 UTC\n- property: Flat 3, 3 Willowmere Road, Alderwick, ZZ9 6ZZ\n\n## Initial request\nHi there,\n\nHope you are well.\n\nApologies for bringing something to attention not long after moving in. Apart from this one small issue, everything else seems fine, and we are really enjoying the comforts of the property! :)\n\nI am not sure if I am missing something on the fan oven. We finally managed to get around to using the oven on Tuesday evening,\n(It's been a long and stressful move-in from the old place to here, so apologies for not checking this sooner).\nThe oven doesn't seem to heat up using the main oven section. I can confirm that the grill heating element works, as I used this last night to cook with, but the main oven heating element doesn't seem to work. On Tuesday evening, we had the oven running for at least an hour to try and get it up to 200 degrees, but it was not heating up at all.\n\nI looked through the instruction booklet I found and am certain I am not missing anything in relation to how the oven operates.\n\nIs this something that could be looked at, please?\n\nKind regards\nClara"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "026-get_case_details-aef992387457",
+   "receipt": "{\"id\": \"026\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:25:02.827731Z",
+   "finished_at": "2026-10-10T13:25:02.827981Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "026-get_action_ledger-28a663aef785",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:25:02.828521Z",
+   "finished_at": "2026-10-10T13:25:02.828629Z"
+  },
+  {
+   "seq": 3,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "query": "invoice"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-029",
+     "timestamp": "2025-09-08 19:02:48 UTC",
+     "channel": "Call",
+     "from": "Agency / system",
+     "to": "Tenant",
+     "excerpt": "[2025-09-08 19:02:48 UTC] Call · from: Agency / system · to: Tenant\nThe agent, Imogen from Meadow Homes, called Leo to inform him about the invoice from Harbour Works and to check if his oven was working properly after the recent repair. Leo confirmed it was working fine and acknowledged that the heating element was replaced. Imogen also mentioned that the service technician cleaned the hobs. Leo expressed his satisfaction, and Imogen confirmed closing the work order."
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "026-search_history-fa51613f3fa6",
+   "receipt": "[{\"event\": \"event-029\", \"timestamp\": \"2025-09-08 19:02:48 UTC\", \"channel\": \"Call\", \"from\": \"Agency / system\", \"to\": \"Tenant\", \"excerpt\": \"[2025-09-08 19:02:48 UTC] Call · from: Agency / system · to:…",
+   "started_at": "2026-10-10T13:25:13.763112Z",
+   "finished_at": "2026-10-10T13:25:13.763475Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Landlord"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [
+    {
+     "event": "event-009",
+     "timestamp": "2025-08-26 17:28:53 UTC",
+     "channel": "Email",
+     "from": "Landlord",
+     "to": "Agency / system",
+     "excerpt": "[2025-08-26 17:28:53 UTC] Email · from: Landlord · to: Agency / system\nYes go ahead"
+    }
+   ],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "026-search_history-4e8e9b1a3b44",
+   "receipt": "[{\"event\": \"event-009\", \"timestamp\": \"2025-08-26 17:28:53 UTC\", \"channel\": \"Email\", \"from\": \"Landlord\", \"to\": \"Agency / system\", \"excerpt\": \"[2025-08-26 17:28:53 UTC] Email · from: Landlord · to: Age…",
+   "started_at": "2026-10-10T13:25:13.763616Z",
+   "finished_at": "2026-10-10T13:25:13.763678Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Final-checks review. Work result: tenant confirmed oven working after heating element replacement (event-029); \"no quote needed\" (event-030); documents skipped with reason recorded (event-034); keys return confirmed (event-037); request marked closed (event-038) while event-035 \"Need confirmation from landlord\" was still outstanding and no invoice has been forwarded to the landlord. Record conflict on provider identity: agency instruction and appointment confirmation name Keystone Compliance (event-014, event-018); booking call names \"Riverside Works\" (event-016); closing call refers to an invoice from \"Harbour Works\" (event-029); SMS reminder signed \"Lantern Utilities\" (event-020). Party names in message bodies are also inconsistent (Clara / Ruben Oakley / Grace Mercer / Leo) — not copied into outgoing letters. Office task raised; invoice chased from the provider on the agency's own record; landlord asked to confirm completion. Safety pass: hob/oven are electric (event-002), fault limited to the main oven element, no gas appliance, no hazard reported."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "026-add_note-1ee47e02653a",
+   "action_id": "026-add_note-1ee47e02653a",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:25:46.690073Z",
+   "finished_at": "2026-10-10T13:25:46.690241Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_landlord",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Flat 3, 3 Willowmere Road, Alderwick, ZZ9 6ZZ — oven repair (your approval to instruct, 26 Aug).\n\nThe work has been carried out: the main oven heating element was replaced and the tenant confirmed on 8 September that the oven is working normally. No quote was required for the job.\n\nTwo final checks remain before we close the file:\n1. We are requesting the provider's invoice and job paperwork and will forward the invoice to you as soon as it is received; we are not able to quote an amount until then.\n2. Please confirm you are happy that the works are complete.\n\nIf we have no reply within 3 working days we will chase."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_landlord",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "026-notify_landlord-08cec9fa017b",
+   "action_id": "026-notify_landlord-08cec9fa017b",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:25:46.690314Z",
+   "finished_at": "2026-10-10T13:25:46.690399Z"
+  },
+  {
+   "seq": 7,
+   "tool": "notify_contractor",
+   "tool_class": "write",
+   "input": {
+    "message": "Re: Oven Repair Request — Flat 3, 3 Willowmere Road, Alderwick, ZZ9 6ZZ (attendance 8 September 2025).\n\nThe tenant has confirmed the main oven heating element was replaced and the oven is working. To complete our file please send, within 3 working days: your invoice (net, VAT and total), the job sheet or engineer's notes, and any photos taken. Please also confirm the trading name that will appear on the invoice, as our records show this job instructed to Keystone Compliance."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "notify_contractor",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "026-notify_contractor-2e2d9b557e2f",
+   "action_id": "026-notify_contractor-2e2d9b557e2f",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T13:25:46.690463Z",
+   "finished_at": "2026-10-10T13:25:46.690557Z"
+  },
+  {
+   "seq": 8,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 026 oven repair: provider identity conflict + ticket closed with final checks outstanding",
+    "summary": "Flat 3, 3 Willowmere Road. Repair done (element replaced; tenant confirmed working, event-029). Issues for the office: (1) Agency records disagree on who holds the job — instructed and appointment-confirmed to Keystone Compliance (event-014, event-018), booking call names \"Riverside Works\" (event-016), closing call cites an invoice from \"Harbour Works\" (event-029), reminder SMS signed \"Lantern Utilities\" (event-020). Please confirm the correct provider/invoice source before any payment is processed. (2) The request was marked closed (event-038) although event-035 flagged \"Need confirmation from landlord\" and no invoice has been forwarded to the landlord; document upload was skipped with the reason \"approved by landlord in activity notes\" (event-034), which does not evidence the job paperwork. (3) Tenant/occupant names in the history are inconsistent (Clara, Ruben Oakley, Grace Mercer, Harriet Fletcher, Leo) — the tenancy record should be checked. Actions taken: invoice and job sheet requested from the instructed provider, landlord asked to confirm completion. No payment moved, no liability decided."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-4",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "026-create_human_task-044de671d004",
+   "action_id": "026-create_human_task-044de671d004",
+   "receipt": "{\"id\": \"ACT-4\"}",
+   "started_at": "2026-10-10T13:25:46.690629Z",
+   "finished_at": "2026-10-10T13:25:46.690706Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "landlord",
+   "what": "Forward the provider's invoice once received and chase if no reply within 3 working days",
+   "due": "3 working days from ACT-2",
+   "source_id": "ACT-2",
+   "status": "open"
+  },
+  {
+   "by": "contractor",
+   "to": "agency",
+   "what": "Send invoice, job sheet and photos, and confirm invoicing trading name",
+   "due": "3 working days from ACT-3",
+   "source_id": "ACT-3",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time from report (26 Aug 2025)",
+   "status": "in_force",
+   "basis": "Section 11 Landlord and Tenant Act 1985",
+   "deadline": null,
+   "note": "Met: repair completed 8 Sept 2025 (event-029)."
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Agency SOP",
+   "deadline": null,
+   "note": "Met: tenant acknowledged same day (event-006)."
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "contractor",
+   "question": "Please send the invoice (net, VAT, total), job sheet/engineer's notes and any photos for the oven element replacement at Flat 3, 3 Willowmere Road on 8 September 2025, and confirm the trading name that will appear on the invoice.",
+   "why": "Documents and invoice are required before the file can be closed; agency records disagree on the provider's trading name.",
+   "blocking": true
+  },
+  {
+   "to": "landlord",
+   "question": "Please confirm you are happy the oven works are complete; the invoice will follow as soon as the provider supplies it.",
+   "why": "event-035 'Need confirmation from landlord' is still outstanding and no invoice has been forwarded.",
+   "blocking": true
+  }
+ ],
+ "handover": null,
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-LANDLORD",
+  "RTE-CONTRACTOR",
+  "ESC-CONFLICT",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the 'invoice from Harbour Works' referred to in event-029 relates to this job; the amount is unknown and no figure has been stated to any party."
+ ],
+ "uncertainty": [
+  "Whether an invoice has in fact been received by the agency, and from which trading entity.",
+  "Whether a management key was issued for the visit; event-037 records keys return confirmed but no key issue event exists."
+ ],
+ "safety_actions": [
+  "Safety pass: oven/hob are electric (event-002), fault limited to the main oven element, no gas appliance and no burning smell, sparks or alarm issue reported; element replaced and appliance confirmed working (event-029). No smoke/CO alarm question arises on this ticket."
+ ],
+ "withheld_actions": [
+  "Did not re-close the request: invoice_to_landlord and landlord_confirmation are still pending (CAP-CLOSE).",
+  "Did not dispatch or re-instruct any contractor: the work is done; a second work order would duplicate it.",
+  "Did not state or approve any invoice amount (PRO-PAYMENTS; no figure in any artefact)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [],
+ "started_at": "2026-10-10T13:24:56.016288Z",
+ "finished_at": "2026-10-10T13:26:57.741351Z",
+ "input_tokens": 49455,
+ "output_tokens": 7816,
+ "cache_read_tokens": 56352
+}

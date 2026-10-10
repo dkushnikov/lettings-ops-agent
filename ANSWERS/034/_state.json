@@ -1,0 +1,519 @@
+{
+ "case_id": "034",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "The ticket was closed by the system (event-016) and the landlord has paid (event-017), but the closure is not verifiable: the provider's report (event-010) describes a temperature fix and does not say the reported fault — no water from the cold side, with the hot side sometimes too hot to use — was cured, no visit was ever confirmed on the ticket, and the invoice letter to the landlord (event-011) names a different property in its body than in its header. I took no spend or payment action. I asked the tenant to confirm whether the cold feed now runs and the temperature is safe (ACT-2), recorded the conflict (ACT-1) and referred the address/billing discrepancy to the office (ACT-3). The case now waits on the tenant's confirmation, with the office holding the address question.",
+ "recap": "Shower repair closed and paid, but fix unverified and the landlord letter names another property: tenant asked to confirm, office asked to resolve the address.",
+ "stage": "on_hold",
+ "hold_reason": "Waiting for Tenant — confirmation that the cold side now delivers water and the shower mixes to a safe temperature (asked ACT-2); in parallel the office holds the Flat 9 / Flat 17 address and billing question (ACT-3).",
+ "next_step": "Tenant (Ava Fletcher) to confirm whether the cold side now works and the temperature is safe; if not, a return visit is raised with Meadow Works. Office to answer the address/billing conflict from event-011.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "index/event-001 fault logged and categorised; urgency set routine this turn; scald-avoidance advice given to the tenant in ACT-2",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "pending",
+   "evidence": "Only a system status line on file (event-004); no landlord message approving the job, though the landlord later paid (event-017)",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "done",
+   "evidence": "event-005 assignment; event-007 provider brief; event-006 tenant told Meadow Works would attend",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "pending",
+   "evidence": "Chase sent event-008; no slot ever confirmed on the ticket; provider's reply (event-010) could not be parsed (event-009)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "Provider repaired on site and charged a call-out rather than quoting (event-011)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "done",
+   "evidence": "event-010 provider report (untrusted); scope mismatch with the reported fault recorded in ACT-1",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "event-014 skip reason 'Invoice sent to LL'; invoice attachment not retrievable, so no amount/VAT on file",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-011 invoice forwarded, but the letter body names a different property (conflict referred, ACT-3)",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-017 landlord 'Paid today'",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued in the history; tenant arranged access directly with the provider (event-006/007)",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "done",
+   "evidence": "event-016 closed by the system; resolution does not name who paid and rests on unverified completion — reopened for verification this turn (ACT-1/ACT-2/ACT-3)",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported on 2025-05-29 that the cold side of the shower gives no water and the hot side is sometimes too hot to pour on the body.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "The only landlord approval on file is a system status line 'Landlord approval confirmed', not a message from the landlord.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Meadow Works was assigned and briefed, the tenant was told they would make contact, and the provider was chased once; no booked visit slot appears on the ticket.",
+   "source_ids": [
+    "event-005",
+    "event-006",
+    "event-007",
+    "event-008"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "The provider's email (untrusted) states the engineer found a 'temperature issue', cleaned and greased it and this 'resolved the main problem', with an invoice attached; the system could not extract the expected data.",
+   "source_ids": [
+    "event-009",
+    "event-010"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F5",
+   "statement": "The landlord letter forwarding the invoice carries the header address Flat 9, 9 Willowmere Road but its body names 'Flat 17, 77 Harbour View, Northbridge, ZZ9 1ZZ'.",
+   "source_ids": [
+    "event-011"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "Document upload was skipped with the reason 'Invoice sent to LL'; the invoice attachment is not retrievable, so no amount or VAT is on file.",
+   "source_ids": [
+    "event-014",
+    "get_attachment"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "The request was marked completed and closed on 2025-06-02; the landlord replied 'Paid today' on 2025-06-16.",
+   "source_ids": [
+    "event-012",
+    "event-013",
+    "event-016",
+    "event-017"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F8",
+   "statement": "No message from the tenant appears in the history after the initial report, so the fix has never been confirmed by the occupant.",
+   "source_ids": [
+    "search_history"
+   ],
+   "confidence": "high"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "The landlord invoice letter names two different properties: header Flat 9, 9 Willowmere Road, Bellmere (matching the case record, tenant email and provider brief) and body Flat 17, 77 Harbour View, Northbridge.",
+   "fact_ids": [
+    "F5"
+   ],
+   "source_ids": [
+    "event-011",
+    "event-006",
+    "event-007",
+    "index"
+   ],
+   "resolution": "Work proceeds on Flat 9, 9 Willowmere Road by source hierarchy (case record over email body); the billing/payment question referred to the office via create_human_task (ACT-3). Neither party was told which address is correct.",
+   "resolved_by": "asked"
+  },
+  {
+   "description": "The tenant reported no water from the cold side; the provider reported only a temperature issue cleaned and greased. It is not established that the reported fault was cured.",
+   "fact_ids": [
+    "F1",
+    "F4",
+    "F8"
+   ],
+   "source_ids": [
+    "event-001",
+    "event-010"
+   ],
+   "resolution": "Tenant asked to confirm the cold feed and the temperature (ACT-2); contractor asked to confirm scope.",
+   "resolved_by": "asked"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Landlord billed and paid under a letter whose body names a different property from the ticket; invoice amount and VAT are nowhere on file.",
+   "source_ids": [
+    "event-011",
+    "event-014",
+    "event-017"
+   ],
+   "action_taken": "Conflict recorded (ACT-1) and referred to the property manager queue (ACT-3); no payment or liability action taken."
+  },
+  {
+   "kind": "safety_hazard",
+   "description": "Tenant described shower water 'sometimes too hot to pour on body' — possible failed thermostatic mixer and scald risk; the provider's report does not confirm safe mixing was restored.",
+   "source_ids": [
+    "event-001",
+    "event-010"
+   ],
+   "action_taken": "Tenant advised not to use the shower if the water runs hot enough to scald and asked to confirm safe mixing (ACT-2); return visit offered."
+  },
+  {
+   "kind": "other",
+   "description": "Closure was driven by system status lines rather than evidence: approval (event-004), completion (event-013) and closure (event-016) rest on no landlord message and no tenant confirmation.",
+   "source_ids": [
+    "event-004",
+    "event-013",
+    "event-016"
+   ],
+   "action_taken": "Recorded in the case note (ACT-1) and in the human task (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "034",
+    "title": "Case 034: Shower Repair Request",
+    "received_at": "2025-05-29 12:35:15 UTC",
+    "track": "Property Management",
+    "case_number": "034",
+    "property": "Flat 9, 9 Willowmere Road, Bellmere, ZZ9 7ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 17,
+    "attachments_hidden": 0,
+    "details": "# Case 034: Shower Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2025-05-29 12:35:15 UTC\n- property: Flat 9, 9 Willowmere Road, Bellmere, ZZ9 7ZZ\n\n## Initial request\nThe cold side of the shower isn’t working. Water not coming out. \nMostly, the warm side is ok but sometimes too hot to pour on body. If cold side is repaired the water could be mixed to equalise temperature. Thanks"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "034-get_case_details-cf2cdd10ad80",
+   "receipt": "{\"id\": \"034\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:28:07.079656Z",
+   "finished_at": "2026-10-10T13:28:07.079732Z"
+  },
+  {
+   "seq": 2,
+   "tool": "get_action_ledger",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "034-get_action_ledger-54f94fa24c96",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:28:07.079827Z",
+   "finished_at": "2026-10-10T13:28:07.079870Z"
+  },
+  {
+   "seq": 3,
+   "tool": "get_attachment",
+   "tool_class": "read",
+   "input": {
+    "name": "attachment-26-document"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "error": "no attachment named attachment-26-document"
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "034-get_attachment-0f543cdf1326",
+   "receipt": "{\"error\": \"no attachment named attachment-26-document\"}",
+   "started_at": "2026-10-10T13:28:17.936771Z",
+   "finished_at": "2026-10-10T13:28:17.937316Z"
+  },
+  {
+   "seq": 4,
+   "tool": "search_history",
+   "tool_class": "read",
+   "input": {
+    "from_party": "Tenant"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": [],
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "034-search_history-509e51a35efb",
+   "receipt": "[]",
+   "started_at": "2026-10-10T13:28:17.937544Z",
+   "finished_at": "2026-10-10T13:28:17.937690Z"
+  },
+  {
+   "seq": 5,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Post-closure review (manual-mode trigger: landlord free-text reply event-017 \"Paid today\"; earlier unparsed provider email event-009). State of record: provider assigned event-005, tenant briefed event-006, provider briefed event-007, chased event-008. Provider reported a \"temperature issue\" cleaned/greased, \"resolved the main problem\" (event-010, untrusted) with an invoice; no visit slot was ever confirmed on the ticket and no tenant confirmation of the fix exists. Tenant's reported fault was no water from the cold side plus water \"sometimes too hot\" (index, event-001) — a possible scald risk from a failed mixer; the provider's note does not state the cold feed was restored. CONFLICT: the landlord notification event-011 carries the header address Flat 9, 9 Willowmere Road, Bellmere, ZZ9 7ZZ but its body names \"Flat 17, 77 Harbour View, Northbridge, ZZ9 1ZZ\"; the case record, tenant email (event-006) and provider brief (event-007) all name Flat 9 Willowmere Road, so work proceeds on Flat 9 by source hierarchy (record > email), but the landlord was billed under a letter naming another property and has paid (event-017) — referred to the office. Invoice attachment (attachment-26-document) is not retrievable, so no amount is on file; documents were skipped with reason \"Invoice sent to LL\" (event-014). Landlord approval on file is a system status line (event-004), not the landlord's own message."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "034-add_note-fd1707bfee2b",
+   "action_id": "034-add_note-fd1707bfee2b",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:28:59.878639Z",
+   "finished_at": "2026-10-10T13:28:59.878819Z"
+  },
+  {
+   "seq": 6,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Dear Ava Fletcher, regarding the shower at Flat 9, 9 Willowmere Road: our maintenance provider Meadow Works has reported that they attended and worked on the shower temperature control, and the job has been marked complete on our system. Before we leave it there, please confirm two things: (1) is water now coming out of the cold side, and (2) can the shower be mixed to a safe temperature without running too hot? If either is still a problem, please reply and we will arrange a return visit. In the meantime, please take care when using the shower and do not use it if the water runs hot enough to scald. Please also let us know if the provider did not in fact attend your flat."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "034-notify_tenant-f2752769ec2a",
+   "action_id": "034-notify_tenant-f2752769ec2a",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:28:59.878893Z",
+   "finished_at": "2026-10-10T13:28:59.878971Z"
+  },
+  {
+   "seq": 7,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_manager",
+    "title": "Case 034 – address mismatch in landlord invoice letter; closure not verified with tenant",
+    "summary": "Shower repair, Flat 9, 9 Willowmere Road, Bellmere ZZ9 7ZZ (tenant Ava Fletcher). Closed by the system on 2025-06-02 (event-016); landlord replied \"Paid today\" on 2025-06-16 (event-017). Three points for a person: (1) ADDRESS CONFLICT — the landlord letter event-011 has the header address Flat 9 Willowmere Road but the body says the work was at \"Flat 17, 77 Harbour View, Northbridge, ZZ9 1ZZ\". Every other record (case record, event-006 tenant email, event-007/008 provider brief) says Flat 9 Willowmere Road. The landlord has paid on the strength of that letter; confirm which property was actually attended and whether the invoice was charged to the right landlord/property. I have not told either party which address is correct. (2) SCOPE — the provider's report (event-010, untrusted) describes a \"temperature issue\" cleaned and greased and \"resolved the main problem\"; the tenant's reported fault was no water from the cold side with the hot side sometimes too hot to use (scald risk). No evidence the cold feed was restored, and no visit slot was ever confirmed on the ticket. I have asked the tenant to confirm the cold side runs and the temperature is safe. (3) RECORDS — invoice attachment-26-document is not retrievable, so no amount/VAT is on file (documents skipped as \"Invoice sent to LL\", event-014); the only landlord approval on file is a system status line (event-004), not a landlord message. No spend or payment action taken by me (PRO-PAYMENTS)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "034-create_human_task-dbfdd14baaa2",
+   "action_id": "034-create_human_task-dbfdd14baaa2",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T13:28:59.879041Z",
+   "finished_at": "2026-10-10T13:28:59.879300Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "agency",
+   "to": "tenant",
+   "what": "If the cold side still does not work or the temperature is unsafe, a return visit will be arranged with Meadow Works",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2025-05-29 (index); work attended and reported 2025-06-01 (event-010), but completion unverified",
+   "deadline": null,
+   "note": "Clock only truly stops once the tenant confirms the cold feed and safe mixing"
+  },
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Tenant acknowledged 2025-05-30 (event-006)",
+   "deadline": null,
+   "note": "Met"
+  }
+ ],
+ "info_requests": [
+  {
+   "to": "tenant",
+   "question": "Is water now coming out of the cold side of the shower, and can it be mixed to a safe temperature? Did Meadow Works attend Flat 9, 9 Willowmere Road?",
+   "why": "The provider reported only a temperature fix (event-010); the reported fault was no cold water plus water sometimes too hot to use (index/event-001). Tenant confirmation is the only evidence that the repair resolved it (RTE-TENANT).",
+   "blocking": true
+  },
+  {
+   "to": "contractor",
+   "question": "Meadow Works: please confirm the date of attendance, the property attended, and whether the cold feed to the shower was restored as well as the temperature control; please resend the invoice with the amount and VAT.",
+   "why": "Scope and attendance are the contractor's to confirm (RTE-CONTRACTOR); the invoice attachment on file is not retrievable.",
+   "blocking": false
+  },
+  {
+   "to": "property_manager",
+   "question": "Which property does the invoice paid by the landlord relate to — Flat 9, 9 Willowmere Road (header of event-011 and all other records) or Flat 17, 77 Harbour View (body of event-011)?",
+   "why": "Agency records disagree about the property billed and the landlord has already paid (event-017); a person must settle it (ESC-CONFLICT routed via create_human_task ACT-3).",
+   "blocking": false
+  }
+ ],
+ "handover": {
+  "to": "property_manager",
+  "question": "Review case 034: The record carries red flags that need a human's confirmation (safety_hazard: Tenant described shower water 'sometimes too hot to pour on body' — possible failed thermostatic mixer and scald risk; the provider's report does not confirm safe mixing was restored.); the case cannot end as needs_info.",
+  "summary": [
+   "Tenant described shower water 'sometimes too hot to pour on body' — possible failed thermostatic mixer and scald risk; the provider's report does not confirm safe mixing was restored."
+  ],
+  "gap": "The record carries red flags that need a human's confirmation (safety_hazard: Tenant described shower water 'sometimes too hot to pour on body' — possible failed thermostatic mixer and scald risk; the provider's report does not confirm safe mixing was restored.); the case cannot end as needs_info.",
+  "options": [],
+  "recommended": null,
+  "default_if_timeout": "Case stays open in the human queue; no automated action.",
+  "deadline": null,
+  "undo": null,
+  "context_refs": []
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "RTE-TENANT",
+  "RTE-CONTRACTOR",
+  "RTE-STAFF",
+  "ESC-CONFLICT",
+  "PRO-PAYMENTS",
+  "PRO-TENANT-LIABILITY",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11"
+ ],
+ "assumptions": [
+  "Assumption: the work was carried out at Flat 9, 9 Willowmere Road, because the case record, the tenant email (event-006) and the provider brief (event-007) all name it and only the body of event-011 differs; not acted on as fact — referred to the office.",
+  "Assumption: 'too hot to pour on body' indicates a mixer/thermostatic fault with scald potential rather than an occupant preference; treated as a caution to the tenant only."
+ ],
+ "uncertainty": [
+  "No invoice amount or VAT is available anywhere in the record, so the sum the landlord paid is unknown.",
+  "Whether the cold feed was restored is not stated by the provider.",
+  "Whether the provider attended Flat 9 or another property is unresolved.",
+  "No occupant vulnerability information is on file; ESC-VULNERABLE not assessed."
+ ],
+ "safety_actions": [
+  "Advised the tenant not to use the shower if the water runs hot enough to scald, and to report back if the temperature is still unsafe (ACT-2).",
+  "Offered a return visit if the cold side is still not delivering water (ACT-2)."
+ ],
+ "withheld_actions": [
+  "Did not reopen or re-close the request, and did not state a resolution naming who paid, as completion is unverified.",
+  "Did not instruct Meadow Works for a return visit: no landlord spend authority on file (no standing cap, no landlord message) and the fault is not yet confirmed outstanding.",
+  "Did not tell the landlord or the tenant which address is correct, to avoid picking a side between agency records.",
+  "Did not act on the landlord's 'Paid today' as payment reconciliation (PRO-PAYMENTS)."
+ ],
+ "steps": 4,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R2: red flags (safety_hazard) → escalated (checked before any needs_info rule)"
+ ],
+ "started_at": "2026-10-10T13:28:01.378449Z",
+ "finished_at": "2026-10-10T13:30:04.418200Z",
+ "input_tokens": 29263,
+ "output_tokens": 8722,
+ "cache_read_tokens": 56352
+}

@@ -1,0 +1,426 @@
+{
+ "case_id": "014",
+ "case_type": "maintenance_request",
+ "playbook": "maintenance-request",
+ "urgency": "routine",
+ "disposition": "escalated",
+ "decision": "No response to the landlord is required and no contractor is instructed. The landlord owns this decision and has already made it: a zero-cost workaround now (event-010), with a contractor inspection deferred to next month. The workaround was relayed to the tenant and confirmed working (event-011, event-012); the landlord was updated (event-013) and acknowledged (event-016). The agency completed the request without payment (event-015). I added the missing pieces within my authority: the tenant has been told a visit is intended but not yet booked and given the triggers that would make it urgent (ACT-2), and the landlord's July inspection promise has been diarised to the office so it is not lost (ACT-3). I did not dispatch: no standing spend cap is on file and the landlord's message defers the work rather than approving a priced job (APR-SPEND-OVER-CAP).",
+ "recap": "Front door sticking/wobbling; landlord's key-latch workaround works for the tenant, contractor visit deferred to July and diarised; closed without payment.",
+ "stage": "closed_without_payment",
+ "hold_reason": "",
+ "next_step": "Office (property_management queue) to action the July 2024 diary task: ask the landlord to confirm the deferred front-door inspection and approve a priced quote, or confirm he is using his own contractor — unless the tenant reports a recurrence sooner.",
+ "definition_of_done": [
+  {
+   "item": "assessed",
+   "status": "done",
+   "evidence": "event-001/event-004 fault described (door and frame wobble, has to be slammed); urgency set routine at use_playbook; damage-limiting advice and escalation triggers given to tenant at ACT-2",
+   "text": "Issue categorised and urgency set; damage-limiting steps given to the tenant where relevant"
+  },
+  {
+   "item": "landlord_authority",
+   "status": "done",
+   "evidence": "event-005 asked the landlord; event-010 landlord replied — workaround now, contractor next month. No spend authorised and none incurred.",
+   "text": "Landlord approval obtained, or the spend sits inside the standing mandate, or the landlord is using their own contractor"
+  },
+  {
+   "item": "provider_assigned",
+   "status": "not_applicable",
+   "evidence": "Landlord deferred the inspection to July 2024 (event-010); no provider instructed, no standing cap on file (APR-SPEND-OVER-CAP). Diarised at ACT-3.",
+   "text": "Provider assigned and briefed; tenant told who is coming and what happens next"
+  },
+  {
+   "item": "visit_confirmed",
+   "status": "not_applicable",
+   "evidence": "No visit instructed; tenant told no appointment is booked yet (ACT-2)",
+   "text": "Visit slot confirmed with the tenant and the provider (or the landlord's own contractor is handling access)"
+  },
+  {
+   "item": "quote_approved",
+   "status": "not_applicable",
+   "evidence": "No quote sought — work deferred by the landlord (event-010)",
+   "text": "Where a quote was required, the landlord approved the amount (VAT stated) before the work started"
+  },
+  {
+   "item": "work_result",
+   "status": "not_applicable",
+   "evidence": "No works carried out; fault managed by the landlord's workaround (event-012)",
+   "text": "Work result recorded from the provider"
+  },
+  {
+   "item": "documents",
+   "status": "skipped",
+   "evidence": "No attendance, no invoice or photos to upload — nothing instructed (event-010, event-015)",
+   "text": "Photos and invoice uploaded, or the reason for skipping recorded"
+  },
+  {
+   "item": "invoice_to_landlord",
+   "status": "done",
+   "evidence": "event-015 request marked completed without payment; no cost to pass on",
+   "text": "Invoice forwarded to the landlord, or the request marked completed without payment with the reason"
+  },
+  {
+   "item": "landlord_confirmation",
+   "status": "done",
+   "evidence": "event-013 agency update to landlord; event-016 landlord acknowledged",
+   "text": "Landlord confirmed completion"
+  },
+  {
+   "item": "keys_returned",
+   "status": "not_applicable",
+   "evidence": "No management key issued; no visit took place",
+   "text": "Keys returned, where a management key was issued for the visit"
+  },
+  {
+   "item": "closed",
+   "status": "done",
+   "evidence": "event-014/event-015 closed by Ava as completed without payment — no party paid, as no work was instructed",
+   "text": "Request closed with a resolution that names who paid"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "statement": "Tenant reported the front door has to be slammed to shut and that the fridge-freezer contractor said it would \"cause a shatter in glass\" and would report it himself.",
+   "source_ids": [
+    "index",
+    "event-001"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F2",
+   "statement": "Follow-up call recorded that the door frame and door \"literally wobble\" when shutting.",
+   "source_ids": [
+    "event-004"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F3",
+   "statement": "Agency asked the landlord for authority to send someone out and placed the case on hold waiting for the landlord.",
+   "source_ids": [
+    "event-005",
+    "event-007"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F4",
+   "statement": "Landlord replied with a zero-cost workaround — put the key in to lift the latch, then close the door — and asked that a contractor look at it next month.",
+   "source_ids": [
+    "event-010"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F5",
+   "statement": "The workaround was relayed to the tenant by phone; she had already used it that morning, it worked, and she agreed to monitor and report any recurrence.",
+   "source_ids": [
+    "event-011",
+    "event-012"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F6",
+   "statement": "The landlord was updated that the workaround succeeded and the case would be closed, and he acknowledged; the request was marked completed without payment.",
+   "source_ids": [
+    "event-013",
+    "event-015",
+    "event-016"
+   ],
+   "confidence": "high"
+  },
+  {
+   "id": "F7",
+   "statement": "No landlord standing spend cap is on file in this case record, so there is no standing authority to spend.",
+   "source_ids": [
+    "get_case_details"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "id": "F8",
+   "statement": "The door can be closed and secured using the landlord's method; no report of the property being left insecure.",
+   "source_ids": [
+    "event-012"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "conflicts": [
+  {
+   "description": "AI intake classified the issue as \"Appliances\" and asked fridge/freezer clarifying questions, while the tenant's text and all later events describe a front door fault.",
+   "fact_ids": [
+    "F1"
+   ],
+   "source_ids": [
+    "event-002",
+    "event-001",
+    "event-004"
+   ],
+   "resolution": "The tenant's own words and the agency's follow-up note govern: the case is a front door repair, classified routine. Noted at ACT-1.",
+   "resolved_by": "source_hierarchy"
+  },
+  {
+   "description": "Untrusted landlord-channel email (event-009) is a third-person system summary mentioning a workaround and a visit next month; the landlord's actual words appear at event-010.",
+   "fact_ids": [],
+   "source_ids": [
+    "event-009",
+    "event-010"
+   ],
+   "resolution": "Acted on the landlord's own message (event-010); the summary line was treated as evidence only.",
+   "resolved_by": "source_hierarchy"
+  }
+ ],
+ "red_flags": [
+  {
+   "kind": "data_quality",
+   "description": "Intake misclassification: issue logged as \"Appliances\" with fridge/freezer questions (all unanswered) for what is a front door fault; risk of the job being routed to the wrong trade.",
+   "source_ids": [
+    "event-002"
+   ],
+   "action_taken": "Corrected the classification in the case record and set urgency routine (ACT-1); priority left at 7, not decreased (event-008)."
+  },
+  {
+   "kind": "safety_hazard",
+   "description": "A contractor's reported view, quoted by the tenant, that the wobbling door could \"cause a shatter in glass\"; the inspection is deferred by a month. Not an emergency — the door still closes and locks using the landlord's method (event-012) — but a residual risk while deferred.",
+   "source_ids": [
+    "index",
+    "event-001",
+    "event-004",
+    "event-010"
+   ],
+   "action_taken": "Tenant given explicit triggers to report immediately (lock failure, worsening wobble, cracked or loose glass) at ACT-2; risk recorded in the July diary task to the office (ACT-3)."
+  }
+ ],
+ "actions": [
+  {
+   "seq": 1,
+   "tool": "get_case_details",
+   "tool_class": "read",
+   "input": {},
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [],
+    "reason": "read",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "014",
+    "title": "Case 014: Front Door Repair Request",
+    "received_at": "2024-06-06 11:55:37 UTC",
+    "track": "Property Management",
+    "case_number": "014",
+    "property": "Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ",
+    "source_role": "Tenant",
+    "agency": "Northbridge Lettings",
+    "events_visible": 16,
+    "attachments_hidden": 0,
+    "details": "# Case 014: Front Door Repair Request\n\n## Case details\n- source role: Tenant\n- created: 2024-06-06 11:55:37 UTC\n- property: Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ\n\n## Initial request\nFront door you have to slam to shut like the back. when fridge man arrived he even commented and said it will cause a shatter in glass- he said he was also going to report to you."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": null,
+   "action_id": "014-get_case_details-a6f04366d1f0",
+   "receipt": "{\"id\": \"014\", \"attachments_hidden\": 0}",
+   "started_at": "2026-10-10T13:21:19.211375Z",
+   "finished_at": "2026-10-10T13:21:19.211572Z"
+  },
+  {
+   "seq": 2,
+   "tool": "add_note",
+   "tool_class": "write",
+   "input": {
+    "note": "Status review (manual-mode trigger: free-text landlord reply event-016 \"Thank you Ava\"). No response to the landlord is required — the landlord's question was answered at event-013. Facts: tenant reported front door has to be slammed and door/frame wobble (index, event-001, event-004); the fridge-freezer contractor also reported it and said it could \"cause a shatter in glass\" (quoted, index). Agency asked the landlord for authority (event-005) and held the case (event-007). Landlord replied with a zero-cost workaround (key used to lift the latch) and asked for a contractor to look \"next month\" (event-010). Workaround relayed to tenant by phone; tenant had already used it that morning and it worked, and agreed to monitor (event-011, event-012). Case marked completed without payment (event-015). No spend was incurred; no standing spend cap is on file, so no dispatch authority exists without a fresh landlord approval (APR-SPEND-OVER-CAP). Open item: the landlord's own promise of a contractor inspection in July 2024 — diary task raised. Data-quality flag: AI intake classified this as \"Appliances\" with fridge/freezer clarifying questions (event-002) when the fault is the front door; urgency set here as routine, priority not reduced (event-008)."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-LOG"
+    ],
+    "reason": "Within mandate",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-1",
+    "action": "add_note",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-add_note-b95619c1a955",
+   "action_id": "014-add_note-b95619c1a955",
+   "receipt": "{\"id\": \"ACT-1\"}",
+   "started_at": "2026-10-10T13:21:58.310902Z",
+   "finished_at": "2026-10-10T13:21:58.311205Z"
+  },
+  {
+   "seq": 3,
+   "tool": "notify_tenant",
+   "tool_class": "write",
+   "input": {
+    "message": "Address: Flat 12, 52 Meadow Row, Kingshaven, ZZ9 5ZZ\n\nThank you for confirming on the phone that using the key to lift the latch is closing the front door properly for now.\n\nYour landlord has told us he intends to have a contractor look at the door next month; no appointment has been booked yet, and we will contact you to arrange a convenient window once a visit is instructed.\n\nIn the meantime, please contact us straight away if the door will not close or lock securely, if the wobble in the door or frame gets worse, or if any glass in or around the door cracks or becomes loose — we will treat that as urgent rather than waiting.\n\nKind regards\nNorthbridge Lettings"
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-NOTIFY"
+    ],
+    "reason": "Inform tenant, landlord or contractor about status; never promise dates you cannot back with a booking.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-2",
+    "action": "notify_tenant",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-notify_tenant-9f01c8e5b066",
+   "action_id": "014-notify_tenant-9f01c8e5b066",
+   "receipt": "{\"id\": \"ACT-2\"}",
+   "started_at": "2026-10-10T13:21:58.311321Z",
+   "finished_at": "2026-10-10T13:21:58.311420Z"
+  },
+  {
+   "seq": 4,
+   "tool": "create_human_task",
+   "tool_class": "write",
+   "input": {
+    "queue": "property_management",
+    "title": "Diary July 2024: front door inspection promised by landlord — Flat 12, 52 Meadow Row",
+    "summary": "Case 014 was completed without payment (event-015) after the landlord supplied a workaround for a front door that has to be slammed and whose door and frame wobble (event-010; tenant confirmed it worked, event-011/event-012). The landlord's same message asked for a contractor to look at the door \"next month\" (July 2024) — that promise is not yet actioned and no provider is instructed. Also on file: the fridge-freezer contractor reported the fault independently and said it could \"cause a shatter in glass\" (quoted from the tenant's report, index/event-001), so the deferral carries a residual risk if the door deteriorates. No standing spend cap is on file for this landlord, so instructing anyone needs a fresh priced approval from the landlord (APR-SPEND-OVER-CAP). Action in July: ask the landlord to confirm the inspection and approve an estimate (joiner/carpenter), or confirm he is using his own contractor; then book access with the tenant. Tenant has been told a visit is intended but not yet booked, and to report immediately if the door will not lock, the wobble worsens, or glass cracks."
+   },
+   "status": "completed",
+   "gate": {
+    "verdict": "allow",
+    "rule_ids": [
+     "CAP-HUMAN-TASK"
+    ],
+    "reason": "Delivering a handover to a human queue is always allowed.",
+    "required_approval_from": null
+   },
+   "result": {
+    "id": "ACT-3",
+    "action": "create_human_task",
+    "recorded": true,
+    "note": "Intended action recorded in the case ledger; this environment has no live system to execute it."
+   },
+   "error": null,
+   "attempts": 1,
+   "idempotency_key": "014-create_human_task-07770ac3c628",
+   "action_id": "014-create_human_task-07770ac3c628",
+   "receipt": "{\"id\": \"ACT-3\"}",
+   "started_at": "2026-10-10T13:21:58.311491Z",
+   "finished_at": "2026-10-10T13:21:58.311579Z"
+  }
+ ],
+ "promises": [
+  {
+   "by": "Landlord",
+   "to": "Agency/tenant",
+   "what": "Have a contractor look at the front door next month (July 2024)",
+   "due": "July 2024",
+   "source_id": "event-010",
+   "status": "open"
+  },
+  {
+   "by": "Tenant",
+   "to": "Agency",
+   "what": "Continue using the key/latch method and report if the door becomes an issue again",
+   "due": null,
+   "source_id": "event-012",
+   "status": "open"
+  },
+  {
+   "by": "Agency",
+   "to": "Tenant",
+   "what": "Contact the tenant to arrange a window once a visit is instructed; treat a lock failure, worsening wobble or cracked glass as urgent",
+   "due": null,
+   "source_id": "ACT-2",
+   "status": "open"
+  }
+ ],
+ "clocks": [
+  {
+   "rule_id": "CLK-SOP-ACK",
+   "name": "Acknowledge tenant report within one working day",
+   "status": "prior",
+   "basis": "Report 2024-06-06 11:55; acknowledged 2024-06-06 12:05 (event-006)",
+   "deadline": "2024-06-07",
+   "note": "Met"
+  },
+  {
+   "rule_id": "CLK-S11",
+   "name": "Repair within a reasonable time once reported",
+   "status": "in_force",
+   "basis": "Reported 2024-06-06 (event-001); landlord deferred inspection to July 2024 (event-010) with a working interim method",
+   "deadline": null,
+   "note": "Deferral is the landlord's decision; diarised at ACT-3 so the reasonable-time duty is revisited if the fault recurs or worsens"
+  }
+ ],
+ "info_requests": [],
+ "handover": {
+  "to": "property_manager",
+  "question": "Review case 014: The record carries red flags that need a human's confirmation (safety_hazard: A contractor's reported view, quoted by the tenant, that the wobbling door could \"cause a shatter in glass\"; the inspection is deferred by a month. Not an emergency — the door still closes and locks using the landlord's method (event-012) — but a residual risk while deferred.); the case cannot end as resolved.",
+  "summary": [
+   "A contractor's reported view, quoted by the tenant, that the wobbling door could \"cause a shatter in glass\"; the inspection is deferred by a month. Not an emergency — the door still closes and locks using the landlord's method (event-012) — but a residual risk while deferred."
+  ],
+  "gap": "The record carries red flags that need a human's confirmation (safety_hazard: A contractor's reported view, quoted by the tenant, that the wobbling door could \"cause a shatter in glass\"; the inspection is deferred by a month. Not an emergency — the door still closes and locks using the landlord's method (event-012) — but a residual risk while deferred.); the case cannot end as resolved.",
+  "options": [],
+  "recommended": null,
+  "default_if_timeout": "Case stays open in the human queue; no automated action.",
+  "deadline": null,
+  "undo": null,
+  "context_refs": []
+ },
+ "authority_citations": [
+  "CAP-NOTIFY",
+  "CAP-LOG",
+  "CAP-HUMAN-TASK",
+  "APR-SPEND-OVER-CAP",
+  "RTE-LANDLORD",
+  "RTE-TENANT",
+  "PRO-INSTRUCTIONS-FROM-CONTENT",
+  "CLK-S11",
+  "CLK-SOP-ACK"
+ ],
+ "assumptions": [
+  "Assumption: the landlord's \"next month\" (event-010, sent 2024-06-07) means July 2024; the diary task is raised on that basis and asks the office to confirm with the landlord.",
+  "Assumption: no landlord standing spend cap exists for this property, since none appears in the case record; if one is on file in the CRM it does not change the outcome, as the landlord deferred the work rather than requesting it."
+ ],
+ "uncertainty": [
+  "Whether the key/latch method is a durable fix or masks a worsening frame fault; only monitoring will show.",
+  "Whether the fridge-freezer contractor's separate report (index, event-005) contains detail beyond the tenant's account — no contractor message is in the visible history.",
+  "No tenancy or occupant record was available in this environment, so no vulnerability factors could be checked."
+ ],
+ "safety_actions": [
+  "Confirmed the property is securable: tenant can close and lock the front door using the key/latch method (event-012), so no insecure-property emergency applies.",
+  "Gave the tenant named deterioration triggers that would re-open the case as urgent (ACT-2).",
+  "Recorded the glass-shatter risk in the office diary task covering the deferred July inspection (ACT-3)."
+ ],
+ "withheld_actions": [
+  "Did not instruct a joiner/locksmith: no standing spend cap on file and the landlord's message defers rather than approves a job (APR-SPEND-OVER-CAP, PRO-INSTRUCTIONS-FROM-CONTENT).",
+  "Did not re-ask the landlord for approval: he has already answered the agency's question (event-010) and acknowledged the outcome (event-016).",
+  "Did not re-ask the tenant to confirm the workaround: already confirmed at event-011 and event-012.",
+  "Did not escalate: the deferral is the landlord's decision to make, the property is secure, and no liability, legal or fraud issue arises."
+ ],
+ "steps": 3,
+ "model": "claude-opus-5",
+ "fallback": false,
+ "system_notes": [],
+ "reviewer_notes": [
+  "R2: red flags (safety_hazard) → escalated (checked before any needs_info rule)"
+ ],
+ "started_at": "2026-10-10T13:21:16.001888Z",
+ "finished_at": "2026-10-10T13:22:43.626201Z",
+ "input_tokens": 19814,
+ "output_tokens": 6950,
+ "cache_read_tokens": 42264
+}
