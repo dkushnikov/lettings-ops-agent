@@ -392,6 +392,8 @@ class RunMeta(BaseModel):
     escalated: int = 0
     fallback_count: int = 0
     failures: list[str] = Field(default_factory=list)
+    commit: str = ""  # short git hash of the code that produced the run; "" outside a checkout
+    dirty: bool = False  # tracked files modified at run start
     input_tokens: int = 0
     output_tokens: int = 0
     cache_read_tokens: int = 0

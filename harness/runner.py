@@ -12,6 +12,7 @@ from __future__ import annotations
 import asyncio
 import math
 import random
+import subprocess
 import time
 import uuid
 from datetime import datetime
@@ -99,6 +100,7 @@ async def run_batch(
         case_timeout_s=settings.case_timeout_s,
         max_steps=settings.max_steps,
         cases_total=len(cases),
+        **_git_commit(),
     )
     t_case = previous_t_case(out_dir)
     est = estimate_wall_seconds(len(cases), settings.concurrency, t_case)
@@ -198,6 +200,19 @@ async def run_batch(
     write_run_meta(out_dir, meta)
     print_summary(results, meta)
     return meta
+
+
+def _git_commit() -> dict[str, Any]:
+    """Short hash of HEAD and whether tracked files are modified, for the run record; empty outside a checkout."""
+    root = Path(__file__).resolve().parent.parent
+    try:
+        sha = subprocess.run(["git", "-C", str(root), "rev-parse", "--short", "HEAD"], capture_output=True, text=True, timeout=5)
+        if sha.returncode != 0:
+            return {}
+        status = subprocess.run(["git", "-C", str(root), "status", "--porcelain", "--untracked-files=no"], capture_output=True, text=True, timeout=5)
+        return {"commit": sha.stdout.strip(), "dirty": bool(status.stdout.strip())}
+    except Exception:  # noqa: BLE001
+        return {}
 
 
 def print_summary(results: dict[str, DecisionState], meta: RunMeta) -> None:
