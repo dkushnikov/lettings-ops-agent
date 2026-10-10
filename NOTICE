@@ -3,3 +3,7 @@ Copyright 2026 Dmitry Kushnikov and contributors
 
 This product includes software developed for the Real-World Agents Hackathon
 (London, 10 October 2026). Licensed under the Apache License, Version 2.0.
+
+fixtures-dwelly/ holds three cases copied from DwellyOrg/HackatonPublicCases, the organisers' synthetic
+test data for the event, used here as test fixtures with attribution; data/pm-cases-index.json is an index
+derived from the same public corpus. Neither is covered by this repository's Apache-2.0 licence.
