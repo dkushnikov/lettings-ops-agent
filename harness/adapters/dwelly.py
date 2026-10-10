@@ -129,7 +129,7 @@ def _visible_details(parsed: ParsedCase) -> str:
     return "\n".join(lines)
 
 
-def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True) -> Case:
+def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, id_style: str = "track") -> Case:
     index_md = (case_dir / "index.md").read_text(encoding="utf-8", errors="replace")
     parsed = parse_index(index_md)
     history_md = (case_dir / "history.md").read_text(encoding="utf-8", errors="replace") if (case_dir / "history.md").exists() else ""
@@ -159,7 +159,10 @@ def load_dwelly_case(case_dir: Path, *, hide_outcome: bool = True, cutoff: int |
                 artefacts.append(Artefact(id=f.stem, kind=ArtefactKind.document, title=f.name, source=f"attachments/{f.name}", content=content[:40000], trust="informational"))
 
     track = case_dir.parent.name
-    case_id = f"{track.split(' ')[0].lower()}-{case_dir.name}" if track and not case_dir.name.startswith(track) else case_dir.name
+    if id_style == "number":
+        case_id = case_dir.name  # submission layout: ANSWERS/<case number>/
+    else:
+        case_id = f"{track.split(' ')[0].lower()}-{case_dir.name}" if track and not case_dir.name.startswith(track) else case_dir.name
     return Case(
         id=case_id,
         title=parsed.title,
@@ -186,7 +189,7 @@ def iter_case_dirs(root: Path) -> list[Path]:
     return out
 
 
-def write_expected(root: Path, out_dir: Path, *, cutoff: int | None = None, cutoffs: dict[str, int] | None = None) -> int:
+def write_expected(root: Path, out_dir: Path, *, cutoff: int | None = None, cutoffs: dict[str, int] | None = None, id_style: str = "track") -> int:
     """Keep the hidden parts (overview, outcome, later events) for the judge only."""
     out_dir.mkdir(parents=True, exist_ok=True)
     cutoffs = cutoffs or {}
@@ -196,7 +199,7 @@ def write_expected(root: Path, out_dir: Path, *, cutoff: int | None = None, cuto
         events = parse_history((case_dir / "history.md").read_text(encoding="utf-8", errors="replace")) if (case_dir / "history.md").exists() else []
         case_cutoff = cutoff_for(case_dir, cutoff, cutoffs)
         later = [e for e in events if case_cutoff is not None and e.number > case_cutoff]
-        case = load_dwelly_case(case_dir, cutoff=case_cutoff, with_attachments=False)
+        case = load_dwelly_case(case_dir, cutoff=case_cutoff, with_attachments=False, id_style=id_style)
         payload = {
             "source": "organisers' public case; outcome text is an example, not the only acceptable decision",
             "status": parsed.details.get("status"),
@@ -346,11 +349,12 @@ def auto_cutoff(events: list[HistoryEvent], strategy: str = "first-external") ->
 class DwellyCasesAdapter:
     name = "dwelly"
 
-    def __init__(self, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, cutoffs: dict[str, int] | None = None, auto_cutoff: str | None = None):
+    def __init__(self, *, hide_outcome: bool = True, cutoff: int | None = None, with_attachments: bool = True, cutoffs: dict[str, int] | None = None, auto_cutoff: str | None = None, id_style: str = "track"):
         self.hide_outcome = hide_outcome
         self.cutoff = cutoff
         self.cutoffs = cutoffs or {}
         self.auto_cutoff = auto_cutoff
+        self.id_style = id_style
         self.with_attachments = with_attachments
         self.effective_cutoffs: dict[str, int] = {}
         self._ledgers: dict[str, CaseLedger] = {}
@@ -371,7 +375,7 @@ class DwellyCasesAdapter:
             c = self._cutoff_for(d)
             if c is not None:
                 self.effective_cutoffs[d.name] = c
-            cases.append(load_dwelly_case(d, hide_outcome=self.hide_outcome, cutoff=c, with_attachments=self.with_attachments))
+            cases.append(load_dwelly_case(d, hide_outcome=self.hide_outcome, cutoff=c, with_attachments=self.with_attachments, id_style=self.id_style))
         return cases
 
     def tools_for(self, case: Case) -> ToolRegistry:
