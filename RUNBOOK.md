@@ -27,6 +27,7 @@ Owner of the keyboard: Dmitry K. Owner of the checklist: Dmitry T. Nothing is ed
 - [ ] `git push --tags`.
 - [ ] Reality Test cases received (the form says they arrive at 16:30; try `git -C ../HackatonPublicCases pull` first, else the channel the organisers use). Do not edit them. Check the layout: `NNN/` folders with `index.md` and `history.md`; if the folder name differs from `Property Management`, change only `CASES=`.
 - [ ] Count the cases. The runner prints the capacity estimate: `T ≈ ⌈N / C⌉ × t_case + margin`. Measured today: 50 cases at concurrency 6 take about 16 minutes with no 429s; 100 cases would take about 32, so raise concurrency to 8 only if the count is above 60.
+- [ ] No runner alive before launching: `pgrep -fl "harness.cli run"` prints nothing (the 15:20 rehearsal reused one case from a runner that was still writing when the folder was removed).
 - [ ] Launch (the exact form tested all day; `--id-style number` → `ANSWERS/<case number>/`):
 
 ```
